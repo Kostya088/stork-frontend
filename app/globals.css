@@ -1,0 +1,19 @@
+:root {
+  --font-body: var(--font-lato);
+  --font-brand: var(--font-comfortaa);
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body), "Segoe UI", sans-serif;
+}
