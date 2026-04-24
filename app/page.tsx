@@ -1,7 +1,7 @@
-export default function Home() {
+export default function DashboardPage() {
   return (
     <>
-      <h1>Home page</h1>
+      <h1>Dashboard</h1>
     </>
   );
 }
