@@ -1,0 +1,120 @@
+.onbordingForm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 32px;
+    font-size: 48px;
+    width: 335px;
+    /* max-width: 480px; */
+}
+
+
+.form {
+    display: flex;
+    flex-direction: column;
+    max-width: 335px;
+    gap: 24px;
+}
+
+.fildset {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 8px;
+    /* padding-bottom: 24px; */
+    /* position: relative; */
+}
+
+.input {
+    font-size: 16px;
+    width: 335px;
+    max-width: 335px;
+    height: 37px;
+    background-color: rgba(0, 0, 0, 0.05);
+    border: none;
+    border-radius: 12px;
+    padding: 8px 12px;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.datePlaceholder {
+    color: #8a8a8a;
+}
+
+.dateFilled {
+    color: #000;
+}
+.input:active,
+.input:focus {
+    outline: none;
+}
+
+.invalid {
+    border: 1px solid #C60000;
+}
+
+.errorMessage {
+    color: #C60000;
+    /* position: absolute; */
+    bottom: 0;
+}
+
+.subbtn {
+    background-color: #FFDAE0;
+    height: 46px;
+    width: 100%;
+    border-radius: 100px;
+    outline: none;
+    border: none;
+    margin-bottom: 24px;
+    box-shadow: 0 5px #FFCBD3;
+}
+
+.subbtn:hover,
+.subbtn:focus {
+    background-color: #FFF4F6;
+    box-shadow: 0 5px rgba(0, 0, 0, 0.15);
+}
+
+.subbtn:active {
+    background-color: #FFCBD3;
+    box-shadow: none;
+}
+
+.paragraph {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.registerLink {
+    text-decoration: none;
+    color: black;
+    border-bottom: 1px solid silver;
+
+}
+
+@media screen and (min-width: 768px) {
+    .title {
+        width: 480px;
+    }
+
+    .form {
+        max-width: 480px;
+    }
+
+    .input {
+        width: 480px;
+        max-width: 480px;
+    }
+}
+
+@media screen and (min-width: 1440px) {
+    .input {
+        height: 40px;
+    }
+}
