@@ -9,10 +9,13 @@ import { useRouter } from "next/navigation";
 
 import CustomSelector from "../CustomSelector/CustomSelector";
 import UserAvatarSelector from "../UserAvatarSelector/UserAvatarSelector";
+import { updateMe, updateUserAvatar } from "@/lib/api/clientApi";
+import type { ApiError } from "@/lib/api/api";
+import type { Gender } from "@/types/user";
 
 const OnbordingSchema = Yup.object().shape({
   gender: Yup.string()
-    .oneOf(["Хлопчик", "Дівчинка", "null"], "Invalid value")
+    .oneOf(["boy", "girl", "null"], "Invalid value")
     .required("Обов'язкове поле"),
   dueDate: Yup.string()
     .matches(/^(\d{4})-(\d{2})-(\d{2})$/)
@@ -21,11 +24,11 @@ const OnbordingSchema = Yup.object().shape({
 
 const genderOptions = [
   {
-    value: "Хлопчик",
+    value: "boy",
     label: "Хлопчик",
   },
   {
-    value: "Дівчинка",
+    value: "girl",
     label: "Дівчинка",
   },
   {
@@ -35,12 +38,13 @@ const genderOptions = [
 ];
 
 interface OnbordingDraft {
-  gender: string;
+  gender: Gender;
   dueDate: string;
 }
 
 const OnbordingForm = () => {
   const [file, setFile] = useState<File | null>(null);
+  const [error, setError] = useState("");
 
   const minDate = useMemo(() => {
     const currentDate = new Date();
@@ -58,24 +62,37 @@ const OnbordingForm = () => {
   const prefId = useId();
 
   const handleSubmit = async (values: OnbordingDraft) => {
-    const userDate = new Date(values.dueDate);
-    const minAllowedDate = new Date(minDate);
-    const maxAllowedDate = new Date(maxDate);
+    try {
+      setError("");
 
-    if (userDate < minAllowedDate || userDate > maxAllowedDate) {
-      console.log("Please choose another date.");
-      return;
+      const userDate = new Date(values.dueDate);
+      const minAllowedDate = new Date(minDate);
+      const maxAllowedDate = new Date(maxDate);
+
+      if (userDate < minAllowedDate || userDate > maxAllowedDate) {
+        setError("Please choose another date.");
+        return;
+      }
+
+      await updateMe({
+        dueDate: values.dueDate,
+        gender: values.gender,
+      });
+
+      if (file) {
+        const formData = new FormData();
+        formData.set("avatar", file);
+        await updateUserAvatar(formData);
+      }
+
+      route.push("/");
+    } catch (error) {
+      setError(
+        (error as ApiError).response?.data?.error ??
+          (error as ApiError).message ??
+          "Oops... some error",
+      );
     }
-
-    const formData = new FormData();
-    formData.set("gender", values.gender);
-    formData.set("dueDate", values.dueDate);
-
-    if (file) {
-      formData.set("avatar", file);
-    }
-
-    route.push("/");
   };
 
   return (
@@ -84,7 +101,7 @@ const OnbordingForm = () => {
       <UserAvatarSelector onSelectFile={setFile} />
       <Formik
         initialValues={{
-          gender: "",
+          gender: null,
           dueDate: "",
         }}
         validationSchema={OnbordingSchema}
@@ -129,6 +146,8 @@ const OnbordingForm = () => {
                 component="div"
               />
             </div>
+
+            {error && <div className={css.errorMessage}>{error}</div>}
 
             <button className={css.subbtn} type="submit">
               Зберегти

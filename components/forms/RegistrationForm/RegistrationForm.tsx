@@ -1,12 +1,15 @@
 "use client";
 
-import { useId } from "react";
+import { useId, useState } from "react";
 import css from "./RegistrationForm.module.css";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import Link from "next/link";
 import * as Yup from "yup";
 import clsx from "clsx";
 import { useRouter } from "next/navigation";
+import { register } from "@/lib/api/clientApi";
+import { useAuthStore } from "@/lib/store/authStore";
+import { ApiError } from "@/lib/api/api";
 
 export interface FormDraft {
   name: string;
@@ -29,12 +32,23 @@ const SignupSchema = Yup.object().shape({
 });
 
 const RegistrationForm = () => {
-  const route = useRouter();
+  const router = useRouter();
+  const [error, setError] = useState("");
+  const setUser = useAuthStore((s) => s.setUser);
   const prefId = useId();
-  const handleSubmit = (values: FormDraft) => {
-    //const user = await registerUser(values);
-    // setAuth(user);
-    route.push("/profile/edit");
+  const handleSubmit = async (values: FormDraft) => {
+    try {
+      setError("");
+      const user = await register(values);
+      setUser(user);
+      router.push("/profile/edit");
+    } catch (error) {
+      setError(
+        (error as ApiError).response?.data?.error ??
+          (error as ApiError).message ??
+          "Oops... some error",
+      );
+    }
   };
 
   return (

@@ -1,6 +1,7 @@
 import OnbordingForm from "@/components/forms/OnboardingForm/OnboardingForm";
 import css from "./EditPage.module.css";
 import clsx from "clsx";
+import Image from "next/image";
 
 const Page = () => {
   return (
@@ -9,7 +10,7 @@ const Page = () => {
         <OnbordingForm />
       </div>
       <div className={clsx(css.container, css.containerImage)}>
-        <img
+        <Image
           className={css.onbordingImage}
           alt="leleka"
           width={720}
