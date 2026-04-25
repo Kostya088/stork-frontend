@@ -1,6 +1,6 @@
 .dashboard {
   display: grid;
-  gap: 20px;
+  gap: 24px;
   width: 100%;
   padding: 24px;
 }
