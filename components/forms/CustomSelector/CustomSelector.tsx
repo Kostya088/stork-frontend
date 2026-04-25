@@ -39,7 +39,17 @@ const CustomSelector = ({
         <p className={clsx(css.selectorTitle, selectedOption && css.selected)}>
           {selectedOption?.label || placeholder}
         </p>
-        <span className={css.icon}>{">"}</span>
+        <span className={css.icon}>
+          <svg width="12" height="7">
+            <use
+              href={
+                isOpenSelector
+                  ? "/icons/sprite.svg#icon-chevron-up"
+                  : "/icons/sprite.svg#icon-chevron-down"
+              }
+            />
+          </svg>
+        </span>
       </div>
 
       {isOpenSelector && (

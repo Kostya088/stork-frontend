@@ -30,7 +30,7 @@ const UserAvatarSelector = ({ onSelectFile }: UserAvatarSelectorProps) => {
         alt="avatar"
         width={164}
         height={164}
-        src={image}
+        src="/icons/Avatar.png"
       />
       <button className={css.btn} onClick={handleClick} type="submit">
         Завантажити фото

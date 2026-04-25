@@ -15,7 +15,7 @@ const Page = () => {
           alt="leleka"
           width={720}
           height={900}
-          src="https://abrakadabra.fun/uploads/posts/2021-12/thumbs/1640528661_1-abrakadabra-fun-p-serii-chelovek-na-avu-1.png"
+          src="/icons/register-img.jpg"
         />
       </div>
     </div>

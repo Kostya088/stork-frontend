@@ -1,35 +1,42 @@
 .userAvatarSelector {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 32px;
 }
 
 .avatar {
-    margin-bottom: 24px;
-    background-color: red;
-    border-radius: 50%;
-    width: 164px;
-    height: 164px;
+  margin-bottom: 24px;
+  border-radius: 50%;
+  width: 164px;
+  height: 164px;
 }
 
 .btn {
-    padding: 8px 20px;
-    font-size: 16px;
-    border-radius: 100px;
-    border: none;
-    outline: none;
-    background-color: rgba(0, 0, 0, 0.05);
-    box-shadow: 0 5px rgba(0, 0, 0, 0.15);
+  font-family: var(--font-lato);
+  font-weight: 500;
+  font-size: 14px;
+  padding: 8px 20px;
+  border-radius: 100px;
+  border: none;
+  outline: none;
+  background-color: rgba(0, 0, 0, 0.05);
+  box-shadow: 0 5px rgba(0, 0, 0, 0.15);
 }
 
 .btn:hover,
 .btn:focus {
-    background-color: #FFFFFF;
+  background-color: #ffffff;
 }
 
 .btn:active {
-    background-color: #B2B2B2;
-    box-shadow: none;
+  background-color: #b2b2b2;
+  box-shadow: none;
+}
+
+@media screen and (min-width: 1440px) {
+  .btn {
+    font-size: 16px;
+  }
 }
