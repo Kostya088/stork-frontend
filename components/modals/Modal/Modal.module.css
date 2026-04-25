@@ -1,7 +1,8 @@
-/* 
-   MOBILE 
+/*
+   MOBILE (base)
 */
 
+/* затемнённый фон */
 .backdrop {
   position: fixed;
   inset: 0;
@@ -43,7 +44,7 @@
 
 /* 
    TABLET
-*/
+ */
 
 @media screen and (min-width: 768px) {
   .backdrop {

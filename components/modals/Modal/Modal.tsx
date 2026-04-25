@@ -9,24 +9,27 @@ import Image from "next/image";
 
 type ModalProps = {
   isOpen: boolean;
-  onClose: () => void; //функція для закриття
-  children: ReactNode; // будь який контент всередині модалки
+  onClose: () => void; //
+  children: ReactNode;
 };
 
 export default function Modal({ isOpen, onClose, children }: ModalProps) {
   useEffect(() => {
     if (!isOpen) return;
+
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         onClose();
       }
     };
+
     document.addEventListener("keydown", handleEsc);
 
     document.body.style.overflow = "hidden";
 
     return () => {
       document.removeEventListener("keydown", handleEsc);
+
       document.body.style.overflow = "auto";
     };
   }, [isOpen, onClose]);
