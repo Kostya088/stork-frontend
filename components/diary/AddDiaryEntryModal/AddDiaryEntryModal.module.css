@@ -1,0 +1,44 @@
+.box {
+  position: relative;
+  width: 100%;
+  padding: 48px 20px 28px;
+  border-radius: 28px;
+  background: #ffffff;
+  box-shadow: 0 24px 60px rgba(36, 26, 29, 0.18);
+}
+
+.title {
+  margin: 0 0 28px;
+  font-family: var(--font-brand), var(--font-body), sans-serif;
+  font-size: 36px;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.closeButton {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: #241a1d;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+@media screen and (min-width: 768px) {
+  .box {
+    padding: 56px 48px 36px;
+  }
+
+  .title {
+    font-size: 40px;
+  }
+}

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { isAxiosError } from "axios";
-import { logErrorResponse } from "../_utils/utils";
+import { logErrorResponse } from "@/app/api/_utils/utils";
 import { nextServer } from "@/lib/api/api";
 
 export async function GET() {
