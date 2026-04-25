@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import TanStackProvider from "@/components/providers/TanStackProvider";
+import AuthProvider from "@/components/providers/AuthProvider";
 
 const lato = localFont({
   src: [
@@ -48,12 +50,23 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  modal,
 }: Readonly<{
   children: React.ReactNode;
+  modal: React.ReactNode;
 }>) {
   return (
-    <html lang="uk" className={`${lato.variable} ${comfortaa.variable}`}>
-      <body>{children}</body>
+    <html lang="en" className={`${lato.variable} ${comfortaa.variable}`}>
+      <body className={lato.variable}>
+        <TanStackProvider>
+          <AuthProvider>
+            <main>
+              {children}
+              {modal ?? null}
+            </main>
+          </AuthProvider>
+        </TanStackProvider>
+      </body>
     </html>
   );
 }

@@ -1,0 +1,26 @@
+.layout {
+  min-height: 100vh;
+}
+
+.sidebarDesktop {
+  display: none;
+}
+
+.main {
+  width: 100%;
+}
+
+@media (min-width: 1440px) {
+  .layout {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+  }
+
+  .sidebarDesktop {
+    display: block;
+  }
+
+  .main {
+    padding: 24px;
+  }
+}

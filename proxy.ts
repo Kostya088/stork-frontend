@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { checkSession } from "./lib/api/serverApi";
 
 const privateRoutes = ["/profile", "/diary", "/journey"];
-const publicRoutes = ["/auth/login", "/auth/register"];
+const publicRoutes = ["/login", "/register"];
 
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -36,7 +36,7 @@ export async function proxy(request: NextRequest) {
   const isLoggedIn = !!accessToken;
 
   if (isPrivateRoute && !isLoggedIn) {
-    return NextResponse.redirect(new URL("/auth/login", request.url));
+    return NextResponse.redirect(new URL("/login", request.url));
   }
 
   if (isPublicRoute && isLoggedIn) {
@@ -59,7 +59,7 @@ export const config = {
     "/profile/:path*",
     "/diary/:path*",
     "/journey/:path*",
-    "/auth/login",
-    "/auth/register",
+    "/login",
+    "/register",
   ],
 };
