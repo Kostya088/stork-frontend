@@ -5,8 +5,10 @@
 import { updateUserAvatar } from "@/lib/api/clientApi";
 import { User } from "@/types/user";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import Image from "next/image";
 import { useRef } from "react";
 import toast from "react-hot-toast";
+import css from "./ProfileAvatar.module.css";
 
 interface ProfileAvatarProps {
   user: User | null;
@@ -47,26 +49,26 @@ export default function ProfileAvatar({ user }: ProfileAvatarProps) {
   };
 
   return (
-    <div className={css}>
-      <div className={css}>
+    <div className={css.wrapper}>
+      <div className={css.avatarWrapper}>
         {user?.avatar ? (
           <Image
-            className={css}
+            className={css.avatar}
             src={user.avatar}
             alt={user.name}
             height={132}
             width={132}
           />
         ) : (
-          <div className={css}>Avatar</div>
+          <div className={css.avatarDefolt}>Avatar</div>
         )}
       </div>
 
-      <div>
-        <h1 className={css}>{user?.name}</h1>
-        <p className={css}>{user?.email}</p>
+      <div className={css.infoWrapper}>
+        <h1 className={css.name}>{user?.name}</h1>
+        <p className={css.email}>{user?.email}</p>
         <input type="file" hidden ref={fileInput} onChange={updateAvatar} />
-        <button className={css} onClick={openFileWindows}>
+        <button className={css.buttonUpdate} onClick={openFileWindows}>
           {mutation.isPending ? "Йде завантаження " : "Завантажити нове фото"}
         </button>
       </div>
