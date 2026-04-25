@@ -1,5 +1,4 @@
 import css from "./RegisterPage.module.css";
-import Image from "next/image";
 import clsx from "clsx";
 import RegistrationForm from "@/components/forms/RegistrationForm/RegistrationForm";
 
