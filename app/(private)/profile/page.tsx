@@ -1,5 +1,6 @@
 "use client";
 import ProfileAvatar from "@/components/profile/ProfileAvatar/ProfileAvatar";
+import ProfileEditForm from "@/components/profile/ProfileEditForm/ProfileEditForm";
 import { getMe } from "@/lib/api/clientApi";
 import { useQuery } from "@tanstack/react-query";
 
@@ -23,7 +24,7 @@ export default function ProfilePage() {
   return (
     <>
       <ProfileAvatar user={user} />
-      <ProfileEditForm />
+      <ProfileEditForm user={user} />
     </>
   );
 }
