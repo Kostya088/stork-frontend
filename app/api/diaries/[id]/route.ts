@@ -4,7 +4,10 @@ import { isAxiosError } from "axios";
 import { logErrorResponse } from "@/app/api/_utils/utils";
 import { nextServer } from "@/lib/api/api";
 
-export async function GET({ params }: { params: Promise<{ id: string }> }) {
+export async function GET(
+  _request: NextRequest,
+  { params }: { params: Promise<{ id: string }> },
+) {
   try {
     const cookieStore = await cookies();
     const { id } = await params;

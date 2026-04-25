@@ -1,9 +1,12 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { isAxiosError } from "axios";
 import { nextServer } from "@/lib/api/api";
 import { logErrorResponse } from "@/app/api/_utils/utils";
 
-export async function GET({ params }: { params: Promise<{ week: string }> }) {
+export async function GET(
+  _request: NextRequest,
+  { params }: { params: Promise<{ week: string }> },
+) {
   try {
     const { week } = await params;
 
