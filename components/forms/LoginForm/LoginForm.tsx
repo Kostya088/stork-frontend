@@ -35,9 +35,9 @@ console.log("LOGIN VALUES:", values);
       toast.success("Успішний вхід");
 
       router.push("/");
-    } catch (err) {
-      console.error(err);
-      toast.error("Помилка входу");
+    } catch  {
+      
+      toast.error("Невірний email або пароль");
     } finally {
       setSubmitting(false);
     }
