@@ -108,10 +108,6 @@ export async function getWeeks(): Promise<WeekInfo[]> {
   return data;
 }
 
-export async function getWeeksMe(): Promise<WeekInfo> {
-  const { data } = await nextClient.get<WeekInfo>("/weeks/me");
-  return data;
-}
 
 export async function getWeeksBaby(week: number): Promise<BabyState> {
   const { data } = await nextClient.get<BabyState>(`/weeks/baby/${week}`);
@@ -120,6 +116,29 @@ export async function getWeeksBaby(week: number): Promise<BabyState> {
 
 export async function getWeeksMom(week: number): Promise<MomState> {
   const { data } = await nextClient.get<MomState>(`/weeks/mom/${week}`);
+  return data;
+}
+export interface WeekDashboardInfo {
+  weekNumber: number;
+  daysUntilDue: number;
+  tipForMom: string | null;
+  babyInfo: {
+    gender?: "boy" | "girl" | null;
+    analogy: string | null;
+    image: string;
+    development: string;
+    size?: number;
+    weight?: number;
+  } | null;
+}
+
+export async function getPublicWeek(week = 1): Promise<WeekDashboardInfo> {
+  const { data } = await nextClient.get<WeekDashboardInfo>(`/weeks?week=${week}`);
+  return data;
+}
+
+export async function getWeeksMe(): Promise<WeekDashboardInfo> {
+  const { data } = await nextClient.get<WeekDashboardInfo>("/weeks/me");
   return data;
 }
 
@@ -158,3 +177,4 @@ export async function checkSession(): Promise<CheckSessionResponse> {
   const { data } = await nextClient.get<CheckSessionResponse>("/auth/session");
   return data;
 }
+

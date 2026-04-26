@@ -2,47 +2,40 @@
 
 import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
-import { getWeeksBaby, getWeeksMe } from "@/lib/api/clientApi";
 import { useAuthStore } from "@/lib/store/authStore";
+import { getPublicWeek, getWeeksMe } from "@/lib/api/clientApi";
 import css from "./BabyTodayCard.module.css";
-
-const defaultBaby = {
-  weekNumber: 1,
-  babySize: 0,
-  babyWeight: 0,
-  image: "https://ftp.goit.study/img/lehlehka/6895ce04a5c677999ed2af25.webp",
-  babyActivity:
-    "На цьому етапі вагітності ще немає. Тиждень відраховується від першого дня останньої менструації, коли організм тільки готується до можливого зачаття.",
-  babyDevelopment:
-    "Фактично, на першому тижні вагітності запліднення ще не відбулося. Організм жінки проходить через менструацію та починає готувати домінантний фолікул, з якого згодом вийде яйцеклітина, готова до запліднення. Це підготовчий етап.",
-};
 
 export default function BabyTodayCard() {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
   const {
-    data: week,
-    isLoading: isWeekLoading,
-    isError: isWeekError,
+    data: currentWeek,
+    isLoading: isCurrentWeekLoading,
+    isError: isCurrentWeekError,
   } = useQuery({
     queryKey: ["weeks", "me"],
     queryFn: getWeeksMe,
     enabled: isAuthenticated,
   });
 
-  const weekNumber = week?.weekNumber;
-
   const {
-    data: baby,
-    isLoading: isBabyLoading,
-    isError: isBabyError,
+    data: publicWeek,
+    isLoading: isPublicWeekLoading,
+    isError: isPublicWeekError,
   } = useQuery({
-    queryKey: ["weeks", "baby", weekNumber],
-    queryFn: () => getWeeksBaby(weekNumber!),
-    enabled: isAuthenticated && Boolean(weekNumber),
+    queryKey: ["weeks", "public", 1],
+    queryFn: () => getPublicWeek(1),
+    enabled: !isAuthenticated,
   });
 
-  if (isAuthenticated && (isWeekLoading || isBabyLoading)) {
+  const weekData = isAuthenticated ? currentWeek : publicWeek;
+  const babyInfo = weekData?.babyInfo;
+
+  if (
+    (isAuthenticated && isCurrentWeekLoading) ||
+    (!isAuthenticated && isPublicWeekLoading)
+  ) {
     return (
       <section className={css.card}>
         <p className={css.status}>Завантаження...</p>
@@ -50,7 +43,11 @@ export default function BabyTodayCard() {
     );
   }
 
-  if (isAuthenticated && (isWeekError || isBabyError || !baby)) {
+  if (
+    (isAuthenticated && isCurrentWeekError) ||
+    (!isAuthenticated && isPublicWeekError) ||
+    !babyInfo
+  ) {
     return (
       <section className={css.card}>
         <p className={css.status}>
@@ -60,8 +57,6 @@ export default function BabyTodayCard() {
     );
   }
 
-  const currentBaby = isAuthenticated ? baby! : defaultBaby;
-
   return (
     <section className={css.card}>
       <h2 className={css.title}>Малюк сьогодні</h2>
@@ -69,7 +64,7 @@ export default function BabyTodayCard() {
       <div className={css.content}>
         <div className={css.imageWrapper}>
           <Image
-            src={currentBaby.image}
+            src={babyInfo.image}
             alt="Ілюстрація розміру малюка"
             className={css.image}
             width={257}
@@ -78,19 +73,27 @@ export default function BabyTodayCard() {
         </div>
 
         <div className={css.info}>
-          <p>
-            <strong>Розмір:</strong> Приблизно {currentBaby.babySize} см
-          </p>
-          <p>
-            <strong>Вага:</strong> Близько {currentBaby.babyWeight} грамів.
-          </p>
-          <p>
-            <strong>Активність:</strong> {currentBaby.babyActivity}
-          </p>
+          {babyInfo.size !== undefined && (
+            <p>
+              <strong>Розмір:</strong> Приблизно {babyInfo.size} см
+            </p>
+          )}
+
+          {babyInfo.weight !== undefined && (
+            <p>
+              <strong>Вага:</strong> Близько {babyInfo.weight} грамів.
+            </p>
+          )}
+
+          {babyInfo.analogy && (
+            <p>
+              <strong>Розмір як:</strong> {babyInfo.analogy}
+            </p>
+          )}
         </div>
       </div>
 
-      <p className={css.description}>{currentBaby.babyDevelopment}</p>
+      <p className={css.description}>{babyInfo.development}</p>
     </section>
   );
 }

@@ -6,8 +6,10 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createDiary, getEmotions } from "@/lib/api/clientApi";
 import type { CreateDiaryData, UpdateDiaryData } from "@/lib/api/clientApi";
 import { useAuthStore } from "@/lib/store/authStore";
-import AddDiaryEntryModal from "@/components/diary/AddDiaryEntryModal/AddDiaryEntryModal";
+import Modal from "@/components/modal/Modal/Modal";
+import AddDiaryEntryForm from "@/components/modal/modalForms/AddDiaryEntryForm/AddDiaryEntryForm";
 import css from "./FeelingCheckCard.module.css";
+
 
 export default function FeelingCheckCard() {
   const router = useRouter();
@@ -57,14 +59,14 @@ export default function FeelingCheckCard() {
         </button>
       </section>
 
-      <AddDiaryEntryModal
-        isOpen={isModalOpen}
-        entry={null}
-        emotions={emotions}
-        isSubmitting={createDiaryMutation.isPending}
-        onClose={() => setIsModalOpen(false)}
-        onSubmit={handleSubmit}
-      />
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <AddDiaryEntryForm
+          entry={null}
+          emotions={emotions}
+          isSubmitting={createDiaryMutation.isPending}
+          onSubmit={handleSubmit}
+        />
+      </Modal>
     </>
   );
 }
