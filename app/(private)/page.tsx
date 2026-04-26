@@ -1,3 +1,7 @@
 export default function DashboardPage() {
-  return <p>DashboardPage</p>;
+  return (
+    <>
+      <p>DashboardPage</p>
+    </>
+  );
 }

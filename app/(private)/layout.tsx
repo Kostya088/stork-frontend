@@ -1,6 +1,7 @@
-import Header from "@/components/layout/Header/Header";
 import Breadcrumbs from "@/components/layout/Breadcrumbs/Breadcrumbs";
-import SideBar from "@/components/layout/SideBar/SideBar";
+import SideBar, {
+  MobileSidebarOverlay,
+} from "@/components/layout/SideBar/SideBar";
 import css from "./layout.module.css";
 
 type Props = {
@@ -10,7 +11,6 @@ type Props = {
 export default function PrivateLayout({ children }: Props) {
   return (
     <div className={css.layout}>
-      <Header showMobileButton={true} hideOnDesktop={true} />
       <aside className={css.sidebarDesktop}>
         <SideBar />
       </aside>
@@ -18,6 +18,7 @@ export default function PrivateLayout({ children }: Props) {
         <Breadcrumbs />
         {children}
       </main>
+      <MobileSidebarOverlay />
     </div>
   );
 }
