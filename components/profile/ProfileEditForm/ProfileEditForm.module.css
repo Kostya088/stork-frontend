@@ -139,11 +139,12 @@
 }
 
 .buttonWrapper {
-  margin: 48px auto 0;
   width: 335px;
+  height: 62px;
   display: flex;
   gap: 16px;
   justify-content: space-between;
+  align-items: flex-end;
 }
 
 .buttonCancel {
