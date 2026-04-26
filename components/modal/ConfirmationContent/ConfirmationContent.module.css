@@ -1,0 +1,106 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    padding: 64px 20px;
+    width: 100%;
+}
+
+.title {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.2;
+    text-align: center;
+    color: #000;
+}
+
+.actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+}
+
+.cancelButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 268px;
+    height: 42px;
+    padding: 10px 24px;
+    border-radius: 100px;
+    border: none;
+    border-bottom: 4px solid rgba(0, 0, 0, 0.15);
+    background: rgba(0, 0, 0, 0.05);
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: transform 0.15s ease, border 0.15s ease;
+}
+
+.confirmButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    gap: 8px;
+    border-bottom: 4px solid #ffcbd3;
+    border-radius: 100px;
+    padding: 10px 24px;
+    width: 268px;
+    height: 42px;
+    background: #ffdae0;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #000;
+    cursor: pointer;
+}
+
+.cancelButton:active,
+.confirmButton:active {
+    transform: translateY(2px);
+    border-bottom-width: 2px;
+}
+
+@media (min-width: 768px) {
+    .container {
+        max-width: 768px;
+    }
+
+    .actions {
+        flex-direction: row;
+        justify-content: center;
+        gap: 16px;
+    }
+
+    .cancelButton,
+    .confirmButton {
+        width: 268px;
+    }
+}
+
+@media (min-width: 1440px) {
+    .container {
+        padding: 64px 64px;
+        max-width: 768px;
+    }
+
+    .title {
+        font-size: 48px;
+    }
+
+    .actions {
+        flex-direction: row;
+        justify-content: center;
+        gap: 16px;
+    }
+
+    .cancelButton,
+    .confirmButton {
+        width: 268px;
+    }
+}
