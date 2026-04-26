@@ -207,14 +207,27 @@ export default function DiaryPage({
           />
         )}
 
-        <DiaryEntryDetails
-          entry={selectedEntry}
-          isLoading={isLoading}
-          isStandalone={detailOnly}
-          onBack={() => router.push("/diary")}
-          onEdit={handleEditClick}
-          onDelete={setEntryToDelete}
-        />
+        {detailOnly && (
+          <DiaryEntryDetails
+            entry={selectedEntry}
+            isLoading={isLoading}
+            isStandalone
+            onBack={() => router.push("/diary")}
+            onEdit={handleEditClick}
+            onDelete={setEntryToDelete}
+          />
+        )}
+
+        {!detailOnly && (
+          <div className={styles.desktopDetails}>
+            <DiaryEntryDetails
+              entry={selectedEntry}
+              isLoading={isLoading}
+              onEdit={handleEditClick}
+              onDelete={setEntryToDelete}
+            />
+          </div>
+        )}
       </section>
 
       <Modal
