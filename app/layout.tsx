@@ -64,8 +64,10 @@ export default function RootLayout({
           <AuthProvider>
             <Header showMobileButton={true} hideOnDesktop={true} hideOnAuth={true} />
             <main>
-              {children}
-              {modal}
+              <div className='container'>
+                {children}
+                {modal ?? null}
+              </div>
             </main>
             <MobileSidebarOverlay />
           </AuthProvider>
