@@ -36,7 +36,7 @@ export default function ProfileAvatar({ user }: ProfileAvatarProps) {
     // якщо немає фото -> завершити функцію
     if (!file) return;
 
-    // якщо фото не визначеного формату -> вивести тос-повідомлення про це і завершити функцію
+    // якщо фото не визначеного формату -> вивести тост-повідомлення про це і завершити функцію
     if (!["image/jpeg", "image/jpg", "image/webp"].includes(file.type)) {
       toast.error("Загрузіть будь-ласка файли форматів .jpeg, .jpg або .webp");
       return;
@@ -68,7 +68,10 @@ export default function ProfileAvatar({ user }: ProfileAvatarProps) {
         <h1 className={css.name}>{user?.name}</h1>
         <p className={css.email}>{user?.email}</p>
         <input type="file" hidden ref={fileInput} onChange={updateAvatar} />
-        <button className={css.buttonUpdate} onClick={openFileWindows}>
+        <button
+          className={css.buttonUpdate}
+          onClick={openFileWindows}
+          disabled={mutation.isPending}>
           {mutation.isPending ? "Йде завантаження " : "Завантажити нове фото"}
         </button>
       </div>

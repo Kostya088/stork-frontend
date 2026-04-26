@@ -1,4 +1,5 @@
 // Компонент для рендеру div-а "Форма профіля"
+"use client";
 
 import { updateMe } from "@/lib/api/clientApi";
 import { User } from "@/types/user";
@@ -84,7 +85,7 @@ export default function ProfileEditForm({ user }: ProfileEditFormProps) {
             />
           </div>
 
-          <div className={css.inputWrapper}>
+          <div className={`${css.inputWrapper} ${css.email}`}>
             <label htmlFor="email-Id" className={css.label}>
               Пошта
             </label>
