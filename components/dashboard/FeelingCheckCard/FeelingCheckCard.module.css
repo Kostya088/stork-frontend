@@ -1,0 +1,32 @@
+.card {
+  padding: 24px;
+  border-radius: 24px;
+  background-color: #fff1f5;
+}
+
+.title {
+  margin-bottom: 12px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.text {
+  font-size: 14px;
+  line-height: 1.4;
+  color: #5d5261;
+}
+
+.button {
+  margin-top: 16px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 999px;
+  background-color: #e7a9b6;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.button:hover {
+  background-color: #de94a4;
+}

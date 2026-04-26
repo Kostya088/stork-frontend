@@ -80,7 +80,7 @@ export async function getMe(): Promise<User> {
   return data;
 }
 
-export type UpdateUserData = Pick<User, "name" | "dueDate" | "gender">;
+export type UpdateUserData = Partial<Pick<User, "name" | "dueDate" | "gender">>;
 
 export async function updateMe(data: UpdateUserData): Promise<User> {
   const { data: user } = await nextClient.patch<User>("/users/me", data);
