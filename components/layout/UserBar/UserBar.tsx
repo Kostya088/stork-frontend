@@ -23,7 +23,7 @@ export default function UserBar() {
       await logoutApi();
       clearIsAuthenticated();
       startTransition(() => {
-        router.push("/auth/login");
+        router.push("/login");
       });
     } catch (error) {
       console.error("Logout failed:", error);
@@ -38,6 +38,8 @@ export default function UserBar() {
         <div className={css.avatar}>
           {user.avatar ? (
             <Image
+              width={180}
+              height={38}
               src={user.avatar}
               alt={user.name}
               className={css.avatarImage}

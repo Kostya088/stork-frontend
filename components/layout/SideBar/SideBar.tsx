@@ -64,7 +64,7 @@ export default function SideBar() {
 export function DesktopSidebar() {
   const close = useSidebarStore((state) => state.close);
   const pathname = usePathname();
-  const isAuthPage = pathname?.startsWith("/auth/");
+  const isAuthPage = pathname === "/login" || pathname === "/register";
 
   if (isAuthPage) return null;
 
