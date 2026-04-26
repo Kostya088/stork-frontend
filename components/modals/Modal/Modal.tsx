@@ -1,43 +1,58 @@
 "use client";
 
 import { useEffect } from "react";
-import styles from "./Modal.module.css";
+import type { ReactNode } from "react";
 
-interface ModalProps {
+import css from "./Modal.module.css";
+
+import Image from "next/image";
+
+type ModalProps = {
   isOpen: boolean;
-  children: React.ReactNode;
-  onClose: () => void;
-  labelledBy?: string;
-}
+  onClose: () => void; //
+  children: ReactNode;
+};
 
-export default function Modal({ isOpen, children, onClose, labelledBy }: ModalProps) {
+export default function Modal({ isOpen, onClose, children }: ModalProps) {
   useEffect(() => {
     if (!isOpen) return;
 
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") onClose();
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onClose();
+      }
     };
 
-    document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("keydown", handleEsc);
+
     document.body.style.overflow = "hidden";
 
     return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-      document.body.style.overflow = "";
+      document.removeEventListener("keydown", handleEsc);
+
+      document.body.style.overflow = "auto";
     };
   }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
+  const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
+
   return (
-    <div className={styles.backdrop} onMouseDown={onClose}>
-      <div
-        className={styles.modal}
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby={labelledBy}
-        onMouseDown={(event) => event.stopPropagation()}
-      >
+    <div className={css.backdrop} onClick={handleBackdropClick}>
+      <div className={css.modal}>
+        <button type="button" className={css.closeButton} onClick={onClose}>
+          <Image
+            src="/icons/closeBtn.svg"
+            alt="Close modal"
+            width={24}
+            height={24}
+          />
+        </button>
         {children}
       </div>
     </div>
