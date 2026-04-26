@@ -99,12 +99,11 @@ export default function ProfileEditForm({ user }: ProfileEditFormProps) {
 
           <div className={css.inputWrapper}>
             <label htmlFor="gender-Id" className={css.label}>
-              {" "}
-              Оберіть стать
+              Стать дитини
             </label>
             <Select
               options={optionsForForm}
-              placeholder="Оберіть стать"
+              placeholder="Стать дитини"
               className={css.genderSelect}
               classNamePrefix="gender"
               value={optionsForForm.find(

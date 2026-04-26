@@ -28,28 +28,31 @@
 }
 
 .infoWrapper {
-  text-align: center;
-  font-family: var(--font-family);
+  font-family: "Lato", sans-serif;
   font-weight: 400;
   font-size: 14px;
-  line-height: 150%;
-  color: var(--color-scheme-text);
+  line-height: 1.5;
+  text-align: center;
+  color: #000;
 }
 
 .name {
-  margin-top: 12px;
-  font-size: 20px;
+  font-family: "Comfortaa", sans-serif;
   font-weight: 700;
-  font-family: var(--second-family);
-  line-height: 140%;
+  font-size: 20px;
+  line-height: 1.4;
   letter-spacing: 0.01em;
   text-align: center;
-  color: var(--color-scheme-text);
+  color: #000;
 }
 
 .email {
-  margin-top: 4px;
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
   font-size: 14px;
+  line-height: 1.5;
+  text-align: center;
+  color: #000;
 }
 
 .buttonUpdate {
