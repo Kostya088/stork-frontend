@@ -35,9 +35,9 @@ export async function proxy(request: NextRequest) {
 
   const isLoggedIn = !!accessToken;
 
-  // if (isPrivateRoute && !isLoggedIn) {
-  //   return NextResponse.redirect(new URL("/login", request.url));
-  // }
+  if (isPrivateRoute && !isLoggedIn) {
+    return NextResponse.redirect(new URL("/login", request.url));
+  }
 
   if (isPublicRoute && isLoggedIn) {
     const response = NextResponse.redirect(new URL("/", request.url));
