@@ -1,5 +1,5 @@
 import Breadcrumbs from "@/components/layout/Breadcrumbs/Breadcrumbs";
-import SideBar, {
+import {
   DesktopSidebar,
   MobileSidebarOverlay,
 } from "@/components/layout/SideBar/SideBar";
@@ -15,10 +15,10 @@ export default function PrivateLayout({ children }: Props) {
       <aside className={css.sidebarDesktop}>
         <DesktopSidebar />
       </aside>
-      <main className={css.main}>
+      <div className={css.main}>
         <Breadcrumbs />
         {children}
-      </main>
+      </div>
       <MobileSidebarOverlay />
     </div>
   );
