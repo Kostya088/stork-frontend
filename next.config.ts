@@ -4,16 +4,16 @@ const nextConfig: NextConfig = {
   reactCompiler: true,
   images: {
     remotePatterns: [
-      {
-        protocol: "https",
-<<<<<<< HEAD
-        hostname: "ftp.goit.study",
-        pathname: "/img/lehlehka/**",
-=======
-        hostname: "res.cloudinary.com",
->>>>>>> origin/main
-      },
-    ],
+  {
+    protocol: "https",
+    hostname: "ftp.goit.study",
+    pathname: "/img/lehlehka/**",
+  },
+  {
+    protocol: "https",
+    hostname: "res.cloudinary.com",
+  },
+],
   },
 };
 
