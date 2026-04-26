@@ -1,5 +1,6 @@
 import Breadcrumbs from "@/components/layout/Breadcrumbs/Breadcrumbs";
 import SideBar, {
+  DesktopSidebar,
   MobileSidebarOverlay,
 } from "@/components/layout/SideBar/SideBar";
 import css from "./layout.module.css";
@@ -12,7 +13,7 @@ export default function PrivateLayout({ children }: Props) {
   return (
     <div className={css.layout}>
       <aside className={css.sidebarDesktop}>
-        <SideBar />
+        <DesktopSidebar />
       </aside>
       <main className={css.main}>
         <Breadcrumbs />
