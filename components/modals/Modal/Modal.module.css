@@ -3,7 +3,7 @@
   inset: 0;
   z-index: 1000;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   padding: 28px 16px;
   overflow-y: auto;
@@ -13,11 +13,4 @@
 .modal {
   width: 100%;
   max-width: 760px;
-}
-
-@media screen and (min-width: 768px) {
-  .backdrop {
-    align-items: center;
-    padding: 32px;
-  }
 }

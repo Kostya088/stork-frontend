@@ -34,4 +34,9 @@ export default function DashboardPage() {
       </div>
     </div>
   );
+  return (
+    <>
+      <p>DashboardPage</p>
+    </>
+  );
 }
