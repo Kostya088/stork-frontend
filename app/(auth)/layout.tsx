@@ -22,7 +22,7 @@ export default function AuthLayout({ children }: Props) {
 
   return (
     <>
-      <Header showMobileButton={false} />
+      <Header />
       {loading ? <div>Loading...</div> : children}
     </>
   );

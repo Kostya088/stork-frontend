@@ -16,7 +16,7 @@ export async function GET() {
     }
 
     if (refreshToken) {
-      const apiRes = await nextServer.get("auth/session", {
+      const apiRes = await nextServer.post("auth/refresh", null, {
         headers: {
           Cookie: cookieStore.toString(),
         },

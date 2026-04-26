@@ -125,7 +125,7 @@ const RegistrationForm = () => {
       </Formik>
       <p className={css.paragraph}>
         Вже маєте аккаунт?
-        <Link className={css.registerLink} href="/auth/login">
+        <Link className={css.registerLink} href="/login">
           Увійти
         </Link>
       </p>

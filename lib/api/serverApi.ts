@@ -15,7 +15,7 @@ async function getCookies() {
 
 export async function checkSession() {
   const headers = await getCookies();
-  const res = await nextServer.get("/auth/session", { headers });
+  const res = await nextServer.post("/auth/refresh", null, { headers });
   return res;
 }
 
