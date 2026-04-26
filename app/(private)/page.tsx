@@ -19,4 +19,9 @@ export default function DashboardPage() {
       <FeelingCheckCard />
     </div>
   );
+  return (
+    <>
+      <p>DashboardPage</p>
+    </>
+  );
 }

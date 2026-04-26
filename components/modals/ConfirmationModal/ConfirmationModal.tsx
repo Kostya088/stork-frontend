@@ -25,6 +25,11 @@ export default function ConfirmationModal({
   return (
     <Modal isOpen={isOpen} onClose={onCancel} labelledBy="confirmation-modal-title">
       <div className={styles.box}>
+        <button className={styles.closeButton} type="button" onClick={onCancel} aria-label="Закрити">
+          <svg className={styles.closeIcon}>
+            <use href="/icons/sprite.svg#icon-close" />
+          </svg>
+        </button>
         <h2 id="confirmation-modal-title" className={styles.title}>
           {title}
         </h2>
