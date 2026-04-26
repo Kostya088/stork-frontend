@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { parse } from "cookie";
 import { isAxiosError } from "axios";
-import { logErrorResponse } from "../../_utils/utils";
+import { logErrorResponse } from "@/app/api/_utils/utils";
 import { nextServer } from "@/lib/api/api";
 
 export async function GET() {
@@ -16,7 +16,7 @@ export async function GET() {
     }
 
     if (refreshToken) {
-      const apiRes = await nextServer.get("auth/session", {
+      const apiRes = await nextServer.post("auth/refresh", null, {
         headers: {
           Cookie: cookieStore.toString(),
         },
@@ -39,6 +39,8 @@ export async function GET() {
             cookieStore.set("accessToken", parsed.accessToken, options);
           if (parsed.refreshToken)
             cookieStore.set("refreshToken", parsed.refreshToken, options);
+          if (parsed.sessionId)
+            cookieStore.set("sessionId", parsed.sessionId, options);
         }
         return NextResponse.json({ success: true }, { status: 200 });
       }

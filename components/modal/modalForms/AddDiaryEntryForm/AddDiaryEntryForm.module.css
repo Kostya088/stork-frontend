@@ -1,0 +1,147 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.fieldGroup,
+.fieldset {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.label {
+    color: #241a1d;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.35;
+}
+
+.input,
+.textarea,
+.emotionBox {
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    background: #f1f1f1;
+    color: #241a1d;
+    font: inherit;
+    font-size: 14px;
+}
+
+.input {
+    height: 40px;
+    padding: 0 14px;
+}
+
+.textarea {
+    min-height: 170px;
+    padding: 14px;
+    resize: vertical;
+}
+
+.input::placeholder,
+.textarea::placeholder {
+    color: #8b8587;
+}
+
+.emotionBox {
+    padding: 10px;
+}
+
+.selectHint {
+    margin: 0 0 10px;
+    color: #5f5356;
+    font-size: 13px;
+}
+
+.emotionList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    max-height: 128px;
+    overflow-y: auto;
+}
+
+.emotionList::-webkit-scrollbar {
+    width: 6px;
+}
+
+.emotionList::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+    background: #ffc7d6;
+}
+
+.emotionOption {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 30px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: #ffffff;
+    color: #241a1d;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background 160ms ease;
+}
+
+.checked {
+    background: #ffd2dd;
+}
+
+.checkbox {
+    width: 14px;
+    height: 14px;
+    accent-color: #241a1d;
+}
+
+.error {
+    color: #9d1f42;
+    font-size: 12px;
+    line-height: 1.3;
+}
+
+.submitButton {
+    align-self: center;
+    min-width: 220px;
+    height: 44px;
+    margin-top: 6px;
+    border: none;
+    border-radius: 999px;
+    background: #ffd2dd;
+    color: #241a1d;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.submitButton:hover,
+.submitButton:focus-visible {
+    opacity: 0.9;
+    outline: none;
+    transform: translateY(-1px);
+}
+
+.submitButton:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+    transform: none;
+}
+
+@media screen and (min-width: 768px) {
+    .form {
+        gap: 20px;
+    }
+
+    .textarea {
+        min-height: 210px;
+    }
+}

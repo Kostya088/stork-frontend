@@ -1,0 +1,18 @@
+.dashboard {
+  display: grid;
+  gap: 20px;
+  width: 100%;
+  padding: 24px;
+}
+
+.status {
+  margin: 24px;
+  color: #5d5261;
+  font-size: 16px;
+}
+
+@media (max-width: 640px) {
+  .dashboard {
+    padding: 16px;
+  }
+}

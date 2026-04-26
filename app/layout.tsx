@@ -3,6 +3,8 @@ import localFont from "next/font/local";
 import "./globals.css";
 import TanStackProvider from "@/components/providers/TanStackProvider";
 import AuthProvider from "@/components/providers/AuthProvider";
+import Header from "@/components/layout/Header/Header";
+import { MobileSidebarOverlay } from "@/components/layout/SideBar/SideBar";
 
 const lato = localFont({
   src: [
@@ -53,17 +55,19 @@ export default function RootLayout({
   modal,
 }: Readonly<{
   children: React.ReactNode;
-  modal: React.ReactNode;
+  modal?: React.ReactNode;
 }>) {
   return (
     <html lang="en" className={`${lato.variable} ${comfortaa.variable}`}>
       <body className={lato.variable}>
         <TanStackProvider>
           <AuthProvider>
+            <Header showMobileButton={true} hideOnDesktop={true} hideOnAuth={true} />
             <main>
               {children}
-              {modal ?? null}
+              {modal}
             </main>
+            <MobileSidebarOverlay />
           </AuthProvider>
         </TanStackProvider>
       </body>
