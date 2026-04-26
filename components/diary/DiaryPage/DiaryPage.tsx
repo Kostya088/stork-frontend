@@ -10,7 +10,7 @@ import AddDiaryEntryForm from "@/components/modal/modalForms/AddDiaryEntryForm/A
 // import ConfirmationModal from "@/components/modal/ConfirmationModal/ConfirmationModal";
 import {
   createDiary,
-  deleteDiary,
+  // deleteDiary,
   getDiaries,
   getEmotions,
   updateDiary,
