@@ -14,12 +14,13 @@ function getGreeting() {
 
 export default function GreetingBlock() {
   const user = useAuthStore((state) => state.user);
-  const name = user?.name ?? "Ганно";
 
   return (
     <section className={css.block}>
       <h1 className={css.title}>
-        {getGreeting()}, {name}!
+        {user
+          ? `${getGreeting()}, ${user.name}!`
+          : `${getGreeting()}!`}
       </h1>
     </section>
   );

@@ -1,90 +1,96 @@
 "use client";
 
+import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
 import { getWeeksBaby, getWeeksMe } from "@/lib/api/clientApi";
+import { useAuthStore } from "@/lib/store/authStore";
 import css from "./BabyTodayCard.module.css";
-import Image from "next/image";
+
+const defaultBaby = {
+  weekNumber: 1,
+  babySize: 0,
+  babyWeight: 0,
+  image: "https://ftp.goit.study/img/lehlehka/6895ce04a5c677999ed2af25.webp",
+  babyActivity:
+    "На цьому етапі вагітності ще немає. Тиждень відраховується від першого дня останньої менструації, коли організм тільки готується до можливого зачаття.",
+  babyDevelopment:
+    "Фактично, на першому тижні вагітності запліднення ще не відбулося. Організм жінки проходить через менструацію та починає готувати домінантний фолікул, з якого згодом вийде яйцеклітина, готова до запліднення. Це підготовчий етап.",
+};
 
 export default function BabyTodayCard() {
-  const { data: week } = useQuery({
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+
+  const {
+    data: week,
+    isLoading: isWeekLoading,
+    isError: isWeekError,
+  } = useQuery({
     queryKey: ["weeks", "me"],
     queryFn: getWeeksMe,
+    enabled: isAuthenticated,
   });
+
+  const weekNumber = week?.weekNumber;
 
   const {
     data: baby,
-    // isLoading: isBabyLoading,
-    // isError: isBabyError,
+    isLoading: isBabyLoading,
+    isError: isBabyError,
   } = useQuery({
-    queryKey: ["weeks", "baby", week?.weekNumber],
-    queryFn: () => getWeeksBaby(week!.weekNumber),
-    enabled: Boolean(week?.weekNumber),
+    queryKey: ["weeks", "baby", weekNumber],
+    queryFn: () => getWeeksBaby(weekNumber!),
+    enabled: isAuthenticated && Boolean(weekNumber),
   });
 
-  // if (isWeekLoading || isBabyLoading) {
-  //   return (
-  //     <section className={css.card}>
-  //       <p>Завантаження...</p>
-  //     </section>
-  //   );
-  // }
+  if (isAuthenticated && (isWeekLoading || isBabyLoading)) {
+    return (
+      <section className={css.card}>
+        <p className={css.status}>Завантаження...</p>
+      </section>
+    );
+  }
 
-  // if (isWeekError || isBabyError || !week || !baby) {
-  //   return (
-  //     <section className={css.card}>
-  //       <p>Не вдалося завантажити інформацію про малюка.</p>
-  //     </section>
-  //   );
-  // }
+  if (isAuthenticated && (isWeekError || isBabyError || !baby)) {
+    return (
+      <section className={css.card}>
+        <p className={css.status}>
+          Не вдалося завантажити інформацію про малюка.
+        </p>
+      </section>
+    );
+  }
 
+  const currentBaby = isAuthenticated ? baby! : defaultBaby;
 
-  // TODO: remove mock after API ready
-const mockWeek = {
-  weekNumber: 14,
-  babySize: 12,
-  babyWeight: 45,
-  image: "/images/avocado.png", // або будь-яка
-};
-
-const mockBaby = {
-  babyActivity: "Малюк активно рухається, хоча ви ще не відчуваєте.",
-  babyDevelopment:
-    "У цей час тіло малюка починає вирівнюватися, м'язи розвиваються, і рухи стають більш скоординованими.",
-};
-
-const currentWeek = week ?? mockWeek;
-const currentBaby = baby ?? mockBaby;
-
-// TODO: remove mock after API ready
   return (
-  <section className={css.card}>
-    <h2 className={css.title}>Малюк сьогодні</h2>
+    <section className={css.card}>
+      <h2 className={css.title}>Малюк сьогодні</h2>
 
-    <div className={css.content}>
-      <div className={css.imageWrapper}>
-        <Image
-          src={currentWeek.image}
-          alt="Ілюстрація розміру малюка"
-          className={css.image}
-          width={260}
-          height={180}
-        />
+      <div className={css.content}>
+        <div className={css.imageWrapper}>
+          <Image
+            src={currentBaby.image}
+            alt="Ілюстрація розміру малюка"
+            className={css.image}
+            width={257}
+            height={194}
+          />
+        </div>
+
+        <div className={css.info}>
+          <p>
+            <strong>Розмір:</strong> Приблизно {currentBaby.babySize} см
+          </p>
+          <p>
+            <strong>Вага:</strong> Близько {currentBaby.babyWeight} грамів.
+          </p>
+          <p>
+            <strong>Активність:</strong> {currentBaby.babyActivity}
+          </p>
+        </div>
       </div>
 
-      <div className={css.info}>
-        <p>
-          <span><strong>Розмір:</strong> Приблизно {currentWeek.babySize} см</span>
-        </p>
-        <p>
-          <span><strong>Вага:</strong> Близько {currentWeek.babyWeight} грамів</span>
-        </p>
-        <p>
-          <span><strong>Активність:</strong> {currentBaby.babyActivity}</span>
-        </p>
-      </div>
-    </div>
-
-    <p className={css.description}>{currentBaby.babyDevelopment}</p>
-  </section>
-);
+      <p className={css.description}>{currentBaby.babyDevelopment}</p>
+    </section>
+  );
 }

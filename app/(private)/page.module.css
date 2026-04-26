@@ -1,18 +1,37 @@
 .dashboard {
-  display: grid;
-  gap: 24px;
   width: 100%;
   padding: 24px;
 }
 
-.status {
-  margin: 24px;
-  color: #5d5261;
-  font-size: 16px;
+.grid {
+  display: grid;
+  grid-template-columns: 2fr 1.2fr;
+  gap: 24px;
 }
 
-@media (max-width: 640px) {
+.leftColumn,
+.rightColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.statusGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 767px) {
   .dashboard {
     padding: 16px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .statusGrid {
+    grid-template-columns: 1fr;
   }
 }
