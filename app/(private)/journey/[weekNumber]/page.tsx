@@ -1,3 +1,3 @@
-export default function JourneyPage() {
+export default function JourneyDetailsPage() {
   return <p>JourneyPage</p>;
 }

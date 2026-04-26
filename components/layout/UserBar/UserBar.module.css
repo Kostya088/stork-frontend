@@ -1,0 +1,84 @@
+.container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: background-color 0.2s;
+  flex: 1;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.container:hover {
+  background: #f1eef0;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #ffd2dd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.avatarImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatarPlaceholder {
+  font-weight: 600;
+  color: #241a1d;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.name {
+  font-weight: 600;
+  color: #241a1d;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.email {
+  font-size: 12px;
+  color: #6b5e61;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.logoutButton {
+  all: unset;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+}
+
+.logoutButton:hover {
+  background: #f1eef0;
+}
+
+.logoutIcon {
+  width: 20px;
+  height: 20px;
+  display: block;
+  color: #241a1d;
+}
