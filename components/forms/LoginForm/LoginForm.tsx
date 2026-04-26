@@ -1,11 +1,10 @@
 "use client";
 
-import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuthStore } from "@/lib/store/authStore";
 import { login } from "@/lib/api/clientApi";
 import styles from "./LoginForm.module.css";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field, ErrorMessage, FormikHelpers } from "formik";
 import * as Yup from "yup";
 import Link from "next/link";
 import toast from "react-hot-toast";
@@ -20,9 +19,14 @@ const schema = Yup.object({
 export default function LoginForm() {
   const router = useRouter();
   const authStore = useAuthStore();
-//   const [error, setError] = useState("");
 
-  const handleSubmit = async (values: any, { setSubmitting }: any) => {
+  const handleSubmit = async (
+    values: { email: string; password: string },
+    { setSubmitting }: FormikHelpers<{ email: string; password: string }>
+  ) => {
+
+console.log("LOGIN VALUES:", values);
+
     try {
       const user = await login(values);
 
@@ -30,10 +34,9 @@ export default function LoginForm() {
 
       toast.success("Успішний вхід");
 
-      router.push("/profile");
+      router.push("/");
     } catch (err) {
       console.error(err);
-    //   setError("Невірний email або пароль");
       toast.error("Помилка входу");
     } finally {
       setSubmitting(false);
@@ -51,7 +54,6 @@ export default function LoginForm() {
       >
         {({ isSubmitting }) => (
           <Form className={styles.form}>
-
             <div className={styles.field}>
               <Field
                 name="email"
@@ -86,7 +88,6 @@ export default function LoginForm() {
                 Зареєструватись
               </Link>
             </p>
-
           </Form>
         )}
       </Formik>
