@@ -84,7 +84,7 @@ console.log("LOGIN VALUES:", values);
 
             <p className={styles.linkText}>
               Немає акаунту?{" "}
-              <Link href="/auth/register" className={styles.link}>
+              <Link href="/register" className={styles.link}>
                 Зареєструватись
               </Link>
             </p>
