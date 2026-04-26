@@ -82,9 +82,17 @@ export function DesktopSidebar() {
 export function MobileSidebarOverlay() {
   const isOpen = useSidebarStore((state) => state.isOpen);
   const close = useSidebarStore((state) => state.close);
+  const pathname = usePathname();
+  const isAuthPage = pathname === "/login" || pathname === "/register";
 
   useEffect(() => {
-    if (isOpen) {
+    if (isAuthPage && isOpen) {
+      close();
+    }
+  }, [close, isAuthPage, isOpen]);
+
+  useEffect(() => {
+    if (isOpen && !isAuthPage) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
@@ -92,9 +100,9 @@ export function MobileSidebarOverlay() {
     return () => {
       document.body.style.overflow = "";
     };
-  }, [isOpen]);
+  }, [isAuthPage, isOpen]);
 
-  if (!isOpen) return null;
+  if (!isOpen || isAuthPage) return null;
 
   return (
     <div className={css.overlay} onClick={close}>

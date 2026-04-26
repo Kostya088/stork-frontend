@@ -4,23 +4,29 @@ import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { logout as logoutApi } from "@/lib/api/clientApi";
 import { useAuthStore } from "@/lib/store/authStore";
-// import ConfirmationModal from "@/components/modal/ConfirmationModal/ConfirmationModal";
+import { useSidebarStore } from "@/lib/store/sidebarStore";
 import Image from "next/image";
 import Link from "next/link";
 import css from "./UserBar.module.css";
+import Modal from "@/components/modal/Modal/Modal";
+import ConfirmationContent from "@/components/modal/ConfirmationContent/ConfirmationContent";
 
 export default function UserBar() {
-  const [isPending, startTransition] = useTransition();
+  const [, startTransition] = useTransition();
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
   const router = useRouter();
   const user = useAuthStore((state) => state.user);
   const clearIsAuthenticated = useAuthStore(
     (state) => state.clearIsAuthenticated,
   );
+  const closeSidebar = useSidebarStore((state) => state.close);
+  const closeLogoutModal = () => setIsLogoutModalOpen(false);
 
   const handleLogout = async () => {
     try {
       await logoutApi();
+      closeLogoutModal();
+      closeSidebar();
       clearIsAuthenticated();
       startTransition(() => {
         router.push("/login");
@@ -64,15 +70,14 @@ export default function UserBar() {
           <use href="/icons/sprite.svg#icon-logout" />
         </svg>
       </button>
-      {/* <ConfirmationModal
-        isOpen={isLogoutModalOpen}
-        title="Ви точно хочете вийти?"
-        confirmButtonText="Так"
-        cancelButtonText="Ні"
-        isLoading={isPending}
-        onConfirm={handleLogout}
-        onCancel={() => setIsLogoutModalOpen(false)}
-      /> */}
+
+      <Modal isOpen={isLogoutModalOpen} onClose={closeLogoutModal}>
+        <ConfirmationContent
+          title="Ви точно хочете вийти?"
+          onConfirm={handleLogout}
+          onCancel={closeLogoutModal}
+        />
+      </Modal>
     </div>
   );
 }
