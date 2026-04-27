@@ -2,6 +2,53 @@
   /* Усі кольори з макету */
   --font-body: var(--font-lato);
   --font-brand: var(--font-comfortaa);
+
+  --primary-background-color: rgba(255, 255, 255, 1);
+
+  /* Text */
+  --primary-text-color: rgba(0, 0, 0, 1);
+  --secondary-text-color: rgba(
+    97,
+    97,
+    97,
+    1
+  ); /*Input(Placeholder),Breadcrumbs,WeekSelector*/
+  --error-text-color: rgba(198, 0, 0, 1);
+
+
+
+
+
+  /* ================= PRIMARY BUTTON ================= */
+  --color-btn-primary: rgba(255, 218, 224, 1);
+  --color-btn-primary-hover: rgba(255, 255, 255, 1);
+  --color-btn-primary-active: rgba(178, 178, 178, 1);
+  --color-btn-primary-disabled: rgba(255, 244, 246, 1);
+
+  --color-btn-primary-bg: rgba(255, 203, 211, 1);
+  --color-btn-primary-bg-hover: rgba(217, 217, 217, 1);
+  --color-btn-primary-bg-disabled: rgba(255, 240, 242, 1);
+
+  /* ================= SECONDARY BUTTON ================= */
+  --color-btn-secondary: rgba(242, 242, 242, 1);
+  --color-btn-secondary-hover: rgba(255, 244, 246, 1);
+  --color-btn-secondary-active: rgba(255, 203, 211, 1);
+  --color-btn-secondary-disabled: rgba(251, 251, 251, 1);
+
+  --color-btn-secondary-bg: rgba(217, 217, 217, 1);
+  --color-btn-secondary-bg-hover: rgba(217, 217, 217, 1);
+  --color-btn-secondary-bg-disabled: rgba(244, 244, 244, 1);
+
+
+    /* ================= LINK ================= */
+  --color-link: rgba(0, 0, 0, 1);
+  --color-link-hover: rgba(0, 0, 0, 1);
+  --color-link-active: rgba(255, 203, 211, 1);
+  --color-link-disabled: rgba(179, 179, 179, 1);
+
+  /* decoration */
+  --link-underline-color: currentColor;
+
   --color-scheme-background: var(--color-white);
   --color-neutral-darkest: #000;
   --color-scheme-border: var(--opacity-neutral-darkest-15);
@@ -72,6 +119,7 @@ html {
 body {
   margin: 0;
   font-family: var(--font-body), "Segoe UI", sans-serif;
+  color: var(--primary-text-color);
 }
 
 h1,
