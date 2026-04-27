@@ -1,4 +1,5 @@
 :root {
+  /* Усі кольори з макету */
   --font-body: var(--font-lato);
   --font-brand: var(--font-comfortaa);
   --color-scheme-background: var(--color-white);
@@ -109,12 +110,6 @@ select {
 /* Курсор pointer для всіх кнопок */
 button {
   cursor: pointer;
-}
-
-/* Ховери для посилань і кнопок */
-a:hover,
-button:hover {
-  opacity: 0.8;
 }
 
 .container {

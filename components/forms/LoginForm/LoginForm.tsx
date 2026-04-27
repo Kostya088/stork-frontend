@@ -6,13 +6,11 @@ import { login } from "@/lib/api/clientApi";
 import styles from "./LoginForm.module.css";
 import { Formik, Form, Field, ErrorMessage, FormikHelpers } from "formik";
 import * as Yup from "yup";
-import Link from "next/link";
 import toast from "react-hot-toast";
+import Link from "next/link";
 
 const schema = Yup.object({
-  email: Yup.string()
-    .email("Невірний email")
-    .required("Email обов'язковий"),
+  email: Yup.string().email("Невірний email").required("Email обов'язковий"),
   password: Yup.string().required("Пароль обов'язковий"),
 });
 
@@ -22,10 +20,9 @@ export default function LoginForm() {
 
   const handleSubmit = async (
     values: { email: string; password: string },
-    { setSubmitting }: FormikHelpers<{ email: string; password: string }>
+    { setSubmitting }: FormikHelpers<{ email: string; password: string }>,
   ) => {
-
-console.log("LOGIN VALUES:", values);
+    console.log("LOGIN VALUES:", values);
 
     try {
       const user = await login(values);
@@ -35,8 +32,7 @@ console.log("LOGIN VALUES:", values);
       toast.success("Успішний вхід");
 
       router.push("/");
-    } catch  {
-      
+    } catch {
       toast.error("Невірний email або пароль");
     } finally {
       setSubmitting(false);
@@ -61,7 +57,11 @@ console.log("LOGIN VALUES:", values);
                 placeholder="Пошта"
                 className={styles.input}
               />
-              <ErrorMessage name="email" component="div" className={styles.error} />
+              <ErrorMessage
+                name="email"
+                component="div"
+                className={styles.error}
+              />
             </div>
 
             <div className={styles.field}>
@@ -71,7 +71,11 @@ console.log("LOGIN VALUES:", values);
                 placeholder="Пароль"
                 className={styles.input}
               />
-              <ErrorMessage name="password" component="div" className={styles.error} />
+              <ErrorMessage
+                name="password"
+                component="div"
+                className={styles.error}
+              />
             </div>
 
             <button
@@ -79,7 +83,7 @@ console.log("LOGIN VALUES:", values);
               disabled={isSubmitting}
               className={styles.button}
             >
-              {isSubmitting ? "Loading..." : "Увійти"}
+              {isSubmitting ? "Вхід..." : "Увійти"}
             </button>
 
             <p className={styles.linkText}>
