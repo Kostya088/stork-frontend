@@ -20,10 +20,5 @@ export default function AuthLayout({ children }: Props) {
     });
   }, [router]);
 
-  return (
-    <>
-      <Header />
-      {loading ? <div>Loading...</div> : children}
-    </>
-  );
+  return <>{loading ? <div>Loading...</div> : children}</>;
 }
