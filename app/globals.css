@@ -15,10 +15,6 @@
   ); /*Input(Placeholder),Breadcrumbs,WeekSelector*/
   --error-text-color: rgba(198, 0, 0, 1);
 
-
-
-
-
   /* ================= PRIMARY BUTTON ================= */
   --color-btn-primary: rgba(255, 218, 224, 1);
   --color-btn-primary-hover: rgba(255, 255, 255, 1);
@@ -39,8 +35,7 @@
   --color-btn-secondary-bg-hover: rgba(217, 217, 217, 1);
   --color-btn-secondary-bg-disabled: rgba(244, 244, 244, 1);
 
-
-    /* ================= LINK ================= */
+  /* ================= LINK ================= */
   --color-link: rgba(0, 0, 0, 1);
   --color-link-hover: rgba(0, 0, 0, 1);
   --color-link-active: rgba(255, 203, 211, 1);
