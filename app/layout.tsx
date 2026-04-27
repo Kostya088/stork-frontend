@@ -63,15 +63,21 @@ export default function RootLayout({
       <body className={lato.variable}>
         <TanStackProvider>
           <AuthProvider>
-            <Header showMobileButton={true} hideOnDesktop={true} hideOnAuth={true} />
+            <Header
+              showMobileButton={true}
+              hideOnDesktop={true}
+              hideOnAuth={true}
+            />
             <main>
-              {children}
-              {modal}
+              <div className="container">
+                {children}
+                {modal}
+              </div>
             </main>
             <MobileSidebarOverlay />
           </AuthProvider>
         </TanStackProvider>
-         <Toaster position="top-left" />
+        <Toaster position="top-left" />
       </body>
     </html>
   );
