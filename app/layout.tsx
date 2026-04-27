@@ -59,21 +59,21 @@ export default function RootLayout({
   modal?: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${lato.variable} ${comfortaa.variable}`}>
-      <body className={lato.variable}>
+    <html lang="en">
+      <body className={`${lato.variable} ${comfortaa.variable}`}>
         <TanStackProvider>
           <AuthProvider>
-            <Header
-              showMobileButton={true}
-              hideOnDesktop={true}
-              hideOnAuth={true}
-            />
-            <main>
-              <div className="container">
+            <div className="container">
+              <Header
+                showMobileButton={true}
+                hideOnDesktop={true}
+                hideOnAuth={true}
+              />
+              <main>
                 {children}
                 {modal}
-              </div>
-            </main>
+              </main>
+            </div>
             <MobileSidebarOverlay />
           </AuthProvider>
         </TanStackProvider>
