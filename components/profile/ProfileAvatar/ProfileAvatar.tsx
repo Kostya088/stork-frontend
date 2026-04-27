@@ -59,6 +59,7 @@ export default function ProfileAvatar({ user }: ProfileAvatarProps) {
               alt={user.name}
               height={132}
               width={132}
+              loading="eager"
             />
           ) : (
             <div className={css.avatarDefolt}>Avatar</div>
@@ -72,7 +73,8 @@ export default function ProfileAvatar({ user }: ProfileAvatarProps) {
           <button
             className={css.buttonUpdate}
             onClick={openFileWindows}
-            disabled={mutation.isPending}>
+            disabled={mutation.isPending}
+          >
             {mutation.isPending ? "Йде завантаження " : "Завантажити нове фото"}
           </button>
         </div>

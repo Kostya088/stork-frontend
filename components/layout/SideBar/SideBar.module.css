@@ -3,6 +3,14 @@
   flex-direction: column;
   height: 100%;
   width: 320px;
+  border-right: 1px solid var(--color-scheme-border);
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+.authSection {
+  margin-top: auto;
+  border-top: 1px solid var(--color-scheme-border);
 }
 
 .sidebarMobile {
@@ -30,8 +38,11 @@
   padding: 12px 16px;
   border-radius: 12px;
   text-decoration: none;
-  font-weight: 500;
-  color: #241a1d;
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: #000;
   transition: background-color 0.2s;
 }
 
@@ -48,8 +59,7 @@
 
 .authSection {
   margin-top: auto;
-  padding: 16px;
-  border-top: 1px solid #e8e0e3;
+  border-top: 1px solid var(--color-scheme-border);
 }
 
 .overlay {

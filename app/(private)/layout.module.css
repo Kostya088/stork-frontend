@@ -16,9 +16,10 @@
     grid-template-columns: 320px 1fr;
   }
 
-  .sidebarDesktop {
-    display: block;
-  }
+.sidebarDesktop {
+  display: block;
+  border-right: 1px solid var(--color-scheme-border);
+}
 
   .main {
     padding: 24px;
