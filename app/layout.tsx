@@ -59,8 +59,8 @@ export default function RootLayout({
   modal?: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${lato.variable} ${comfortaa.variable}`}>
+    <html lang="en" className={`${lato.variable} ${comfortaa.variable}`}>
+      <body>
         <TanStackProvider>
           <AuthProvider>
             <div className="container">
