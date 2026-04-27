@@ -18,7 +18,7 @@ export default function DashboardPage() {
       <div className={styles.status}>
         <div className={styles.statusRow}>
           <StatusBlock type="week" />
-          <StatusBlock type="daysLeft" />
+          <StatusBlock type="daysUntilDue" />
         </div>
       </div>
 

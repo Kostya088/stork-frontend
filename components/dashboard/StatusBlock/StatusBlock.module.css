@@ -6,13 +6,28 @@
 
 .item {
   padding: 20px;
-  border-radius: 20px;
-  background-color: #f3e4e8;
+  border-radius: 24px;
+
+  /* 🔥 ЕДИНЫЙ ФОН КАК В ДРУГИХ КАРТОЧКАХ */
+  background-color: #fff4f6;
 
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  box-shadow: 0 6px 16px rgba(255, 77, 125, 0.08);
+  transition: transform 0.2s ease;
+}
+
+.item:hover {
+  transform: translateY(-2px);
+}
+
+.label {
+  font-size: 14px;
+  opacity: 0.7;
+  margin-bottom: 6px;
 }
 
 .value {

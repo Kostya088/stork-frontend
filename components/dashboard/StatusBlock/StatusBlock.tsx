@@ -1,23 +1,19 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
-import { getWeeksMe } from "@/lib/api/clientApi";
-import type { WeekInfo } from "@/types/weekInfo";
+import { useWeekDashboard } from "@/hooks/useWeekDashboard";
 import css from "./StatusBlock.module.css";
+
+type StatusType = "week" | "daysUntilDue";
+
+type StatusBlockProps = {
+  type: StatusType;
+};
 
 export default function StatusBlock({
   type,
-}: {
-  type: "week" | "daysLeft";
-}) {
-  const {
-    data: week,
-    isLoading,
-    isError,
-  } = useQuery<WeekInfo>({
-    queryKey: ["weeks", "me"],
-    queryFn: getWeeksMe,
-  });
+}: StatusBlockProps) {
+  const { data, isLoading, isError } =
+    useWeekDashboard();
 
   if (isLoading) {
     return (
@@ -29,7 +25,7 @@ export default function StatusBlock({
     );
   }
 
-  if (isError || !week) {
+  if (isError || !data) {
     return (
       <div className={css.item}>
         <p className={css.label}>Немає даних</p>
@@ -37,27 +33,23 @@ export default function StatusBlock({
     );
   }
 
+  const config = {
+    week: {
+      label: "Тиждень",
+      value: data.weekNumber,
+    },
+    daysUntilDue: {
+      label: "Днів до зустрічі",
+      value: data.daysUntilDue,
+    },
+  };
+
+  const current = config[type];
+
   return (
     <div className={css.item}>
-      {type === "week" && (
-        <>
-          <p className={css.label}>Тиждень</p>
-          <p className={css.value}>
-            {week.weekNumber}
-          </p>
-        </>
-      )}
-
-      {type === "daysLeft" && (
-        <>
-          <p className={css.label}>
-            Днів до зустрічі
-          </p>
-          <p className={css.value}>
-            {week.daysRemaining}
-          </p>
-        </>
-      )}
+      <p className={css.label}>{current.label}</p>
+      <p className={css.value}>{current.value}</p>
     </div>
   );
 }

@@ -2,8 +2,8 @@
 
 import { useAuthStore } from "@/lib/store/authStore";
 import {
-  useMutation,
   useQuery,
+  useMutation,
   useQueryClient,
 } from "@tanstack/react-query";
 import {
@@ -17,6 +17,7 @@ export default function TasksReminderCard() {
   const isAuthenticated = useAuthStore(
     (s) => s.isAuthenticated,
   );
+
   const queryClient = useQueryClient();
 
   const { data: tasks = [], isLoading } =
@@ -28,82 +29,84 @@ export default function TasksReminderCard() {
 
   const createTaskMutation = useMutation({
     mutationFn: createTask,
-    onSuccess: () => {
+    onSuccess: () =>
       queryClient.invalidateQueries({
         queryKey: ["tasks"],
-      });
-    },
+      }),
   });
 
   const updateTaskMutation = useMutation({
     mutationFn: ({
       id,
-      completed,
+      isDone,
     }: {
       id: string;
-      completed: boolean;
-    }) => updateTaskStatus(id, completed),
-    onSuccess: () => {
+      isDone: boolean;
+    }) => updateTaskStatus(id, isDone),
+    onSuccess: () =>
       queryClient.invalidateQueries({
         queryKey: ["tasks"],
-      });
-    },
+      }),
   });
 
-  const handleAddTask = async () => {
-    if (!isAuthenticated) {
-      window.location.href = "/auth/register";
-      return;
-    }
+  const handleCreate = () => {
+    const name = prompt("Нове завдання");
+    if (!name) return;
 
-    const title = prompt("Нове завдання");
-    if (!title) return;
-
-    await createTaskMutation.mutateAsync({
-      name: title,
+    createTaskMutation.mutate({
+      name,
       date: new Date().toISOString(),
     });
   };
 
-  const toggleTask = (
-    id: string,
-    completed: boolean,
-  ) => {
-    updateTaskMutation.mutate({
-      id,
-      completed: !completed,
-    });
-  };
-
-  const isEmpty = tasks.length === 0;
-
   if (isLoading) {
     return (
       <section className={css.card}>
-        <p>Завантаження...</p>
+        <p className={css.text}>
+          Завантаження...
+        </p>
       </section>
     );
   }
 
+  const isEmpty = tasks.length === 0;
+
   return (
     <section className={css.card}>
+      {/* HEADER */}
       <div className={css.header}>
         <h2 className={css.title}>
           Важливі завдання
         </h2>
 
-        <button
-          onClick={handleAddTask}
-          className={css.addBtn}
-        >
-          +
-        </button>
+        {!isEmpty && (
+          <button
+            className={css.addBtn}
+            onClick={handleCreate}
+          >
+            +
+          </button>
+        )}
       </div>
 
+      {/* EMPTY STATE */}
       {isEmpty ? (
-        <p className={css.empty}>
-          Немає активних завдань
-        </p>
+        <div>
+          <p className={css.emptyText}>
+            Наразі немає завдань
+          </p>
+
+          <p className={css.text}>
+            Створіть перше завдання
+          </p>
+
+          <button
+            className={css.button}
+            onClick={handleCreate}
+          >
+            Створити завдання
+          </button>
+        </div>
       ) : (
         <ul className={css.list}>
           {tasks.map((task) => (
@@ -111,27 +114,35 @@ export default function TasksReminderCard() {
               key={task._id}
               className={css.item}
             >
-              <label>
+              <label className={css.label}>
                 <input
                   type="checkbox"
+                  className={css.checkbox}
                   checked={task.isDone}
                   onChange={() =>
-                    toggleTask(
-                      task._id,
-                      task.isDone,
-                    )
+                    updateTaskMutation.mutate({
+                      id: task._id,
+                      isDone: !task.isDone,
+                    })
                   }
                 />
+
                 <span
                   className={
                     task.isDone
                       ? css.completed
-                      : css.text
+                      : css.textItem
                   }
                 >
                   {task.name}
                 </span>
               </label>
+
+              <span className={css.date}>
+                {new Date(
+                  task.date,
+                ).toLocaleDateString()}
+              </span>
             </li>
           ))}
         </ul>
