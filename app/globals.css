@@ -2,14 +2,41 @@
   --font-body: var(--font-lato);
   --font-brand: var(--font-comfortaa);
 
-  --primary-background-color: #ffffff;
+  --primary-background-color: rgba(255, 255, 255, 1);
 
   /* Text */
-  --primary-text-color:  #000;
-  --secondary-text-color:rgba(0, 0, 0, 0.60);  /*Input(Placeholder),Breadcrumbs,WeekSelector*/
-  --error-text-color:  #C60000;
+  --primary-text-color: rgba(0, 0, 0, 1);
+  --secondary-text-color: rgba(
+    97,
+    97,
+    97,
+    1
+  ); /*Input(Placeholder),Breadcrumbs,WeekSelector*/
+  --error-text-color: rgba(198, 0, 0, 1);
 
-}  
+
+  
+
+  /* ================= PRIMARY BUTTON ================= */
+  --color-btn-primary: rgba(255, 218, 224, 1);
+  --color-btn-primary-hover: rgba(255, 255, 255, 1);
+  --color-btn-primary-active: rgba(178, 178, 178, 1);
+  --color-btn-primary-disabled: rgba(255, 244, 246, 1);
+
+  --color-btn-primary-bg: rgba(255, 203, 211, 1);
+  --color-btn-primary-bg-hover: rgba(217, 217, 217, 1);
+  --color-btn-primary-bg-disabled: rgba(255, 240, 242, 1);
+
+  /* ================= SECONDARY BUTTON ================= */
+  --color-btn-secondary: rgba(242, 242, 242, 1);
+  --color-btn-secondary-hover: rgba(255, 244, 246, 1);
+  --color-btn-secondary-active: rgba(255, 203, 211, 1);
+  --color-btn-secondary-disabled: rgba(251, 251, 251, 1);
+
+  --color-btn-secondary-bg: rgba(217, 217, 217, 1);
+  --color-btn-secondary-bg-hover: rgba(217, 217, 217, 1);
+  --color-btn-secondary-bg-disabled: rgba(244, 244, 244, 1);
+}
 
 html {
   box-sizing: border-box;
