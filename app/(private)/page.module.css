@@ -16,7 +16,7 @@
 
 .statusRow {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* 👈 2 карточки рядом */
+  grid-template-columns: 1fr 1fr;
   gap: 16px;
 }
 
@@ -52,6 +52,6 @@
   }
 
   .statusRow {
-    grid-template-columns: 1fr; /* 👈 на мобилке в столбик */
+    grid-template-columns: 1fr;
   }
 }
