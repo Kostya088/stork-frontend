@@ -25,9 +25,9 @@ export default function DiaryList({
         </h1>
         <button className={styles.createButton} type="button" onClick={onCreateEntry}>
           <span>Новий запис</span>
-          <span className={styles.createIcon} aria-hidden="true">
-            +
-          </span>
+          <svg className={styles.addIcon}>
+            <use href="/icons/sprite.svg#icon-add" />
+          </svg>
         </button>
       </div>
 

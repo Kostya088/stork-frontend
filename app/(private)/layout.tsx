@@ -1,8 +1,5 @@
 import Breadcrumbs from "@/components/layout/Breadcrumbs/Breadcrumbs";
-import {
-  DesktopSidebar,
-  MobileSidebarOverlay,
-} from "@/components/layout/SideBar/SideBar";
+import { DesktopSidebar } from "@/components/layout/SideBar/SideBar";
 import css from "./layout.module.css";
 
 type Props = {
@@ -19,7 +16,6 @@ export default function PrivateLayout({ children }: Props) {
         <Breadcrumbs />
         {children}
       </div>
-      <MobileSidebarOverlay />
     </div>
   );
 }

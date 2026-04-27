@@ -3,6 +3,7 @@
 .page {
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
 /* форма */
@@ -13,6 +14,19 @@
 /* картинка */
 .right {
     display: none;
+}
+
+.logoLink {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 10;
+    color: inherit;
+    text-decoration: none;
+}
+
+.logoIcon {
+    display: block;
 }
 
 @media (min-width: 1440px) {

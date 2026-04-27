@@ -1,3 +1,5 @@
-export default function DiaryPage() {
-  return <p>DiaryPage</p>;
+import DiaryPage from "@/components/diary/DiaryPage/DiaryPage";
+
+export default function DiaryRoutePage() {
+  return <DiaryPage />;
 }

@@ -2,7 +2,6 @@
 
 import { useEffect, useState, startTransition } from "react";
 import { useRouter } from "next/navigation";
-import Header from "@/components/layout/Header/Header";
 
 type Props = {
   children: React.ReactNode;
@@ -20,10 +19,5 @@ export default function AuthLayout({ children }: Props) {
     });
   }, [router]);
 
-  return (
-    <>
-      <Header />
-      {loading ? <div>Loading...</div> : children}
-    </>
-  );
+  return <>{loading ? <div>Loading...</div> : children}</>;
 }

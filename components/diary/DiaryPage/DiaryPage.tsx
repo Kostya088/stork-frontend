@@ -10,7 +10,7 @@ import AddDiaryEntryForm from "@/components/modal/modalForms/AddDiaryEntryForm/A
 // import ConfirmationModal from "@/components/modal/ConfirmationModal/ConfirmationModal";
 import {
   createDiary,
-  deleteDiary,
+  // deleteDiary,
   getDiaries,
   getEmotions,
   updateDiary,
@@ -19,7 +19,7 @@ import {
 } from "@/lib/api/clientApi";
 import type { DiaryEntry } from "@/types/diaryEntry";
 import type { Emotion } from "@/types/emotion";
-
+// dfadsfa
 interface DiaryPageProps {
   initialSelectedId?: string;
   detailOnly?: boolean;
@@ -56,7 +56,7 @@ export default function DiaryPage({
   const [error, setError] = useState<string | null>(null);
   const [isEntryModalOpen, setIsEntryModalOpen] = useState(false);
   const [editingEntry, setEditingEntry] = useState<DiaryEntry | null>(null);
-  const [entryToDelete, setEntryToDelete] = useState<DiaryEntry | null>(null);
+  // const [entryToDelete, setEntryToDelete] = useState<DiaryEntry | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
@@ -164,33 +164,33 @@ export default function DiaryPage({
     }
   };
 
-  const handleDeleteConfirm = async () => {
-    if (!entryToDelete) return;
+  // const handleDeleteConfirm = async () => {
+  //   if (!entryToDelete) return;
 
-    try {
-      setIsSubmitting(true);
-      setError(null);
-      await deleteDiary(entryToDelete._id);
-      setEntries((currentEntries) => {
-        const nextEntries = currentEntries.filter(
-          (entry) => entry._id !== entryToDelete._id,
-        );
-        if (selectedId === entryToDelete._id) {
-          setSelectedId(nextEntries[0]?._id ?? null);
-        }
-        return nextEntries;
-      });
-      setEntryToDelete(null);
+  //   try {
+  //     setIsSubmitting(true);
+  //     setError(null);
+  //     await deleteDiary(entryToDelete._id);
+  //     setEntries((currentEntries) => {
+  //       const nextEntries = currentEntries.filter(
+  //         (entry) => entry._id !== entryToDelete._id,
+  //       );
+  //       if (selectedId === entryToDelete._id) {
+  //         setSelectedId(nextEntries[0]?._id ?? null);
+  //       }
+  //       return nextEntries;
+  //     });
+  //     setEntryToDelete(null);
 
-      if (detailOnly) {
-        router.push("/diary");
-      }
-    } catch {
-      setError("Не вдалося видалити запис. Спробуйте ще раз.");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+  //     if (detailOnly) {
+  //       router.push("/diary");
+  //     }
+  //   } catch {
+  //     setError("Не вдалося видалити запис. Спробуйте ще раз.");
+  //   } finally {
+  //     setIsSubmitting(false);
+  //   }
+  // };
 
   return (
     <main className={`${styles.page} ${detailOnly ? styles.detailPage : ""}`}>
@@ -207,14 +207,27 @@ export default function DiaryPage({
           />
         )}
 
-        <DiaryEntryDetails
-          entry={selectedEntry}
-          isLoading={isLoading}
-          isStandalone={detailOnly}
-          onBack={() => router.push("/diary")}
-          onEdit={handleEditClick}
-          onDelete={setEntryToDelete}
-        />
+        {detailOnly && (
+          <DiaryEntryDetails
+            entry={selectedEntry}
+            isLoading={isLoading}
+            isStandalone
+            onBack={() => router.push("/diary")}
+            onEdit={handleEditClick}
+            onDelete={() => {}}
+          />
+        )}
+
+        {!detailOnly && (
+          <div className={styles.desktopDetails}>
+            <DiaryEntryDetails
+              entry={selectedEntry}
+              isLoading={isLoading}
+              onEdit={handleEditClick}
+              onDelete={() => {}}
+            />
+          </div>
+        )}
       </section>
 
       <Modal

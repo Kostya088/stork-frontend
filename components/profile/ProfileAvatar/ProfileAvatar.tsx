@@ -49,31 +49,35 @@ export default function ProfileAvatar({ user }: ProfileAvatarProps) {
   };
 
   return (
-    <div className={css.wrapper}>
-      <div className={css.avatarWrapper}>
-        {user?.avatar ? (
-          <Image
-            className={css.avatar}
-            src={user.avatar}
-            alt={user.name}
-            height={132}
-            width={132}
-          />
-        ) : (
-          <div className={css.avatarDefolt}>Avatar</div>
-        )}
-      </div>
+    <div className={css.mainWrapper}>
+      <div className={css.wrapper}>
+        <div className={css.avatarWrapper}>
+          {user?.avatar ? (
+            <Image
+              className={css.avatar}
+              src={user.avatar}
+              alt={user.name}
+              height={132}
+              width={132}
+              loading="eager"
+            />
+          ) : (
+            <div className={css.avatarDefolt}>Avatar</div>
+          )}
+        </div>
 
-      <div className={css.infoWrapper}>
-        <h1 className={css.name}>{user?.name}</h1>
-        <p className={css.email}>{user?.email}</p>
-        <input type="file" hidden ref={fileInput} onChange={updateAvatar} />
-        <button
-          className={css.buttonUpdate}
-          onClick={openFileWindows}
-          disabled={mutation.isPending}>
-          {mutation.isPending ? "Йде завантаження " : "Завантажити нове фото"}
-        </button>
+        <div className={css.infoWrapper}>
+          <h1 className={css.name}>{user?.name}</h1>
+          <p className={css.email}>{user?.email}</p>
+          <input type="file" hidden ref={fileInput} onChange={updateAvatar} />
+          <button
+            className={css.buttonUpdate}
+            onClick={openFileWindows}
+            disabled={mutation.isPending}
+          >
+            {mutation.isPending ? "Йде завантаження " : "Завантажити нове фото"}
+          </button>
+        </div>
       </div>
     </div>
   );
