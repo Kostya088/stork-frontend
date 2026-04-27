@@ -2,7 +2,6 @@
 
 import { useEffect, useState, startTransition } from "react";
 import { useRouter } from "next/navigation";
-import Header from "@/components/layout/Header/Header";
 
 type Props = {
   children: React.ReactNode;
