@@ -2,9 +2,12 @@
 import ProfileAvatar from "@/components/profile/ProfileAvatar/ProfileAvatar";
 import ProfileEditForm from "@/components/profile/ProfileEditForm/ProfileEditForm";
 import { getMe } from "@/lib/api/clientApi";
+import { useAuthStore } from "@/lib/store/authStore";
 import { useQuery } from "@tanstack/react-query";
 
 export default function ProfilePage() {
+  const setUser = useAuthStore((state) => state.setUser);
+
   const {
     data: user,
     isLoading,
@@ -13,6 +16,7 @@ export default function ProfilePage() {
     queryKey: ["user"],
     queryFn: async () => {
       const user = await getMe();
+      setUser(user);
       return user;
     },
   });
