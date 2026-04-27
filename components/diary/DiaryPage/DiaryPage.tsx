@@ -5,11 +5,12 @@ import { useRouter } from "next/navigation";
 import styles from "./DiaryPage.module.css";
 import DiaryList from "@/components/diary/DiaryList/DiaryList";
 import DiaryEntryDetails from "@/components/diary/DiaryEntryDetails/DiaryEntryDetails";
-import AddDiaryEntryModal from "@/components/diary/AddDiaryEntryModal/AddDiaryEntryModal";
-import ConfirmationModal from "@/components/modals/ConfirmationModal/ConfirmationModal";
+import Modal from "@/components/modal/Modal/Modal";
+import AddDiaryEntryForm from "@/components/modal/modalForms/AddDiaryEntryForm/AddDiaryEntryForm";
+// import ConfirmationModal from "@/components/modal/ConfirmationModal/ConfirmationModal";
 import {
   createDiary,
-  deleteDiary,
+  // deleteDiary,
   getDiaries,
   getEmotions,
   updateDiary,
@@ -18,14 +19,19 @@ import {
 } from "@/lib/api/clientApi";
 import type { DiaryEntry } from "@/types/diaryEntry";
 import type { Emotion } from "@/types/emotion";
-
+// dfadsfa
 interface DiaryPageProps {
   initialSelectedId?: string;
   detailOnly?: boolean;
 }
 
-const resolveEntryEmotions = (entry: DiaryEntry, emotions: Emotion[]): DiaryEntry => {
-  const emotionsById = new Map(emotions.map((emotion) => [emotion._id, emotion]));
+const resolveEntryEmotions = (
+  entry: DiaryEntry,
+  emotions: Emotion[],
+): DiaryEntry => {
+  const emotionsById = new Map(
+    emotions.map((emotion) => [emotion._id, emotion]),
+  );
 
   return {
     ...entry,
@@ -36,65 +42,68 @@ const resolveEntryEmotions = (entry: DiaryEntry, emotions: Emotion[]): DiaryEntr
   };
 };
 
-export default function DiaryPage({ initialSelectedId, detailOnly = false }: DiaryPageProps) {
+export default function DiaryPage({
+  initialSelectedId,
+  detailOnly = false,
+}: DiaryPageProps) {
   const router = useRouter();
   const [entries, setEntries] = useState<DiaryEntry[]>([]);
   const [emotions, setEmotions] = useState<Emotion[]>([]);
-  const [selectedId, setSelectedId] = useState<string | null>(initialSelectedId ?? null);
+  const [selectedId, setSelectedId] = useState<string | null>(
+    initialSelectedId ?? null,
+  );
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isEntryModalOpen, setIsEntryModalOpen] = useState(false);
   const [editingEntry, setEditingEntry] = useState<DiaryEntry | null>(null);
-  const [entryToDelete, setEntryToDelete] = useState<DiaryEntry | null>(null);
+  // const [entryToDelete, setEntryToDelete] = useState<DiaryEntry | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
-  let isMounted = true;
+    let isMounted = true;
 
-  const fetchData = async () => {
-    try {
-      setIsLoading(true);
-      setError(null);
+    const fetchData = async () => {
+      try {
+        setIsLoading(true);
+        setError(null);
 
-      const [entriesData, emotionsData] = await Promise.all([
-        getDiaries(),
-        getEmotions(),
-      ]);
+        const [entriesData, emotionsData] = await Promise.all([
+          getDiaries(),
+          getEmotions(),
+        ]);
 
-      if (!isMounted) return;
+        if (!isMounted) return;
 
-      setEntries(
-        entriesData.map((entry) =>
-          resolveEntryEmotions(entry, emotionsData)
-        )
-      );
-      setEmotions(emotionsData);
+        setEntries(
+          entriesData.map((entry) => resolveEntryEmotions(entry, emotionsData)),
+        );
+        setEmotions(emotionsData);
 
-      if (initialSelectedId) {
-        setSelectedId(initialSelectedId);
-        return;
+        if (initialSelectedId) {
+          setSelectedId(initialSelectedId);
+          return;
+        }
+
+        if (entriesData.length > 0) {
+          setSelectedId((currentId) => currentId ?? entriesData[0]._id);
+        }
+      } catch {
+        if (isMounted) {
+          setError("Не вдалося завантажити записи щоденника");
+        }
+      } finally {
+        if (isMounted) {
+          setIsLoading(false);
+        }
       }
+    };
 
-      if (entriesData.length > 0) {
-        setSelectedId((currentId) => currentId ?? entriesData[0]._id);
-      }
-    } catch {
-      if (isMounted) {
-        setError("Не вдалося завантажити записи щоденника");
-      }
-    } finally {
-      if (isMounted) {
-        setIsLoading(false);
-      }
-    }
-  };
+    void fetchData();
 
-  void fetchData();
-
-  return () => {
-    isMounted = false;
-  };
-}, [initialSelectedId]);
+    return () => {
+      isMounted = false;
+    };
+  }, [initialSelectedId]);
 
   const selectedEntry = useMemo(() => {
     if (!selectedId) return null;
@@ -130,11 +139,16 @@ export default function DiaryPage({ initialSelectedId, detailOnly = false }: Dia
           emotions,
         );
         setEntries((currentEntries) =>
-          currentEntries.map((entry) => (entry._id === updatedEntry._id ? updatedEntry : entry)),
+          currentEntries.map((entry) =>
+            entry._id === updatedEntry._id ? updatedEntry : entry,
+          ),
         );
         setSelectedId(updatedEntry._id);
       } else {
-        const createdEntry = resolveEntryEmotions(await createDiary(data as CreateDiaryData), emotions);
+        const createdEntry = resolveEntryEmotions(
+          await createDiary(data as CreateDiaryData),
+          emotions,
+        );
         setEntries((currentEntries) => [createdEntry, ...currentEntries]);
         setSelectedId(createdEntry._id);
       }
@@ -142,37 +156,41 @@ export default function DiaryPage({ initialSelectedId, detailOnly = false }: Dia
       setIsEntryModalOpen(false);
       setEditingEntry(null);
     } catch {
-      setError("Не вдалося зберегти запис. Перевірте дані та спробуйте ще раз.");
+      setError(
+        "Не вдалося зберегти запис. Перевірте дані та спробуйте ще раз.",
+      );
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const handleDeleteConfirm = async () => {
-    if (!entryToDelete) return;
+  // const handleDeleteConfirm = async () => {
+  //   if (!entryToDelete) return;
 
-    try {
-      setIsSubmitting(true);
-      setError(null);
-      await deleteDiary(entryToDelete._id);
-      setEntries((currentEntries) => {
-        const nextEntries = currentEntries.filter((entry) => entry._id !== entryToDelete._id);
-        if (selectedId === entryToDelete._id) {
-          setSelectedId(nextEntries[0]?._id ?? null);
-        }
-        return nextEntries;
-      });
-      setEntryToDelete(null);
+  //   try {
+  //     setIsSubmitting(true);
+  //     setError(null);
+  //     await deleteDiary(entryToDelete._id);
+  //     setEntries((currentEntries) => {
+  //       const nextEntries = currentEntries.filter(
+  //         (entry) => entry._id !== entryToDelete._id,
+  //       );
+  //       if (selectedId === entryToDelete._id) {
+  //         setSelectedId(nextEntries[0]?._id ?? null);
+  //       }
+  //       return nextEntries;
+  //     });
+  //     setEntryToDelete(null);
 
-      if (detailOnly) {
-        router.push("/diary");
-      }
-    } catch {
-      setError("Не вдалося видалити запис. Спробуйте ще раз.");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+  //     if (detailOnly) {
+  //       router.push("/diary");
+  //     }
+  //   } catch {
+  //     setError("Не вдалося видалити запис. Спробуйте ще раз.");
+  //   } finally {
+  //     setIsSubmitting(false);
+  //   }
+  // };
 
   return (
     <main className={`${styles.page} ${detailOnly ? styles.detailPage : ""}`}>
@@ -189,29 +207,45 @@ export default function DiaryPage({ initialSelectedId, detailOnly = false }: Dia
           />
         )}
 
-        <DiaryEntryDetails
-          entry={selectedEntry}
-          isLoading={isLoading}
-          isStandalone={detailOnly}
-          onBack={() => router.push("/diary")}
-          onEdit={handleEditClick}
-          onDelete={setEntryToDelete}
-        />
+        {detailOnly && (
+          <DiaryEntryDetails
+            entry={selectedEntry}
+            isLoading={isLoading}
+            isStandalone
+            onBack={() => router.push("/diary")}
+            onEdit={handleEditClick}
+            onDelete={() => {}}
+          />
+        )}
+
+        {!detailOnly && (
+          <div className={styles.desktopDetails}>
+            <DiaryEntryDetails
+              entry={selectedEntry}
+              isLoading={isLoading}
+              onEdit={handleEditClick}
+              onDelete={() => {}}
+            />
+          </div>
+        )}
       </section>
 
-      <AddDiaryEntryModal
+      <Modal
         isOpen={isEntryModalOpen}
-        entry={editingEntry}
-        emotions={emotions}
-        isSubmitting={isSubmitting}
         onClose={() => {
           setIsEntryModalOpen(false);
           setEditingEntry(null);
         }}
-        onSubmit={handleSubmitEntry}
-      />
+      >
+        <AddDiaryEntryForm
+          entry={editingEntry}
+          emotions={emotions}
+          isSubmitting={isSubmitting}
+          onSubmit={handleSubmitEntry}
+        />
+      </Modal>
 
-      <ConfirmationModal
+      {/* <ConfirmationModal
         isOpen={Boolean(entryToDelete)}
         title="Видалити запис?"
         confirmButtonText="Видалити"
@@ -219,7 +253,7 @@ export default function DiaryPage({ initialSelectedId, detailOnly = false }: Dia
         isLoading={isSubmitting}
         onConfirm={handleDeleteConfirm}
         onCancel={() => setEntryToDelete(null)}
-      />
+      /> */}
     </main>
   );
 }

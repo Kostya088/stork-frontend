@@ -5,6 +5,7 @@ import TanStackProvider from "@/components/providers/TanStackProvider";
 import AuthProvider from "@/components/providers/AuthProvider";
 import Header from "@/components/layout/Header/Header";
 import { MobileSidebarOverlay } from "@/components/layout/SideBar/SideBar";
+import { Toaster } from "react-hot-toast";
 
 const lato = localFont({
   src: [
@@ -72,6 +73,7 @@ export default function RootLayout({
             <MobileSidebarOverlay />
           </AuthProvider>
         </TanStackProvider>
+         <Toaster position="top-left" />
       </body>
     </html>
   );

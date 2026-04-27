@@ -1,42 +1,58 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
-import { getWeeksBaby, getWeeksMe } from "@/lib/api/clientApi";
-import css from "./BabyTodayCard.module.css";
 import Image from "next/image";
+import { useQuery } from "@tanstack/react-query";
+import { useAuthStore } from "@/lib/store/authStore";
+import { getPublicWeek, getWeeksMe } from "@/lib/api/clientApi";
+import css from "./BabyTodayCard.module.css";
 
 export default function BabyTodayCard() {
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+
   const {
-    data: week,
-    isLoading: isWeekLoading,
-    isError: isWeekError,
+    data: currentWeek,
+    isLoading: isCurrentWeekLoading,
+    isError: isCurrentWeekError,
   } = useQuery({
     queryKey: ["weeks", "me"],
     queryFn: getWeeksMe,
+    enabled: isAuthenticated,
   });
 
   const {
-    data: baby,
-    isLoading: isBabyLoading,
-    isError: isBabyError,
+    data: publicWeek,
+    isLoading: isPublicWeekLoading,
+    isError: isPublicWeekError,
   } = useQuery({
-    queryKey: ["weeks", "baby", week?.weekNumber],
-    queryFn: () => getWeeksBaby(week!.weekNumber),
-    enabled: Boolean(week?.weekNumber),
+    queryKey: ["weeks", "public", 1],
+    queryFn: () => getPublicWeek(1),
+    enabled: !isAuthenticated,
   });
 
-  if (isWeekLoading || isBabyLoading) {
+  const weekData = isAuthenticated ? currentWeek : publicWeek;
+  const babyInfo = weekData?.babyInfo;
+
+  if (
+    (isAuthenticated && isCurrentWeekLoading) ||
+    (!isAuthenticated && isPublicWeekLoading)
+  ) {
     return (
       <section className={css.card}>
-        <p>Завантаження...</p>
+        <p className={css.status}>Завантаження...</p>
       </section>
     );
   }
 
-  if (isWeekError || isBabyError || !week || !baby) {
+  if (
+    (isAuthenticated && isCurrentWeekError) ||
+    (!isAuthenticated && isPublicWeekError) ||
+    !babyInfo
+  ) {
     return (
       <section className={css.card}>
-        <p>Не вдалося завантажити інформацію про малюка.</p>
+        <p className={css.status}>
+          Не вдалося завантажити інформацію про малюка.
+        </p>
       </section>
     );
   }
@@ -48,34 +64,36 @@ export default function BabyTodayCard() {
       <div className={css.content}>
         <div className={css.imageWrapper}>
           <Image
-            src={baby.image}
+            src={babyInfo.image}
             alt="Ілюстрація розміру малюка"
             className={css.image}
-            width={260}
-            height={180}
+            width={257}
+            height={194}
           />
         </div>
 
         <div className={css.info}>
-          <p>
-            <span>
-              <strong>Розмір:</strong> Приблизно {baby.babySize} см
-            </span>
-          </p>
-          <p>
-            <span>
-              <strong>Вага:</strong> Близько {baby.babyWeight} грамів
-            </span>
-          </p>
-          <p>
-            <span>
-              <strong>Активність:</strong> {baby.babyActivity}
-            </span>
-          </p>
+          {babyInfo.size !== undefined && (
+            <p>
+              <strong>Розмір:</strong> Приблизно {babyInfo.size} см
+            </p>
+          )}
+
+          {babyInfo.weight !== undefined && (
+            <p>
+              <strong>Вага:</strong> Близько {babyInfo.weight} грамів.
+            </p>
+          )}
+
+          {babyInfo.analogy && (
+            <p>
+              <strong>Розмір як:</strong> {babyInfo.analogy}
+            </p>
+          )}
         </div>
       </div>
 
-      <p className={css.description}>{baby.babyDevelopment}</p>
+      <p className={css.description}>{babyInfo.development}</p>
     </section>
   );
 }
