@@ -1,0 +1,30 @@
+.card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.item {
+  padding: 20px;
+  border-radius: 20px;
+  background-color: #f3e4e8;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.value {
+  font-size: 24px;
+  font-weight: 700;
+  color: #2d2a32;
+  text-align: center;
+}
+
+/* mobile */
+@media (max-width: 640px) {
+  .card {
+    grid-template-columns: 1fr;
+  }
+}
