@@ -10,17 +10,32 @@ export default function StatusBlock({
 }: {
   type: "week" | "daysLeft";
 }) {
-  const { data: week } = useQuery<WeekInfo>({
+  const {
+    data: week,
+    isLoading,
+    isError,
+  } = useQuery<WeekInfo>({
     queryKey: ["weeks", "me"],
     queryFn: getWeeksMe,
   });
 
-  const mockWeek = {
-    weekNumber: 16,
-    daysLeft: 165,
-  };
+  if (isLoading) {
+    return (
+      <div className={css.item}>
+        <p className={css.label}>
+          Завантаження...
+        </p>
+      </div>
+    );
+  }
 
-  const currentWeek = week ?? mockWeek;
+  if (isError || !week) {
+    return (
+      <div className={css.item}>
+        <p className={css.label}>Немає даних</p>
+      </div>
+    );
+  }
 
   return (
     <div className={css.item}>
@@ -28,7 +43,7 @@ export default function StatusBlock({
         <>
           <p className={css.label}>Тиждень</p>
           <p className={css.value}>
-            {currentWeek.weekNumber}
+            {week.weekNumber}
           </p>
         </>
       )}
@@ -39,7 +54,7 @@ export default function StatusBlock({
             Днів до зустрічі
           </p>
           <p className={css.value}>
-            {currentWeek.daysLeft}
+            {week.daysRemaining}
           </p>
         </>
       )}

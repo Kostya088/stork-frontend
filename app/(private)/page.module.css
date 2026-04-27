@@ -1,37 +1,57 @@
 .dashboard {
-  width: 100%;
-  padding: 24px;
-}
-
-.grid {
   display: grid;
-  grid-template-columns: 2fr 1.2fr;
+  grid-template-areas:
+    "greeting greeting"
+    "status tasks"
+    "baby feeling"
+    "tip feeling";
+  grid-template-columns: 2fr 1fr;
   gap: 24px;
 }
 
-.leftColumn,
-.rightColumn {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
+/* 📊 БЛОК С ДВУМЯ КАРТОЧКАМИ */
+.status {
+  grid-area: status;
 }
 
-.statusGrid {
+.statusRow {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
+  grid-template-columns: 1fr 1fr; /* 👈 2 карточки рядом */
+  gap: 16px;
 }
 
-@media (max-width: 767px) {
+/* остальные блоки */
+.greeting {
+  grid-area: greeting;
+}
+.tasks {
+  grid-area: tasks;
+}
+.baby {
+  grid-area: baby;
+}
+.tip {
+  grid-area: tip;
+}
+.feeling {
+  grid-area: feeling;
+}
+
+/* 📱 MOBILE */
+@media (max-width: 640px) {
   .dashboard {
-    padding: 16px;
+    grid-template-areas:
+      "greeting"
+      "status"
+      "baby"
+      "tip"
+      "tasks"
+      "feeling";
+    grid-template-columns: 1fr;
+    gap: 16px;
   }
 
-  .grid {
-    grid-template-columns: 1fr;
-  }
-
-  .statusGrid {
-    grid-template-columns: 1fr;
+  .statusRow {
+    grid-template-columns: 1fr; /* 👈 на мобилке в столбик */
   }
 }

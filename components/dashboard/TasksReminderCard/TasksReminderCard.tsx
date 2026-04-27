@@ -1,50 +1,56 @@
 "use client";
 
 import { useAuthStore } from "@/lib/store/authStore";
-import { useState } from "react";
+import {
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
+import {
+  getTasks,
+  createTask,
+  updateTaskStatus,
+} from "@/lib/api/clientApi";
 import css from "./TasksReminderCard.module.css";
-
-type Task = {
-  id: string;
-  title: string;
-  completed: boolean;
-};
 
 export default function TasksReminderCard() {
   const isAuthenticated = useAuthStore(
     (s) => s.isAuthenticated,
   );
+  const queryClient = useQueryClient();
 
-  const mockTasks: Task[] = [
-    {
-      id: "1",
-      title: "Випити 2л води",
-      completed: false,
+  const { data: tasks = [], isLoading } =
+    useQuery({
+      queryKey: ["tasks"],
+      queryFn: getTasks,
+      enabled: isAuthenticated,
+    });
+
+  const createTaskMutation = useMutation({
+    mutationFn: createTask,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["tasks"],
+      });
     },
-    {
-      id: "2",
-      title: "Прогулянка 30 хв",
-      completed: true,
+  });
+
+  const updateTaskMutation = useMutation({
+    mutationFn: ({
+      id,
+      completed,
+    }: {
+      id: string;
+      completed: boolean;
+    }) => updateTaskStatus(id, completed),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["tasks"],
+      });
     },
-  ];
+  });
 
-  const [tasks, setTasks] =
-    useState<Task[]>(mockTasks);
-
-  const toggleTask = (id: string) => {
-    setTasks((prev) =>
-      prev.map((task) =>
-        task.id === id
-          ? {
-              ...task,
-              completed: !task.completed,
-            }
-          : task,
-      ),
-    );
-  };
-
-  const handleAddTask = () => {
+  const handleAddTask = async () => {
     if (!isAuthenticated) {
       window.location.href = "/auth/register";
       return;
@@ -53,17 +59,31 @@ export default function TasksReminderCard() {
     const title = prompt("Нове завдання");
     if (!title) return;
 
-    setTasks((prev) => [
-      ...prev,
-      {
-        id: Date.now().toString(),
-        title,
-        completed: false,
-      },
-    ]);
+    await createTaskMutation.mutateAsync({
+      name: title,
+      date: new Date().toISOString(),
+    });
+  };
+
+  const toggleTask = (
+    id: string,
+    completed: boolean,
+  ) => {
+    updateTaskMutation.mutate({
+      id,
+      completed: !completed,
+    });
   };
 
   const isEmpty = tasks.length === 0;
+
+  if (isLoading) {
+    return (
+      <section className={css.card}>
+        <p>Завантаження...</p>
+      </section>
+    );
+  }
 
   return (
     <section className={css.card}>
@@ -88,25 +108,28 @@ export default function TasksReminderCard() {
         <ul className={css.list}>
           {tasks.map((task) => (
             <li
-              key={task.id}
+              key={task._id}
               className={css.item}
             >
               <label>
                 <input
                   type="checkbox"
-                  checked={task.completed}
+                  checked={task.isDone}
                   onChange={() =>
-                    toggleTask(task.id)
+                    toggleTask(
+                      task._id,
+                      task.isDone,
+                    )
                   }
                 />
                 <span
                   className={
-                    task.completed
+                    task.isDone
                       ? css.completed
                       : css.text
                   }
                 >
-                  {task.title}
+                  {task.name}
                 </span>
               </label>
             </li>

@@ -9,23 +9,47 @@ import type { MomState } from "@/types/momState";
 import css from "./MomTipCard.module.css";
 
 export default function MomTipCard() {
-  const { data: week } = useQuery({
+  const {
+    data: week,
+    isLoading: weekLoading,
+    isError: weekError,
+  } = useQuery({
     queryKey: ["weeks", "me"],
     queryFn: getWeeksMe,
   });
 
-  const { data: momState } = useQuery<MomState>({
-    queryKey: ["mom-state", week?.weekNumber],
-    queryFn: () => getWeeksMom(week!.weekNumber),
-    enabled: !!week?.weekNumber,
+  const weekNumber = week?.weekNumber;
+
+  const {
+    data: momState,
+    isLoading: momLoading,
+    isError: momError,
+  } = useQuery<MomState>({
+    queryKey: ["mom-state", weekNumber],
+    queryFn: () =>
+      getWeeksMom(weekNumber as number),
+    enabled: !!weekNumber,
   });
 
-  const mockTip = {
-    text: "Не забувайте про зволоження шкіри живота та стегон спеціальними олійками, щоб попередити появу розтяжок.",
-    icon: "💡",
-  };
+  if (weekLoading || momLoading) {
+    return (
+      <section className={css.card}>
+        <p className={css.text}>
+          Завантаження...
+        </p>
+      </section>
+    );
+  }
 
-  const currentTip = momState?.tip ?? mockTip;
+  if (weekError || momError || !momState) {
+    return (
+      <section className={css.card}>
+        <p className={css.text}>
+          Не вдалося завантажити пораду для мами
+        </p>
+      </section>
+    );
+  }
 
   return (
     <section className={css.card}>
@@ -35,10 +59,11 @@ export default function MomTipCard() {
 
       <div className={css.content}>
         <span className={css.icon}>
-          {currentTip.icon}
+          {momState.tip.icon}
         </span>
+
         <p className={css.text}>
-          {currentTip.text}
+          {momState.tip.text}
         </p>
       </div>
     </section>
