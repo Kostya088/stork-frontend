@@ -22,8 +22,6 @@ export default function LoginForm() {
     values: { email: string; password: string },
     { setSubmitting }: FormikHelpers<{ email: string; password: string }>,
   ) => {
-    console.log("LOGIN VALUES:", values);
-
     try {
       const user = await login(values);
 
