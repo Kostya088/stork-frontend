@@ -1,7 +1,15 @@
 :root {
   --font-body: var(--font-lato);
   --font-brand: var(--font-comfortaa);
-}
+
+  --primary-background-color: #ffffff;
+
+  /* Text */
+  --primary-text-color:  #000;
+  --secondary-text-color:rgba(0, 0, 0, 0.60);  /*Input(Placeholder),Breadcrumbs,WeekSelector*/
+  --error-text-color:  #C60000;
+
+}  
 
 html {
   box-sizing: border-box;
@@ -18,6 +26,7 @@ html {
 body {
   margin: 0;
   font-family: var(--font-body), "Segoe UI", sans-serif;
+  color: var(--primary-text-color);
 }
 
 h1,
