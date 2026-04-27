@@ -35,3 +35,25 @@ export default function DashboardPage() {
     </div>
   );
 }
+
+import { useState } from "react";
+import Modal from "@/components/modals/Modal/Modal";
+
+export function HomePage() {
+  // состояние открытия модалки
+  const [isOpen, setIsOpen] = useState(true);
+
+  return (
+    <main>
+      {/* кнопка открытия для теста */}
+      <button onClick={() => setIsOpen(true)}>Open modal</button>
+
+      {/* тестовая модалка */}
+      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        {/* тестовый контент */}
+        <h2>Тестовая модалка</h2>
+        <p>Проверяем стили и логику</p>
+      </Modal>
+    </main>
+  );
+}
