@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { register } from "@/lib/api/clientApi";
 import { useAuthStore } from "@/lib/store/authStore";
 import { ApiError } from "@/lib/api/api";
+import toast from "react-hot-toast";
 
 export interface FormDraft {
   name: string;
@@ -33,7 +34,7 @@ const SignupSchema = Yup.object().shape({
 
 const RegistrationForm = () => {
   const router = useRouter();
-  const [error, setError] = useState("");
+  const [, setError] = useState("");
   const setUser = useAuthStore((s) => s.setUser);
   const prefId = useId();
   const handleSubmit = async (values: FormDraft) => {
@@ -41,8 +42,10 @@ const RegistrationForm = () => {
       setError("");
       const user = await register(values);
       setUser(user);
+      toast.success("Реєстрація пройшла успішно");
       router.push("/profile/edit");
     } catch (error) {
+      toast.error("Помилка: щось пішло не так");
       setError(
         (error as ApiError).response?.data?.error ??
           (error as ApiError).message ??
@@ -124,7 +127,7 @@ const RegistrationForm = () => {
         )}
       </Formik>
       <p className={css.paragraph}>
-        Вже маєте аккаунт?
+        Вже маєте аккаунт?{" "}
         <Link className={css.registerLink} href="/login">
           Увійти
         </Link>

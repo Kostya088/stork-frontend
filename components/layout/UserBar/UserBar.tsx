@@ -44,11 +44,12 @@ export default function UserBar() {
         <div className={css.avatar}>
           {user.avatar ? (
             <Image
-              width={180}
-              height={38}
+              width={40}
+              height={40}
               src={user.avatar}
               alt={user.name}
               className={css.avatarImage}
+              loading="eager"
             />
           ) : (
             <span className={css.avatarPlaceholder}>
