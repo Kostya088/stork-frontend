@@ -2,9 +2,21 @@
   --font-body: var(--font-lato);
   --font-brand: var(--font-comfortaa);
 
-  --primary-background-color: rgba(255, 255, 255, 1);
+  --color-white: rgba(255, 255, 255, 1); /*White*/
 
-  /* Text */
+  --color-pink-50: rgba(255, 244, 246, 1); /*Pink */
+  --color-pink-100: rgba(255, 218, 224, 1); /*Pink */
+  --color-pink-200: rgba(255, 203, 211, 1); /*Pink */
+  --color-pink-300: rgba(217, 173, 179, 1); /*Pink */
+
+  --color-gray-50: rgba(242, 242, 242, 1); /* Gray */
+  --color-gray-100: rgba(231, 231, 229, 1); /* Gray */
+  --color-gray-200: rgba(191, 191, 191, 1); /* Gray */
+  --color-gray-300: rgba(184, 182, 180, 1); /* Gray */
+
+  --color-red: rgba(198, 0, 0, 1);
+
+  /* ================= TEXT ================= */
   --primary-text-color: rgba(0, 0, 0, 1);
   --secondary-text-color: rgba(
     97,
@@ -12,22 +24,35 @@
     97,
     1
   ); /*Input(Placeholder),Breadcrumbs,WeekSelector*/
-  --error-text-color: rgba(198, 0, 0, 1);
+  --error-text-color: var(--color-red);
+
+  /* ================= BACKGROUND ================= */
+  --color-bg-primary: var(--color-white);
+
+  /*Pink */
+  --color-bg-accent-soft: var(--color-pink-50);
+  --color-bg-accent: var(--color-pink-100);
+
+  /*Gray */
+  --color-bg-neutral-100: var(--color-gray-200);
+  --color-bg-neutral-200: var(--color-gray-300);
+  --color-bg-neutral-300: rgba(128, 128, 128, 1);
+
 
   /* ================= PRIMARY BUTTON ================= */
-  --color-btn-primary-bg: rgba(255, 218, 224, 1);
+  --color-btn-primary-bg: var(--color-pink-100);
   --color-btn-primary-bg-hover: rgba(255, 255, 255, 1);
   --color-btn-primary-bg-active: rgba(178, 178, 178, 1);
-  --color-btn-primary-bg-disabled: rgba(255, 244, 246, 1);
+  --color-btn-primary-bg-disabled: var(--color-pink-50);
 
-  --color-btn-primary-shadow: rgba(255, 203, 211, 1);
+  --color-btn-primary-shadow: var(--color-pink-200);
   --color-btn-primary-shadow-hover: rgba(217, 217, 217, 1);
   --color-btn-primary-shadow-disabled: rgba(255, 240, 242, 1);
 
   /* ================= SECONDARY BUTTON ================= */
-  --color-btn-secondary-bg: rgba(242, 242, 242, 1);
-  --color-btn-secondary-bg-hover: rgba(255, 244, 246, 1);
-  --color-btn-secondary-bg-active: rgba(255, 203, 211, 1);
+  --color-btn-secondary-bg: var(--color-gray-50);
+  --color-btn-secondary-bg-hover: var(--color-pink-50);
+  --color-btn-secondary-bg-active: var(--color-pink-200);
   --color-btn-secondary-bg-disabled: rgba(251, 251, 251, 1);
 
   --color-btn-secondary-shadow: rgba(217, 217, 217, 1);
@@ -37,7 +62,7 @@
   /* ================= LINK ================= */
   --color-link: rgba(0, 0, 0, 1);
   --color-link-hover: rgba(0, 0, 0, 1);
-  --color-link-active: rgba(255, 203, 211, 1);
+  --color-link-active: var(--color-pink-200);
   --color-link-disabled: rgba(179, 179, 179, 1);
 
   /* decoration */
@@ -73,6 +98,7 @@ html {
 body {
   margin: 0;
   font-family: var(--font-body), "Segoe UI", sans-serif;
+  background-color: var(--color-bg-primary);
   color: var(--primary-text-color);
 }
 
