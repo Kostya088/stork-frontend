@@ -5,7 +5,7 @@ import type { Emotion } from "@/types/emotion";
 import type { User } from "@/types/user";
 import type { BabyState } from "@/types/babyState";
 import type { MomState } from "@/types/momState";
-import type { WeekInfo } from "@/types/weekInfo";
+import type { WeekDashboardInfo, WeekInfo } from "@/types/weekInfo";
 
 export async function getTasks(): Promise<Task[]> {
   const { data } = await nextClient.get<Task[]>("/tasks");
@@ -117,19 +117,6 @@ export async function getWeeksBaby(week: number): Promise<BabyState> {
 export async function getWeeksMom(week: number): Promise<MomState> {
   const { data } = await nextClient.get<MomState>(`/weeks/mom/${week}`);
   return data;
-}
-export interface WeekDashboardInfo {
-  weekNumber: number;
-  daysUntilDue: number;
-  tipForMom: string | null;
-  babyInfo: {
-    gender?: "boy" | "girl" | null;
-    analogy: string | null;
-    image: string;
-    development: string;
-    size?: number;
-    weight?: number;
-  } | null;
 }
 
 export async function getPublicWeek(week = 1): Promise<WeekDashboardInfo> {
