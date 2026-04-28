@@ -16,29 +16,13 @@ function getLabel(segment: string): string {
   return SEGMENT_LABELS[segment] ?? segment;
 }
 
-const AUTH_PATHS = ["/login", "/register", "/edit/profile"];
+const AUTH_PATHS = ["/login", "/register", "/profile/edit"];
 
 export default function Breadcrumbs() {
   const pathname = usePathname();
   const segments = pathname.split("/").filter(Boolean);
 
-  if (AUTH_PATHS.includes(pathname)) return null;
-
-  if (segments.length === 0 && !AUTH_PATHS.includes(pathname)) {
-    return (
-      <nav aria-label="breadcrumb" className={css.breadcrumbs}>
-        <ol className={css.list}>
-          <li className={css.item}>
-            <span className={css.link}>Лелека</span>
-            <span className={css.separator}>&#8250;</span>
-            <span className={css.current} aria-current="page">
-              Мій день
-            </span>
-          </li>
-        </ol>
-      </nav>
-    );
-  }
+  if (segments.length === 0 || AUTH_PATHS.includes(pathname)) return null;
 
   const pageCrumbs = segments.map((segment, index) => {
     const href = "/" + segments.slice(0, index + 1).join("/");
