@@ -16,7 +16,7 @@ function getLabel(segment: string): string {
   return SEGMENT_LABELS[segment] ?? segment;
 }
 
-const AUTH_PATHS = ["/login", "/register", "/edit/profile"];
+const AUTH_PATHS = ["/login", "/register", "/profile/edit"];
 
 export default function Breadcrumbs() {
   const pathname = usePathname();
