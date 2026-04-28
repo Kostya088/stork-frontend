@@ -19,16 +19,15 @@
 }
 
 .separator {
-  color: var(--color-text-primary, #1a1a1a);
-  font-size: 18px;
-  line-height: 1;
-  user-select: none;
+  color: var(--color-scheme-text);
+  flex-shrink: 0;
 }
 
 .link {
-  font-size: 16px;
-  color: var(--color-text-primary, #1a1a1a);
-  font-weight: 500;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--color-scheme-text);
   text-decoration: none;
 }
 
@@ -37,7 +36,18 @@
 }
 
 .current {
-  font-size: 16px;
-  color: var(--color-text-secondary, #888);
+  font-size: 12px;
   font-weight: 400;
+  line-height: 1.6;
+  color: var(--color-neutral);
+}
+
+@media (min-width: 768px) {
+  .link {
+    font-size: 14px;
+  }
+
+  .current {
+    font-size: 14px;
+  }
 }
