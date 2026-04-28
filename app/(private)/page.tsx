@@ -16,10 +16,7 @@ export default function DashboardPage() {
       </div>
 
       <div className={styles.status}>
-        <div className={styles.statusRow}>
-          <StatusBlock type="week" />
-          <StatusBlock type="daysUntilDue" />
-        </div>
+        <StatusBlock />
       </div>
 
       <div className={styles.baby}>

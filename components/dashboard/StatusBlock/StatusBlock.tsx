@@ -3,53 +3,53 @@
 import { useWeekDashboard } from "@/hooks/useWeekDashboard";
 import css from "./StatusBlock.module.css";
 
-type StatusType = "week" | "daysUntilDue";
-
-type StatusBlockProps = {
-  type: StatusType;
-};
-
-export default function StatusBlock({
-  type,
-}: StatusBlockProps) {
+export default function StatusBlock() {
   const { data, isLoading, isError } =
     useWeekDashboard();
 
   if (isLoading) {
     return (
-      <div className={css.item}>
-        <p className={css.label}>
+      <div className={css.row}>
+        <div className={css.card}>
           Завантаження...
-        </p>
+        </div>
+        <div className={css.card}>
+          Завантаження...
+        </div>
       </div>
     );
   }
 
   if (isError || !data) {
     return (
-      <div className={css.item}>
-        <p className={css.label}>Немає даних</p>
+      <div className={css.row}>
+        <div className={css.card}>
+          Немає даних
+        </div>
+        <div className={css.card}>
+          Немає даних
+        </div>
       </div>
     );
   }
 
-  const config = {
-    week: {
-      label: "Тиждень",
-      value: data.weekNumber,
-    },
-    daysUntilDue: {
-      label: "Днів до зустрічі",
-      value: data.daysUntilDue,
-    },
-  };
-
-  const current = config[type];
-
   return (
-    <div className={css.item}>
-      <p className={css.label}>{current.label}</p>
-      <p className={css.value}>{current.value}</p>
+    <div className={css.row}>
+      <div className={css.card}>
+        <p className={css.label}>Тиждень</p>
+        <p className={css.value}>
+          {data.weekNumber}
+        </p>
+      </div>
+
+      <div className={css.card}>
+        <p className={css.label}>
+          Днів до зустрічі
+        </p>
+        <p className={css.value}>
+          {data.daysUntilDue}
+        </p>
+      </div>
     </div>
   );
 }

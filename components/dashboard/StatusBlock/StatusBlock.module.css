@@ -1,13 +1,12 @@
-.card {
+.row {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
 }
 
-.item {
+.card {
   padding: 20px;
   border-radius: 24px;
-
   background-color: #fff4f6;
 
   display: flex;
@@ -17,9 +16,12 @@
 
   box-shadow: 0 6px 16px rgba(255, 77, 125, 0.08);
   transition: transform 0.2s ease;
+
+  height: 120px; /* під макет */
+  overflow-y: auto;
 }
 
-.item:hover {
+.card:hover {
   transform: translateY(-2px);
 }
 
@@ -38,7 +40,11 @@
 
 /* mobile */
 @media (max-width: 640px) {
-  .card {
+  .row {
     grid-template-columns: 1fr;
+  }
+
+  .card {
+    height: auto;
   }
 }
