@@ -20,9 +20,9 @@
   --color-btn-primary-bg-active: rgba(178, 178, 178, 1);
   --color-btn-primary-bg-disabled: rgba(255, 244, 246, 1);
 
-  --color-btn-primary-bottom: rgba(255, 203, 211, 1);
-  --color-btn-primary-bottom-hover: rgba(217, 217, 217, 1);
-  --color-btn-primary-bottom-disabled: rgba(255, 240, 242, 1);
+  --color-btn-primary-shadow: rgba(255, 203, 211, 1);
+  --color-btn-primary-shadow-hover: rgba(217, 217, 217, 1);
+  --color-btn-primary-shadow-disabled: rgba(255, 240, 242, 1);
 
   /* ================= SECONDARY BUTTON ================= */
   --color-btn-secondary-bg: rgba(242, 242, 242, 1);
@@ -30,9 +30,9 @@
   --color-btn-secondary-bg-active: rgba(255, 203, 211, 1);
   --color-btn-secondary-bg-disabled: rgba(251, 251, 251, 1);
 
-  --color-btn-secondary-bottom: rgba(217, 217, 217, 1);
-  --color-btn-secondary-bottom-hover: rgba(217, 217, 217, 1);
-  --color-btn-secondary-bottom-disabled: rgba(244, 244, 244, 1);
+  --color-btn-secondary-shadow: rgba(217, 217, 217, 1);
+  --color-btn-secondary-shadow-hover: rgba(217, 217, 217, 1);
+  --color-btn-secondary-shadow-disabled: rgba(244, 244, 244, 1);
 
   /* ================= LINK ================= */
   --color-link: rgba(0, 0, 0, 1);
