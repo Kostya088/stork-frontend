@@ -1,118 +1,127 @@
 .wrapper {
-    width: 100%;
-    padding: 24px;
-    border-radius: 24px;
-    background: #fff4f7;
-    color: #241a1d;
+  width: 100%;
+  padding: 24px;
+  border-radius: 24px;
+  background: #fff4f7;
+  color: #241a1d;
 }
 
 .meta {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    margin-bottom: 24px;
-    justify-content: space-between;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 24px;
 }
 
 .titleRow,
 .dateRow {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.titleRow {
-    min-width: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
 }
 
 .title {
-    margin: 0;
-    font-family: var(--font-comfortaa), var(--font-comfortaa-fallback), sans-serif;
-    font-size: 24px;
-    font-weight: 600;
-    line-height: 1.25;
+  min-width: 0;
+  margin: 0;
+  overflow-wrap: anywhere;
+  font-family: var(--font-comfortaa), var(--font-comfortaa-fallback), sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.25;
 }
 
 .date {
-    color: #5f5356;
-    font-size: 16px;
-    line-height: 1.4;
-    white-space: nowrap;
+  color: #5f5356;
+  font-size: 16px;
+  line-height: 1.4;
+  white-space: nowrap;
 }
 
 .iconButton {
-    display: inline-flex;
-    flex-shrink: 0;
-    align-items: center;
-    justify-content: center;
-    width: 24px;
-    height: 24px;
-    padding: 0;
-    border: none;
-    background-color: transparent;
-    color: #241a1d;
-    cursor: pointer;
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  color: #241a1d;
+  cursor: pointer;
 }
 
 .icon {
-    display: block;
-    width: 20px;
-    height: 20px;
+  display: block;
+  width: 21px;
+  height: 21px;
 }
 
 .backButton {
-    margin-bottom: 16px;
-    padding: 0;
-    font: inherit;
-    font-weight: 600;
+  margin-bottom: 16px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #241a1d;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 .text {
-    margin-bottom: 20px;
-    color: #241a1d;
-    font-size: 16px;
-    line-height: 1.55;
-    white-space: pre-wrap;
+  margin-bottom: 20px;
+  overflow-wrap: anywhere;
+  color: #241a1d;
+  font-size: 16px;
+  line-height: 1.55;
+  white-space: pre-wrap;
 }
 
 .emotions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .emotion {
-    padding: 6px 12px;
-    border-radius: 999px;
-    background: #ffffff;
-    font-size: 13px;
-    line-height: 1.2;
+  max-width: 100%;
+  padding: 6px 12px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #ffffff;
+  font-size: 13px;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .placeholder {
-    margin: 0;
-    padding: 40px 16px;
-    color: #6f6065;
-    font-size: 16px;
-    text-align: center;
+  margin: 0;
+  padding: 40px 16px;
+  color: #6f6065;
+  font-size: 16px;
+  text-align: center;
 }
 
 @media screen and (min-width: 1024px) {
-    .wrapper {
-        height: 680px;
-        padding: 32px;
-        overflow-y: auto;
-    }
+  .wrapper {
+    height: 680px;
+    padding: 32px;
+    overflow-y: auto;
+  }
 
-    .wrapper::-webkit-scrollbar {
-        width: 6px;
-    }
+  .wrapper::-webkit-scrollbar {
+    width: 6px;
+  }
 
-    .wrapper::-webkit-scrollbar-thumb {
-        border-radius: 999px;
-        background: #ffc7d6;
-    }
+  .wrapper::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+    background: #ffc7d6;
+  }
 }

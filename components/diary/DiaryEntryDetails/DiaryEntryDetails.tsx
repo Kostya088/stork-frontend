@@ -1,6 +1,6 @@
-import styles from "./DiaryEntryDetails.module.css";
 import type { DiaryEntry } from "@/types/diaryEntry";
 import { formatDiaryDate, getEmotionTitle } from "@/utils/diary";
+import styles from "./DiaryEntryDetails.module.css";
 
 interface DiaryEntryDetailsProps {
   entry: DiaryEntry | null;
@@ -32,10 +32,12 @@ export default function DiaryEntryDetails({
       <section className={styles.wrapper}>
         {isStandalone && onBack && (
           <button className={styles.backButton} type="button" onClick={onBack}>
-            ← До записів
+            До записів
           </button>
         )}
-        <p className={styles.placeholder}>Наразі записи у щоденнику відстні</p>
+        <p className={styles.placeholder}>
+          Наразі записи у щоденнику відстні
+        </p>
       </section>
     );
   }
@@ -44,7 +46,7 @@ export default function DiaryEntryDetails({
     <article className={styles.wrapper}>
       {isStandalone && onBack && (
         <button className={styles.backButton} type="button" onClick={onBack}>
-          ← До записів
+          До записів
         </button>
       )}
 
@@ -58,7 +60,7 @@ export default function DiaryEntryDetails({
             onClick={() => onEdit(entry)}
             aria-label="Редагувати запис"
           >
-            <svg className={styles.icon}>
+            <svg className={styles.icon} aria-hidden="true">
               <use href="/icons/sprite.svg#icon-edit-square" />
             </svg>
           </button>
@@ -78,7 +80,7 @@ export default function DiaryEntryDetails({
             onClick={() => onDelete(entry)}
             aria-label="Видалити запис"
           >
-            <svg className={styles.icon}>
+            <svg className={styles.icon} aria-hidden="true">
               <use href="/icons/sprite.svg#icon-delete-forever" />
             </svg>
           </button>
@@ -87,11 +89,12 @@ export default function DiaryEntryDetails({
 
       <div className={styles.text}>{entry.description}</div>
 
-      <ul className={styles.emotions} aria-label="Категорії запису">
+      <ul className={styles.emotions} aria-label="Емоції запису">
         {entry.emotions.map((emotion, index) => (
           <li
             className={styles.emotion}
             key={`${getEmotionTitle(emotion)}-${index}`}
+            title={getEmotionTitle(emotion)}
           >
             {getEmotionTitle(emotion)}
           </li>

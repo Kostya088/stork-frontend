@@ -1,7 +1,7 @@
 .wrapper {
   width: 100%;
   padding: 24px 16px;
-  border-radius: 32px;
+  border-radius: 24px;
   background: #fff4f6;
 }
 
@@ -16,10 +16,9 @@
 .title {
   margin: 0;
   font-family: var(--font-brand), var(--font-body), sans-serif;
+  font-size: 24px;
   font-weight: 700;
-  font-size: 18px;
-  line-height: 1.4;
-  letter-spacing: 0.01em;
+  line-height: 1.25;
   color: #000000;
 }
 
@@ -34,22 +33,22 @@
   color: #000000;
   font: inherit;
   font-size: 14px;
-  line-height: 1.6;
   font-weight: 500;
+  line-height: 1.4;
   cursor: pointer;
 }
 
 .addIcon {
+  display: block;
+  flex-shrink: 0;
   width: 21px;
   height: 21px;
-  display: block;
 }
 
 .list {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  max-height: none;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -68,13 +67,15 @@
 
 @media screen and (min-width: 1024px) {
   .wrapper {
+    display: flex;
+    flex-direction: column;
     height: 680px;
     padding: 18px;
     overflow: hidden;
   }
 
   .title {
-    font-size: 20px;
+    font-size: 28px;
   }
 
   .createButton {
@@ -82,7 +83,8 @@
   }
 
   .list {
-    max-height: 602px;
+    flex: 1;
+    min-height: 0;
     padding-right: 4px;
     overflow-y: auto;
   }
