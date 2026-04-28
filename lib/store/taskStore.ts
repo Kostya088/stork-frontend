@@ -1,4 +1,4 @@
-import {Task } from "@/types/task";
+import { Task } from "@/types/task";
 import { create } from "zustand";
 
 interface TaskStore {
@@ -10,11 +10,11 @@ interface TaskStore {
 
 export const useTaskStore = create<TaskStore>()((set) => ({
   isAuthenticated: false,
- task: null,
+  task: null,
   setTask: (task: Task) => {
     set(() => ({ task, isAuthenticated: true }));
   },
   clearIsAuthenticated: () => {
-    set(() => ({task: null, isAuthenticated: false }));
+    set(() => ({ task: null, isAuthenticated: false }));
   },
 }));
