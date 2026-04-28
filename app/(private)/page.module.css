@@ -9,35 +9,39 @@
   gap: 24px;
 }
 
-/* 📊 БЛОК С ДВУМЯ КАРТОЧКАМИ */
+/* ===== STATUS BLOCK ===== */
 .status {
   grid-area: status;
 }
 
 .statusRow {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, 1fr);
   gap: 16px;
 }
 
-/* остальные блоки */
+/* ===== GRID AREAS ===== */
 .greeting {
   grid-area: greeting;
 }
+
 .tasks {
   grid-area: tasks;
 }
+
 .baby {
   grid-area: baby;
 }
+
 .tip {
   grid-area: tip;
 }
+
 .feeling {
   grid-area: feeling;
 }
 
-/* 📱 MOBILE */
+/* ===== MOBILE ===== */
 @media (max-width: 640px) {
   .dashboard {
     grid-template-areas:

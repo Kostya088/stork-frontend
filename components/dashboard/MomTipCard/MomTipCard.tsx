@@ -18,19 +18,19 @@ export default function MomTipCard() {
     useWeekDashboard();
 
   const weekNumber = week?.weekNumber;
-  console.log("week:", week);
-  console.log("weekNumber:", weekNumber);
+
   const { data, isLoading, isError } = useQuery({
     queryKey: ["mom-state", weekNumber],
-    queryFn: () => getWeeksMom(weekNumber!),
-    enabled: typeof weekNumber === "number",
+    queryFn: () =>
+      getWeeksMom(weekNumber as number),
+    enabled: !!weekNumber,
   });
 
   if (isWeekLoading || isLoading) {
     return (
       <section className={css.card}>
         <p className={css.text}>
-          Завантаження...
+          Підбираємо для вас корисну пораду...
         </p>
       </section>
     );
@@ -40,17 +40,17 @@ export default function MomTipCard() {
     return (
       <section className={css.card}>
         <p className={css.text}>
-          Не вдалося завантажити пораду
+          Поки що не вдалося завантажити пораду
         </p>
       </section>
     );
   }
 
-  const tip: ComfortTip = (data
-    .comfortTips?.[0] as ComfortTip) ?? {
+  const tip: ComfortTip = data
+    .comfortTips?.[0] ?? {
     title: FALLBACK_TITLE,
     category: "💡",
-    tip: "Сьогодні відпочинь і прислухайся до свого самопочуття ❤️",
+    tip: "Не забувайте про зволоження шкіри живота та стегон спеціальними олійками, щоб попередити появу розтяжок.",
   };
 
   return (
@@ -63,6 +63,7 @@ export default function MomTipCard() {
         <span className={css.icon}>
           {tip.category}
         </span>
+
         <p className={css.text}>{tip.tip}</p>
       </div>
     </section>

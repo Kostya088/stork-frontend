@@ -1,39 +1,35 @@
 "use client";
 
+import { useCallback } from "react";
+import { useRouter } from "next/navigation";
 import { useAuthStore } from "@/lib/store/authStore";
 import {
   useQuery,
   useMutation,
   useQueryClient,
 } from "@tanstack/react-query";
+
 import {
   getTasks,
-  createTask,
   updateTaskStatus,
 } from "@/lib/api/clientApi";
+
 import css from "./TasksReminderCard.module.css";
 
 export default function TasksReminderCard() {
+  const router = useRouter();
+  const queryClient = useQueryClient();
+
   const isAuthenticated = useAuthStore(
     (s) => s.isAuthenticated,
   );
-
-  const queryClient = useQueryClient();
 
   const { data: tasks = [], isLoading } =
     useQuery({
       queryKey: ["tasks"],
       queryFn: getTasks,
-      enabled: isAuthenticated,
+      enabled: !!isAuthenticated,
     });
-
-  const createTaskMutation = useMutation({
-    mutationFn: createTask,
-    onSuccess: () =>
-      queryClient.invalidateQueries({
-        queryKey: ["tasks"],
-      }),
-  });
 
   const updateTaskMutation = useMutation({
     mutationFn: ({
@@ -43,27 +39,37 @@ export default function TasksReminderCard() {
       id: string;
       isDone: boolean;
     }) => updateTaskStatus(id, isDone),
-    onSuccess: () =>
+    onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["tasks"],
-      }),
+      });
+    },
   });
 
-  const handleCreate = () => {
-    const name = prompt("Нове завдання");
-    if (!name) return;
+  const handleCreate = useCallback(() => {
+    if (!isAuthenticated) {
+      router.push("/register");
+      return;
+    }
 
-    createTaskMutation.mutate({
-      name,
-      date: new Date().toISOString(),
-    });
-  };
+    console.log("Open create task flow");
+  }, [isAuthenticated, router]);
+
+  const handleToggle = useCallback(
+    (id: string, isDone: boolean) => {
+      updateTaskMutation.mutate({
+        id,
+        isDone,
+      });
+    },
+    [updateTaskMutation],
+  );
 
   if (isLoading) {
     return (
       <section className={css.card}>
         <p className={css.text}>
-          Завантаження...
+          Завантажуємо завдання…
         </p>
       </section>
     );
@@ -79,25 +85,23 @@ export default function TasksReminderCard() {
           Важливі завдання
         </h2>
 
-        {!isEmpty && (
-          <button
-            className={css.addBtn}
-            onClick={handleCreate}
-          >
-            +
-          </button>
-        )}
+        <button
+          className={css.addBtn}
+          onClick={handleCreate}
+        >
+          +
+        </button>
       </div>
 
       {/* EMPTY STATE */}
       {isEmpty ? (
         <div>
           <p className={css.emptyText}>
-            Наразі немає завдань
+            Наразі завдань немає
           </p>
 
           <p className={css.text}>
-            Створіть перше завдання
+            Створіть перше нове завдання
           </p>
 
           <button
@@ -120,10 +124,10 @@ export default function TasksReminderCard() {
                   className={css.checkbox}
                   checked={task.isDone}
                   onChange={() =>
-                    updateTaskMutation.mutate({
-                      id: task._id,
-                      isDone: !task.isDone,
-                    })
+                    handleToggle(
+                      task._id,
+                      !task.isDone,
+                    )
                   }
                 />
 
@@ -141,7 +145,7 @@ export default function TasksReminderCard() {
               <span className={css.date}>
                 {new Date(
                   task.date,
-                ).toLocaleDateString()}
+                ).toLocaleDateString("uk-UA")}
               </span>
             </li>
           ))}
