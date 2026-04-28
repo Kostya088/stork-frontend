@@ -1,14 +1,20 @@
 "use client";
 
-// import { useState } from "react";
-// import { useRouter } from "next/navigation";
-// import { useAuthStore } from "@/lib/store/authStore";
-// import { useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useAuthStore } from "@/lib/store/authStore";
+import { useQueryClient } from "@tanstack/react-query";
 
 // import { getTasks, updateTaskStatus } from "@/lib/api/clientApi";
 
 // import Modal from "@/components/modal/Modal/Modal";
 // import AddTaskForm from "@/components/modal/modalForms/AddTaskForm/AddTaskForm";
+
+import css from "./TasksReminderCard.module.css";
+// import { useTaskStore } from "@/lib/store/taskStore";
+
+import Modal from "@/components/modal/Modal/Modal";
+import AddTaskForm from "@/components/modal/modalForms/AddTaskForm/AddTaskForm";
 
 const TasksReminderCard = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -49,8 +55,7 @@ const TasksReminderCard = () => {
         ) : (
           <ul className={css.list}></ul>
         )}
-
-        <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        {isModalOpen && (
           <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
             <AddTaskForm
               onSuccess={() => {
@@ -61,7 +66,7 @@ const TasksReminderCard = () => {
               }}
             />
           </Modal>
-        </Modal>
+        )}
       </section>
     </div>
   );
@@ -189,17 +194,17 @@ export default TasksReminderCard;
 //       )}
 //     </section>
 
-  //     <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-  //       <AddTaskForm
-  //         onSuccess={() => {
-  //           queryClient.invalidateQueries({
-  //             queryKey: ["tasks"],
-  //           });
-  //           setIsModalOpen(false);
-  //         }}
-  //       />
-  //     </Modal>
-  //   </>
-  // );
-  return <p>KATERYNA</p>;
-}
+//     <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+//       <AddTaskForm
+//         onSuccess={() => {
+//           queryClient.invalidateQueries({
+//             queryKey: ["tasks"],
+//           });
+//           setIsModalOpen(false);
+//         }}
+//       />
+//     </Modal>
+//   </>
+// );
+//   return <p>afdsfa</p>;
+// }
