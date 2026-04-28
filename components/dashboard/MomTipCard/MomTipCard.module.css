@@ -1,0 +1,28 @@
+.card {
+  padding: 24px;
+  border-radius: 24px;
+  background-color: #fff1f5;
+}
+
+.title {
+  margin-bottom: 12px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.content {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.icon {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.text {
+  font-size: 14px;
+  line-height: 1.4;
+  color: #5d5261;
+}
