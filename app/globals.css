@@ -52,6 +52,11 @@
   --color-btn-primary-bg-active: var(--color-gray-250);
   --color-btn-primary-bg-disabled: var(--color-pink-50);
 
+  /* ================= PRIMARY BUTTON ================= */
+  --color-btn-primary: rgba(255, 218, 224, 1);
+  --color-btn-primary-hover: rgba(255, 255, 255, 1);
+  --color-btn-primary-active: rgba(178, 178, 178, 1);
+  --color-btn-primary-disabled: rgba(255, 244, 246, 1);
   --color-btn-primary-shadow: var(--color-pink-200);
   --color-btn-primary-shadow-hover: var(--color-gray-150);
   --color-btn-primary-shadow-disabled: var(--color-white-100);
@@ -77,6 +82,11 @@
 
   /* ================= TASK ITEM (CHECKBOX) ================= */
 
+  /* ================= LINK ================= */
+  --color-link: rgba(0, 0, 0, 1);
+  --color-link-hover: rgba(0, 0, 0, 1);
+  --color-link-active: rgba(255, 203, 211, 1);
+  --color-link-disabled: rgba(179, 179, 179, 1);
   --color-checkbox-bg: var(--color-gray-50);
   --color-checkbox-bg-active: var(--color-black);
 

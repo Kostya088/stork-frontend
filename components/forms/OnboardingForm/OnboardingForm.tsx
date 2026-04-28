@@ -9,9 +9,10 @@ import { useRouter } from "next/navigation";
 
 import CustomSelector from "../CustomSelector/CustomSelector";
 import UserAvatarSelector from "../UserAvatarSelector/UserAvatarSelector";
-import { updateMe, updateUserAvatar } from "@/lib/api/clientApi";
+import { getMe, updateMe, updateUserAvatar } from "@/lib/api/clientApi";
 import type { ApiError } from "@/lib/api/api";
 import type { Gender } from "@/types/user";
+import { useAuthStore } from "@/lib/store/authStore";
 
 const OnbordingSchema = Yup.object().shape({
   gender: Yup.string()
@@ -38,13 +39,14 @@ const genderOptions = [
 ];
 
 interface OnbordingDraft {
-  gender: Gender;
+  gender: Gender | "null";
   dueDate: string;
 }
 
 const OnbordingForm = () => {
   const [file, setFile] = useState<File | null>(null);
   const [error, setError] = useState("");
+  const setUser = useAuthStore((state) => state.setUser);
 
   const minDate = useMemo(() => {
     const currentDate = new Date();
@@ -76,7 +78,7 @@ const OnbordingForm = () => {
 
       await updateMe({
         dueDate: values.dueDate,
-        gender: values.gender,
+        gender: values.gender === "null" ? null : values.gender,
       });
 
       if (file) {
@@ -84,6 +86,9 @@ const OnbordingForm = () => {
         formData.set("avatar", file);
         await updateUserAvatar(formData);
       }
+
+      const freshUser = await getMe(); // <- отримуємо свіжі дані
+      setUser(freshUser); // <- оновлюємо стор
 
       route.push("/");
     } catch (error) {
