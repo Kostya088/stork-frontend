@@ -22,8 +22,6 @@ export default function Breadcrumbs() {
   const pathname = usePathname();
   const segments = pathname.split("/").filter(Boolean);
 
-  if (segments.length === 0 || AUTH_PATHS.includes(pathname)) return null;
-
   const pageCrumbs = segments.map((segment, index) => {
     const href = "/" + segments.slice(0, index + 1).join("/");
     const label = getLabel(segment);
@@ -32,16 +30,22 @@ export default function Breadcrumbs() {
   });
 
   const crumbs = [
-    { href: "/", label: "Лелека", isLast: segments.length === 0 },
-    ...pageCrumbs,
+    { href: "/", label: "Лелека", isLast: false },
+    ...(segments.length === 0
+      ? [{ href: "/", label: "Мій день", isLast: true }]
+      : pageCrumbs),
   ];
 
   return (
     <nav aria-label="breadcrumb" className={css.breadcrumbs}>
       <ol className={css.list}>
         {crumbs.map(({ href, label, isLast }, index) => (
-          <li key={href} className={css.item}>
-            {index > 0 && <span className={css.separator}>&#8250;</span>}
+          <li key={href + index} className={css.item}>
+            {index > 0 && (
+              <svg className={css.separator} width="7" height="12">
+                <use href="/icons/sprite.svg#icon-chevron-right" />
+              </svg>
+            )}
             {isLast ? (
               <span className={css.current} aria-current="page">
                 {label}
