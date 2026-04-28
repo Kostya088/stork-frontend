@@ -1,6 +1,10 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import {
+  useState,
+  useCallback,
+  useMemo,
+} from "react";
 import { useRouter } from "next/navigation";
 import { useAuthStore } from "@/lib/store/authStore";
 import {
@@ -18,8 +22,10 @@ import Modal from "@/components/modal/Modal/Modal";
 import AddTaskForm from "@/components/modal/modalForms/AddTaskForm/AddTaskForm";
 
 import css from "./TasksReminderCard.module.css";
+import { useTaskStore } from "@/lib/store/taskStore";
 
 export default function TasksReminderCard() {
+   const setTask = useTaskStore((state) => state.setTask);
   const router = useRouter();
   const queryClient = useQueryClient();
 
@@ -30,12 +36,16 @@ export default function TasksReminderCard() {
   const [isModalOpen, setIsModalOpen] =
     useState(false);
 
-  const { data: tasks = [], isLoading } =
-    useQuery({
-      queryKey: ["tasks"],
-      queryFn: getTasks,
-      enabled: isAuthenticated,
-    });
+  // 📦 TASKS
+  const { data, isLoading } = useQuery({
+    queryKey: ["tasks"],
+    queryFn: async(=> ),
+    enabled: isAuthenticated,
+  });
+  console.log("DATA:", data);
+  const tasks = useMemo(() => {
+    return Array.isArray(data) ? data : [];
+  }, [data]);
 
   const updateTaskMutation = useMutation({
     mutationFn: ({
@@ -162,7 +172,6 @@ export default function TasksReminderCard() {
         )}
       </section>
 
-      {/* MODAL */}
       <Modal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
