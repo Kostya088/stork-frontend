@@ -13,11 +13,6 @@
     1
   ); /*Input(Placeholder),Breadcrumbs,WeekSelector*/
   --error-text-color: rgba(198, 0, 0, 1);
-  
-
-
-
-
 
   /* ================= PRIMARY BUTTON ================= */
   --color-btn-primary-bg: rgba(255, 218, 224, 1);
@@ -39,8 +34,7 @@
   --color-btn-secondary-bottom-hover: rgba(217, 217, 217, 1);
   --color-btn-secondary-bottom-disabled: rgba(244, 244, 244, 1);
 
-
-    /* ================= LINK ================= */
+  /* ================= LINK ================= */
   --color-link: rgba(0, 0, 0, 1);
   --color-link-hover: rgba(0, 0, 0, 1);
   --color-link-active: rgba(255, 203, 211, 1);
@@ -50,6 +44,7 @@
   --link-underline-color: currentColor;
 
   /* ================= FONT-SIZE ================= */
+  --font-size-2xs: 10px;
   --font-size-xs: 12px;
   --font-size-sm: 14px;
   --font-size-md: 16px;
@@ -58,8 +53,9 @@
   --font-size-2xl: 24px;
   --font-size-3xl: 32px;
   --font-size-4xl: 36px;
-  --font-size-5xl: 48px;
-
+  --font-size-5xl: 40px;
+  --font-size-6xl: 48px;
+  --font-size-7xl: 56px;
 }
 
 html {
