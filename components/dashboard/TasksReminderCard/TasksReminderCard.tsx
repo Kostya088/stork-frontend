@@ -1,17 +1,17 @@
 "use client";
 
-import { useState, useCallback, useMemo } from "react";
-import { useRouter } from "next/navigation";
-import { useAuthStore } from "@/lib/store/authStore";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+// import { useState, useCallback, useMemo } from "react";
+// import { useRouter } from "next/navigation";
+// import { useAuthStore } from "@/lib/store/authStore";
+// import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { getTasks, updateTaskStatus } from "@/lib/api/clientApi";
+// import { getTasks, updateTaskStatus } from "@/lib/api/clientApi";
 
-import Modal from "@/components/modal/Modal/Modal";
-import AddTaskForm from "@/components/modal/modalForms/AddTaskForm/AddTaskForm";
+// import Modal from "@/components/modal/Modal/Modal";
+// import AddTaskForm from "@/components/modal/modalForms/AddTaskForm/AddTaskForm";
 
-import css from "./TasksReminderCard.module.css";
-import { useTaskStore } from "@/lib/store/taskStore";
+// import css from "./TasksReminderCard.module.css";
+// import { useTaskStore } from "@/lib/store/taskStore";
 
 export default function TasksReminderCard() {
   // const setTask = useTaskStore((state) => state.setTask);
@@ -145,5 +145,5 @@ export default function TasksReminderCard() {
   //     </Modal>
   //   </>
   // );
-  return <p>afdsfa</p>;
+  return <p>KATERYNA</p>;
 }

@@ -16,11 +16,29 @@ function getLabel(segment: string): string {
   return SEGMENT_LABELS[segment] ?? segment;
 }
 
-const AUTH_PATHS = ["/login", "/register", "/profile/edit"];
+const AUTH_PATHS = ["/login", "/register", "/edit/profile"];
 
 export default function Breadcrumbs() {
   const pathname = usePathname();
   const segments = pathname.split("/").filter(Boolean);
+
+  if (AUTH_PATHS.includes(pathname)) return null;
+
+  if (segments.length === 0 && !AUTH_PATHS.includes(pathname)) {
+    return (
+      <nav aria-label="breadcrumb" className={css.breadcrumbs}>
+        <ol className={css.list}>
+          <li className={css.item}>
+            <span className={css.link}>Лелека</span>
+            <span className={css.separator}>&#8250;</span>
+            <span className={css.current} aria-current="page">
+              Мій день
+            </span>
+          </li>
+        </ol>
+      </nav>
+    );
+  }
 
   const pageCrumbs = segments.map((segment, index) => {
     const href = "/" + segments.slice(0, index + 1).join("/");
@@ -30,22 +48,16 @@ export default function Breadcrumbs() {
   });
 
   const crumbs = [
-    { href: "/", label: "Лелека", isLast: false },
-    ...(segments.length === 0
-      ? [{ href: "/", label: "Мій день", isLast: true }]
-      : pageCrumbs),
+    { href: "/", label: "Лелека", isLast: segments.length === 0 },
+    ...pageCrumbs,
   ];
 
   return (
     <nav aria-label="breadcrumb" className={css.breadcrumbs}>
       <ol className={css.list}>
         {crumbs.map(({ href, label, isLast }, index) => (
-          <li key={href + index} className={css.item}>
-            {index > 0 && (
-              <svg className={css.separator} width="7" height="12">
-                <use href="/icons/sprite.svg#icon-chevron-right" />
-              </svg>
-            )}
+          <li key={href} className={css.item}>
+            {index > 0 && <span className={css.separator}>&#8250;</span>}
             {isLast ? (
               <span className={css.current} aria-current="page">
                 {label}
