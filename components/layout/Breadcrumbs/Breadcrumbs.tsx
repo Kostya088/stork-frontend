@@ -6,7 +6,7 @@ import css from "./Breadcrumbs.module.css";
 
 const SEGMENT_LABELS: Record<string, string> = {
   diary: "Щоденник",
-  journey: "Мій шлях",
+  journey: "Мій день",
   profile: "Профіль",
   edit: "Редагування",
   new: "Новий запис",
@@ -16,7 +16,7 @@ function getLabel(segment: string): string {
   return SEGMENT_LABELS[segment] ?? segment;
 }
 
-const AUTH_PATHS = ["/login", "/register"];
+const AUTH_PATHS = ["/login", "/register", "/profile/edit"];
 
 export default function Breadcrumbs() {
   const pathname = usePathname();

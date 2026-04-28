@@ -9,12 +9,13 @@ const Page = () => {
       <div className={clsx(css.container, css.containerForm)}>
         <OnbordingForm />
       </div>
-      <div className={clsx(css.container, css.containerImage)}>
+      <div className={clsx(css.container, css.containerImage)} style={{ position: 'relative' }}>
         <Image
           className={css.onbordingImage}
           alt="leleka"
-          width={720}
-          height={900}
+          fill={true}
+          sizes="50vw"
+          loading="eager"
           src="/icons/profile-img.jpg"
         />
       </div>
