@@ -1,5 +1,3 @@
-'use client';
-
 import GreetingBlock from '@/components/dashboard/GreetingBlock/GreetingBlock';
 import StatusBlock from '@/components/dashboard/StatusBlock/StatusBlock';
 import BabyTodayCard from '@/components/dashboard/BabyTodayCard/BabyTodayCard';
