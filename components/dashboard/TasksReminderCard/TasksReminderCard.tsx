@@ -1,35 +1,46 @@
-"use client";
-
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { useAuthStore } from "@/lib/store/authStore";
-import { useQueryClient } from "@tanstack/react-query";
-
+'use client';
+import css from './TasksReminderCard.module.css';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useAuthStore } from '@/lib/store/authStore';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import Modal from '@/components/modal/Modal/Modal';
+import AddTaskForm from '@/components/modal/modalForms/AddTaskForm/AddTaskForm';
+import { useTaskStore } from '@/lib/store/taskStore';
+import { getTasks } from '@/lib/api/clientApi';
+// import { getTasks } from '@/lib/api/serverApi';
 // import { getTasks, updateTaskStatus } from "@/lib/api/clientApi";
-
 // import Modal from "@/components/modal/Modal/Modal";
 // import AddTaskForm from "@/components/modal/modalForms/AddTaskForm/AddTaskForm";
-
-import css from "./TasksReminderCard.module.css";
 // import { useTaskStore } from "@/lib/store/taskStore";
 
-import Modal from "@/components/modal/Modal/Modal";
-import AddTaskForm from "@/components/modal/modalForms/AddTaskForm/AddTaskForm";
-
 const TasksReminderCard = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
-
   const queryClient = useQueryClient();
-  const { user, isAuthenticated } = useAuthStore();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { isAuthenticated } = useAuthStore();
+  const tasks = useTaskStore((s) => s.tasks);
 
-  console.log(user, isAuthenticated);
+  const setTasks = useTaskStore((s) => s.setTasks);
+
+  const { data } = useQuery({
+    queryKey: ['tasks'],
+    queryFn: getTasks,
+  });
+
+  useEffect(() => {
+    if (data) {
+      setTasks(data);
+    }
+  }, [data, setTasks]);
+
+  console.log('tasksStore', tasks);
 
   const handleCreate = () => {
     if (isAuthenticated) {
       setIsModalOpen(true);
     } else {
-      router.push("/auth/register");
+      router.push('/auth/register');
     }
   };
 
@@ -37,12 +48,18 @@ const TasksReminderCard = () => {
     <div>
       <section className={css.card}>
         <div className={css.cardHeader}>
-          <h2>Важливі завдання</h2>
-          <button className={css.addBtn} onClick={handleCreate}>
-            +
+          <h2 className={css.tasksHeading}>Важливі завдання</h2>
+          <button
+            className={css.addBtn}
+            onClick={handleCreate}
+            aria-label="Додати завдання"
+          >
+            <svg width="24" height="24" aria-hidden="true">
+              <use href="/icons/sprite.svg#icon-add" />
+            </svg>
           </button>
         </div>
-        {!isAuthenticated ? (
+        {!isAuthenticated || tasks.length === 0 ? (
           <>
             <div className={css.cardContent}>
               <p className={css.text}>Наразі немає жодних завдань</p>
@@ -53,14 +70,26 @@ const TasksReminderCard = () => {
             </button>
           </>
         ) : (
-          <ul className={css.list}></ul>
+          <ul className={css.list}>
+            {tasks.map((task) => (
+              <li key={task._id} className={css.item}>
+                <div className={css.taskDate}>
+                  {new Date(task.date).toLocaleDateString('uk-UA', {
+                    day: '2-digit',
+                    month: '2-digit',
+                  })}
+                </div>
+                <div className={css.taskName}>{task.name}</div>
+              </li>
+            ))}
+          </ul>
         )}
         {isModalOpen && (
           <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
             <AddTaskForm
               onSuccess={() => {
                 queryClient.invalidateQueries({
-                  queryKey: ["tasks"],
+                  queryKey: ['tasks'],
                 });
                 setIsModalOpen(false);
               }}
