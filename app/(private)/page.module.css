@@ -1,6 +1,6 @@
 .dashboard {
   width: 100%;
-  padding: 24px;
+  padding-top: 16px;
 }
 
 .grid {
@@ -13,6 +13,7 @@
 .rightColumn {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 24px;
 }
 
@@ -37,7 +38,7 @@
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 1440px) {
   .dashboard {
     padding: 16px;
   }
