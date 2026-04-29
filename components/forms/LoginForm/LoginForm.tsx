@@ -45,7 +45,7 @@ function LoginFormWatcher() {
 export default function LoginForm() {
   const router = useRouter();
   const authStore = useAuthStore();
-  const [initialValues, setInitialValues] = useState(() => {
+  const [initialValues] = useState(() => {
     try {
       const saved = sessionStorage.getItem(STORAGE_KEY);
       if (saved) {
