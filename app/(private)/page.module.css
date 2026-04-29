@@ -5,7 +5,7 @@
 
 .grid {
   display: grid;
-  grid-template-columns: 2fr 1.2fr;
+  grid-template-columns: 1fr;
   gap: 24px;
 }
 
@@ -19,7 +19,22 @@
 .statusGrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
+  gap: 16px;
+}
+
+@media (min-width: 1440px) {
+  .dashboard {
+    padding: 24px 40px;
+  }
+
+  .grid {
+    grid-template-columns: minmax(0, 2fr) minmax(320px, 1fr);
+    gap: 32px;
+  }
+
+  .statusGrid {
+    gap: 24px;
+  }
 }
 
 @media (max-width: 767px) {
@@ -27,11 +42,8 @@
     padding: 16px;
   }
 
-  .grid {
-    grid-template-columns: 1fr;
-  }
-
   .statusGrid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
   }
 }
