@@ -1,149 +1,210 @@
 "use client";
 
-// import { useState, useCallback, useMemo } from "react";
-// import { useRouter } from "next/navigation";
-// import { useAuthStore } from "@/lib/store/authStore";
-// import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useAuthStore } from "@/lib/store/authStore";
+import { useQueryClient } from "@tanstack/react-query";
 
 // import { getTasks, updateTaskStatus } from "@/lib/api/clientApi";
 
 // import Modal from "@/components/modal/Modal/Modal";
 // import AddTaskForm from "@/components/modal/modalForms/AddTaskForm/AddTaskForm";
 
-// import css from "./TasksReminderCard.module.css";
+import css from "./TasksReminderCard.module.css";
 // import { useTaskStore } from "@/lib/store/taskStore";
 
-export default function TasksReminderCard() {
-  // const setTask = useTaskStore((state) => state.setTask);
-  // const router = useRouter();
-  // const queryClient = useQueryClient();
+import Modal from "@/components/modal/Modal/Modal";
+import AddTaskForm from "@/components/modal/modalForms/AddTaskForm/AddTaskForm";
 
-  // const isAuthenticated = useAuthStore(
-  //   (s) => s.isAuthenticated,
-  // );
+const TasksReminderCard = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const router = useRouter();
 
-  // const [isModalOpen, setIsModalOpen] =
-  //   useState(false);
+  const queryClient = useQueryClient();
+  const { user, isAuthenticated } = useAuthStore();
 
-  // // 📦 TASKS
-  // const { data, isLoading } = useQuery({
-  //   queryKey: ["tasks"],
-  //   queryFn: async(=> ),
-  //   enabled: isAuthenticated,
-  // });
-  // console.log("DATA:", data);
-  // const tasks = useMemo(() => {
-  //   return Array.isArray(data) ? data : [];
-  // }, [data]);
+  console.log(user, isAuthenticated);
 
-  // const updateTaskMutation = useMutation({
-  //   mutationFn: ({
-  //     id,
-  //     isDone,
-  //   }: {
-  //     id: string;
-  //     isDone: boolean;
-  //   }) => updateTaskStatus(id, isDone),
+  const handleCreate = () => {
+    if (isAuthenticated) {
+      setIsModalOpen(true);
+    } else {
+      router.push("/auth/register");
+    }
+  };
 
-  //   onSuccess: () => {
-  //     queryClient.invalidateQueries({
-  //       queryKey: ["tasks"],
-  //     });
-  //   },
-  // });
+  return (
+    <div>
+      <section className={css.card}>
+        <div className={css.cardHeader}>
+          <h2>Важливі завдання</h2>
+          <button className={css.addBtn} onClick={handleCreate}>
+            +
+          </button>
+        </div>
+        {!isAuthenticated ? (
+          <>
+            <div className={css.cardContent}>
+              <p className={css.text}>Наразі немає жодних завдань</p>
+              <p className={css.text}>Створіть перше нове завдання!</p>
+            </div>
+            <button className={css.button} onClick={handleCreate}>
+              Створити завдання
+            </button>
+          </>
+        ) : (
+          <ul className={css.list}></ul>
+        )}
+        {isModalOpen && (
+          <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+            <AddTaskForm
+              onSuccess={() => {
+                queryClient.invalidateQueries({
+                  queryKey: ["tasks"],
+                });
+                setIsModalOpen(false);
+              }}
+            />
+          </Modal>
+        )}
+      </section>
+    </div>
+  );
+};
 
-  // const requireAuth = useCallback(() => {
-  //   if (!isAuthenticated) {
-  //     router.push("/register");
-  //     return false;
-  //   }
-  //   return true;
-  // }, [isAuthenticated, router]);
+export default TasksReminderCard;
 
-  // const handleCreate = useCallback(() => {
-  //   if (!requireAuth()) return;
-  //   setIsModalOpen(true);
-  // }, [requireAuth]);
+// export default function TasksReminderCard() {
+// const setTask = useTaskStore((state) => state.setTask);
+// const router = useRouter();
+// const queryClient = useQueryClient();
 
-  // const handleToggle = useCallback(
-  //   (id: string, isDone: boolean) => {
-  //     if (!requireAuth()) return;
+// const isAuthenticated = useAuthStore(
+//   (s) => s.isAuthenticated,
+// );
 
-  //     updateTaskMutation.mutate({ id, isDone });
-  //   },
-  //   [requireAuth, updateTaskMutation],
-  // );
+// const [isModalOpen, setIsModalOpen] =
+//   useState(false);
 
-  // if (isLoading) {
-  //   return (
-  //     <section className={css.card}>
-  //       <p className={css.text}>
-  //         Завантажуємо завдання…
-  //       </p>
-  //     </section>
-  //   );
-  // }
+// // 📦 TASKS
+// const { data, isLoading } = useQuery({
+//   queryKey: ["tasks"],
+//   queryFn: async(=> ),
+//   enabled: isAuthenticated,
+// });
+// console.log("DATA:", data);
+// const tasks = useMemo(() => {
+//   return Array.isArray(data) ? data : [];
+// }, [data]);
 
-  // const isEmpty = tasks.length === 0;
+// const updateTaskMutation = useMutation({
+//   mutationFn: ({
+//     id,
+//     isDone,
+//   }: {
+//     id: string;
+//     isDone: boolean;
+//   }) => updateTaskStatus(id, isDone),
 
-  // return (
-  //   <>
-  //     <section className={css.card}>
-  //       <div className={css.header}>
-  //         <h2 className={css.title}>Важливі завдання</h2>
+//   onSuccess: () => {
+//     queryClient.invalidateQueries({
+//       queryKey: ["tasks"],
+//     });
+//   },
+// });
 
-  //         <button className={css.addBtn} onClick={handleCreate}>
-  //           +
-  //         </button>
-  //       </div>
+// const requireAuth = useCallback(() => {
+//   if (!isAuthenticated) {
+//     router.push("/register");
+//     return false;
+//   }
+//   return true;
+// }, [isAuthenticated, router]);
 
-  //       {isEmpty ? (
-  //         <div>
-  //           <p className={css.emptyText}>Наразі немає жодних завдань</p>
+// const handleCreate = useCallback(() => {
+//   if (!requireAuth()) return;
+//   setIsModalOpen(true);
+// }, [requireAuth]);
 
-  //           <p className={css.text}>Створіть перше нове завдання!</p>
+// const handleToggle = useCallback(
+//   (id: string, isDone: boolean) => {
+//     if (!requireAuth()) return;
 
-  //           <button className={css.button} onClick={handleCreate}>
-  //             Створити завдання
-  //           </button>
-  //         </div>
-  //       ) : (
-  //         <ul className={css.list}>
-  //           {tasks.map((task) => (
-  //             <li key={task._id} className={css.item}>
-  //               <label className={css.label}>
-  //                 <input
-  //                   type="checkbox"
-  //                   className={css.checkbox}
-  //                   checked={task.isDone}
-  //                   onChange={() => handleToggle(task._id, !task.isDone)}
-  //                 />
+//     updateTaskMutation.mutate({ id, isDone });
+//   },
+//   [requireAuth, updateTaskMutation],
+// );
 
-  //                 <span className={task.isDone ? css.completed : css.textItem}>
-  //                   {task.name}
-  //                 </span>
-  //               </label>
+// if (isLoading) {
+//   return (
+//     <section className={css.card}>
+//       <p className={css.text}>
+//         Завантажуємо завдання…
+//       </p>
+//     </section>
+//   );
+// }
 
-  //               <span className={css.date}>
-  //                 {new Date(task.date).toLocaleDateString("uk-UA")}
-  //               </span>
-  //             </li>
-  //           ))}
-  //         </ul>
-  //       )}
-  //     </section>
+// const isEmpty = tasks.length === 0;
 
-  //     <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-  //       <AddTaskForm
-  //         onSuccess={() => {
-  //           queryClient.invalidateQueries({
-  //             queryKey: ["tasks"],
-  //           });
-  //           setIsModalOpen(false);
-  //         }}
-  //       />
-  //     </Modal>
-  //   </>
-  // );
-  return <p>KATERYNA</p>;
-}
+// return (
+//   <>
+//     <section className={css.card}>
+//       <div className={css.header}>
+//         <h2 className={css.title}>Важливі завдання</h2>
+
+//         <button className={css.addBtn} onClick={handleCreate}>
+//           +
+//         </button>
+//       </div>
+
+//       {isEmpty ? (
+//         <div>
+//           <p className={css.emptyText}>Наразі немає жодних завдань</p>
+
+//           <p className={css.text}>Створіть перше нове завдання!</p>
+
+//           <button className={css.button} onClick={handleCreate}>
+//             Створити завдання
+//           </button>
+//         </div>
+//       ) : (
+//         <ul className={css.list}>
+//           {tasks.map((task) => (
+//             <li key={task._id} className={css.item}>
+//               <label className={css.label}>
+//                 <input
+//                   type="checkbox"
+//                   className={css.checkbox}
+//                   checked={task.isDone}
+//                   onChange={() => handleToggle(task._id, !task.isDone)}
+//                 />
+
+//                 <span className={task.isDone ? css.completed : css.textItem}>
+//                   {task.name}
+//                 </span>
+//               </label>
+
+//               <span className={css.date}>
+//                 {new Date(task.date).toLocaleDateString("uk-UA")}
+//               </span>
+//             </li>
+//           ))}
+//         </ul>
+//       )}
+//     </section>
+
+//     <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+//       <AddTaskForm
+//         onSuccess={() => {
+//           queryClient.invalidateQueries({
+//             queryKey: ["tasks"],
+//           });
+//           setIsModalOpen(false);
+//         }}
+//       />
+//     </Modal>
+//   </>
+// );
+//   return <p>afdsfa</p>;
+// }
