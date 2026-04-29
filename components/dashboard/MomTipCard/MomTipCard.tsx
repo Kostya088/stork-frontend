@@ -32,7 +32,6 @@ export default function MomTipCard() {
   if (!isAuthenticated) {
     return (
       <section className={css.card}>
-        <div className={css.icon}>💡</div>
 
         <h2 className={css.title}>
           Порада для мами
@@ -48,7 +47,6 @@ export default function MomTipCard() {
 
   return (
     <section className={css.card}>
-      <div className={css.icon}>💡</div>
 
       <h2 className={css.title}>
         Порада для мами

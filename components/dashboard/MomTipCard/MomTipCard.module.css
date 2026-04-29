@@ -1,13 +1,13 @@
 .card {
   padding: 24px;
   border-radius: 24px;
-  background-color: #fff1f5;
+  background-color: var(--color-scheme-foreground);
 }
 
 .title {
-  margin-bottom: 12px;
-  font-size: 18px;
-  font-weight: 600;
+  margin-bottom: 4px;
+  font-size: 20px;
+  font-weight: 700;
 }
 
 .content {
@@ -16,13 +16,19 @@
   align-items: flex-start;
 }
 
-.icon {
-  font-size: 20px;
-  flex-shrink: 0;
-}
 
 .text {
   font-size: 14px;
-  line-height: 1.4;
-  color: #5d5261;
+  line-height: 160%;
+  color: var(--color-scheme-text);
+}
+@media (min-width: 1440px) {
+  .title {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 140%;
+}
+.text {
+  font-size: 16px;
+}
 }
