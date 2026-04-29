@@ -8,11 +8,6 @@ import Modal from '@/components/modal/Modal/Modal';
 import AddTaskForm from '@/components/modal/modalForms/AddTaskForm/AddTaskForm';
 import { useTaskStore } from '@/lib/store/taskStore';
 import { getTasks, updateTaskStatus } from '@/lib/api/clientApi';
-// import { getTasks } from '@/lib/api/serverApi';
-// import { getTasks, updateTaskStatus } from "@/lib/api/clientApi";
-// import Modal from "@/components/modal/Modal/Modal";
-// import AddTaskForm from "@/components/modal/modalForms/AddTaskForm/AddTaskForm";
-// import { useTaskStore } from "@/lib/store/taskStore";
 
 const TasksReminderCard = () => {
   const router = useRouter();
@@ -71,22 +66,27 @@ const TasksReminderCard = () => {
           <ul className={css.list}>
             {tasks.map((task) => (
               <li key={task._id} className={css.item}>
-                <input
-                  type="checkbox"
-                  className={css.checkbox}
-                  checked={task.isDone}
-                  onChange={async () => {
-                    await updateTaskStatus(task._id, !task.isDone);
-                    queryClient.invalidateQueries({ queryKey: ['tasks'] });
-                  }}
-                />
                 <div className={css.taskDate}>
-                  {new Date(task.date).toLocaleDateString('uk-UA', {
-                    day: '2-digit',
-                    month: '2-digit',
-                  })}
+                  <p>
+                    {new Date(task.date).toLocaleDateString('uk-UA', {
+                      day: '2-digit',
+                      month: '2-digit',
+                    })}
+                  </p>
                 </div>
-                <div className={css.taskName}>{task.name}</div>
+                <div className={css.itemLeft}>
+                  <input
+                    type="checkbox"
+                    className={css.checkbox}
+                    checked={task.isDone}
+                    onChange={async () => {
+                      await updateTaskStatus(task._id, !task.isDone);
+                      queryClient.invalidateQueries({ queryKey: ['tasks'] });
+                    }}
+                  />
+                  <p className={css.taskName}>{task.name}</p>
+                </div>
+                {/* <div className={css.taskName}>{task.name}</div> */}
               </li>
             ))}
           </ul>
