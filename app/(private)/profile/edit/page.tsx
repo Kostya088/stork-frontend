@@ -2,17 +2,21 @@ import OnbordingForm from "@/components/forms/OnboardingForm/OnboardingForm";
 import css from "./EditPage.module.css";
 import clsx from "clsx";
 import Image from "next/image";
+import Link from "next/link";
 
 const Page = () => {
   return (
-    <div className={css["page"]}>
-      <div className={clsx(css.container, css.containerForm)}>
+    <div className={css.page}>
+      <Link href="/" className={css.logoLink}>
+        <svg className={css.logoIcon} width="95" height="29">
+          <use href="/icons/sprite.svg#icon-leleka-logo" />
+        </svg>
+      </Link>
+
+      <div className={css.container}>
         <OnbordingForm />
       </div>
-      <div
-        className={clsx(css.container, css.containerImage)}
-        style={{ position: "relative" }}
-      >
+      <div className={css.containerImage}>
         <Image
           className={css.onbordingImage}
           alt="leleka"
