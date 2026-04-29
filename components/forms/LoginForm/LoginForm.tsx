@@ -1,19 +1,17 @@
-"use client";
+'use client';
 
-import { useRouter } from "next/navigation";
-import { useAuthStore } from "@/lib/store/authStore";
-import { login } from "@/lib/api/clientApi";
-import styles from "./LoginForm.module.css";
-import { Formik, Form, Field, ErrorMessage, FormikHelpers } from "formik";
-import * as Yup from "yup";
-import toast from "react-hot-toast";
-import Link from "next/link";
-import clsx from "clsx";
+import { useRouter } from 'next/navigation';
+import { useAuthStore } from '@/lib/store/authStore';
+import { login } from '@/lib/api/clientApi';
+import styles from './LoginForm.module.css';
+import { Formik, Form, Field, ErrorMessage, FormikHelpers } from 'formik';
+import * as Yup from 'yup';
+import toast from 'react-hot-toast';
+import Link from 'next/link';
+import clsx from 'clsx';
 
 const schema = Yup.object({
-  email: Yup.string()
-    .email("Невірний email")
-    .required("Email обов'язковий"),
+  email: Yup.string().email('Невірний email').required("Email обов'язковий"),
   password: Yup.string().required("Пароль обов'язковий"),
 });
 
@@ -23,18 +21,18 @@ export default function LoginForm() {
 
   const handleSubmit = async (
     values: { email: string; password: string },
-    { setSubmitting }: FormikHelpers<{ email: string; password: string }>
+    { setSubmitting }: FormikHelpers<{ email: string; password: string }>,
   ) => {
     try {
       const user = await login(values);
 
       authStore.setUser(user);
 
-      toast.success("Успішний вхід");
+      toast.success('Успішний вхід');
 
-      router.push("/");
+      router.push('/');
     } catch {
-      toast.error("Невірний email або пароль");
+      toast.error('Невірний email або пароль');
     } finally {
       setSubmitting(false);
     }
@@ -45,7 +43,7 @@ export default function LoginForm() {
       <h2 className={styles.title}>Вхід</h2>
 
       <Formik
-        initialValues={{ email: "", password: "" }}
+        initialValues={{ email: '', password: '' }}
         validationSchema={schema}
         onSubmit={handleSubmit}
       >
@@ -59,7 +57,7 @@ export default function LoginForm() {
                 placeholder="Пошта"
                 className={clsx(
                   styles.input,
-                  errors.email && touched.email && styles.inputError
+                  errors.email && touched.email && styles.inputError,
                 )}
               />
               <ErrorMessage
@@ -77,7 +75,7 @@ export default function LoginForm() {
                 placeholder="Пароль"
                 className={clsx(
                   styles.input,
-                  errors.password && touched.password && styles.inputError
+                  errors.password && touched.password && styles.inputError,
                 )}
               />
               <ErrorMessage
@@ -93,12 +91,12 @@ export default function LoginForm() {
               disabled={isSubmitting}
               className={styles.button}
             >
-              {isSubmitting ? "Вхід..." : "Увійти"}
+              {isSubmitting ? 'Вхід...' : 'Увійти'}
             </button>
 
             {/* LINK */}
             <p className={styles.linkText}>
-              Немає акаунту?{" "}
+              Немає акаунту?{' '}
               <Link href="/register" className={styles.registerLink}>
                 Зареєструватись
               </Link>
@@ -108,11 +106,7 @@ export default function LoginForm() {
       </Formik>
     </div>
   );
-} 
-
-
-
-
+}
 
 // "use client";
 
