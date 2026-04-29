@@ -1,8 +1,7 @@
-import OnbordingForm from "@/components/forms/OnboardingForm/OnboardingForm";
-import css from "./EditPage.module.css";
-import clsx from "clsx";
-import Image from "next/image";
-import Link from "next/link";
+import OnbordingForm from '@/components/forms/OnboardingForm/OnboardingForm';
+import css from './EditPage.module.css';
+import Image from 'next/image';
+import Link from 'next/link';
 
 const Page = () => {
   return (

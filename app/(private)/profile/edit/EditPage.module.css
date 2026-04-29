@@ -5,6 +5,7 @@
   overflow: hidden;
   align-items: center;
   justify-content: center;
+  box-sizing: border-box;
 }
 
 .logoLink {
@@ -24,6 +25,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-top: 80px;
+  box-sizing: border-box;
 }
 
 .containerImage {
