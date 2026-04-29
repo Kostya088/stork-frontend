@@ -1,3 +1,5 @@
+import TasksReminderCard from '@/components/dashboard/TasksReminderCard/TasksReminderCard';
+
 export default function JourneyPage() {
-  return <p>JourneyPage</p>;
+  return <TasksReminderCard />;
 }

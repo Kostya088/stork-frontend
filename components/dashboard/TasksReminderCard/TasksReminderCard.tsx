@@ -7,7 +7,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import Modal from '@/components/modal/Modal/Modal';
 import AddTaskForm from '@/components/modal/modalForms/AddTaskForm/AddTaskForm';
 import { useTaskStore } from '@/lib/store/taskStore';
-import { getTasks } from '@/lib/api/clientApi';
+import { getTasks, updateTaskStatus } from '@/lib/api/clientApi';
 // import { getTasks } from '@/lib/api/serverApi';
 // import { getTasks, updateTaskStatus } from "@/lib/api/clientApi";
 // import Modal from "@/components/modal/Modal/Modal";
@@ -33,8 +33,6 @@ const TasksReminderCard = () => {
       setTasks(data);
     }
   }, [data, setTasks]);
-
-  console.log('tasksStore', tasks);
 
   const handleCreate = () => {
     if (isAuthenticated) {
@@ -73,6 +71,15 @@ const TasksReminderCard = () => {
           <ul className={css.list}>
             {tasks.map((task) => (
               <li key={task._id} className={css.item}>
+                <input
+                  type="checkbox"
+                  className={css.checkbox}
+                  checked={task.isDone}
+                  onChange={async () => {
+                    await updateTaskStatus(task._id, !task.isDone);
+                    queryClient.invalidateQueries({ queryKey: ['tasks'] });
+                  }}
+                />
                 <div className={css.taskDate}>
                   {new Date(task.date).toLocaleDateString('uk-UA', {
                     day: '2-digit',

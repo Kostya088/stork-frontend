@@ -23,7 +23,7 @@ export async function updateTaskStatus(
   id: string,
   isDone: boolean,
 ): Promise<Task> {
-  const { data } = await nextClient.patch<Task>(`/tasks/${id}/status`, {
+  const { data } = await nextClient.patch<Task>(`/tasks/${id}`, {
     isDone,
   });
   return data;
