@@ -4,7 +4,14 @@ import { useRouter } from 'next/navigation';
 import { useAuthStore } from '@/lib/store/authStore';
 import { login } from '@/lib/api/clientApi';
 import styles from './LoginForm.module.css';
-import { Formik, Form, Field, ErrorMessage, FormikHelpers, useFormikContext } from 'formik';
+import {
+  Formik,
+  Form,
+  Field,
+  ErrorMessage,
+  FormikHelpers,
+  useFormikContext,
+} from 'formik';
 import * as Yup from 'yup';
 import toast from 'react-hot-toast';
 import Link from 'next/link';
@@ -23,7 +30,10 @@ function LoginFormWatcher() {
 
   useEffect(() => {
     try {
-      sessionStorage.setItem(STORAGE_KEY, JSON.stringify({ email: values.email }));
+      sessionStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify({ email: values.email }),
+      );
     } catch {
       // ignore storage errors
     }
