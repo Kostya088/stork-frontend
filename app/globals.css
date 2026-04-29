@@ -41,7 +41,7 @@
 --color-red: #c60000;
 
 /* Gray */
---color-gray-50: rgba(242, 242, 242, 1);
+--color-gray-50: rgba(242, 242, 242, 1); 
 --color-gray-100: rgba(231, 231, 229, 1);
 --color-gray-150: rgba(217, 217, 217, 1);
 --color-gray-200: rgba(191, 191, 191, 1);
