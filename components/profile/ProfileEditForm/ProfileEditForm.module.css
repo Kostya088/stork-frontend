@@ -1,8 +1,10 @@
 /* for mobile 320px-767px*/
 .mainWrapper {
+  width: 100%;
   max-width: 375px;
   padding: 0 20px;
   margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .formWrapper {
@@ -14,7 +16,7 @@
   flex-direction: column;
   gap: 24px;
   justify-content: center;
-  align-content: center;
+  align-items: stretch;
 }
 
 .inputWrapper {
@@ -126,6 +128,11 @@
 .genderSelect :global(.gender__option--is-actived) {
   background: #e6e6e6;
   outline: none;
+  color: #000;
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.5;
 }
 
 .inputDate {
@@ -184,11 +191,11 @@
 
 .buttonWrapper {
   width: 100%;
-  height: 62px;
   display: flex;
-  gap: 16px;
+  flex-wrap: wrap;
+  gap: 12px;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: stretch;
 }
 
 .buttonCancel {
@@ -197,7 +204,9 @@
   border-radius: 100px;
   background: rgba(0, 0, 0, 0.05);
   padding: 8px 20px;
-  width: 159px;
+  width: 100%;
+  min-width: 0;
+  flex: 1 1 100%;
 
   font-family: 'Lato', sans-serif;
   font-weight: 500;
@@ -226,7 +235,9 @@
   border-bottom: 4px solid #ffcbd3;
   border-radius: 100px;
   padding: 8px 20px;
-  width: 159px;
+  width: 100%;
+  min-width: 0;
+  flex: 1 1 100%;
   background: #ffdae0;
 
   font-family: 'Lato', sans-serif;
@@ -265,15 +276,19 @@
   }
 
   .buttonWrapper {
+    flex-wrap: nowrap;
     justify-content: flex-end;
+    align-items: flex-end;
   }
 
   .buttonCancel {
     width: 150px;
+    flex: 0 0 auto;
   }
 
   .buttonSave {
     width: 135px;
+    flex: 0 0 auto;
   }
 }
 

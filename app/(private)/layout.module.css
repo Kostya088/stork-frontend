@@ -13,7 +13,7 @@
 @media (min-width: 1440px) {
   .layout {
     display: grid;
-    grid-template-columns: 320px 1fr;
+    grid-template-columns: 312px 1fr;
   }
 
   .sidebarDesktop {
@@ -27,5 +27,9 @@
 
   .noSidebar {
     grid-template-columns: 1fr;
+  }
+
+  .noSidebar .main {
+    padding: 0;
   }
 }

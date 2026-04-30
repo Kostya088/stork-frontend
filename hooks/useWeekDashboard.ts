@@ -2,7 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { getWeeksMe } from "@/lib/api/clientApi";
-import type { WeekDashboardInfo } from "@/lib/api/clientApi";
+import type { WeekDashboardInfo } from "@/types/weekInfo";
 
 export function useWeekDashboard() {
   return useQuery<WeekDashboardInfo>({
