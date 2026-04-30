@@ -29,11 +29,8 @@ export default function JourneyDetails({ weekNumber }: Props) {
     enabled: tab === "mom",
   });
 
-  const iconMap: Record<string, string> = {
-    Харчування: "food",
-    Активність: "activity",
-    Відпочинок: "rest",
-  };
+  const TIP_ICONS = ["food", "activity", "rest"] as const;
+
 
   return (
     <section className={css.section}>
@@ -151,16 +148,15 @@ export default function JourneyDetails({ weekNumber }: Props) {
                 <div className={clsx(css.momCard, css.momCardTips)}>
                   <h3 className={css.cardTitle}>Поради для вашого комфорту</h3>
                   <ul className={css.tipsList}>
-                    {momQuery.data.comfortTips.map((t) => (
+                    {momQuery.data.comfortTips.map((t, i) => (
                       <li key={t.category} className={css.tipItem}>
                         <div className={css.tipIconWrapper}>
                           <svg className={css.tipIcon} aria-hidden="true">
                             <use
-                              href={`/icons/sprite.svg#${iconMap[t.category] || "rest"}`}
+                              href={`/icons/sprite.svg#${TIP_ICONS[i] ?? "rest"}`}
                             />
                           </svg>
                         </div>
-
                         <div className={css.tipContent}>
                           <p className={css.tipCategory}>{t.category}</p>
                           <p className={css.tipText}>{t.tip}</p>
