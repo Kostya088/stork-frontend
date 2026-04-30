@@ -15,9 +15,7 @@ export default function Login() {
               <use href="/icons/sprite.svg#icon-leleka-logo" />
             </svg>
           </Link>
-          <div className={styles.formWrapper}>
-            <LoginForm />
-          </div>
+          <LoginForm />
         </div>
         <div className={styles.right}>
           <Image
