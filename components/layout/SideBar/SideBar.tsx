@@ -127,7 +127,7 @@ export function MobileSidebarOverlay() {
         onClick={(e) => e.stopPropagation()}
       >
         <div className={css.mobileHeader}>
-          <Link href="/" className={css.logoLink}>
+          <Link href="/" className={css.logoLink} onClick={handleClose}>
             <svg className={css.logoIcon} width="95" height="29">
               <use href="/icons/sprite.svg#icon-leleka-logo" />
             </svg>
