@@ -16,9 +16,13 @@ function getLabel(segment: string): string {
   return SEGMENT_LABELS[segment] ?? segment;
 }
 
+const AUTH_PATHS = ["/login", "/register", "/profile/edit"];
+
 export default function Breadcrumbs() {
   const pathname = usePathname();
   const segments = pathname.split("/").filter(Boolean);
+
+  if (AUTH_PATHS.includes(pathname)) return null;
 
   const pageCrumbs = segments.map((segment, index) => {
     const href = "/" + segments.slice(0, index + 1).join("/");
