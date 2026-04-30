@@ -1,52 +1,34 @@
-/*  MOBILE FIRST */
-
 .container {
   display: flex;
   flex-direction: column;
-  align-items: center;
   width: 100%;
   justify-content: center;
-
   min-height: 100dvh;
 }
 
-.logoLink {
-  display: block;
-  margin-bottom: 32px;
-  color: inherit;
-  text-decoration: none;
-}
-
-.logoIcon {
-  display: block;
-}
-
-.page {
-  display: flex;
-  flex-direction: column;
-}
-
-/* форма */
-.left {
-  width: 100%;
-}
-
-/* картинка */
-.right {
-  display: none;
-}
-
-/*  Заголовок */
 .title {
-  font-family: comfortaa, sans-serif;
+  font-family: var(--font-comfortaa);
   font-weight: 700;
   font-size: 36px;
   line-height: 120%;
   letter-spacing: 0.01em;
   text-align: center;
-
-  color: var(--color-scheme-text);
   margin-bottom: 32px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 335px;
+  gap: 24px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 8px;
 }
 
 .label {
@@ -54,36 +36,21 @@
   margin-bottom: 8px;
 }
 
-/*  Форма */
-.form {
-  width: 100%;
-  max-width: 335px;
-
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-/*  input */
 .input {
+  font-family: var(--font-lato);
+  font-size: 16px;
   width: 100%;
   height: 37px;
-  box-sizing: border-box;
-
-  padding: 8px 12px;
-
   background-color: rgba(0, 0, 0, 0.05);
-  border: 1px solid #ccc;
+  border: none;
   border-radius: 12px;
-
-  font-size: 16px;
+  padding: 8px 12px;
+  box-sizing: border-box;
+  outline: none;
 }
 
 .input::placeholder {
   font-size: 16px;
-}
-.inputError {
-  border: 1px solid red;
 }
 
 .input:active,
@@ -92,38 +59,31 @@
   border-color: #ffcbd3;
 }
 
-/*  error */
+.inputError {
+  border: 1px solid #c60000;
+}
+
 .error {
-  font-size: 16px;
-  color: red;
-  line-height: 160%;
-  font-weight: 400;
+  color: #c60000;
   font-size: 16px;
 }
 
-/*  кнопка */
 .button {
   all: unset;
-
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-
   width: 100%;
-  height: 41px;
-
-  padding: 10px 24px;
-
+  height: 46px;
   border-radius: 100px;
-  border-bottom: 4px solid #ffcbd3;
-
   background: #ffdae0;
-
+  box-shadow: 0 5px #ffcbd3;
   box-sizing: border-box;
   cursor: pointer;
-
+  font-family: var(--font-lato);
+  font-weight: 500;
   font-size: 16px;
+  margin-bottom: 24px;
 }
 
 .button:hover,
@@ -137,24 +97,14 @@
   box-shadow: none;
 }
 
-/*  текст з посиланням */
 .linkText {
-  width: 100%;
-  max-width: 335px;
-
-  margin-top: 24px;
-
   font-size: 16px;
   text-align: center;
-  line-height: 150%;
 }
-
-/*  посилання */
 
 .registerLink {
   text-decoration: none;
   color: black;
-  font-weight: 400;
 }
 
 .registerLink:hover,
@@ -167,7 +117,7 @@
   border-bottom: 1px solid #ffcbd3;
 }
 
-@media (min-width: 768px) {
+@media screen and (min-width: 768px) {
   .container {
     justify-content: center;
     align-items: center;
@@ -186,18 +136,14 @@
   .button {
     height: 46px;
   }
-
-  .linkText {
-    max-width: 480px;
-  }
 }
 
-@media (min-width: 1440px) {
+@media screen and (min-width: 1440px) {
   .title {
     font-size: 48px;
   }
 
-  :global(.container) {
-    padding: 0;
+  .input {
+    height: 40px;
   }
 }
