@@ -349,8 +349,34 @@ select {
   font: inherit;
 }
 
-/* Курсор pointer для всіх кнопок */
+/* Курсор pointer та базові стилі для всіх кнопок */
 button {
   cursor: pointer;
   color: var(--color-scheme-text);
+  transition: filter 0.2s ease, transform 0.1s ease, opacity 0.2s ease;
+}
+
+/* Глобальний ховер: легке затемнення (яскравість 95%) */
+button:hover {
+  filter: brightness(0.95);
+}
+
+/* Глобальний фокус (замість стандартного синього outline) */
+button:focus-visible {
+  outline: 2px solid var(--color-scheme-accent);
+  outline-offset: 2px;
+}
+
+/* Глобальний клік (active): кнопка трохи просідає */
+button:active {
+  transform: scale(0.98);
+  filter: brightness(0.9);
+}
+
+/* Вимкнені кнопки: менш яскраві, без курсора-пальця і ефектів */
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  filter: none;
 }
