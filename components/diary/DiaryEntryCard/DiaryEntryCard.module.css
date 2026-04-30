@@ -1,10 +1,10 @@
 .card {
   display: block;
   width: 100%;
-  padding: 14px 16px;
+  padding: 16px;
   border: 1px solid transparent;
-  border-radius: 18px;
-  background: #ffd2dd;
+  border-radius: 16px;
+  background: var(--color-scheme-foreground-alt);
   text-align: left;
   cursor: pointer;
   transition:
@@ -16,7 +16,7 @@
 .card:hover,
 .card:focus-visible,
 .active {
-  border-color: #ff9eb9;
+  border-color: var(--color-scheme-border);
   box-shadow: 0 8px 20px rgba(255, 158, 185, 0.24);
   outline: none;
   transform: translateY(-1px);
@@ -27,31 +27,30 @@
   align-items: flex-start;
   justify-content: space-between;
   gap: 12px;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .title {
   min-width: 0;
   margin: 0;
   overflow-wrap: anywhere;
-  color: #241a1d;
+  font-weight: 600;
   font-size: 16px;
-  font-weight: 700;
-  line-height: 1.25;
+  line-height: 1.6;
 }
 
 .date {
   flex-shrink: 0;
-  color: #5f5356;
+  font-weight: 400;
   font-size: 12px;
-  line-height: 1.3;
+  line-height: 1.6;
   white-space: nowrap;
 }
 
 .emotions {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 8px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -59,13 +58,28 @@
 
 .emotion {
   max-width: 100%;
-  padding: 4px 10px;
+  padding: 2px 12px;
   overflow: hidden;
-  border-radius: 999px;
-  background: #ffffff;
-  color: #241a1d;
-  font-size: 12px;
-  line-height: 1.2;
+  border: 1px solid transparent;
+  border-radius: 100px;
+  background: var(--color-scheme-foreground);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.5;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+@media screen and (min-width: 1440px) {
+  .title {
+    font-size: 18px;
+  }
+
+  .date {
+    font-size: 14px;
+  }
+
+  .emotion {
+    font-size: 16px;
+  }
 }

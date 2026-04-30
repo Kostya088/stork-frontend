@@ -218,13 +218,13 @@ export default function DiaryPage({
   };
 
   return (
-    <main className={`${styles.page} ${detailOnly ? styles.detailPage : ""}`}>
+    <div className={`${styles.page} ${detailOnly ? styles.detailPage : ""}`}>
       <div className={styles.inner}>
         <GreetingBlock />
 
         {error && <p className={styles.error}>{error}</p>}
 
-        <section className={styles.content}>
+        <div className={styles.content}>
           {!detailOnly && (
             <DiaryList
               entries={entries}
@@ -256,7 +256,7 @@ export default function DiaryPage({
               />
             </div>
           )}
-        </section>
+        </div>
       </div>
 
       <Modal isOpen={isEntryModalOpen} onClose={closeEntryModal}>
@@ -277,6 +277,6 @@ export default function DiaryPage({
           onCancel={closeDeleteModal}
         />
       </Modal>
-    </main>
+    </div>
   );
 }

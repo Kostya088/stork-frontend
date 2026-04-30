@@ -1,8 +1,8 @@
 .wrapper {
   width: 100%;
   padding: 24px 16px;
-  border-radius: 24px;
-  background: #fff4f6;
+  border-radius: 32px;
+  background: var(--color-pastel-pink-lighter);
 }
 
 .header {
@@ -15,7 +15,7 @@
 
 .title {
   margin: 0;
-  font-family: var(--font-comfortaa), sans-serif;
+  font-family: var(--font-brand), sans-serif;
   font-weight: 700;
   font-size: 18px;
   line-height: 1.4;
@@ -30,11 +30,10 @@
   padding: 0;
   border: none;
   background: transparent;
-  color: #000000;
   font: inherit;
   font-size: 14px;
   font-weight: 500;
-  line-height: 1.4;
+  line-height: 1.6;
   cursor: pointer;
 }
 
@@ -48,7 +47,7 @@
 .list {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -59,23 +58,21 @@
   margin: 0;
   padding: 24px 12px;
   border-radius: 18px;
-  background: #ffffff;
-  color: #6f6065;
+  background: var(--primary-background-color);
   font-size: 14px;
   text-align: center;
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1440px) {
   .wrapper {
     display: flex;
     flex-direction: column;
     height: 680px;
-    padding: 18px;
     overflow: hidden;
   }
 
   .title {
-    font-size: 28px;
+    font-size: 20px;
   }
 
   .createButton {
@@ -95,6 +92,11 @@
 
   .list::-webkit-scrollbar-thumb {
     border-radius: 999px;
-    background: #ffc7d6;
+    background: var(--color-scheme-foreground-alt);
+  }
+
+  .status,
+  .empty {
+    font-size: 16px;
   }
 }

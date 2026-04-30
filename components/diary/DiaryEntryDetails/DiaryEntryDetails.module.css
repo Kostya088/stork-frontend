@@ -1,9 +1,8 @@
 .wrapper {
   width: 100%;
   padding: 24px;
-  border-radius: 24px;
-  background: #fff4f7;
-  color: #241a1d;
+  border-radius: 32px;
+  background: var(--color-scheme-foreground);
 }
 
 .meta {
@@ -11,8 +10,7 @@
   flex-wrap: wrap;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 24px;
+  margin-bottom: 8px;
 }
 
 .titleRow,
@@ -27,16 +25,17 @@
   min-width: 0;
   margin: 0;
   overflow-wrap: anywhere;
-  font-family: var(--font-comfortaa), var(--font-comfortaa-fallback), sans-serif;
-  font-size: 24px;
-  font-weight: 600;
-  line-height: 1.25;
+  font-family: var(--font-brand), sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.4;
+  letter-spacing: 0.01em;
 }
 
 .date {
-  color: #5f5356;
-  font-size: 16px;
-  line-height: 1.4;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.6;
   white-space: nowrap;
 }
 
@@ -45,12 +44,11 @@
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
-  width: 28px;
-  height: 28px;
+  width: 40px;
+  height: 40px;
   padding: 0;
   border: none;
   background-color: transparent;
-  color: #241a1d;
   cursor: pointer;
 }
 
@@ -60,23 +58,12 @@
   height: 21px;
 }
 
-.backButton {
-  margin-bottom: 16px;
-  padding: 0;
-  border: none;
-  background: transparent;
-  color: #241a1d;
-  font: inherit;
-  font-weight: 600;
-  cursor: pointer;
-}
-
 .text {
-  margin-bottom: 20px;
+  margin-bottom: 8px;
   overflow-wrap: anywhere;
-  color: #241a1d;
-  font-size: 16px;
-  line-height: 1.55;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.5;
   white-space: pre-wrap;
 }
 
@@ -91,12 +78,13 @@
 
 .emotion {
   max-width: 100%;
-  padding: 6px 12px;
+  padding: 4px 10px;
   overflow: hidden;
-  border-radius: 999px;
-  background: #ffffff;
-  font-size: 13px;
-  line-height: 1.2;
+  border-radius: 100px;
+  background: var(--opacity-neutral-darkest-5);
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 1.6;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -109,10 +97,9 @@
   text-align: center;
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1440px) {
   .wrapper {
     height: 680px;
-    padding: 32px;
     overflow-y: auto;
   }
 
@@ -123,5 +110,21 @@
   .wrapper::-webkit-scrollbar-thumb {
     border-radius: 999px;
     background: #ffc7d6;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .date {
+    font-size: 14px;
+  }
+
+  .text {
+    font-size: 16px;
+  }
+
+  .emotion {
+    font-size: 14px;
   }
 }

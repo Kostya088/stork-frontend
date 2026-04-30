@@ -14,41 +14,29 @@ interface DiaryEntryDetailsProps {
 export default function DiaryEntryDetails({
   entry,
   isLoading,
-  isStandalone = false,
-  onBack,
   onEdit,
   onDelete,
 }: DiaryEntryDetailsProps) {
   if (isLoading) {
     return (
-      <section className={styles.wrapper}>
+      <div className={styles.wrapper}>
         <p className={styles.placeholder}>Завантажуємо запис...</p>
-      </section>
+      </div>
     );
   }
 
   if (!entry) {
     return (
-      <section className={styles.wrapper}>
-        {isStandalone && onBack && (
-          <button className={styles.backButton} type="button" onClick={onBack}>
-            До записів
-          </button>
-        )}
+      <div className={styles.wrapper}>
         <p className={styles.placeholder}>
           Наразі записи у щоденнику відстні
         </p>
-      </section>
+      </div>
     );
   }
 
   return (
     <article className={styles.wrapper}>
-      {isStandalone && onBack && (
-        <button className={styles.backButton} type="button" onClick={onBack}>
-          До записів
-        </button>
-      )}
 
       <div className={styles.meta}>
         <div className={styles.titleRow}>
