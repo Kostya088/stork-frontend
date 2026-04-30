@@ -1,40 +1,42 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import css from "./Breadcrumbs.module.css";
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import css from './Breadcrumbs.module.css';
 
 const SEGMENT_LABELS: Record<string, string> = {
-  diary: "Щоденник",
-  journey: "Подорож",
-  profile: "Профіль",
-  edit: "Редагування",
-  new: "Новий запис",
+  diary: 'Щоденник',
+  journey: 'Подорож',
+  profile: 'Профіль',
+  edit: 'Редагування',
+  new: 'Новий запис',
 };
 
 function getLabel(segment: string): string {
   return SEGMENT_LABELS[segment] ?? segment;
 }
 
-const AUTH_PATHS = ["/login", "/register", "/profile/edit"];
+const AUTH_PATHS = ['/login', '/register', '/profile/edit'];
 
 export default function Breadcrumbs() {
   const pathname = usePathname();
-  const segments = pathname.split("/").filter(Boolean);
+  const segments = pathname.split('/').filter(Boolean);
 
   if (AUTH_PATHS.includes(pathname)) return null;
 
-  const pageCrumbs = segments.map((segment, index) => {
-    const href = "/" + segments.slice(0, index + 1).join("/");
+  const nonNumeric = segments.filter((segment) => isNaN(Number(segment)));
+  const pageCrumbs = nonNumeric.slice(0, 1).map((segment) => {
+    const href =
+      '/' + segments.slice(0, segments.indexOf(segment) + 1).join('/');
     const label = getLabel(segment);
-    const isLast = index === segments.length - 1;
+    const isLast = true;
     return { href, label, isLast };
   });
 
   const crumbs = [
-    { href: "/", label: "Лелека", isLast: false },
+    { href: '/', label: 'Лелека', isLast: false },
     ...(segments.length === 0
-      ? [{ href: "/", label: "Мій день", isLast: true }]
+      ? [{ href: '/', label: 'Мій день', isLast: true }]
       : pageCrumbs),
   ];
 
