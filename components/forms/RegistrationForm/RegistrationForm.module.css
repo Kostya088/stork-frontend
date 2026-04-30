@@ -42,7 +42,7 @@
   font-size: 16px;
   width: 100%;
   height: 37px;
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: var(--opacity-neutral-darkest-5);
   border: none;
   border-radius: 12px;
   padding: 8px 12px;
@@ -57,15 +57,15 @@
 .input:active,
 .input:focus {
   outline: none;
-  border-color: #ffcbd3;
+  border-color: var(--color-scheme-accent);
 }
 
 .invalid {
-  border: 1px solid #c60000;
+  border: 1px solid var(--color-red);
 }
 
 .errorMessage {
-  color: #c60000;
+  color: var(--color-red);
   bottom: 0;
   font-size: 16px;
 }
@@ -74,24 +74,24 @@
   font-family: var(--font-lato);
   font-weight: 500;
   font-size: 16px;
-  background-color: #ffdae0;
+  background-color: var(--color-scheme-foreground-alt);
   height: 46px;
   width: 100%;
   border-radius: 100px;
   outline: none;
   border: none;
   margin-bottom: 24px;
-  box-shadow: 0 5px #ffcbd3;
+  box-shadow: 0 5px var(--color-scheme-accent);
 }
 
 .subbtn:hover,
 .subbtn:focus {
-  background-color: #fff4f6;
-  box-shadow: 0 5px rgba(0, 0, 0, 0.15);
+  background-color: var(--color-btn-primary-bg-hover);
+  box-shadow: 0 5px var(--opacity-neutral-darkest-15);
 }
 
 .subbtn:active {
-  background-color: #ffcbd3;
+  background-color: var(--color-scheme-accent);
   box-shadow: none;
 }
 
@@ -102,17 +102,17 @@
 
 .registerLink {
   text-decoration: none;
-  color: black;
+  color: var(--color-neutral-darkest);
 }
 
 .registerLink:hover,
 .registerLink:focus {
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid var(--color-neutral-darkest);
 }
 
 .registerLink:active {
-  color: #ffcbd3;
-  border-bottom: 1px solid #ffcbd3;
+  color: var(--color-scheme-accent);
+  border-bottom: 1px solid var(--color-scheme-accent);
 }
 
 .paragraph {

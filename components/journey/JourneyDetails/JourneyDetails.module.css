@@ -3,7 +3,7 @@
     margin-top: 32px;
     display: flex;
     width: 100%;
-    background: var(--color-pastel-pink-lighter);
+    background: var(--color-scheme-foreground);
     border-radius: 100px;
     padding: 4px;
 
@@ -26,7 +26,7 @@
 
 
 .tabActive {
-    background: var(--color-pastel-pink-light);
+    background: var(--color-scheme-foreground-alt);
 }
 
 .status{
@@ -43,7 +43,7 @@
     margin-top: 16px;
     margin-bottom: 24px;
     padding: 24px;
-    background: var(--color-pastel-pink-lighter);
+    background: var(--color-scheme-foreground);
     border-radius: 32px;
 }
 
@@ -96,7 +96,7 @@ object-fit: cover;
     flex-direction: column;
     border-radius: 12px;
     padding: 12px;
-    background-color: var(--color-pastel-pink-light);
+    background-color: var(--color-scheme-foreground-alt);
 }
 
 .factWrapperCont{
@@ -156,12 +156,12 @@ margin-right: 8px;
 
 /* Картка «Як ви можете почуватись» — рожевий фон */
 .momCardFeelings {
-    background: var(--color-pastel-pink-lighter);
+    background: var(--color-scheme-foreground);
 }
 
 /* Картка «Поради для вашого комфорту» — світлий фон з рамкою */
 .momCardTips {
-    background: var(--color-pastel-pink-lighter);
+    background: var(--color-scheme-foreground);
     margin-top: 24px;
     margin-bottom: 24px;
 }

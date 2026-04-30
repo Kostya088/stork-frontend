@@ -1,5 +1,4 @@
 .page {
-<<<<<<< diary/lenuar
   min-height: 100vh;
   color: var(--color-neutral-darkest);
 }
@@ -11,11 +10,6 @@
   width: 100%;
   max-width: 1180px;
   margin: 0 auto;
-=======
-  padding: 24px 16px;
-  background: #ffffff;
-  color: #241a1d;
->>>>>>> dev
 }
 
 .content {

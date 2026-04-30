@@ -60,7 +60,7 @@
   /* Pastel Pink */
   --color-pastel-pink-lightest: #fff9fa;
   --color-pastel-pink-lighter: #fff4f6;
-  --color-pastel-pink-light: #ffdae0;
+  --color-pastel-pink-light: #fadde2;
   --color-pastel-pink: #ffcbd3;
   --color-pastel-pink-dark: #cca2a8;
   --color-pastel-pink-darker: #665154;
@@ -84,7 +84,7 @@
   --color-french-pass-lighter: #e5fafe;
   --color-french-pass-lightest: #fbfefe;
 
-  /* ================= SEMANTIC COLORS ================= */
+  /* ================= LIGHT THEME (DEFAULT) ================= */
 
   --primary-text-color: var(--color-black);
   --secondary-text-color: var(--color-gray-700);
@@ -93,49 +93,45 @@
   --error-text-color: var(--color-red);
 
   --color-bg-primary: var(--color-white);
-  --color-bg-accent-soft: var(--color-pink-50);
-  --color-bg-accent: var(--color-pink-100);
+  --color-bg-accent-soft: var(--color-oasis-lighter);
+  --color-bg-accent: var(--color-oasis-light);
 
   --color-bg-neutral-100: var(--color-gray-200);
   --color-bg-neutral-200: var(--color-gray-300);
   --color-bg-neutral-300: var(--color-gray-400);
 
-  /* ================= BUTTONS ================= */
-
-  /* Primary */
-  --color-btn-primary-bg: var(--color-pink-100);
+  /* Buttons Primary */
+  --color-btn-primary-bg: var(--color-oasis-light);
   --color-btn-primary-bg-hover: var(--color-white);
   --color-btn-primary-bg-active: var(--color-gray-250);
-  --color-btn-primary-bg-disabled: var(--color-pink-50);
+  --color-btn-primary-bg-disabled: var(--color-oasis-lightest);
 
-  --color-btn-primary: rgba(255, 218, 224, 1);
+  --color-btn-primary: rgba(254, 236, 204, 1);
   --color-btn-primary-hover: rgba(255, 255, 255, 1);
   --color-btn-primary-active: rgba(178, 178, 178, 1);
-  --color-btn-primary-disabled: rgba(255, 244, 246, 1);
+  --color-btn-primary-disabled: rgba(254, 253, 249, 1);
 
-  --color-btn-primary-shadow: var(--color-pink-200);
+  --color-btn-primary-shadow: var(--color-oasis-dark);
   --color-btn-primary-shadow-hover: var(--color-gray-150);
   --color-btn-primary-shadow-disabled: var(--color-white-100);
 
-  /* Secondary */
+  /* Buttons Secondary */
   --color-btn-secondary-bg: var(--color-gray-50);
-  --color-btn-secondary-bg-hover: var(--color-pink-50);
-  --color-btn-secondary-bg-active: var(--color-pink-200);
+  --color-btn-secondary-bg-hover: var(--color-oasis-lighter);
+  --color-btn-secondary-bg-active: var(--color-oasis-dark);
   --color-btn-secondary-bg-disabled: var(--color-white-50);
 
   --color-btn-secondary-shadow: var(--color-gray-150);
   --color-btn-secondary-shadow-hover: var(--color-gray-150);
   --color-btn-secondary-shadow-disabled: var(--color-white-100);
 
-  /* ================= COMPONENTS ================= */
-
   /* Weeks Card */
-  --color-weeks-bg: var(--color-pink-50);
-  --color-weeks-bg-active: var(--color-pink-200);
+  --color-weeks-bg: var(--color-oasis-lightest);
+  --color-weeks-bg-active: var(--color-oasis-dark);
   --color-weeks-bg-disable: var(--color-gray-100);
 
-  --color-weeks-border-hover: var(--color-pink-100);
-  --color-weeks-border-active: var(--color-pink-300);
+  --color-weeks-border-hover: var(--color-oasis-lighter);
+  --color-weeks-border-active: var(--color-oasis-darker);
 
   /* Checkbox */
   --color-checkbox-bg: var(--color-gray-50);
@@ -143,32 +139,16 @@
 
   /* Input */
   --color-input-bg: var(--color-gray-50);
-  --color-input-border-active: var(--color-pink-200);
+  --color-input-border-active: var(--color-oasis-dark);
 
   /* Links */
   --color-link: var(--color-black);
   --color-link-hover: var(--color-black);
-  --color-link-active: var(--color-pink-200);
+  --color-link-active: var(--color-oasis-dark);
   --color-link-disabled: var(--color-gray-250);
   --link-underline-color: currentColor;
 
-  /* ================= TYPOGRAPHY ================= */
-
-  --font-size-2xs: 10px;
-  --font-size-xs: 12px;
-  --font-size-sm: 14px;
-  --font-size-md: 16px;
-  --font-size-lg: 18px;
-  --font-size-xl: 20px;
-  --font-size-2xl: 24px;
-  --font-size-3xl: 32px;
-  --font-size-4xl: 36px;
-  --font-size-5xl: 40px;
-  --font-size-6xl: 48px;
-  --font-size-7xl: 56px;
-
-  /* ================= SCHEME TOKENS ================= */
-
+  /* Scheme Tokens */
   --color-scheme-background: var(--color-white);
   --color-neutral-darkest: #000;
   --color-scheme-border: var(--opacity-neutral-darkest-15);
@@ -180,9 +160,9 @@
   --color-neutral-dark: #4c4c4c;
   --color-neutral-darker: #191919;
 
-  --color-scheme-foreground: var(--color-pastel-pink-lighter);
-  --color-scheme-accent: var(--color-pastel-pink);
-  --color-scheme-foreground-alt: var(--color-pastel-pink-light);
+  --color-scheme-foreground: var(--color-oasis-lighter);
+  --color-scheme-accent: var(--color-oasis);
+  --color-scheme-foreground-alt: var(--color-oasis-light);
 
   /* ================= OPACITY ================= */
 
@@ -205,6 +185,110 @@
   --opacity-neutral-darkest-40: rgba(0, 0, 0, 0.4);
   --opacity-neutral-darkest-50: rgba(0, 0, 0, 0.5);
   --opacity-neutral-darkest-60: rgba(0, 0, 0, 0.6);
+}
+
+/* ================= PINK THEME ================= */
+
+[data-theme='pink'] {
+  /* Semantic Colors */
+  --color-bg-accent-soft: var(--color-pastel-pink-light);
+  --color-bg-accent: var(--color-pastel-pink);
+
+  /* Buttons Primary */
+  --color-btn-primary-bg: var(--color-pink-100);
+  --color-btn-primary-bg-hover: var(--color-white);
+  --color-btn-primary-bg-active: var(--color-gray-250);
+  --color-btn-primary-bg-disabled: var(--color-pink-50);
+
+  --color-btn-primary: rgba(255, 218, 224, 1);
+  --color-btn-primary-hover: rgba(255, 255, 255, 1);
+  --color-btn-primary-active: rgba(178, 178, 178, 1);
+  --color-btn-primary-disabled: rgba(255, 244, 246, 1);
+
+  --color-btn-primary-shadow: var(--color-pink-200);
+  --color-btn-primary-shadow-hover: var(--color-gray-150);
+  --color-btn-primary-shadow-disabled: var(--color-white-100);
+
+  /* Buttons Secondary */
+  --color-btn-secondary-bg: var(--color-gray-50);
+  --color-btn-secondary-bg-hover: var(--color-pastel-pink-light);
+  --color-btn-secondary-bg-active: var(--color-pink-200);
+  --color-btn-secondary-bg-disabled: var(--color-white-50);
+
+  --color-btn-secondary-shadow: var(--color-gray-150);
+  --color-btn-secondary-shadow-hover: var(--color-gray-150);
+  --color-btn-secondary-shadow-disabled: var(--color-white-100);
+
+  /* Weeks Card */
+  --color-weeks-bg: var(--color-pastel-pink-lighter);
+  --color-weeks-bg-active: var(--color-pink-200);
+  --color-weeks-bg-disable: var(--color-gray-100);
+
+  --color-weeks-border-hover: var(--color-pastel-pink-light);
+  --color-weeks-border-active: var(--color-pink-300);
+
+  /* Input */
+  --color-input-border-active: var(--color-pink-200);
+
+  /* Links */
+  --color-link-active: var(--color-pink-200);
+
+  /* Scheme Tokens */
+  --color-scheme-foreground: var(--color-pastel-pink-lighter);
+  --color-scheme-accent: var(--color-pastel-pink);
+  --color-scheme-foreground-alt: var(--color-pastel-pink-light);
+}
+
+/* ================= BLUE THEME ================= */
+
+[data-theme='blue'] {
+  /* Semantic Colors */
+  --color-bg-accent-soft: var(--color-french-pass-lighter);
+  --color-bg-accent: var(--color-french-pass-light);
+
+  /* Buttons Primary */
+  --color-btn-primary-bg: var(--color-french-pass-light);
+  --color-btn-primary-bg-hover: var(--color-white);
+  --color-btn-primary-bg-active: var(--color-gray-250);
+  --color-btn-primary-bg-disabled: var(--color-french-pass-lightest);
+
+  --color-btn-primary: rgba(196, 242, 254, 1);
+  --color-btn-primary-hover: rgba(255, 255, 255, 1);
+  --color-btn-primary-active: rgba(178, 178, 178, 1);
+  --color-btn-primary-disabled: rgba(251, 254, 254, 1);
+
+  --color-btn-primary-shadow: var(--color-french-pass-dark);
+  --color-btn-primary-shadow-hover: var(--color-gray-150);
+  --color-btn-primary-shadow-disabled: var(--color-white-100);
+
+  /* Buttons Secondary */
+  --color-btn-secondary-bg: var(--color-gray-50);
+  --color-btn-secondary-bg-hover: var(--color-french-pass-lighter);
+  --color-btn-secondary-bg-active: var(--color-french-pass-dark);
+  --color-btn-secondary-bg-disabled: var(--color-white-50);
+
+  --color-btn-secondary-shadow: var(--color-gray-150);
+  --color-btn-secondary-shadow-hover: var(--color-gray-150);
+  --color-btn-secondary-shadow-disabled: var(--color-white-100);
+
+  /* Weeks Card */
+  --color-weeks-bg: var(--color-french-pass-lightest);
+  --color-weeks-bg-active: var(--color-french-pass-dark);
+  --color-weeks-bg-disable: var(--color-gray-100);
+
+  --color-weeks-border-hover: var(--color-french-pass-lighter);
+  --color-weeks-border-active: var(--color-french-pass-darker);
+
+  /* Input */
+  --color-input-border-active: var(--color-french-pass-dark);
+
+  /* Links */
+  --color-link-active: var(--color-french-pass-dark);
+
+  /* Scheme Tokens */
+  --color-scheme-foreground: var(--color-french-pass-lighter);
+  --color-scheme-accent: var(--color-french-pass);
+  --color-scheme-foreground-alt: var(--color-french-pass-light);
 }
 
 html {

@@ -50,7 +50,7 @@
   background-color: var(--color-btn-primary-bg);
   border-radius: 100px;
   border: none;
-  box-shadow: 0 4px 0 #f5b5be;
+  box-shadow: 0 4px 0 var(--color-scheme-accent);
 
   font-family: Lato;
   font-size: var(--font-size-sm);

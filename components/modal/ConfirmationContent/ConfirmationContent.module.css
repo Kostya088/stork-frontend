@@ -12,7 +12,7 @@
     font-weight: 700;
     line-height: 1.2;
     text-align: center;
-    color: #000;
+    color: var(--color-neutral-darkest);
 }
 
 .actions {
@@ -33,9 +33,9 @@
     padding: 10px 24px;
     border-radius: 100px;
     border: none;
-    border-bottom: 4px solid #ffcbd3;
+    border-bottom: 4px solid var(--color-scheme-accent);
     
-     background: #ffdae0;
+     background: var(--color-scheme-foreground-alt);
    
     font-size: 16px;
     font-weight: 500;
@@ -50,17 +50,17 @@
     flex-direction: row;
     gap: 8px;
     border: none;
-    border-bottom: 4px solid rgba(0, 0, 0, 0.15);
+    border-bottom: 4px solid var(--opacity-neutral-darkest-15);
     appearance: none;
     border-radius: 100px;
     padding: 10px 24px;
     width: 268px;
     height: 42px;
-   background: rgba(0, 0, 0, 0.05);
+   background: var(--opacity-neutral-darkest-5);
     font-weight: 500;
     font-size: 14px;
     line-height: 1.6;
-    color: #000;
+    color: var(--color-neutral-darkest);
     cursor: pointer;
 }
 

@@ -33,7 +33,7 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 1.5;
-  color: #000;
+  color: var(--color-neutral-darkest);
   margin-bottom: 8px;
   letter-spacing: 0.01em;
   white-space: nowrap;
@@ -46,7 +46,7 @@
   font-size: 56px;
   line-height: 1.2;
   letter-spacing: 0.01em;
-  color: #000;
+  color: var(--color-neutral-darkest);
   text-align: center;
 }
 
@@ -70,7 +70,7 @@
     font-family: "Lato", sans-serif;
     font-weight: 400;
     line-height: 1.5;
-    color: #000;
+    color: var(--color-neutral-darkest);
     white-space: nowrap;
   }
   .value {
@@ -79,6 +79,6 @@
     font-weight: 700;
     line-height: 1.2;
     letter-spacing: 0.01em;
-    color: #000;
+    color: var(--color-neutral-darkest);
   }
 }

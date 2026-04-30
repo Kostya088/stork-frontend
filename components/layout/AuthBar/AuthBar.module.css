@@ -16,19 +16,19 @@
 }
 
 .registerLink {
-  background: #f1eef0;
-  color: #241a1d;
+  background: var(--color-scheme-foreground);
+  color: var(--color-neutral-darkest);
 }
 
 .registerLink:hover {
-  background: #e8e0e3;
+  background: var(--color-scheme-foreground-alt);
 }
 
 .loginLink {
-  background: #ffd2dd;
-  color: #241a1d;
+  background: var(--color-scheme-accent);
+  color: var(--color-neutral-darkest);
 }
 
 .loginLink:hover {
-  background: #ffc0ce;
+  background: var(--color-btn-primary-bg);
 }

@@ -16,6 +16,13 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  padding: 8px;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+}
+
+.burgerMenuButton:hover {
+  background: var(--color-scheme-foreground-alt);
 }
 
 .burgerMenuIcon {

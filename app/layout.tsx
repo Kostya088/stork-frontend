@@ -3,6 +3,7 @@ import localFont from 'next/font/local';
 import './globals.css';
 import TanStackProvider from '@/components/providers/TanStackProvider';
 import AuthProvider from '@/components/providers/AuthProvider';
+import { ThemeProvider } from '@/components/providers/ThemeProvider';
 import Header from '@/components/layout/Header/Header';
 import { MobileSidebarOverlay } from '@/components/layout/SideBar/SideBar';
 import { Toaster } from 'react-hot-toast';
@@ -63,22 +64,25 @@ export default function RootLayout({
       lang="en"
       className={`${lato.variable} ${comfortaa.variable}`}
       data-scroll-behavior="smooth"
+      suppressHydrationWarning
     >
       <body>
         <TanStackProvider>
           <AuthProvider>
-            <div className="container">
-              <Header
-                showMobileButton={true}
-                hideOnDesktop={true}
-                hideOnAuth={true}
-              />
-              <main>
-                {children}
-                {modal}
-              </main>
-            </div>
-            <MobileSidebarOverlay />
+            <ThemeProvider>
+              <div className="container">
+                <Header
+                  showMobileButton={true}
+                  hideOnDesktop={true}
+                  hideOnAuth={true}
+                />
+                <main>
+                  {children}
+                  {modal}
+                </main>
+              </div>
+              <MobileSidebarOverlay />
+            </ThemeProvider>
           </AuthProvider>
         </TanStackProvider>
         <Toaster position="top-left" />

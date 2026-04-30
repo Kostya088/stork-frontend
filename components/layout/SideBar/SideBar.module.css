@@ -19,7 +19,7 @@
   height: 100%;
   width: 300px;
   max-width: 85vw;
-  background: #fff;
+  background: var(--color-white);
   animation: slideIn 0.3s ease;
 }
 
@@ -48,7 +48,7 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 150%;
-  color: #000;
+  color: var(--color-neutral-darkest);
   transition: background-color 0.2s;
   max-height: 40px;
 }
@@ -57,11 +57,11 @@
   width: 20px;
   height: 20px;
   flex-shrink: 0;
-  color: #241a1d;
+  color: var(--color-neutral-darkest);
 }
 
 .navLink:hover {
-  background: #f1eef0;
+  background: var(--color-scheme-foreground-alt);
 }
 
 .authSection {
@@ -73,7 +73,7 @@
   position: fixed;
   inset: 0;
   z-index: 1000;
-  background: rgba(36, 26, 29, 0.28);
+  background: var(--opacity-neutral-darkest-30);
   display: flex;
   justify-content: flex-start;
 }
@@ -104,14 +104,14 @@
 }
 
 .closeButton:hover {
-  background: #f1eef0;
+  background: var(--color-scheme-foreground-alt);
 }
 
 .closeIcon {
   width: 18px;
   height: 18px;
   display: block;
-  color: #241a1d;
+  color: var(--color-neutral-darkest);
 }
 
 @keyframes slideIn {
@@ -134,10 +134,10 @@
 
 @keyframes fadeOut {
   from {
-    background: rgba(36, 26, 29, 0.28);
+    background: var(--opacity-neutral-darkest-30);
   }
   to {
-    background: rgba(36, 26, 29, 0);
+    background: var(--opacity-transparent);
   }
 }
 @media (min-width: 1440px) {

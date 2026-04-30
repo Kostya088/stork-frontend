@@ -16,7 +16,7 @@
 }
 
 .label {
-    color: #241a1d;
+    color: var(--color-neutral-darkest);
     font-size: 14px;
     font-weight: 600;
     line-height: 1.35;
@@ -28,8 +28,8 @@
     width: 100%;
     border: none;
     border-radius: 10px;
-    background: #f1f1f1;
-    color: #241a1d;
+    background: var(--color-neutral-lightest);
+    color: var(--color-neutral-darkest);
     font: inherit;
     font-size: 14px;
 }
@@ -47,7 +47,7 @@
 
 .input::placeholder,
 .textarea::placeholder {
-    color: #8b8587;
+    color: var(--color-neutral);
 }
 
 .emotionBox {
@@ -56,7 +56,7 @@
 
 .selectHint {
     margin: 0 0 10px;
-    color: #5f5356;
+    color: var(--color-neutral-dark);
     font-size: 13px;
 }
 
@@ -74,7 +74,7 @@
 
 .emotionList::-webkit-scrollbar-thumb {
     border-radius: 999px;
-    background: #ffc7d6;
+    background: var(--color-scheme-accent);
 }
 
 .emotionOption {
@@ -84,25 +84,25 @@
     min-height: 30px;
     padding: 6px 10px;
     border-radius: 999px;
-    background: #ffffff;
-    color: #241a1d;
+    background: var(--color-white);
+    color: var(--color-neutral-darkest);
     font-size: 13px;
     cursor: pointer;
     transition: background 160ms ease;
 }
 
 .checked {
-    background: #ffd2dd;
+    background: var(--color-scheme-foreground-alt);
 }
 
 .checkbox {
     width: 14px;
     height: 14px;
-    accent-color: #241a1d;
+    accent-color: var(--color-neutral-darkest);
 }
 
 .error {
-    color: #9d1f42;
+    color: var(--color-red);
     font-size: 12px;
     line-height: 1.3;
 }
@@ -114,8 +114,8 @@
     margin-top: 6px;
     border: none;
     border-radius: 999px;
-    background: #ffd2dd;
-    color: #241a1d;
+    background: var(--color-scheme-foreground-alt);
+    color: var(--color-neutral-darkest);
     font: inherit;
     font-size: 14px;
     font-weight: 700;

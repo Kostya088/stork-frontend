@@ -46,7 +46,7 @@
   width: 100%;
   max-width: 100%;
   height: 37px;
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: var(--opacity-neutral-darkest-5);
   border: none;
   border-radius: 12px;
   padding: 8px 12px;
@@ -55,11 +55,11 @@
 }
 
 .datePlaceholder {
-  color: #8a8a8a;
+  color: var(--color-neutral);
 }
 
 .dateFilled {
-  color: #000;
+  color: var(--color-neutral-darkest);
 }
 
 .input:active,
@@ -68,11 +68,11 @@
 }
 
 .invalid {
-  border: 1px solid #c60000;
+  border: 1px solid var(--color-red);
 }
 
 .errorMessage {
-  color: #c60000;
+  color: var(--color-red);
   /* position: absolute; */
   bottom: 0;
 }
@@ -81,24 +81,24 @@
   font-family: var(--font-lato);
   font-weight: 500;
   font-size: 14px;
-  background-color: #ffdae0;
+  background-color: var(--color-scheme-foreground-alt);
   height: 46px;
   width: 100%;
   border-radius: 100px;
   outline: none;
   border: none;
   margin-bottom: 24px;
-  box-shadow: 0 5px #ffcbd3;
+  box-shadow: 0 5px var(--color-scheme-accent);
 }
 
 .subbtn:hover,
 .subbtn:focus {
-  background-color: #fff4f6;
-  box-shadow: 0 5px rgba(0, 0, 0, 0.15);
+  background-color: var(--color-btn-primary-bg-hover);
+  box-shadow: 0 5px var(--opacity-neutral-darkest-15);
 }
 
 .subbtn:active {
-  background-color: #ffcbd3;
+  background-color: var(--color-scheme-accent);
   box-shadow: none;
 }
 
@@ -109,7 +109,7 @@
 
 .registerLink {
   text-decoration: none;
-  color: black;
+  color: var(--color-neutral-darkest);
   border-bottom: 1px solid silver;
 }
 

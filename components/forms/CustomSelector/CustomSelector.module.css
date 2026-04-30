@@ -13,13 +13,13 @@
   width: 100%;
   max-width: 100%;
   height: 37px;
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: var(--opacity-neutral-darkest-5);
   border: none;
   border-radius: 12px;
   padding: 8px 12px;
   box-sizing: border-box;
   outline: none;
-  color: #7f7f7f;
+  color: var(--color-neutral);
 }
 
 .select.isOpen {
@@ -29,11 +29,11 @@
 .selectorTitle {
   font-weight: 400;
   font-size: 14px;
-  color: #8a8a8a;
+  color: var(--color-neutral);
 }
 
 .selected {
-  color: #000;
+  color: var(--color-neutral-darkest);
 }
 
 .options {
@@ -43,7 +43,7 @@
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  background-color: rgb(240, 240, 240);
+  background-color: var(--color-neutral-lightest);
   width: 100%;
   max-width: 100%;
   padding: 8px 0;
@@ -60,11 +60,11 @@
 }
 
 .elem:hover {
-  background-color: rgb(220, 220, 220);
+  background-color: var(--color-gray-150);
 }
 
 .errorMessage {
-  color: #c60000;
+  color: var(--color-red);
   margin-top: 8px;
 }
 

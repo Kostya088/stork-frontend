@@ -17,7 +17,7 @@
 }
 
 .container:hover {
-  background: #f1eef0;
+  background: var(--color-scheme-foreground-alt);
 }
 
 .avatar {
@@ -25,7 +25,7 @@
   height: 40px;
   border-radius: 50%;
   overflow: hidden;
-  background: #ffd2dd;
+  background: var(--color-scheme-accent);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -40,7 +40,7 @@
 
 .avatarPlaceholder {
   font-weight: 600;
-  color: #241a1d;
+  color: var(--color-neutral-darkest);
 }
 
 .info {
@@ -51,7 +51,7 @@
 
 .name {
   font-weight: 600;
-  color: #241a1d;
+  color: var(--color-neutral-darkest);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -60,7 +60,7 @@
 .email {
   font-size: 12px;
   line-height: 160%;
-  color: #000;
+  color: var(--color-neutral-darkest);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -76,12 +76,12 @@
 }
 
 .logoutButton:hover {
-  background: #f1eef0;
+  background: var(--color-scheme-foreground-alt);
 }
 
 .logoutIcon {
   width: 20px;
   height: 20px;
   display: block;
-  color: #241a1d;
+  color: var(--color-neutral-darkest);
 }
