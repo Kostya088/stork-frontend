@@ -87,8 +87,7 @@
     justify-content: space-between;
 }
 
-.dropdownTrigger:focus,
-.dropdownTrigger:hover {
+.dropdownTrigger:focus {
     border-left: 1px solid var(--color-scheme-border);
     border-right: 1px solid var(--color-scheme-border);
     border-top: 1px solid var(--color-scheme-border);
@@ -127,12 +126,14 @@
 .dropdownMenu {
     position: absolute;
     overflow-y: auto;
+    border: 1px solid var(--color-scheme-border);
     border-radius: 0 0 12px 12px;
     padding: 8px 0px;
     width: 295px;
     height: 220px;
     background: var(--color-neutral-lightest);
     gap: 8px;
+     scrollbar-gutter: stable;
 }
 
 .dropdownMenu::-webkit-scrollbar {
@@ -140,7 +141,9 @@
 }
 
 .dropdownMenu::-webkit-scrollbar-track {
-    background: transparent;
+    background: #eee; /* сіра лінія */
+    border-radius: 4px;
+    margin: 8px 0;
 }
 
 .dropdownMenu::-webkit-scrollbar-thumb {
@@ -150,17 +153,51 @@
 
 /* hover (опціонально) */
 .dropdownMenu::-webkit-scrollbar-thumb:hover {
-    opacity: 0.8;
+    background: #e58c95;
 }
 
 
 .option {
-    display: flex;
+   display: flex;
+    align-items: center;
     gap: 8px;
     padding: 8px;
     border-radius: 8px;
     cursor: pointer;
 }
+
+.checkbox {
+    appearance: none;
+    -webkit-appearance: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+background: var(--opacity-neutral-darkest-5);
+border: 1px solid var(--opacity-transparent);
+border-radius: 4px;
+width: 18px;
+height: 18px;
+}
+.checkbox:checked {
+border-radius: 4px;
+background: var(--color-neutral-darkest);
+border: 1px solid var(--color-neutral-darkest);
+}
+
+.checkbox:checked::after {
+    content: '';
+        align-items: center;
+    justify-content: center;
+    width: 6px;
+    height: 10px;
+    border: solid var(--color-white);;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    position: absolute;
+}
+
 
 .checked {
     background: var(--opacity-neutral-darkest-5);
@@ -233,7 +270,11 @@
         width: 268px;
     }
 
-    .dropdownMenu{
+    .dropdownMenu {
         width: 640px;
+    }
+
+    .checked {
+        max-width: 640px;
     }
 }

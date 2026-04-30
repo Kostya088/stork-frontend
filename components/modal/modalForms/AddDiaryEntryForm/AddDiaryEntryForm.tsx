@@ -99,7 +99,9 @@ export default function AddDiaryEntryForm({
       {({ values, isSubmitting }) => (
         <>
           {/* 🔥 ГОЛОВНИЙ ЗАГОЛОВОК */}
-          <h2 className={styles.title}>Новий запис</h2>
+          <h2 className={styles.title}>
+            {entry ? 'Редагувати запис' : 'Новий запис'}
+          </h2>
 
           <Form className={styles.form}>
             {/* Заголовок */}
@@ -168,6 +170,7 @@ export default function AddDiaryEntryForm({
                             }`}
                         >
                           <Field
+                            className={styles.checkbox}
                             type="checkbox"
                             name="emotions"
                             value={emotion._id}
