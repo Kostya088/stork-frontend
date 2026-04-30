@@ -33,7 +33,7 @@ export default function FeelingCheckCard() {
 
   const handleClick = () => {
     if (!isAuthenticated) {
-      router.push("/register");
+      router.push("/login");
       return;
     }
 

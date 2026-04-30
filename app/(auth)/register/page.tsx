@@ -1,33 +1,31 @@
-import css from "./RegisterPage.module.css";
-import clsx from "clsx";
-import RegistrationForm from "@/components/forms/RegistrationForm/RegistrationForm";
-import Image from "next/image";
-import Link from "next/link";
+import styles from './RegisterPage.module.css';
+import RegistrationForm from '@/components/forms/RegistrationForm/RegistrationForm';
+import Link from 'next/link';
+import Image from 'next/image';
 
-const Page = () => {
+export default function Register() {
   return (
-    <div className={css["page"]}>
-      <Link href="/" className={css.logoLink}>
-        <svg className={css.logoIcon} width="95" height="29">
+    <div className={styles.page}>
+      <Link href="/" className={styles.logoLink}>
+        <svg className={styles.logoIcon} width="95" height="29">
           <use href="/icons/sprite.svg#icon-leleka-logo" />
         </svg>
       </Link>
 
-      <div className={clsx(css.container, css.containerForm)}>
+      <div className={styles.left}>
         <RegistrationForm />
       </div>
-      <div className={clsx(css.container, css.containerImage)}>
+
+      <div className={styles.right}>
         <Image
-          className={css.registerImage}
-          alt="leleka"
+          src="/icons/register-img.jpg"
+          alt="Register"
           width={720}
           height={900}
-          loading="eager"
-          src="/icons/register-img.jpg"
+          className={styles.image}
+          priority
         />
       </div>
     </div>
   );
-};
-
-export default Page;
+}

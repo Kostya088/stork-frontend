@@ -58,37 +58,40 @@ export default function BabyTodayCard() {
   }
 
   return (
-  <section className={css.card}>
-    <h2 className={css.title}>Малюк сьогодні</h2>
+    <section className={css.card}>
+      <h2 className={css.title}>Малюк сьогодні</h2>
 
-    <div className={css.content}>
-      <div className={css.imageWrapper}>
-        <Image
-          src={babyInfo.image}
-          alt="Ілюстрація розміру малюка"
-          className={css.image}
-          width={257}
-          height={194}
-          priority
-        />
+      <div className={css.content}>
+        <div className={css.imageWrapper}>
+          <Image
+            src={babyInfo.image}
+            alt="Ілюстрація розміру малюка"
+            className={css.image}
+            width={257}
+            height={194}
+            priority
+          />
+        </div>
+
+        <div className={css.info}>
+          <p>
+            <span className={css.label}>Розмір:</span> Приблизно{" "}
+            {babyInfo.babySize} см
+          </p>
+
+          <p>
+            <span className={css.label}>Вага:</span> Близько{" "}
+            {babyInfo.babyWeight} грамів.
+          </p>
+
+          <p>
+            <span className={css.label}>Активність:</span>{" "}
+            {babyInfo.babyActivity}
+          </p>
+        </div>
       </div>
 
-      <div className={css.info}>
-        <p>
-          <strong>Розмір:</strong> Приблизно {babyInfo.babySize} см
-        </p>
-
-        <p>
-          <strong>Вага:</strong> Близько {babyInfo.babyWeight} грамів.
-        </p>
-
-        <p>
-          <strong>Активність:</strong> {babyInfo.babyActivity}
-        </p>
-      </div>
-    </div>
-
-    <p className={css.description}>{babyInfo.babyDevelopment}</p>
-  </section>
-);
+      <p className={css.description}>{babyInfo.babyDevelopment}</p>
+    </section>
+  );
 }

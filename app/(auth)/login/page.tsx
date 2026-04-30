@@ -1,10 +1,10 @@
-import styles from "./LoginPage.module.css";
-import LoginForm from "@/components/forms/LoginForm/LoginForm";
-import Link from "next/link";
-import Image from "next/image";
+import styles from './LoginPage.module.css';
+import LoginForm from '@/components/forms/LoginForm/LoginForm';
+import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Login() {
-   return (
+  return (
     <div className={styles.page}>
       <Link href="/" className={styles.logoLink}>
         <svg className={styles.logoIcon} width="95" height="29">
