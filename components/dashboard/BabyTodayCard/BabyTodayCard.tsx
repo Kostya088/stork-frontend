@@ -69,31 +69,29 @@ export default function BabyTodayCard() {
             className={css.image}
             width={257}
             height={194}
+            priority
           />
         </div>
 
         <div className={css.info}>
-          {babyInfo.size !== undefined && (
-            <p>
-              <strong>Розмір:</strong> Приблизно {babyInfo.size} см
-            </p>
-          )}
+          <p>
+            <span className={css.label}>Розмір:</span> Приблизно{" "}
+            {babyInfo.babySize} см
+          </p>
 
-          {babyInfo.weight !== undefined && (
-            <p>
-              <strong>Вага:</strong> Близько {babyInfo.weight} грамів.
-            </p>
-          )}
+          <p>
+            <span className={css.label}>Вага:</span> Близько{" "}
+            {babyInfo.babyWeight} грамів.
+          </p>
 
-          {babyInfo.analogy && (
-            <p>
-              <strong>Розмір як:</strong> {babyInfo.analogy}
-            </p>
-          )}
+          <p>
+            <span className={css.label}>Активність:</span>{" "}
+            {babyInfo.babyActivity}
+          </p>
         </div>
       </div>
 
-      <p className={css.description}>{babyInfo.development}</p>
+      <p className={css.description}>{babyInfo.babyDevelopment}</p>
     </section>
   );
 }

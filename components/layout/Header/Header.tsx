@@ -12,7 +12,10 @@ export default function Header({
 }) {
   const sideBarToggle = useSidebarStore((state) => state.toggle);
   const pathname = usePathname();
-  const isAuthPage = pathname === "/login" || pathname === "/register";
+  const isAuthPage =
+    pathname === "/login" ||
+    pathname === "/register" ||
+    pathname === "/profile/edit";
 
   if (hideOnAuth && isAuthPage) return null;
 

@@ -1,29 +1,19 @@
 .page {
-  height: 98vh;
-  width: 100%;
   display: flex;
-  overflow: hidden;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
   position: relative;
+  height: 100vh;
+  overflow: hidden;
 }
 
-.container {
-  height: 100%;
-  display: flex;
-  min-width: 50%;
-  justify-content: center;
-  align-items: center;
+/* форма */
+.left {
+  width: 100%;
 }
 
-.containerImage {
+/* картинка */
+.right {
   display: none;
-}
-
-.registerImage {
-  object-fit: cover;
-  max-width: 100%;
-  height: auto;
 }
 
 .logoLink {
@@ -39,10 +29,25 @@
   display: block;
 }
 
-@media screen and (min-width: 1440px) {
-  .containerImage {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+@media (min-width: 1440px) {
+  .page {
+    flex-direction: row;
+    height: 100vh;
+  }
+
+  .left {
+    width: 50%;
+  }
+
+  .right {
+    display: block;
+    position: relative;
+
+    width: 50%;
+    height: 100vh;
+  }
+
+  .Header {
+    width: 50%;
   }
 }

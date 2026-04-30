@@ -1,68 +1,193 @@
+.container {
+  min-width: 335px;
+  max-width: 375px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Styles for tablet */
+@media only screen and (min-width: 768px) {
+  .container {
+    max-width: 768px;
+    padding: 0 32px;
+  }
+}
+
+/* Styles for desktop */
+@media only screen and (min-width: 1440px) {
+  .container {
+    max-width: 1440px;
+    padding: 0;
+  }
+}
+
 :root {
-  /* Усі кольори з макету */
-  --font-body: var(--font-lato);
-  --font-brand: var(--font-comfortaa);
+  /* ================= FONT ================= */
+  --font-family: 'Lato', sans-serif;
+  --second-family: 'Comfortaa', sans-serif;
 
-  --primary-background-color: rgba(255, 255, 255, 1);
+  /* ================= COLORS (BASE PALETTE) ================= */
 
-  /* Text */
-  --primary-text-color: rgba(0, 0, 0, 1);
-  --secondary-text-color: rgba(
-    97,
-    97,
-    97,
-    1
-  ); /*Input(Placeholder),Breadcrumbs,WeekSelector*/
-  --error-text-color: rgba(198, 0, 0, 1);
+  /* White */
+  --color-white-50: #fbfbfb;
+  --color-white-100: #f4f4f4;
+  --color-white: #fff;
 
+  /* Black */
+  --color-black: rgba(0, 0, 0, 1);
 
+  /* Red */
+  --color-red: #c60000;
 
+  /* Gray */
+  --color-gray-50: rgba(242, 242, 242, 1);
+  --color-gray-100: rgba(231, 231, 229, 1);
+  --color-gray-150: rgba(217, 217, 217, 1);
+  --color-gray-200: rgba(191, 191, 191, 1);
+  --color-gray-250: rgba(178, 178, 178, 1);
+  --color-gray-300: rgba(184, 182, 180, 1);
+  --color-gray-400: rgba(128, 128, 128, 1);
+  --color-gray-500: rgba(127, 127, 127, 1);
+  --color-gray-600: rgba(102, 102, 102, 1);
+  --color-gray-700: rgba(97, 97, 97, 1);
 
+  /* Pink */
+  --color-pink-50: rgba(255, 244, 246, 1);
+  --color-pink-100: rgba(255, 218, 224, 1);
+  --color-pink-200: rgba(255, 203, 211, 1);
+  --color-pink-300: rgba(217, 173, 179, 1);
 
-  /* ================= PRIMARY BUTTON ================= */
+  /* Pastel Pink */
+  --color-pastel-pink-lightest: #fff9fa;
+  --color-pastel-pink-lighter: #fff4f6;
+  --color-pastel-pink-light: #ffdae0;
+  --color-pastel-pink: #ffcbd3;
+  --color-pastel-pink-dark: #cca2a8;
+  --color-pastel-pink-darker: #665154;
+  --color-pastel-pink-darkest: #4c3c3f;
+
+  /* Oasis */
+  --color-oasis-light: #fef1db;
+  --color-oasis: #feeccc;
+  --color-oasis-dark: #cbbca3;
+  --color-oasis-darker: #655e51;
+  --color-oasis-darkest: #4c463d;
+  --color-oasis-lightest: #fefdf9;
+  --color-oasis-lighter: #fefbf4;
+
+  /* French Pass */
+  --color-french-pass-darkest: #39484c;
+  --color-french-pass: #adeffe;
+  --color-french-pass-darker: #4c6065;
+  --color-french-pass-dark: #98c1cb;
+  --color-french-pass-light: #c4f2fe;
+  --color-french-pass-lighter: #e5fafe;
+  --color-french-pass-lightest: #fbfefe;
+
+  /* ================= SEMANTIC COLORS ================= */
+
+  --primary-text-color: var(--color-black);
+  --secondary-text-color: var(--color-gray-700);
+  --color-text-tertiary: var(--color-gray-600);
+  --color-text-quaternary: var(--color-gray-500);
+  --error-text-color: var(--color-red);
+
+  --color-bg-primary: var(--color-white);
+  --color-bg-accent-soft: var(--color-pink-50);
+  --color-bg-accent: var(--color-pink-100);
+
+  --color-bg-neutral-100: var(--color-gray-200);
+  --color-bg-neutral-200: var(--color-gray-300);
+  --color-bg-neutral-300: var(--color-gray-400);
+
+  /* ================= BUTTONS ================= */
+
+  /* Primary */
+  --color-btn-primary-bg: var(--color-pink-100);
+  --color-btn-primary-bg-hover: var(--color-white);
+  --color-btn-primary-bg-active: var(--color-gray-250);
+  --color-btn-primary-bg-disabled: var(--color-pink-50);
+
   --color-btn-primary: rgba(255, 218, 224, 1);
   --color-btn-primary-hover: rgba(255, 255, 255, 1);
   --color-btn-primary-active: rgba(178, 178, 178, 1);
   --color-btn-primary-disabled: rgba(255, 244, 246, 1);
 
-  --color-btn-primary-bg: rgba(255, 203, 211, 1);
-  --color-btn-primary-bg-hover: rgba(217, 217, 217, 1);
-  --color-btn-primary-bg-disabled: rgba(255, 240, 242, 1);
+  --color-btn-primary-shadow: var(--color-pink-200);
+  --color-btn-primary-shadow-hover: var(--color-gray-150);
+  --color-btn-primary-shadow-disabled: var(--color-white-100);
 
-  /* ================= SECONDARY BUTTON ================= */
-  --color-btn-secondary: rgba(242, 242, 242, 1);
-  --color-btn-secondary-hover: rgba(255, 244, 246, 1);
-  --color-btn-secondary-active: rgba(255, 203, 211, 1);
-  --color-btn-secondary-disabled: rgba(251, 251, 251, 1);
+  /* Secondary */
+  --color-btn-secondary-bg: var(--color-gray-50);
+  --color-btn-secondary-bg-hover: var(--color-pink-50);
+  --color-btn-secondary-bg-active: var(--color-pink-200);
+  --color-btn-secondary-bg-disabled: var(--color-white-50);
 
-  --color-btn-secondary-bg: rgba(217, 217, 217, 1);
-  --color-btn-secondary-bg-hover: rgba(217, 217, 217, 1);
-  --color-btn-secondary-bg-disabled: rgba(244, 244, 244, 1);
+  --color-btn-secondary-shadow: var(--color-gray-150);
+  --color-btn-secondary-shadow-hover: var(--color-gray-150);
+  --color-btn-secondary-shadow-disabled: var(--color-white-100);
 
+  /* ================= COMPONENTS ================= */
 
-    /* ================= LINK ================= */
-  --color-link: rgba(0, 0, 0, 1);
-  --color-link-hover: rgba(0, 0, 0, 1);
-  --color-link-active: rgba(255, 203, 211, 1);
-  --color-link-disabled: rgba(179, 179, 179, 1);
+  /* Weeks Card */
+  --color-weeks-bg: var(--color-pink-50);
+  --color-weeks-bg-active: var(--color-pink-200);
+  --color-weeks-bg-disable: var(--color-gray-100);
 
-  /* decoration */
+  --color-weeks-border-hover: var(--color-pink-100);
+  --color-weeks-border-active: var(--color-pink-300);
+
+  /* Checkbox */
+  --color-checkbox-bg: var(--color-gray-50);
+  --color-checkbox-bg-active: var(--color-black);
+
+  /* Input */
+  --color-input-bg: var(--color-gray-50);
+  --color-input-border-active: var(--color-pink-200);
+
+  /* Links */
+  --color-link: var(--color-black);
+  --color-link-hover: var(--color-black);
+  --color-link-active: var(--color-pink-200);
+  --color-link-disabled: var(--color-gray-250);
   --link-underline-color: currentColor;
+
+  /* ================= TYPOGRAPHY ================= */
+
+  --font-size-2xs: 10px;
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-size-md: 16px;
+  --font-size-lg: 18px;
+  --font-size-xl: 20px;
+  --font-size-2xl: 24px;
+  --font-size-3xl: 32px;
+  --font-size-4xl: 36px;
+  --font-size-5xl: 40px;
+  --font-size-6xl: 48px;
+  --font-size-7xl: 56px;
+
+  /* ================= SCHEME TOKENS ================= */
 
   --color-scheme-background: var(--color-white);
   --color-neutral-darkest: #000;
   --color-scheme-border: var(--opacity-neutral-darkest-15);
   --color-scheme-text: var(--color-neutral-darkest);
   --color-neutral-lighter: #d8d8d8;
-  --color-white: #fff;
   --color-neutral-lightest: #f2f2f2;
   --color-neutral-light: #b2b2b2;
   --color-neutral: #7f7f7f;
   --color-neutral-dark: #4c4c4c;
   --color-neutral-darker: #191919;
-  --opacity-transparent: rgba(255, 255, 255, 0);
+
   --color-scheme-foreground: var(--color-pastel-pink-lighter);
   --color-scheme-accent: var(--color-pastel-pink);
+  --color-scheme-foreground-alt: var(--color-pastel-pink-light);
+
+  /* ================= OPACITY ================= */
+
+  --opacity-transparent: rgba(255, 255, 255, 0);
+
   --opacity-white-5: rgba(255, 255, 255, 0.05);
   --opacity-white-10: rgba(255, 255, 255, 0.1);
   --opacity-white-15: rgba(255, 255, 255, 0.15);
@@ -71,6 +196,7 @@
   --opacity-white-40: rgba(255, 255, 255, 0.4);
   --opacity-white-50: rgba(255, 255, 255, 0.5);
   --opacity-white-60: rgba(255, 255, 255, 0.6);
+
   --opacity-neutral-darkest-5: rgba(0, 0, 0, 0.05);
   --opacity-neutral-darkest-10: rgba(0, 0, 0, 0.1);
   --opacity-neutral-darkest-15: rgba(0, 0, 0, 0.15);
@@ -79,29 +205,6 @@
   --opacity-neutral-darkest-40: rgba(0, 0, 0, 0.4);
   --opacity-neutral-darkest-50: rgba(0, 0, 0, 0.5);
   --opacity-neutral-darkest-60: rgba(0, 0, 0, 0.6);
-  --color-pastel-pink-lightest: #fff9fa;
-  --color-pastel-pink-lighter: #fff4f6;
-  --color-pastel-pink-light: #ffdae0;
-  --color-pastel-pink: #ffcbd3;
-  --color-pastel-pink-dark: #cca2a8;
-  --color-pastel-pink-darker: #665154;
-  --color-pastel-pink-darkest: #4c3c3f;
-  --color-scheme-foreground-alt: var(--color-pastel-pink-light);
-  --color-oasis-light: #fef1db;
-  --color-oasis: #feeccc;
-  --color-oasis-dark: #cbbca3;
-  --color-oasis-darker: #655e51;
-  --color-oasis-darkest: #4c463d;
-  --color-oasis-lightest: #fefdf9;
-  --color-oasis-lighter: #fefbf4;
-  --color-french-pass-darkest: #39484c;
-  --color-french-pass: #adeffe;
-  --color-french-pass-darker: #4c6065;
-  --color-french-pass-dark: #98c1cb;
-  --color-french-pass-light: #c4f2fe;
-  --color-french-pass-lighter: #e5fafe;
-  --color-french-pass-lightest: #fbfefe;
-  --color-red: #c60000;
 }
 
 html {
@@ -118,8 +221,9 @@ html {
 
 body {
   margin: 0;
-  font-family: var(--font-body), "Segoe UI", sans-serif;
-  color: var(--primary-text-color);
+  font-family: var(--font-family);
+  color: var(--color-neutral-darkest);
+  background: var(--color-white);
 }
 
 h1,
@@ -129,7 +233,8 @@ h4,
 h5,
 h6,
 p {
-  margin: 0;
+  font-family: var(--second-family);
+  color: var(--color-neutral-darkest);
 }
 
 img {
@@ -139,8 +244,13 @@ img {
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
+  color: var(--color-scheme-text);
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  transition:
+    color 0.25s ease,
+    text-decoration-color 0.25s ease,
+    opacity 0.2s ease;
 }
 
 ul,
@@ -158,25 +268,5 @@ select {
 /* Курсор pointer для всіх кнопок */
 button {
   cursor: pointer;
-}
-
-.container {
-  width: 100%;
-  max-width: 375px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-@media screen and (min-width: 768px) {
-  .container {
-    max-width: 768px;
-    padding: 0 32px;
-  }
-}
-
-@media screen and (min-width: 1440px) {
-  .container {
-    max-width: 1440px;
-    padding: 0 32px;
-  }
+  color: var(--color-scheme-text);
 }
