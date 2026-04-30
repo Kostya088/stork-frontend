@@ -1,11 +1,11 @@
 .dashboard {
   width: 100%;
-  padding: 24px;
+  padding-top: 16px;
 }
 
 .grid {
   display: grid;
-  grid-template-columns: 2fr 1.2fr;
+  grid-template-columns: 1fr;
   gap: 24px;
 }
 
@@ -13,25 +13,26 @@
 .rightColumn {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 24px;
 }
 
 .statusGrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
+  gap: 16px;
 }
 
-@media (max-width: 767px) {
-  .dashboard {
-    padding: 16px;
-  }
+@media (min-width: 1440px) {
 
   .grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 2fr) minmax(320px, 1fr);
+    gap: 32px;
   }
 
   .statusGrid {
-    grid-template-columns: 1fr;
+    gap: 24px;
   }
 }
+
+ 

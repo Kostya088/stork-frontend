@@ -1,21 +1,21 @@
-import { nextClient } from "./api";
-import type { Task } from "@/types/task";
-import type { DiaryEntry } from "@/types/diaryEntry";
-import type { Emotion } from "@/types/emotion";
-import type { User } from "@/types/user";
-import type { BabyState } from "@/types/babyState";
-import type { MomState } from "@/types/momState";
-import type { WeekDashboardInfo, WeekInfo } from "@/types/weekInfo";
+import { nextClient } from './api';
+import type { Task } from '@/types/task';
+import type { DiaryEntry } from '@/types/diaryEntry';
+import type { Emotion } from '@/types/emotion';
+import type { User } from '@/types/user';
+import type { BabyState } from '@/types/babyState';
+import type { MomState } from '@/types/momState';
+import type { WeekDashboardInfo, WeekInfo } from '@/types/weekInfo';
 
 export async function getTasks(): Promise<Task[]> {
-  const { data } = await nextClient.get<Task[]>("/tasks");
+  const { data } = await nextClient.get<Task[]>('/tasks');
   return data;
 }
 
-export type CreateTaskData = Pick<Task, "name" | "date">;
+export type CreateTaskData = Pick<Task, 'name' | 'date'>;
 
 export async function createTask(data: CreateTaskData): Promise<Task> {
-  const { data: task } = await nextClient.post<Task>("/tasks", data);
+  const { data: task } = await nextClient.post<Task>('/tasks', data);
   return task;
 }
 
@@ -23,7 +23,7 @@ export async function updateTaskStatus(
   id: string,
   isDone: boolean,
 ): Promise<Task> {
-  const { data } = await nextClient.patch<Task>(`/tasks/${id}/status`, {
+  const { data } = await nextClient.patch<Task>(`/tasks/${id}`, {
     isDone,
   });
   return data;
@@ -34,7 +34,7 @@ export async function deleteTask(id: string): Promise<void> {
 }
 
 export async function getDiaries(): Promise<DiaryEntry[]> {
-  const { data } = await nextClient.get<DiaryEntry[]>("/diaries");
+  const { data } = await nextClient.get<DiaryEntry[]>('/diaries');
   return data;
 }
 
@@ -45,11 +45,11 @@ export async function getDiaryById(id: string): Promise<DiaryEntry> {
 
 export type CreateDiaryData = Pick<
   DiaryEntry,
-  "title" | "description" | "emotions"
+  'title' | 'description' | 'emotions'
 >;
 
 export async function createDiary(data: CreateDiaryData): Promise<DiaryEntry> {
-  const { data: diary } = await nextClient.post<DiaryEntry>("/diaries", data);
+  const { data: diary } = await nextClient.post<DiaryEntry>('/diaries', data);
   return diary;
 }
 
@@ -71,43 +71,42 @@ export async function deleteDiary(id: string): Promise<void> {
 }
 
 export async function getEmotions(): Promise<Emotion[]> {
-  const { data } = await nextClient.get<Emotion[]>("/emotions");
+  const { data } = await nextClient.get<Emotion[]>('/emotions');
   return data;
 }
 
 export async function getMe(): Promise<User> {
-  const { data } = await nextClient.get<User>("/users/me");
+  const { data } = await nextClient.get<User>('/users/me');
   return data;
 }
 
-export type UpdateUserData = Partial<Pick<User, "name" | "dueDate" | "gender">>;
+export type UpdateUserData = Partial<Pick<User, 'name' | 'dueDate' | 'gender'>>;
 
 export async function updateMe(data: UpdateUserData): Promise<User> {
-  const { data: user } = await nextClient.patch<User>("/users/me", data);
+  const { data: user } = await nextClient.patch<User>('/users/me', data);
   return user;
 }
 
 export async function updateUserAvatar(formData: FormData): Promise<User> {
-  const { data } = await nextClient.patch<User>("/users/me/avatar", formData, {
+  const { data } = await nextClient.patch<User>('/users/me/avatar', formData, {
     headers: {
-      "Content-Type": "multipart/form-data",
+      'Content-Type': 'multipart/form-data',
     },
   });
   return data;
 }
 
-export type Theme = "light" | "blue" | "pink";
+export type Theme = 'light' | 'blue' | 'pink';
 
 export async function updateUserTheme(theme: Theme): Promise<User> {
-  const { data } = await nextClient.patch<User>("/users/me/theme", { theme });
+  const { data } = await nextClient.patch<User>('/users/me/theme', { theme });
   return data;
 }
 
 export async function getWeeks(): Promise<WeekInfo[]> {
-  const { data } = await nextClient.get<WeekInfo[]>("/weeks");
+  const { data } = await nextClient.get<WeekInfo[]>('/weeks');
   return data;
 }
-
 
 export async function getWeeksBaby(week: number): Promise<BabyState> {
   const { data } = await nextClient.get<BabyState>(`/weeks/baby/${week}`);
@@ -120,12 +119,14 @@ export async function getWeeksMom(week: number): Promise<MomState> {
 }
 
 export async function getPublicWeek(week = 1): Promise<WeekDashboardInfo> {
-  const { data } = await nextClient.get<WeekDashboardInfo>(`/weeks?week=${week}`);
+  const { data } = await nextClient.get<WeekDashboardInfo>(
+    `/weeks?week=${week}`,
+  );
   return data;
 }
 
 export async function getWeeksMe(): Promise<WeekDashboardInfo> {
-  const { data } = await nextClient.get<WeekDashboardInfo>("/weeks/me");
+  const { data } = await nextClient.get<WeekDashboardInfo>('/weeks/me');
   return data;
 }
 
@@ -135,7 +136,7 @@ export interface LoginRequest {
 }
 
 export async function login(data: LoginRequest): Promise<User> {
-  const { data: user } = await nextClient.post<User>("/auth/login", data);
+  const { data: user } = await nextClient.post<User>('/auth/login', data);
   return user;
 }
 
@@ -144,16 +145,16 @@ export interface RegisterRequest {
   email: string;
   password: string;
   dueDate?: string;
-  gender?: "boy" | "girl";
+  gender?: 'boy' | 'girl';
 }
 
 export async function register(data: RegisterRequest): Promise<User> {
-  const { data: user } = await nextClient.post<User>("/auth/register", data);
+  const { data: user } = await nextClient.post<User>('/auth/register', data);
   return user;
 }
 
 export async function logout(): Promise<void> {
-  await nextClient.post("/auth/logout");
+  await nextClient.post('/auth/logout');
 }
 
 interface CheckSessionResponse {
@@ -161,7 +162,6 @@ interface CheckSessionResponse {
 }
 
 export async function checkSession(): Promise<CheckSessionResponse> {
-  const { data } = await nextClient.get<CheckSessionResponse>("/auth/session");
+  const { data } = await nextClient.get<CheckSessionResponse>('/auth/session');
   return data;
 }
-

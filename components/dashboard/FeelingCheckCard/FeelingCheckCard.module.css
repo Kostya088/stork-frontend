@@ -1,19 +1,21 @@
 .card {
-  padding: 24px;
+  padding: 20px;
   border-radius: 32px;
-  background-color: #fff4f6;
+  background-color: var(--color-scheme-foreground);
 }
 
 .title {
-  margin-bottom: 24px;
-  font-size: 24px;
+  margin-bottom: 16px;
+  font-size: 20px;
+  margin-bottom: 8px;
   font-weight: 700;
 }
 
 .text {
-  font-size: 16px;
-  line-height: 1.5;
-  color: #000;
+  font-size: 14px;
+  color: var(--color-scheme-text);
+  font-weight: 400;
+  line-height: 150%;
 }
 
 .button {
@@ -21,12 +23,25 @@
   padding: 10px 24px;
   border: none;
   border-radius: 100px;
-  background-color: #ffcbd3;
+  background-color: var(--color-scheme-foreground-alt);
   font-weight: 500;
   cursor: pointer;
   transition: 0.2s;
 }
 
 .button:hover {
-  background-color: #fff4f6;
+  background-color: var(--color-scheme-foreground);
+}
+
+@media (min-width: 1440px) {
+  .title {
+  margin-bottom: 8px;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 140%;
+}
+.text {
+  font-size: 16px;
+
+}
 }

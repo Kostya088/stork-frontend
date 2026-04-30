@@ -29,4 +29,8 @@
   .noSidebar {
     grid-template-columns: 1fr;
   }
+
+  .noSidebar .main {
+    padding: 0;
+  }
 }
