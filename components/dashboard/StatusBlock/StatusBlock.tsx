@@ -53,7 +53,7 @@ export default function StatusBlock() {
 
       <div className={css.card}>
         <p className={css.label}>Днів до зустрічі</p>
-        <p className={css.value}>{data?.daysUntilDue}</p>
+        <p className={css.value}>~{data?.daysUntilDue}</p>
       </div>
     </div>
   );
