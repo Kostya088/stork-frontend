@@ -13,6 +13,7 @@
     "axios": "^1.15.2",
     "clsx": "^2.1.1",
     "cookie": "^1.1.1",
+    "embla-carousel-react": "^8.6.0",
     "formik": "^2.4.9",
     "modern-normalize": "^3.0.1",
     "next": "^16.2.4",
