@@ -25,7 +25,7 @@
 }
 
 .label {
-  font-family: "Lato", sans-serif;
+  font-family: 'Lato', sans-serif;
   font-weight: 400;
   font-size: 14px;
   line-height: 1.5;
@@ -41,7 +41,7 @@
   height: 37px;
   background: rgba(0, 0, 0, 0.05);
 
-  font-family: "Lato", sans-serif;
+  font-family: 'Lato', sans-serif;
   font-weight: 400;
   font-size: 14px;
   line-height: 1.5;
@@ -53,7 +53,7 @@
 }
 
 .errorMessage {
-  font-family: "Lato", sans-serif;
+  font-family: 'Lato', sans-serif;
   font-weight: 400;
   font-size: 12px;
   line-height: 1.6;
@@ -67,10 +67,12 @@
   height: 40px;
   background: rgba(0, 0, 0, 0.05);
 
-  font-family: "Lato", sans-serif;
+  font-family: 'Lato', sans-serif;
   font-weight: 400;
   font-size: 14px;
   line-height: 1.5;
+  cursor: pointer;
+  outline: none;
 }
 
 .genderSelect :global(.gender__control--is-focused) {
@@ -83,6 +85,7 @@
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 12px 12px 0 0;
   box-shadow: none;
+  outline: none;
 }
 
 .genderSelect :global(.gender__single-value) {
@@ -97,12 +100,13 @@
 
 .genderSelect :global(.gender__option) {
   cursor: pointer;
-  font-family: "Lato", sans-serif;
+  font-family: 'Lato', sans-serif;
   font-weight: 400;
   font-size: 14px;
   line-height: 1.5;
   color: #000;
   background: #f2f2f2;
+  outline: none;
 }
 
 .genderSelect :global(.gender__indicator-separator) {
@@ -111,17 +115,17 @@
 
 .genderSelect :global(.gender__indicator) {
   color: rgba(0, 0, 0, 0.6);
+  outline: none;
 }
 
 .genderSelect :global(.gender__option--is-focused) {
   background: #e6e6e6;
   outline: none;
+}
 
-  color: #000;
-  font-family: "Lato", sans-serif;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 1.5;
+.genderSelect :global(.gender__option--is-actived) {
+  background: #e6e6e6;
+  outline: none;
 }
 
 .inputDate {
@@ -133,16 +137,49 @@
 
   background: #f2f2f2;
 
-  font-family: "Lato", sans-serif;
+  font-family: 'Lato', sans-serif;
   font-weight: 400;
   font-size: 14px;
   line-height: 1.5;
   color: #7f7f7f;
+  cursor: pointer;
+
+  position: relative;
 }
 
 .inputDate:focus {
   outline: none;
   border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+:global(.react-datepicker__input-container .react-datepicker__calendar-icon) {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0;
+  z-index: 1;
+  right: 12px;
+  pointer-events: none;
+  width: 12px;
+  height: 7px;
+  color: #7f7f7f;
+}
+
+:global(.react-datepicker) {
+  min-height: 260px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+:global(.react-datepicker__month) {
+  min-height: 192px;
+}
+
+:global(.react-datepicker__week) {
+  height: 32px;
 }
 
 .buttonWrapper {
@@ -162,7 +199,7 @@
   padding: 8px 20px;
   width: 159px;
 
-  font-family: "Lato", sans-serif;
+  font-family: 'Lato', sans-serif;
   font-weight: 500;
   font-size: 14px;
   line-height: 1.6;
@@ -192,7 +229,7 @@
   width: 159px;
   background: #ffdae0;
 
-  font-family: "Lato", sans-serif;
+  font-family: 'Lato', sans-serif;
   font-weight: 500;
   font-size: 14px;
   line-height: 1.6;
