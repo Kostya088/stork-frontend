@@ -1,36 +1,39 @@
 .page {
-  height: 98vh;
-  width: 100%;
   display: flex;
-  overflow: hidden;
-  align-items: center;
   justify-content: center;
-  position: relative;
+  align-items: center;
+  min-height: 100vh;
+  overflow: hidden;
 }
 
 .container {
-  height: 100%;
   display: flex;
-  min-width: 50%;
-  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+}
+
+.left {
+  position: relative;
+  display: flex;
   align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 20px;
+  height: 100%;
 }
 
-.containerImage {
+.right {
   display: none;
-}
-
-.registerImage {
-  object-fit: cover;
-  max-width: 100%;
-  height: auto;
 }
 
 .logoLink {
   position: absolute;
   top: 20px;
   left: 20px;
-  z-index: 10;
+  align-items: center;
+  margin-bottom: 24px;
   color: inherit;
   text-decoration: none;
 }
@@ -39,10 +42,29 @@
   display: block;
 }
 
-@media screen and (min-width: 1440px) {
-  .containerImage {
+@media (min-width: 1440px) {
+  .container {
+    flex-direction: row;
+    max-width: 1440px;
+    height: 100vh;
+    max-height: 900px;
+    align-items: flex-start;
+  }
+
+  .left {
+    width: 50%;
+    padding: 32px 40px;
+  }
+
+  .right {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 50%;
+  }
+
+  .image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    height: auto;
   }
 }

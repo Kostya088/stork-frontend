@@ -1,54 +1,54 @@
-import type { Metadata } from "next";
-import localFont from "next/font/local";
-import "./globals.css";
-import TanStackProvider from "@/components/providers/TanStackProvider";
-import AuthProvider from "@/components/providers/AuthProvider";
-import Header from "@/components/layout/Header/Header";
-import { MobileSidebarOverlay } from "@/components/layout/SideBar/SideBar";
-import { Toaster } from "react-hot-toast";
+import type { Metadata } from 'next';
+import localFont from 'next/font/local';
+import './globals.css';
+import TanStackProvider from '@/components/providers/TanStackProvider';
+import AuthProvider from '@/components/providers/AuthProvider';
+import Header from '@/components/layout/Header/Header';
+import { MobileSidebarOverlay } from '@/components/layout/SideBar/SideBar';
+import { Toaster } from 'react-hot-toast';
 
 const lato = localFont({
   src: [
     {
-      path: "../public/fonts/Lato-Regular.ttf",
-      weight: "400",
-      style: "normal",
+      path: '../public/fonts/Lato-Regular.ttf',
+      weight: '400',
+      style: 'normal',
     },
     {
-      path: "../public/fonts/Lato-Medium.ttf",
-      weight: "500",
-      style: "normal",
+      path: '../public/fonts/Lato-Medium.ttf',
+      weight: '500',
+      style: 'normal',
     },
     {
-      path: "../public/fonts/Lato-SemiBold.ttf",
-      weight: "600",
-      style: "normal",
+      path: '../public/fonts/Lato-SemiBold.ttf',
+      weight: '600',
+      style: 'normal',
     },
     {
-      path: "../public/fonts/Lato-Bold.ttf",
-      weight: "700",
-      style: "normal",
+      path: '../public/fonts/Lato-Bold.ttf',
+      weight: '700',
+      style: 'normal',
     },
   ],
-  variable: "--font-lato",
-  display: "swap",
+  variable: '--font-lato',
+  display: 'swap',
 });
 
 const comfortaa = localFont({
   src: [
     {
-      path: "../public/fonts/Comfortaa-Bold.woff2",
-      weight: "700",
-      style: "normal",
+      path: '../public/fonts/Comfortaa-Bold.woff2',
+      weight: '700',
+      style: 'normal',
     },
   ],
-  variable: "--font-comfortaa",
-  display: "swap",
+  variable: '--font-comfortaa',
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
-  title: "Stork",
-  description: "Ваш помічник на шляху до материнства",
+  title: 'Stork',
+  description: 'Ваш помічник на шляху до материнства',
 };
 
 export default function RootLayout({
@@ -59,7 +59,11 @@ export default function RootLayout({
   modal?: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${lato.variable} ${comfortaa.variable}`}>
+    <html
+      lang="en"
+      className={`${lato.variable} ${comfortaa.variable}`}
+      data-scroll-behavior="smooth"
+    >
       <body>
         <TanStackProvider>
           <AuthProvider>

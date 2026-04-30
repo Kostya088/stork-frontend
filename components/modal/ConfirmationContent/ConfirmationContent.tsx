@@ -18,7 +18,7 @@ export default function ConfirmationContent({
     onCancel,
 }: ConfirmationContentProps) {
     return (
-        <div className={css.container}>
+        <div className={css.modal}>
             <h2 className={css.title}>{title}</h2>
 
             <div className={css.actions}>

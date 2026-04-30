@@ -2,8 +2,7 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  width: 320px;
-  border-right: 1px solid var(--color-scheme-border);
+  width: 312px;
   padding: 0 16px;
   box-sizing: border-box;
 }
@@ -18,33 +17,40 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  width: 320px;
+  width: 300px;
   max-width: 85vw;
   background: #fff;
   animation: slideIn 0.3s ease;
+}
+
+.sidebarMobileClosing {
+  animation: slideOut 0.3s ease forwards;
+}
+
+.overlayClosing {
+  animation: fadeOut 0.3s ease forwards;
 }
 
 .nav {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  padding: 16px;
+  padding: 0px;
 }
 
 .navLink {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 12px 16px;
+  padding: 10px 16px;
   border-radius: 12px;
   text-decoration: none;
-  font-family: "Lato", sans-serif;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 150%;
   color: #000;
   transition: background-color 0.2s;
+  max-height: 40px;
 }
 
 .navIcon {
@@ -76,13 +82,17 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px;
-  border-bottom: 1px solid #e8e0e3;
+  padding: 21px;
 }
 
 .logoLink {
   color: inherit;
   text-decoration: none;
+}
+
+.logoIcon {
+  width: 95px;
+  height: 29px;
 }
 
 .closeButton {
@@ -98,8 +108,8 @@
 }
 
 .closeIcon {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   display: block;
   color: #241a1d;
 }
@@ -110,5 +120,28 @@
   }
   to {
     transform: translateX(0);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    background: rgba(36, 26, 29, 0.28);
+  }
+  to {
+    background: rgba(36, 26, 29, 0);
+  }
+}
+@media (min-width: 1440px) {
+  .navLink {
+    font-size: 16px;
   }
 }

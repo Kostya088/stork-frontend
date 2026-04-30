@@ -13,15 +13,23 @@
 @media (min-width: 1440px) {
   .layout {
     display: grid;
-    grid-template-columns: 320px 1fr;
+    grid-template-columns: 312px 1fr;
   }
 
-.sidebarDesktop {
-  display: block;
-  border-right: 1px solid var(--color-scheme-border);
-}
+  .sidebarDesktop {
+    display: block;
+    border-right: 1px solid var(--color-scheme-border);
+  }
 
   .main {
     padding: 24px;
+  }
+
+  .noSidebar {
+    grid-template-columns: 1fr;
+  }
+
+  .noSidebar .main {
+    padding: 0;
   }
 }

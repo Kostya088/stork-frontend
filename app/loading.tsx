@@ -1,3 +1,25 @@
+"use client";
+
+import PuffLoader from "react-spinners/PuffLoader";
+
 export default function Loading() {
-  return <h2 style={{ textAlign: "center" }}>Loading, please wait...</h2>;
+  return (
+    <div
+      style={{
+        position: "fixed",
+        inset: 0,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "rgba(255,255,255,0.8)", // напівпрозорий фон
+        zIndex: 9999,
+      }}
+    >
+      <PuffLoader
+        color="#2563eb"
+        size={90}
+        speedMultiplier={1.2}
+      />
+    </div>
+  );
 }
