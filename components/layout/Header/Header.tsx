@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useSidebarStore } from "@/lib/store/sidebarStore";
-import css from "./Header.module.css";
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { useSidebarStore } from '@/lib/store/sidebarStore';
+import css from './Header.module.css';
 
 export default function Header({
   showMobileButton = false,
@@ -13,18 +13,18 @@ export default function Header({
   const sideBarToggle = useSidebarStore((state) => state.toggle);
   const pathname = usePathname();
   const isAuthPage =
-    pathname === "/login" ||
-    pathname === "/register" ||
-    pathname === "/profile/edit";
+    pathname === '/login' ||
+    pathname === '/register' ||
+    pathname === '/profile/edit';
 
   if (hideOnAuth && isAuthPage) return null;
 
   return (
     <header
-      className={`${css.header} ${hideOnDesktop ? css.hideOnDesktop : ""}`}
+      className={`${css.header} ${hideOnDesktop ? css.hideOnDesktop : ''}`}
     >
       <Link href="/" className={css.logoLink}>
-        <svg className={css.logoIcon} width="76" height="24">
+        <svg className={css.logoIcon} width="95" height="29">
           <use href="/icons/sprite.svg#icon-leleka-logo" />
         </svg>
       </Link>

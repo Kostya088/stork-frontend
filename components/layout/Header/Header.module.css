@@ -32,4 +32,7 @@
   .hideOnDesktop {
     display: none;
   }
+  .header {
+    padding: 16px 16px;
+  }
 }
