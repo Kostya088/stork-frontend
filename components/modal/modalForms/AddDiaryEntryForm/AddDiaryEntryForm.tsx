@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { ErrorMessage, Field, Form, Formik } from 'formik';
+import { ErrorMessage, Field, Form, Formik, useFormikContext } from 'formik';
 import * as Yup from 'yup';
 
 import styles from './AddDiaryEntryForm.module.css';
@@ -10,6 +10,8 @@ import type { DiaryEntry } from '@/types/diaryEntry';
 import type { Emotion } from '@/types/emotion';
 import type { CreateDiaryData, UpdateDiaryData } from '@/lib/api/clientApi';
 import { getEmotionId } from '@/utils/diary';
+
+/* ==================== TYPES ==================== */
 
 interface AddDiaryEntryFormProps {
   entry: DiaryEntry | null;
@@ -22,6 +24,18 @@ interface DiaryFormValues {
   description: string;
   emotions: string[];
 }
+
+/* ==================== CONSTANTS ==================== */
+
+const STORAGE_KEY = 'diaryEntryDraft';
+
+const fallbackEmotions: Emotion[] = [
+  { _id: 'inspiration', title: 'Натхнення' },
+  { _id: 'gratitude', title: 'Вдячність' },
+  { _id: 'anxiety', title: 'Тривога' },
+  { _id: 'cravings', title: 'Дивні бажання' },
+  { _id: 'nausea', title: 'Нудота' },
+];
 
 const validationSchema = Yup.object({
   title: Yup.string()
@@ -41,36 +55,48 @@ const validationSchema = Yup.object({
     .required(),
 });
 
-const fallbackEmotions: Emotion[] = [
-  { _id: 'inspiration', title: 'Натхнення' },
-  { _id: 'gratitude', title: 'Вдячність' },
-  { _id: 'anxiety', title: 'Тривога' },
-  { _id: 'cravings', title: 'Дивні бажання' },
-  { _id: 'nausea', title: 'Нудота' },
-];
+/* ==================== HELPERS ==================== */
+
+function DiaryFormWatcher() {
+  const { values } = useFormikContext<DiaryFormValues>();
+
+  useEffect(() => {
+    try {
+      sessionStorage.setItem(STORAGE_KEY, JSON.stringify(values));
+    } catch {}
+  }, [values]);
+
+  return null;
+}
+
+/* ==================== COMPONENT ==================== */
 
 export default function AddDiaryEntryForm({
   entry,
   emotions,
   onSubmit,
 }: AddDiaryEntryFormProps) {
-  const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
+  const [isOpen, setIsOpen] = useState(false);
 
-  const emotionOptions = emotions.length > 0 ? emotions : fallbackEmotions;
+  const emotionOptions = emotions.length ? emotions : fallbackEmotions;
 
-  const initialValues: DiaryFormValues = {
-    title: entry?.title ?? '',
-    description: entry?.description ?? '',
-    emotions: entry?.emotions.map(getEmotionId) ?? [],
-  };
+  const [initialValues] = useState<DiaryFormValues>(() => {
+    try {
+      const saved = sessionStorage.getItem(STORAGE_KEY);
+      if (saved && !entry) return JSON.parse(saved);
+    } catch {}
+
+    return {
+      title: entry?.title ?? '',
+      description: entry?.description ?? '',
+      emotions: entry?.emotions.map(getEmotionId) ?? [],
+    };
+  });
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(e.target as Node)
-      ) {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
         setIsOpen(false);
       }
     };
@@ -91,6 +117,8 @@ export default function AddDiaryEntryForm({
             description: values.description.trim(),
             emotions: values.emotions,
           });
+
+          sessionStorage.removeItem(STORAGE_KEY);
         } finally {
           actions.setSubmitting(false);
         }
@@ -98,13 +126,14 @@ export default function AddDiaryEntryForm({
     >
       {({ values, isSubmitting }) => (
         <>
-          {/* 🔥 ГОЛОВНИЙ ЗАГОЛОВОК */}
           <h2 className={styles.title}>
             {entry ? 'Редагувати запис' : 'Новий запис'}
           </h2>
 
+          <DiaryFormWatcher />
+
           <Form className={styles.form}>
-            {/* Заголовок */}
+            {/* TITLE */}
             <label className={styles.fieldGroup}>
               <span className={styles.label}>Заголовок</span>
               <Field
@@ -112,14 +141,10 @@ export default function AddDiaryEntryForm({
                 name="title"
                 placeholder="Введіть заголовок запису"
               />
-              <ErrorMessage
-                name="title"
-                component="span"
-                className={styles.error}
-              />
+              <ErrorMessage name="title" component="span" className={styles.error} />
             </label>
 
-            {/* Категорії */}
+            {/* CATEGORIES */}
             <fieldset className={styles.fieldset}>
               <legend className={styles.label}>Категорії</legend>
 
@@ -127,13 +152,13 @@ export default function AddDiaryEntryForm({
                 <button
                   type="button"
                   className={styles.dropdownTrigger}
-                  onClick={() => setIsOpen((prev) => !prev)}
+                  onClick={() => setIsOpen(prev => !prev)}
                 >
                   <div className={styles.selectedList}>
-                    {values.emotions.length > 0 ? (
+                    {values.emotions.length ? (
                       emotionOptions
-                        .filter((e) => values.emotions.includes(e._id))
-                        .map((e) => (
+                        .filter(e => values.emotions.includes(e._id))
+                        .map(e => (
                           <span key={e._id} className={styles.chip}>
                             {e.title}
                           </span>
@@ -146,28 +171,27 @@ export default function AddDiaryEntryForm({
                   </div>
 
                   <span className={styles.arrow}>
-                    {isOpen ? (
-                      <svg width="12" height="7">
-                        <use href="/icons/sprite.svg#icon-chevron-up"></use>
-                      </svg>
-                    ) : (
-                      <svg width="12" height="7">
-                        <use href="/icons/sprite.svg#icon-chevron-down"></use>
-                      </svg>
-                    )}
+                    <svg width="12" height="7">
+                      <use
+                        href={`/icons/sprite.svg#${
+                          isOpen ? 'icon-chevron-up' : 'icon-chevron-down'
+                        }`}
+                      />
+                    </svg>
                   </span>
                 </button>
 
                 {isOpen && (
                   <div className={styles.dropdownMenu}>
-                    {emotionOptions.map((emotion) => {
+                    {emotionOptions.map(emotion => {
                       const checked = values.emotions.includes(emotion._id);
 
                       return (
                         <label
                           key={emotion._id}
-                          className={`${styles.option} ${checked ? styles.checked : ''
-                            }`}
+                          className={`${styles.option} ${
+                            checked ? styles.checked : ''
+                          }`}
                         >
                           <Field
                             className={styles.checkbox}
@@ -190,7 +214,7 @@ export default function AddDiaryEntryForm({
               />
             </fieldset>
 
-            {/* Текст */}
+            {/* DESCRIPTION */}
             <label className={styles.fieldGroup}>
               <span className={styles.label}>Запис</span>
               <Field
@@ -206,7 +230,7 @@ export default function AddDiaryEntryForm({
               />
             </label>
 
-            {/* Кнопка */}
+            {/* SUBMIT */}
             <button
               className={styles.submitButton}
               type="submit"

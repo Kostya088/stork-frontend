@@ -1,3 +1,5 @@
+/* ==================== LAYOUT ==================== */
+
 .form {
     display: flex;
     flex-direction: column;
@@ -30,6 +32,8 @@
     line-height: 1.5;
     color: var(--color-scheme-text);
 }
+
+/* ==================== INPUTS ==================== */
 
 .input {
     background: var(--opacity-neutral-darkest-5);
@@ -69,7 +73,7 @@
     outline: none;
 }
 
-/* DROPDOWN */
+/* ==================== DROPDOWN ==================== */
 
 .dropdown {
     position: relative;
@@ -80,14 +84,19 @@
     border-radius: 12px;
     padding: 8px 12px;
     width: 294px;
-    height: 48px;
+    max-height: 48px;
     background: var(--color-neutral-lightest);
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.dropdownTrigger:focus {
+.dropdownTrigger:hover {
+    border: 2px solid var(--color-scheme-accent);
+    outline: none;
+}
+
+.dropdownTrigger:focus-within {
     border-left: 1px solid var(--color-scheme-border);
     border-right: 1px solid var(--color-scheme-border);
     border-top: 1px solid var(--color-scheme-border);
@@ -95,11 +104,29 @@
     background: var(--opacity-neutral-darkest-5);
 }
 
+.dropdownMenu {
+    position: absolute;
+    overflow-y: auto;
+    border: 1px solid var(--color-scheme-border);
+    border-radius: 0 0 12px 12px;
+    padding: 8px 0px;
+    width: 295px;
+    height: 220px;
+    background: var(--color-neutral-lightest);
+    gap: 8px;
+    scrollbar-gutter: stable;
+}
+
+/* ==================== DROPDOWN CONTENT ==================== */
 
 .selectedList {
     display: flex;
+    align-items: center;
     gap: 6px;
     flex-wrap: wrap;
+    max-height: 60px;
+    overflow-y: auto;
+    padding-right: 4px;
 }
 
 .placeholder {
@@ -122,82 +149,16 @@
     fill: var(--opacity-neutral-darkest-60);
 }
 
-
-.dropdownMenu {
-    position: absolute;
-    overflow-y: auto;
-    border: 1px solid var(--color-scheme-border);
-    border-radius: 0 0 12px 12px;
-    padding: 8px 0px;
-    width: 295px;
-    height: 220px;
-    background: var(--color-neutral-lightest);
-    gap: 8px;
-     scrollbar-gutter: stable;
-}
-
-.dropdownMenu::-webkit-scrollbar {
-    width: 10px;
-}
-
-.dropdownMenu::-webkit-scrollbar-track {
-    background: #eee; /* сіра лінія */
-    border-radius: 4px;
-    margin: 8px 0;
-}
-
-.dropdownMenu::-webkit-scrollbar-thumb {
-    background: var(--color-scheme-accent);
-    border-radius: 4px;
-}
-
-/* hover (опціонально) */
-.dropdownMenu::-webkit-scrollbar-thumb:hover {
-    background: #e58c95;
-}
-
+/* ==================== OPTIONS ==================== */
 
 .option {
-   display: flex;
+    display: flex;
     align-items: center;
     gap: 8px;
     padding: 8px;
     border-radius: 8px;
     cursor: pointer;
 }
-
-.checkbox {
-    appearance: none;
-    -webkit-appearance: none;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    position: relative;
-background: var(--opacity-neutral-darkest-5);
-border: 1px solid var(--opacity-transparent);
-border-radius: 4px;
-width: 18px;
-height: 18px;
-}
-.checkbox:checked {
-border-radius: 4px;
-background: var(--color-neutral-darkest);
-border: 1px solid var(--color-neutral-darkest);
-}
-
-.checkbox:checked::after {
-    content: '';
-        align-items: center;
-    justify-content: center;
-    width: 6px;
-    height: 10px;
-    border: solid var(--color-white);;
-    border-width: 0 2px 2px 0;
-    transform: rotate(45deg);
-    position: absolute;
-}
-
 
 .checked {
     background: var(--opacity-neutral-darkest-5);
@@ -207,13 +168,77 @@ border: 1px solid var(--color-neutral-darkest);
     height: 37px;
 }
 
-/* BUTTON */
+/* ==================== CHECKBOX ==================== */
+
+.checkbox {
+    appearance: none;
+    -webkit-appearance: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    background: var(--opacity-neutral-darkest-5);
+    border: 1px solid var(--opacity-transparent);
+    border-radius: 4px;
+    width: 18px;
+    height: 18px;
+}
+
+.checkbox:checked {
+    background: var(--color-neutral-darkest);
+    border: 1px solid var(--color-neutral-darkest);
+}
+
+.checkbox:checked::after {
+    content: '';
+    width: 6px;
+    height: 10px;
+    border: solid var(--color-white);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    position: absolute;
+}
+
+/* ==================== SCROLLBARS ==================== */
+
+.selectedList::-webkit-scrollbar {
+    width: 6px;
+}
+
+.selectedList::-webkit-scrollbar-thumb {
+    background: var(--color-scheme-accent);
+    border-radius: 4px;
+}
+
+.dropdownMenu::-webkit-scrollbar {
+    width: 10px;
+}
+
+.dropdownMenu::-webkit-scrollbar-track {
+    background: #eee;
+    border-radius: 4px;
+    margin: 8px 0;
+}
+
+.dropdownMenu::-webkit-scrollbar-thumb {
+    background: var(--color-scheme-accent);
+    border-radius: 4px;
+}
+
+.dropdownMenu::-webkit-scrollbar-thumb:hover {
+    background: #e58c95;
+}
+
+/* ==================== BUTTON ==================== */
 
 .submitButton {
     display: flex;
     align-items: center;
     justify-content: center;
     align-self: center;
+    border: none;
+    outline: none;
     background: var(--color-scheme-foreground-alt);
     border-bottom: 4px solid var(--color-scheme-accent);
     border-radius: 100px;
@@ -242,12 +267,14 @@ border: 1px solid var(--color-neutral-darkest);
     opacity: 0.3;
 }
 
-/* ERROR */
+/* ==================== ERROR ==================== */
 
 .error {
     font-size: 12px;
     color: red;
 }
+
+/* ==================== RESPONSIVE ==================== */
 
 @media screen and (min-width: 768px) {
     .title {
