@@ -98,6 +98,7 @@
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 0 0 12px 12px;
   overflow: hidden;
+  z-index: 2;
 }
 
 .genderSelect :global(.gender__option) {
