@@ -1,17 +1,21 @@
-"use client";
+'use client';
 
-import { ErrorMessage, Field, Form, Formik } from "formik";
-import * as Yup from "yup";
-import styles from "./AddDiaryEntryForm.module.css";
-import type { DiaryEntry } from "@/types/diaryEntry";
-import type { Emotion } from "@/types/emotion";
-import type { CreateDiaryData, UpdateDiaryData } from "@/lib/api/clientApi";
-import { getEmotionId } from "@/utils/diary";
+import { useEffect, useRef, useState } from 'react';
+import { ErrorMessage, Field, Form, Formik, useFormikContext } from 'formik';
+import * as Yup from 'yup';
+
+import styles from './AddDiaryEntryForm.module.css';
+
+import type { DiaryEntry } from '@/types/diaryEntry';
+import type { Emotion } from '@/types/emotion';
+import type { CreateDiaryData, UpdateDiaryData } from '@/lib/api/clientApi';
+import { getEmotionId } from '@/utils/diary';
+
+/* ==================== TYPES ==================== */
 
 interface AddDiaryEntryFormProps {
   entry: DiaryEntry | null;
   emotions: Emotion[];
-  isSubmitting: boolean;
   onSubmit: (data: CreateDiaryData | UpdateDiaryData) => Promise<void>;
 }
 
@@ -21,130 +25,221 @@ interface DiaryFormValues {
   emotions: string[];
 }
 
+/* ==================== CONSTANTS ==================== */
+
+const STORAGE_KEY = 'diaryEntryDraft';
+
+const fallbackEmotions: Emotion[] = [
+  { _id: 'inspiration', title: 'Натхнення' },
+  { _id: 'gratitude', title: 'Вдячність' },
+  { _id: 'anxiety', title: 'Тривога' },
+  { _id: 'cravings', title: 'Дивні бажання' },
+  { _id: 'nausea', title: 'Нудота' },
+];
+
 const validationSchema = Yup.object({
   title: Yup.string()
     .trim()
-    .min(1, "Введіть заголовок")
-    .max(64, "Максимум 64 символи")
-    .required("Введіть заголовок"),
+    .min(1, 'Введіть заголовок')
+    .max(64, 'Максимум 64 символи')
+    .required('Введіть заголовок'),
   description: Yup.string()
     .trim()
-    .min(1, "Введіть текст запису")
-    .max(1000, "Максимум 1000 символів")
-    .required("Введіть текст запису"),
+    .min(1, 'Введіть текст запису')
+    .max(1000, 'Максимум 1000 символів')
+    .required('Введіть текст запису'),
   emotions: Yup.array()
     .of(Yup.string().required())
-    .min(1, "Оберіть хоча б одну категорію")
-    .max(12, "Можна обрати максимум 12 категорій")
-    .required("Оберіть категорії"),
+    .min(1, 'Оберіть хоча б одну категорію')
+    .max(12)
+    .required(),
 });
 
-const fallbackEmotions: Emotion[] = [
-  { _id: "inspiration", title: "Натхнення" },
-  { _id: "gratitude", title: "Вдячність" },
-  { _id: "anxiety", title: "Тривога" },
-  { _id: "cravings", title: "Дивні бажання" },
-  { _id: "nausea", title: "Нудота" },
-];
+/* ==================== HELPERS ==================== */
+
+function DiaryFormWatcher() {
+  const { values } = useFormikContext<DiaryFormValues>();
+
+  useEffect(() => {
+    try {
+      sessionStorage.setItem(STORAGE_KEY, JSON.stringify(values));
+    } catch {}
+  }, [values]);
+
+  return null;
+}
+
+/* ==================== COMPONENT ==================== */
 
 export default function AddDiaryEntryForm({
   entry,
   emotions,
-  isSubmitting,
   onSubmit,
 }: AddDiaryEntryFormProps) {
-  const emotionOptions = emotions.length > 0 ? emotions : fallbackEmotions;
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
+  const [isOpen, setIsOpen] = useState(false);
 
-  const initialValues: DiaryFormValues = {
-    title: entry?.title ?? "",
-    description: entry?.description ?? "",
-    emotions: entry?.emotions.map(getEmotionId) ?? [],
-  };
+  const emotionOptions = emotions.length ? emotions : fallbackEmotions;
+
+  const [initialValues] = useState<DiaryFormValues>(() => {
+    try {
+      const saved = sessionStorage.getItem(STORAGE_KEY);
+      if (saved && !entry) return JSON.parse(saved);
+    } catch {}
+
+    return {
+      title: entry?.title ?? '',
+      description: entry?.description ?? '',
+      emotions: entry?.emotions.map(getEmotionId) ?? [],
+    };
+  });
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   return (
     <Formik<DiaryFormValues>
       enableReinitialize
       initialValues={initialValues}
       validationSchema={validationSchema}
-      onSubmit={async (values) => {
-        await onSubmit({
-          title: values.title.trim(),
-          description: values.description.trim(),
-          emotions: values.emotions,
-        });
+      onSubmit={async (values, actions) => {
+        try {
+          await onSubmit({
+            title: values.title.trim(),
+            description: values.description.trim(),
+            emotions: values.emotions,
+          });
+
+          sessionStorage.removeItem(STORAGE_KEY);
+        } finally {
+          actions.setSubmitting(false);
+        }
       }}
     >
-      {({ values }) => (
-        <Form className={styles.form}>
-          <label className={styles.fieldGroup}>
-            <span className={styles.label}>Заголовок</span>
-            <Field
-              className={styles.input}
-              name="title"
-              type="text"
-              placeholder="Введіть заголовок запису"
-            />
-            <ErrorMessage
-              className={styles.error}
-              name="title"
-              component="span"
-            />
-          </label>
+      {({ values, isSubmitting }) => (
+        <>
+          <h2 className={styles.title}>
+            {entry ? 'Редагувати запис' : 'Новий запис'}
+          </h2>
 
-          <fieldset className={styles.fieldset}>
-            <legend className={styles.label}>Категорії</legend>
-            <div className={styles.emotionBox}>
-              <p className={styles.selectHint}>Оберіть категорію</p>
-              <div className={styles.emotionList}>
-                {emotionOptions.map((emotion) => {
-                  const checked = values.emotions.includes(emotion._id);
-                  return (
-                    <label
-                      className={`${styles.emotionOption} ${checked ? styles.checked : ""}`}
-                      key={emotion._id}
-                    >
-                      <Field
-                        className={styles.checkbox}
-                        type="checkbox"
-                        name="emotions"
-                        value={emotion._id}
+          <DiaryFormWatcher />
+
+          <Form className={styles.form}>
+            {/* TITLE */}
+            <label className={styles.fieldGroup}>
+              <span className={styles.label}>Заголовок</span>
+              <Field
+                className={styles.input}
+                name="title"
+                placeholder="Введіть заголовок запису"
+              />
+              <ErrorMessage name="title" component="span" className={styles.error} />
+            </label>
+
+            {/* CATEGORIES */}
+            <fieldset className={styles.fieldset}>
+              <legend className={styles.label}>Категорії</legend>
+
+              <div className={styles.dropdown} ref={dropdownRef}>
+                <button
+                  type="button"
+                  className={styles.dropdownTrigger}
+                  onClick={() => setIsOpen(prev => !prev)}
+                >
+                  <div className={styles.selectedList}>
+                    {values.emotions.length ? (
+                      emotionOptions
+                        .filter(e => values.emotions.includes(e._id))
+                        .map(e => (
+                          <span key={e._id} className={styles.chip}>
+                            {e.title}
+                          </span>
+                        ))
+                    ) : (
+                      <span className={styles.placeholder}>
+                        Оберіть категорію
+                      </span>
+                    )}
+                  </div>
+
+                  <span className={styles.arrow}>
+                    <svg width="12" height="7">
+                      <use
+                        href={`/icons/sprite.svg#${
+                          isOpen ? 'icon-chevron-up' : 'icon-chevron-down'
+                        }`}
                       />
-                      <span>{emotion.title}</span>
-                    </label>
-                  );
-                })}
+                    </svg>
+                  </span>
+                </button>
+
+                {isOpen && (
+                  <div className={styles.dropdownMenu}>
+                    {emotionOptions.map(emotion => {
+                      const checked = values.emotions.includes(emotion._id);
+
+                      return (
+                        <label
+                          key={emotion._id}
+                          className={`${styles.option} ${
+                            checked ? styles.checked : ''
+                          }`}
+                        >
+                          <Field
+                            className={styles.checkbox}
+                            type="checkbox"
+                            name="emotions"
+                            value={emotion._id}
+                          />
+                          {emotion.title}
+                        </label>
+                      );
+                    })}
+                  </div>
+                )}
               </div>
-            </div>
-            <ErrorMessage
-              className={styles.error}
-              name="emotions"
-              component="span"
-            />
-          </fieldset>
 
-          <label className={styles.fieldGroup}>
-            <span className={styles.label}>Запис</span>
-            <Field
-              as="textarea"
-              className={styles.textarea}
-              name="description"
-              placeholder="Запишіть, як ви себе відчуваєте"
-            />
-            <ErrorMessage
-              className={styles.error}
-              name="description"
-              component="span"
-            />
-          </label>
+              <ErrorMessage
+                name="emotions"
+                component="span"
+                className={styles.error}
+              />
+            </fieldset>
 
-          <button
-            className={styles.submitButton}
-            type="submit"
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? "Зберігаємо..." : "Зберегти"}
-          </button>
-        </Form>
+            {/* DESCRIPTION */}
+            <label className={styles.fieldGroup}>
+              <span className={styles.label}>Запис</span>
+              <Field
+                as="textarea"
+                className={styles.textarea}
+                name="description"
+                placeholder="Запишіть, як ви себе відчуваєте"
+              />
+              <ErrorMessage
+                name="description"
+                component="span"
+                className={styles.error}
+              />
+            </label>
+
+            {/* SUBMIT */}
+            <button
+              className={styles.submitButton}
+              type="submit"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? 'Зберігаємо...' : 'Зберегти'}
+            </button>
+          </Form>
+        </>
       )}
     </Formik>
   );

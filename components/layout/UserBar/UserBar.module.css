@@ -2,18 +2,21 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 16px 24px;
+  padding: 12px 6px;
   border-radius: 12px;
   text-decoration: none;
   transition: background-color 0.2s;
   flex: 1;
   min-height: 80px;
+  min-width: 0;
 }
 
 .wrapper {
   display: flex;
   align-items: center;
   gap: 4px;
+  width: 100%;
+  min-width: 0;
 }
 
 .container:hover {
@@ -47,6 +50,7 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  min-width: 0;
 }
 
 .name {
@@ -69,10 +73,16 @@
 .logoutButton {
   all: unset;
   cursor: pointer;
-  padding: 8px;
-  margin-right: 16px;
+  padding: 16px;
+  margin-right: 8px;
   border-radius: 8px;
   transition: background-color 0.2s;
+}
+
+@media (min-width: 1440px) {
+  .logoutButton {
+    margin-right: -8px;
+  }
 }
 
 .logoutButton:hover {

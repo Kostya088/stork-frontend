@@ -19,7 +19,6 @@
   border-color: var(--color-scheme-border);
   box-shadow: 0 8px 20px rgba(255, 158, 185, 0.24);
   outline: none;
-  transform: translateY(-1px);
 }
 
 .topLine {

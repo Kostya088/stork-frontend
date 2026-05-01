@@ -131,7 +131,7 @@ export default function DiaryPage({
   const handleSelectEntry = (entry: DiaryEntry) => {
     setSelectedId(entry._id);
 
-    if (window.matchMedia('(max-width: 1440px)').matches) {
+    if (window.matchMedia("(max-width: 1440px)").matches) {
       router.push(`/diary/${entry._id}`);
     }
   };
