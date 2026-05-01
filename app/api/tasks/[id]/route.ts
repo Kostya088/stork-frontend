@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { isAxiosError } from 'axios';
 import { logErrorResponse } from '@/app/api/_utils/utils';
-import { nextServer } from '@/lib/api/api';
+import { api } from '../../api';
 
 export async function DELETE(
   _request: NextRequest,
@@ -12,7 +12,7 @@ export async function DELETE(
     const cookieStore = await cookies();
     const { id } = await params;
 
-    const res = await nextServer.delete(`/tasks/${id}`, {
+    const res = await api.delete(`/tasks/${id}`, {
       headers: {
         Cookie: cookieStore.toString(),
       },
@@ -44,7 +44,7 @@ export async function PATCH(
     const { id } = await params;
     const body = await _request.json();
 
-    const res = await nextServer.patch(`/tasks/${id}`, body, {
+    const res = await api.patch(`/tasks/${id}`, body, {
       headers: {
         Cookie: cookieStore.toString(),
         'Content-Type': 'application/json',

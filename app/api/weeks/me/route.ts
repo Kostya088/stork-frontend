@@ -1,14 +1,14 @@
-import { NextResponse } from "next/server";
-import { cookies } from "next/headers";
-import { isAxiosError } from "axios";
-import { logErrorResponse } from "@/app/api/_utils/utils";
-import { nextServer } from "@/lib/api/api";
+import { NextResponse } from 'next/server';
+import { cookies } from 'next/headers';
+import { isAxiosError } from 'axios';
+import { logErrorResponse } from '@/app/api/_utils/utils';
+import { api } from '../../api';
 
 export async function GET() {
   try {
     const cookieStore = await cookies();
 
-    const res = await nextServer.get("/weeks/me", {
+    const res = await api.get('/weeks/me', {
       headers: {
         Cookie: cookieStore.toString(),
       },
@@ -25,7 +25,7 @@ export async function GET() {
     }
     logErrorResponse({ message: (error as Error).message });
     return NextResponse.json(
-      { error: "Internal Server Error" },
+      { error: 'Internal Server Error' },
       { status: 500 },
     );
   }

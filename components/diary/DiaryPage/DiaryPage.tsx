@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import { useEffect, useMemo, useState } from "react";
-import { useRouter } from "next/navigation";
-import GreetingBlock from "@/components/dashboard/GreetingBlock/GreetingBlock";
-import DiaryList from "@/components/diary/DiaryList/DiaryList";
-import DiaryEntryDetails from "@/components/diary/DiaryEntryDetails/DiaryEntryDetails";
-import Modal from "@/components/modal/Modal/Modal";
-import ConfirmationContent from "@/components/modal/ConfirmationContent/ConfirmationContent";
-import AddDiaryEntryForm from "@/components/modal/modalForms/AddDiaryEntryForm/AddDiaryEntryForm";
+import { useEffect, useMemo, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import GreetingBlock from '@/components/dashboard/GreetingBlock/GreetingBlock';
+import DiaryList from '@/components/diary/DiaryList/DiaryList';
+import DiaryEntryDetails from '@/components/diary/DiaryEntryDetails/DiaryEntryDetails';
+import Modal from '@/components/modal/Modal/Modal';
+import ConfirmationContent from '@/components/modal/ConfirmationContent/ConfirmationContent';
+import AddDiaryEntryForm from '@/components/modal/modalForms/AddDiaryEntryForm/AddDiaryEntryForm';
 import {
   createDiary,
   deleteDiary,
@@ -16,10 +16,10 @@ import {
   updateDiary,
   type CreateDiaryData,
   type UpdateDiaryData,
-} from "@/lib/api/clientApi";
-import type { DiaryEntry } from "@/types/diaryEntry";
-import type { Emotion } from "@/types/emotion";
-import styles from "./DiaryPage.module.css";
+} from '@/lib/api/clientApi';
+import type { DiaryEntry } from '@/types/diaryEntry';
+import type { Emotion } from '@/types/emotion';
+import styles from './DiaryPage.module.css';
 
 interface DiaryPageProps {
   initialSelectedId?: string;
@@ -37,7 +37,7 @@ const resolveEntryEmotions = (
   return {
     ...entry,
     emotions: entry.emotions.map((emotion) => {
-      if (typeof emotion !== "string") return emotion;
+      if (typeof emotion !== 'string') return emotion;
       return emotionsById.get(emotion) ?? emotion;
     }),
   };
@@ -96,7 +96,7 @@ export default function DiaryPage({
         });
       } catch {
         if (isMounted) {
-          setError("Не вдалося завантажити записи щоденника");
+          setError('Не вдалося завантажити записи щоденника');
         }
       } finally {
         if (isMounted) {
@@ -131,7 +131,7 @@ export default function DiaryPage({
   const handleSelectEntry = (entry: DiaryEntry) => {
     setSelectedId(entry._id);
 
-    if (window.matchMedia("(max-width: 1023px)").matches) {
+    if (window.matchMedia('(max-width: 1440px)').matches) {
       router.push(`/diary/${entry._id}`);
     }
   };
@@ -176,7 +176,7 @@ export default function DiaryPage({
       closeEntryModal();
     } catch {
       setError(
-        "Не вдалося зберегти запис. Перевірте дані та спробуйте ще раз.",
+        'Не вдалося зберегти запис. Перевірте дані та спробуйте ще раз.',
       );
     } finally {
       setIsSubmitting(false);
@@ -208,17 +208,17 @@ export default function DiaryPage({
       setEntryToDelete(null);
 
       if (detailOnly) {
-        router.push("/diary");
+        router.push('/diary');
       }
     } catch {
-      setError("Не вдалося видалити запис. Спробуйте ще раз.");
+      setError('Не вдалося видалити запис. Спробуйте ще раз.');
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <div className={`${styles.page} ${detailOnly ? styles.detailPage : ""}`}>
+    <div className={`${styles.page} ${detailOnly ? styles.detailPage : ''}`}>
       <div className={styles.inner}>
         <GreetingBlock />
 
@@ -240,7 +240,7 @@ export default function DiaryPage({
               entry={selectedEntry}
               isLoading={isLoading}
               isStandalone
-              onBack={() => router.push("/diary")}
+              onBack={() => router.push('/diary')}
               onEdit={handleEditClick}
               onDelete={setEntryToDelete}
             />
@@ -271,7 +271,7 @@ export default function DiaryPage({
       <Modal isOpen={Boolean(entryToDelete)} onClose={closeDeleteModal}>
         <ConfirmationContent
           title="Видалити запис?"
-          confirmText={isSubmitting ? "Видаляємо..." : "Видалити"}
+          confirmText={isSubmitting ? 'Видаляємо...' : 'Видалити'}
           cancelText="Скасувати"
           onConfirm={handleDeleteConfirm}
           onCancel={closeDeleteModal}

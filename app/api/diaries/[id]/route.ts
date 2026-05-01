@@ -1,39 +1,8 @@
-import { NextRequest, NextResponse } from "next/server";
-import { cookies } from "next/headers";
-import { isAxiosError } from "axios";
-import { logErrorResponse } from "@/app/api/_utils/utils";
-import { nextServer } from "@/lib/api/api";
-
-export async function GET(
-  _request: NextRequest,
-  { params }: { params: Promise<{ id: string }> },
-) {
-  try {
-    const cookieStore = await cookies();
-    const { id } = await params;
-
-    const res = await nextServer.get(`/diaries/${id}`, {
-      headers: {
-        Cookie: cookieStore.toString(),
-      },
-    });
-
-    return NextResponse.json(res.data, { status: res.status });
-  } catch (error) {
-    if (isAxiosError(error)) {
-      logErrorResponse(error.response?.data);
-      return NextResponse.json(
-        { error: error.message, response: error.response?.data },
-        { status: error.status },
-      );
-    }
-    logErrorResponse({ message: (error as Error).message });
-    return NextResponse.json(
-      { error: "Internal Server Error" },
-      { status: 500 },
-    );
-  }
-}
+import { NextRequest, NextResponse } from 'next/server';
+import { cookies } from 'next/headers';
+import { isAxiosError } from 'axios';
+import { logErrorResponse } from '@/app/api/_utils/utils';
+import { api } from '../../api';
 
 export async function PATCH(
   request: NextRequest,
@@ -44,13 +13,14 @@ export async function PATCH(
     const { id } = await params;
     const body = await request.json();
 
-    const res = await nextServer.patch(`/diaries/${id}`, body, {
+    const res = await api.patch(`/diaries/${id}`, body, {
       headers: {
         Cookie: cookieStore.toString(),
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     });
 
+    console.log('HEllo world');
     return NextResponse.json(res.data, { status: res.status });
   } catch (error) {
     if (isAxiosError(error)) {
@@ -62,7 +32,7 @@ export async function PATCH(
     }
     logErrorResponse({ message: (error as Error).message });
     return NextResponse.json(
-      { error: "Internal Server Error" },
+      { error: 'Internal Server Error' },
       { status: 500 },
     );
   }
@@ -76,7 +46,7 @@ export async function DELETE(
     const cookieStore = await cookies();
     const { id } = await params;
 
-    const res = await nextServer.delete(`/diaries/${id}`, {
+    const res = await api.delete(`/diaries/${id}`, {
       headers: {
         Cookie: cookieStore.toString(),
       },
@@ -93,7 +63,7 @@ export async function DELETE(
     }
     logErrorResponse({ message: (error as Error).message });
     return NextResponse.json(
-      { error: "Internal Server Error" },
+      { error: 'Internal Server Error' },
       { status: 500 },
     );
   }

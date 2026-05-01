@@ -1,15 +1,15 @@
-import { cookies } from "next/headers";
-import { NextRequest, NextResponse } from "next/server";
-import { checkSession } from "./lib/api/serverApi";
+import { cookies } from 'next/headers';
+import { NextRequest, NextResponse } from 'next/server';
+import { checkSession } from './lib/api/serverApi';
 
-const privateRoutes = ["/profile", "/diary", "/journey"];
-const publicRoutes = ["/login", "/register"];
+const privateRoutes = ['/profile', '/diary', '/journey'];
+const publicRoutes = ['/login', '/register'];
 
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const cookieStore = await cookies();
-  let accessToken = cookieStore.get("accessToken")?.value;
-  const refreshToken = cookieStore.get("refreshToken")?.value;
+  let accessToken = cookieStore.get('accessToken')?.value;
+  const refreshToken = cookieStore.get('refreshToken')?.value;
 
   const isPublicRoute = publicRoutes.some((route) =>
     pathname.startsWith(route),
@@ -24,11 +24,11 @@ export async function proxy(request: NextRequest) {
     try {
       const res = await checkSession();
       if (res.status === 200) {
-        const setCookie = res.headers["set-cookie"];
+        const setCookie = res.headers['set-cookie'];
         if (setCookie) {
           refreshedCookies = Array.isArray(setCookie) ? setCookie : [setCookie];
         }
-        accessToken = "refreshed";
+        accessToken = 'refreshed';
       }
     } catch {}
   }
@@ -36,30 +36,30 @@ export async function proxy(request: NextRequest) {
   const isLoggedIn = !!accessToken;
 
   if (isPrivateRoute && !isLoggedIn) {
-    return NextResponse.redirect(new URL("/login", request.url));
+    return NextResponse.redirect(new URL('/login', request.url));
   }
 
   if (isPublicRoute && isLoggedIn) {
-    const response = NextResponse.redirect(new URL("/", request.url));
+    const response = NextResponse.redirect(new URL('/', request.url));
     for (const cookie of refreshedCookies) {
-      response.headers.append("set-cookie", cookie);
+      response.headers.append('set-cookie', cookie);
     }
     return response;
   }
 
   const response = NextResponse.next();
   for (const cookie of refreshedCookies) {
-    response.headers.append("set-cookie", cookie);
+    response.headers.append('set-cookie', cookie);
   }
   return response;
 }
 
 export const config = {
   matcher: [
-    "/profile/:path*",
-    "/diary/:path*",
-    "/journey/:path*",
-    "/login",
-    "/register",
+    '/profile/:path*',
+    '/diary/:path*',
+    '/journey/:path*',
+    '/login',
+    '/register',
   ],
 };
