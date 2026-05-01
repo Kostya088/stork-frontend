@@ -1,110 +1,153 @@
 'use client';
+
 import css from './TasksReminderCard.module.css';
-import { useEffect, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuthStore } from '@/lib/store/authStore';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import Modal from '@/components/modal/Modal/Modal';
 import AddTaskForm from '@/components/modal/modalForms/AddTaskForm/AddTaskForm';
-import { useTaskStore } from '@/lib/store/taskStore';
 import { getTasks, updateTaskStatus } from '@/lib/api/clientApi';
+import type { Task } from '@/types/task';
 
 const TasksReminderCard = () => {
   const router = useRouter();
   const queryClient = useQueryClient();
+
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { isAuthenticated } = useAuthStore();
-  const tasks = useTaskStore((s) => s.tasks);
 
-  const setTasks = useTaskStore((s) => s.setTasks);
+  const isAuthenticated = useAuthStore((s) => s.isAuthenticated);
 
-  const { data } = useQuery({
+  const { data: tasks = [] } = useQuery<Task[]>({
     queryKey: ['tasks'],
     queryFn: getTasks,
+    enabled: isAuthenticated,
+    staleTime: 1000 * 60 * 2,
+    refetchOnWindowFocus: false,
   });
-
-  useEffect(() => {
-    if (data) {
-      setTasks(data);
-    }
-  }, [data, setTasks]);
 
   const handleCreate = () => {
     if (isAuthenticated) {
       setIsModalOpen(true);
     } else {
-      router.push('/auth/register');
+      router.push('/register');
     }
   };
 
-  return (
-    <div>
+  // ✅ FIX: стабильное обновление + защита от ошибок
+  const handleToggle = async (id: string, isDone: boolean) => {
+    try {
+      await updateTaskStatus(id, !isDone);
+
+      queryClient.setQueryData<Task[]>(['tasks'], (old) => {
+        if (!old) return old;
+
+        return old.map((t) =>
+          t._id === id ? { ...t, isDone: !isDone } : t
+        );
+      });
+    } catch (e) {
+      console.error(e);
+      queryClient.invalidateQueries({ queryKey: ['tasks'] });
+    }
+  };
+
+  const sortedTasks = useMemo(() => {
+    const active: Task[] = [];
+    const done: Task[] = [];
+
+    tasks.forEach((task) => {
+      if (task.isDone) done.push(task);
+      else active.push(task);
+    });
+
+    return [...active, ...done];
+  }, [tasks]);
+
+  // =========================
+  // GUEST STATE (КАК БЫЛО)
+  // =========================
+  if (!isAuthenticated) {
+    return (
       <section className={css.card}>
         <div className={css.cardHeader}>
           <h2 className={css.tasksHeading}>Важливі завдання</h2>
-          <button
-            className={css.addBtn}
-            onClick={handleCreate}
-            aria-label="Додати завдання"
-          >
-            <svg width="24" height="24" aria-hidden="true">
-              <use href="/icons/sprite.svg#icon-add" />
-            </svg>
+
+          <button className={css.addBtn} onClick={handleCreate}>
+            +
           </button>
         </div>
-        {!isAuthenticated || tasks.length === 0 ? (
-          <>
-            <div className={css.cardContent}>
-              <p className={css.text}>Наразі немає жодних завдань</p>
-              <p className={css.text}>Створіть перше нове завдання!</p>
-            </div>
-            <button className={css.button} onClick={handleCreate}>
-              Створити завдання
-            </button>
-          </>
-        ) : (
-          <ul className={css.list}>
-            {tasks.map((task) => (
-              <li key={task._id} className={css.item}>
-                <div className={css.taskDate}>
-                  <p>
-                    {new Date(task.date).toLocaleDateString('uk-UA', {
+
+        <div className={css.cardContent}>
+          <p className={css.textStrong}>Наразі немає жодних завдань</p>
+          <p className={css.text}>Створіть перше нове завдання!</p>
+
+          <button className={css.button} onClick={handleCreate}>
+            Створити завдання
+          </button>
+        </div>
+      </section>
+    );
+  }
+
+  return (
+    <section className={css.card}>
+      <div className={css.cardHeader}>
+        <h2 className={css.tasksHeading}>Важливі завдання</h2>
+
+        <button className={css.addBtn} onClick={handleCreate}>
+          +
+        </button>
+      </div>
+
+      {sortedTasks.length ? (
+        <ul className={css.list}>
+          {sortedTasks.map((task, index) => (
+            <li
+              // ✅ FIX: убран fallback с index (Next.js safe keys)
+              key={task._id}
+              className={css.item}
+            >
+              <div className={css.taskDate}>
+                {task.date
+                  ? new Date(task.date).toLocaleDateString('uk-UA', {
                       day: '2-digit',
                       month: '2-digit',
-                    })}
-                  </p>
-                </div>
-                <div className={css.itemLeft}>
-                  <input
-                    type="checkbox"
-                    className={css.checkbox}
-                    checked={task.isDone}
-                    onChange={async () => {
-                      await updateTaskStatus(task._id, !task.isDone);
-                      queryClient.invalidateQueries({ queryKey: ['tasks'] });
-                    }}
-                  />
-                  <p className={css.taskName}>{task.name}</p>
-                </div>
-                {/* <div className={css.taskName}>{task.name}</div> */}
-              </li>
-            ))}
-          </ul>
-        )}
-        {isModalOpen && (
-          <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-            <AddTaskForm
-              onSuccess={() => {
-                queryClient.invalidateQueries({
-                  queryKey: ['tasks'],
-                });
-                setIsModalOpen(false);
-              }}
-            />
-          </Modal>
-        )}
-      </section>
-    </div>
+                    })
+                  : '—'}
+              </div>
+
+              <div className={css.itemLeft}>
+                <input
+                  type="checkbox"
+                  className={css.checkbox}
+                  checked={task.isDone}
+                  // ✅ FIX: убрано stale state
+                  onChange={() => handleToggle(task._id, task.isDone)}
+                />
+
+                <p className={`${css.taskName} ${task.isDone ? css.done : ''}`}>
+                  {task.name}
+                </p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p className={css.text}>Немає завдань</p>
+      )}
+
+      {isModalOpen && (
+        <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+          <AddTaskForm
+            onSuccess={() => {
+              queryClient.invalidateQueries({ queryKey: ['tasks'] });
+              setIsModalOpen(false);
+            }}
+          />
+        </Modal>
+      )}
+    </section>
   );
 };
 
