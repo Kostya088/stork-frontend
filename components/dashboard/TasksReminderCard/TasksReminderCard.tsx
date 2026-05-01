@@ -42,9 +42,7 @@ const TasksReminderCard = () => {
       queryClient.setQueryData<Task[]>(['tasks'], (old) => {
         if (!old) return old;
 
-        return old.map((t) =>
-          t._id === id ? { ...t, isDone: !isDone } : t
-        );
+        return old.map((t) => (t._id === id ? { ...t, isDone: !isDone } : t));
       });
     } catch (e) {
       console.error(e);
@@ -102,7 +100,7 @@ const TasksReminderCard = () => {
 
       {sortedTasks.length ? (
         <ul className={css.list}>
-          {sortedTasks.map((task, index) => (
+          {sortedTasks.map((task) => (
             <li
               // ✅ FIX: убран fallback с index (Next.js safe keys)
               key={task._id}
