@@ -20,7 +20,6 @@ export async function PATCH(
       },
     });
 
-    console.log('HEllo world');
     return NextResponse.json(res.data, { status: res.status });
   } catch (error) {
     if (isAxiosError(error)) {

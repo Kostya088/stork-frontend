@@ -82,12 +82,18 @@ export async function updateMe(data: UpdateUserData): Promise<User> {
   return user;
 }
 
-export async function updateUserAvatar(formData: FormData): Promise<User> {
-  const { data } = await nextServer.patch<User>('/users/me/avatar', formData, {
-    headers: {
-      'Content-Type': 'multipart/form-data',
+export async function updateUserAvatar(
+  formData: FormData,
+): Promise<{ url: string }> {
+  const { data } = await nextServer.patch<{ url: string }>(
+    '/users/me/avatar',
+    formData,
+    {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
     },
-  });
+  );
   return data;
 }
 
