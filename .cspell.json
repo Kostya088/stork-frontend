@@ -1,0 +1,14 @@
+{
+  "version": "0.2",
+  "language": "en,uk,ru",
+  "ignorePaths": [
+    "node_modules",
+    ".next"
+  ],
+  "words": [
+    "descr",
+    "редиректим",
+    "фолбэк",
+    "embla"
+  ]
+}
