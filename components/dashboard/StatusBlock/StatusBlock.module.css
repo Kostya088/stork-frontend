@@ -1,84 +1,69 @@
+.wrapper {
+  padding: 16px 0;
+}
+
+/* ================= ROW ================= */
 
 .row {
   display: flex;
   flex-direction: row;
-  gap: 32px;
-  justify-content: flex-start;
-  margin-bottom: 24px;
+  flex-wrap: nowrap; /* не переносим */
+  gap: 16px;
+  justify-content: center;
 }
 
+/* ================= CARD (MOBILE DEFAULT) ================= */
 
 .card {
-  padding: 32px 40px;
+  border: 0;
   border-radius: 32px;
-  background: none;
-  border: none;
-  box-shadow: none;
+  background: var(--color-pink-50);
+  padding: 16px;
+
+  width: 159px;   /* mobile default */
+  height: 127px;
+
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  min-width: 180px;
-  min-height: 120px;
-  transition: none;
+  gap: 8px;
 }
 
-/* .card:hover {
-
-} */
-
+/* ================= TEXT ================= */
 
 .label {
-  font-family: "Lato", sans-serif;
+  font-family: var(--font-family);
   font-weight: 400;
-  font-size: 16px;
+  font-size: var(--font-size-sm);
   line-height: 1.5;
-  color: #000;
-  margin-bottom: 8px;
-  letter-spacing: 0.01em;
-  white-space: nowrap;
+  color: var(--color-black);
+  text-align: left;
 }
-
 
 .value {
-  font-family: "Comfortaa", sans-serif;
+  font-family: var(--second-family);
   font-weight: 700;
-  font-size: 56px;
+  font-size: var(--font-size-5xl);
   line-height: 1.2;
   letter-spacing: 0.01em;
-  color: #000;
-  text-align: center;
+  color: var(--color-black);
+  text-align: left;
 }
 
+/* ================= TABLET ================= */
 
-
-@media (max-width: 768px) {
-  .row {
-    flex-direction: row;
-    gap: 8px;
-    justify-content: space-between;
-    align-items: stretch;
-  }
+@media only screen and (min-width: 768px) {
   .card {
-    min-width: unset;
-    width: 100%;
-    padding: 24px 12px;
-    border-radius: 24px;
+    width: 336px;
+    height: 105px;
   }
-  .label {
-    font-size: 14px;
-    font-family: "Lato", sans-serif;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #000;
-    white-space: nowrap;
-  }
-  .value {
-    font-size: 40px;
-    font-family: "Comfortaa", sans-serif;
-    font-weight: 700;
-    line-height: 1.2;
-    letter-spacing: 0.01em;
-    color: #000;
+}
+
+/* ================= DESKTOP ================= */
+
+@media only screen and (min-width: 1440px) {
+  .card {
+    width: 305px;
+    height: 127px;
   }
 }
