@@ -1,11 +1,11 @@
-import { NextResponse } from "next/server";
-import { isAxiosError } from "axios";
-import { nextServer } from "@/lib/api/api";
-import { logErrorResponse } from "@/app/api/_utils/utils";
+import { NextResponse } from 'next/server';
+import { isAxiosError } from 'axios';
+import { logErrorResponse } from '@/app/api/_utils/utils';
+import { api } from '../api';
 
 export async function GET() {
   try {
-    const res = await nextServer.get("/weeks");
+    const res = await api.get('/weeks');
 
     return NextResponse.json(res.data, { status: res.status });
   } catch (error) {
@@ -18,7 +18,7 @@ export async function GET() {
     }
     logErrorResponse({ message: (error as Error).message });
     return NextResponse.json(
-      { error: "Internal Server Error" },
+      { error: 'Internal Server Error' },
       { status: 500 },
     );
   }

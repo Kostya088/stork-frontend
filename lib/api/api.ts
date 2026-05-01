@@ -1,13 +1,8 @@
-import axios, { AxiosError } from "axios";
+import axios from 'axios';
 
-export const nextClient = axios.create({
-  baseURL: "/api",
-  withCredentials: true,
-});
+const baseURL = `${process.env.NEXT_PUBLIC_API_URL}/api`;
 
 export const nextServer = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3000",
+  baseURL,
   withCredentials: true,
 });
-
-export type ApiError = AxiosError<{ error: string }>;
