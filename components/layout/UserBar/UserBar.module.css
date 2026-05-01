@@ -74,9 +74,15 @@
   all: unset;
   cursor: pointer;
   padding: 16px;
-  margin-right: -8px;
+  margin-right: 8px;
   border-radius: 8px;
   transition: background-color 0.2s;
+}
+
+@media (min-width: 1440px) {
+  .logoutButton {
+    margin-right: -8px;
+  }
 }
 
 .logoutButton:hover {
