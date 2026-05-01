@@ -115,6 +115,7 @@ export default function ProfileEditForm({ user }: ProfileEditFormProps) {
                 className={css.genderSelect}
                 isSearchable={false}
                 classNamePrefix="gender"
+                id="gender-Id"
                 value={optionsForForm.find(
                   (option) => option.value === values.gender,
                 )}
