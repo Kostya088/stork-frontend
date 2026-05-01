@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px 20px;
+  padding: 16px 0;
 }
 
 .logoLink {
@@ -31,5 +31,8 @@
 @media (min-width: 1440px) {
   .hideOnDesktop {
     display: none;
+  }
+  .header {
+    padding: 16px 16px;
   }
 }

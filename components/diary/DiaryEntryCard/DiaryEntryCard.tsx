@@ -1,6 +1,6 @@
-import styles from "./DiaryEntryCard.module.css";
 import type { DiaryEntry } from "@/types/diaryEntry";
 import { formatDiaryDate, getEmotionTitle } from "@/utils/diary";
+import styles from "./DiaryEntryCard.module.css";
 
 interface DiaryEntryCardProps {
   entry: DiaryEntry;
@@ -8,7 +8,11 @@ interface DiaryEntryCardProps {
   onClick: () => void;
 }
 
-export default function DiaryEntryCard({ entry, isActive, onClick }: DiaryEntryCardProps) {
+export default function DiaryEntryCard({
+  entry,
+  isActive,
+  onClick,
+}: DiaryEntryCardProps) {
   return (
     <button
       type="button"
@@ -23,9 +27,13 @@ export default function DiaryEntryCard({ entry, isActive, onClick }: DiaryEntryC
         </time>
       </div>
 
-      <ul className={styles.emotions} aria-label="Категорії запису">
+      <ul className={styles.emotions} aria-label="Емоції запису">
         {entry.emotions.map((emotion, index) => (
-          <li className={styles.emotion} key={`${getEmotionTitle(emotion)}-${index}`}>
+          <li
+            className={styles.emotion}
+            key={`${getEmotionTitle(emotion)}-${index}`}
+            title={getEmotionTitle(emotion)}
+          >
             {getEmotionTitle(emotion)}
           </li>
         ))}

@@ -113,6 +113,7 @@ export default function ProfileEditForm({ user }: ProfileEditFormProps) {
                 options={optionsForForm}
                 placeholder="Стать дитини"
                 className={css.genderSelect}
+                isSearchable={false}
                 classNamePrefix="gender"
                 value={optionsForForm.find(
                   (option) => option.value === values.gender,
@@ -136,8 +137,14 @@ export default function ProfileEditForm({ user }: ProfileEditFormProps) {
                   )
                 }
                 className={css.inputDate}
+                showIcon={true}
+                icon={
+                  <svg className={css.iconDown}>
+                    <use href="/icons/sprite.svg#icon-chevron-down" />
+                  </svg>
+                }
                 dateFormat="dd.MM.yyyy"
-                popperPlacement="top-start"
+                popperPlacement="bottom-end"
                 name="dueDate"
                 id="dueDate-Id"
               />

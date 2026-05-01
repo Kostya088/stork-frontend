@@ -24,9 +24,6 @@
 }
 
 @media (min-width: 1440px) {
-  /* .dashboard {
-    padding: 24px 40px;
-  } */
 
   .grid {
     grid-template-columns: minmax(0, 2fr) minmax(320px, 1fr);
@@ -38,13 +35,4 @@
   }
 }
 
-/* @media (max-width: 1440px) {
-  .dashboard {
-    padding: 16px;
-  }
-
-  .statusGrid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-  }
-} */
+ 

@@ -1,20 +1,20 @@
-"use client";
+'use client';
 
-import { useEffect } from "react";
-import Link from "next/link";
-import { useAuthStore } from "@/lib/store/authStore";
-import { useSidebarStore } from "@/lib/store/sidebarStore";
-import { usePathname } from "next/navigation";
-import Header from "../Header/Header";
-import AuthBar from "../AuthBar/AuthBar";
-import UserBar from "../UserBar/UserBar";
-import css from "./SideBar.module.css";
+import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import { useAuthStore } from '@/lib/store/authStore';
+import { useSidebarStore } from '@/lib/store/sidebarStore';
+import { usePathname } from 'next/navigation';
+import Header from '../Header/Header';
+import AuthBar from '../AuthBar/AuthBar';
+import UserBar from '../UserBar/UserBar';
+import css from './SideBar.module.css';
 
 const navLinks = [
-  { href: "/", label: "Мій день", icon: "icon-calendar" },
-  { href: "/journey", label: "Подорож", icon: "icon-branch" },
-  { href: "/diary", label: "Щоденник", icon: "icon-book" },
-  { href: "/profile", label: "Профіль", icon: "icon-profile" },
+  { href: '/', label: 'Мій день', icon: 'icon-calendar' },
+  { href: '/journey', label: 'Подорож', icon: 'icon-branch' },
+  { href: '/diary', label: 'Щоденник', icon: 'icon-book' },
+  { href: '/profile', label: 'Профіль', icon: 'icon-profile' },
 ];
 
 export function SideBarContent({ onLinkClick }: { onLinkClick?: () => void }) {
@@ -22,8 +22,8 @@ export function SideBarContent({ onLinkClick }: { onLinkClick?: () => void }) {
 
   const getHref = (href: string) => {
     if (isAuthenticated) return href;
-    if (href === "/") return "/login";
-    return "/login";
+    if (href === '/') return '/login';
+    return '/login';
   };
 
   return (
@@ -65,9 +65,9 @@ export function DesktopSidebar() {
   const close = useSidebarStore((state) => state.close);
   const pathname = usePathname();
   const isAuthPage =
-    pathname === "/login" ||
-    pathname === "/register" ||
-    pathname === "/profile/edit";
+    pathname === '/login' ||
+    pathname === '/register' ||
+    pathname === '/profile/edit';
 
   if (isAuthPage) return null;
 
@@ -83,7 +83,10 @@ export function MobileSidebarOverlay() {
   const isOpen = useSidebarStore((state) => state.isOpen);
   const close = useSidebarStore((state) => state.close);
   const pathname = usePathname();
-  const isAuthPage = pathname === "/login" || pathname === "/register";
+  const isAuthPage = pathname === '/login' || pathname === '/register';
+
+  const [isClosing, setIsClosing] = useState(false);
+  const shouldRender = isOpen || isClosing;
 
   useEffect(() => {
     if (isAuthPage && isOpen) {
@@ -92,30 +95,46 @@ export function MobileSidebarOverlay() {
   }, [close, isAuthPage, isOpen]);
 
   useEffect(() => {
-    if (isOpen && !isAuthPage) {
-      document.body.style.overflow = "hidden";
+    if (shouldRender && !isAuthPage) {
+      document.body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = "";
+      document.body.style.overflow = '';
     }
     return () => {
-      document.body.style.overflow = "";
+      document.body.style.overflow = '';
     };
-  }, [isAuthPage, isOpen]);
+  }, [isAuthPage, shouldRender]);
 
-  if (!isOpen || isAuthPage) return null;
+  if (!shouldRender || isAuthPage) return null;
+
+  const handleClose = () => {
+    if (isClosing) return;
+
+    setIsClosing(true);
+    window.setTimeout(() => {
+      close();
+      setIsClosing(false);
+    }, 300);
+  };
 
   return (
-    <div className={css.overlay} onClick={close}>
-      <aside className={css.sidebarMobile} onClick={(e) => e.stopPropagation()}>
+    <div
+      className={`${css.overlay} ${isClosing ? css.overlayClosing : ''}`}
+      onClick={handleClose}
+    >
+      <aside
+        className={`${css.sidebarMobile} ${isClosing ? css.sidebarMobileClosing : ''}`}
+        onClick={(e) => e.stopPropagation()}
+      >
         <div className={css.mobileHeader}>
-          <Link href="/" className={css.logoLink}>
-            <svg className={css.logoIcon} width="76" height="24">
+          <Link href="/" className={css.logoLink} onClick={handleClose}>
+            <svg className={css.logoIcon} width="95" height="29">
               <use href="/icons/sprite.svg#icon-leleka-logo" />
             </svg>
           </Link>
           <button
             className={css.closeButton}
-            onClick={close}
+            onClick={handleClose}
             aria-label="Закрити"
           >
             <svg className={css.closeIcon}>
@@ -123,7 +142,7 @@ export function MobileSidebarOverlay() {
             </svg>
           </button>
         </div>
-        <SideBarContent onLinkClick={close} />
+        <SideBarContent onLinkClick={handleClose} />
       </aside>
     </div>
   );

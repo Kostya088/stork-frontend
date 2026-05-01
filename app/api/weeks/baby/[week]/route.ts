@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { cookies } from "next/headers";
 import { isAxiosError } from "axios";
 import { nextServer } from "@/lib/api/api";
 import { logErrorResponse } from "@/app/api/_utils/utils";
@@ -9,8 +10,13 @@ export async function GET(
 ) {
   try {
     const { week } = await params;
+    const cookieStore = await cookies();
 
-    const res = await nextServer.get(`/weeks/baby/${week}`);
+    const res = await nextServer.get(`/weeks/baby/${week}`, {
+      headers: {
+        Cookie: cookieStore.toString(),
+      },
+    });
 
     return NextResponse.json(res.data, { status: res.status });
   } catch (error) {

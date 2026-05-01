@@ -6,12 +6,19 @@ import { getWeeksMe, getPublicWeek } from '@/lib/api/clientApi';
 
 import css from './StatusBlock.module.css';
 
+const WEEK_INDEX = 1;
+
 export default function StatusBlock() {
   const isAuthenticated = useAuthStore((s) => s.isAuthenticated);
+
   const { data, isLoading, isError } = useQuery({
-    queryKey: isAuthenticated ? ['weeks', 'me'] : ['weeks', 'public', 1],
-    queryFn: isAuthenticated ? getWeeksMe : () => getPublicWeek(1),
-    enabled: true,
+    queryKey: ['weeks', isAuthenticated ? 'me' : 'public', WEEK_INDEX],
+    queryFn: async () => {
+      if (isAuthenticated) {
+        return getWeeksMe();
+      }
+      return getPublicWeek(WEEK_INDEX);
+    },
   });
 
   if (isLoading) {
@@ -48,12 +55,14 @@ export default function StatusBlock() {
     <div className={css.row}>
       <div className={css.card}>
         <p className={css.label}>Тиждень</p>
-        <p className={css.value}>{data?.weekNumber}</p>
+        <p className={css.value}>{data?.weekNumber ?? '—'}</p>
       </div>
 
       <div className={css.card}>
         <p className={css.label}>Днів до зустрічі</p>
-        <p className={css.value}>{data?.daysUntilDue}</p>
+        <p className={css.value}>
+          {data?.daysUntilDue != null ? `~${data.daysUntilDue}` : '—'}
+        </p>
       </div>
     </div>
   );
