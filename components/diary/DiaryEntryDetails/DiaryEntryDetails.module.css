@@ -92,7 +92,9 @@
 .placeholder {
   margin: 0;
   padding: 40px 16px;
-  color: #6f6065;
+  border-radius: 18px;
+  border: 1px solid var(--color-scheme-border);
+  background: var(--color-scheme-background);
   font-size: 16px;
   text-align: center;
 }
