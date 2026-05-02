@@ -13,14 +13,12 @@ export default function DashboardPage() {
 
       <div className={styles.grid}>
         <div className={styles.leftColumn}>
-          <div className={styles.statusGrid}>
-            <StatusBlock />
-          </div>
+  <StatusBlock />
 
-          <BabyTodayCard />
+  <BabyTodayCard />
 
-          <MomTipCard />
-        </div>
+  <MomTipCard />
+</div>
 
         <div className={styles.rightColumn}>
           <TasksReminderCard />
