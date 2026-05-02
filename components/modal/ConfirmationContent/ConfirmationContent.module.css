@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 32px;
+    gap: 48px;
     padding-top: 16px;
     width: 100%;
 }
@@ -12,14 +12,14 @@
     font-weight: 700;
     line-height: 1.2;
     text-align: center;
-    color: #000;
+    color: var(--color-scheme-text);
 }
 
 .actions {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 16px;
+    gap: 24px;
     width: 100%;
 }
 
@@ -27,20 +27,19 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    border: none;
+
+
+    background: var(--color-scheme-foreground-alt);
+    border-bottom: 4px solid var(--color-scheme-accent);
+    border-radius: 100px;
+    padding: 10px 24px;
     width: 268px;
     height: 42px;
-    padding: 10px 24px;
-    border-radius: 100px;
-    border: none;
-    border-bottom: 4px solid #ffcbd3;
-    
-     background: #ffdae0;
-   
-    font-size: 16px;
     font-weight: 500;
-    cursor: pointer;
-    transition: transform 0.15s ease, border 0.15s ease;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--color-scheme-text);
 }
 
 .confirmButton {
@@ -48,62 +47,62 @@
     align-items: center;
     justify-content: center;
     flex-direction: row;
-    gap: 8px;
     border: none;
-    border-bottom: 4px solid rgba(0, 0, 0, 0.15);
-    appearance: none;
+    background: var(--opacity-neutral-darkest-5);
+    border-bottom: 4px solid var(--opacity-neutral-darkest-15);
     border-radius: 100px;
     padding: 10px 24px;
     width: 268px;
     height: 42px;
-   background: rgba(0, 0, 0, 0.05);
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 1.6;
-    color: #000;
-    cursor: pointer;
 }
 
-.cancelButton:active,
+.cancelButton:hover,
+.cancelButton:focus {
+    border-bottom: 4px solid var(--color-scheme-border);
+    background: var(--color-scheme-background);
+}
+
+
+.confirmButton:hover,
+.confirmButton:focus {
+    border-bottom: 4px solid var(--opacity-neutral-darkest-15);
+    background: var(--color-scheme-foreground);
+}
+
+.cancelButton:active {
+    background: var(--color-neutral-light);
+}
+
 .confirmButton:active {
-    transform: translateY(2px);
-    border-bottom-width: 2px;
+    background: var(--color-scheme-accent);
 }
 
 @media (min-width: 768px) {
     .modal {
         max-width: 768px;
+        padding-top: 0;
     }
 
     .actions {
         flex-direction: row;
         justify-content: center;
-        gap: 16px;
+        gap: 24px;
     }
 
-    .cancelButton,
-    .confirmButton {
-        width: 268px;
-    }
 }
 
 @media (min-width: 1440px) {
-    .modal {
-        max-width: 768px;
-    }
+
 
     .title {
         font-size: 48px;
     }
 
-    .actions {
-        flex-direction: row;
-        justify-content: center;
-        gap: 16px;
-    }
+
 
     .cancelButton,
     .confirmButton {
-        width: 268px;
+        height: 46px;
     }
+
 }
