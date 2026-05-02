@@ -8,7 +8,7 @@
 
 .title {
     font-weight: 700;
-    font-size: 36px;
+    font-size: var( --font-size-4xl);
     line-height: 1.2;
     letter-spacing: 0.01em;
     text-align: center;
@@ -28,7 +28,7 @@
 
 .label {
     font-weight: 400;
-    font-size: 14px;
+    font-size: var(--font-size-sm);
     line-height: 1.5;
     color: var(--color-scheme-text);
 }
@@ -40,10 +40,10 @@
     border: 2px solid var(--opacity-transparent);
     border-radius: 12px;
     padding: 8px 12px;
-    max-width: 294px;
+    width: 294px;
     height: 37px;
     font-weight: 400;
-    font-size: 14px;
+    font-size: var(--font-size-sm);
     line-height: 1.5;
     color: var(--opacity-neutral-darkest-60);
 }
@@ -55,22 +55,30 @@
 }
 
 .textarea {
+    resize: none;
     background: var(--opacity-neutral-darkest-5);
     border: 1px solid var(--opacity-transparent);
     border-radius: 12px;
     padding: 12px;
-    max-width: 294px;
+    width: 294px;
     height: 250px;
     font-weight: 400;
-    font-size: 14px;
+    font-size: var(--font-size-sm);
     line-height: 1.5;
     color: var(--opacity-neutral-darkest-60);
+        scrollbar-width: thin;
+    scrollbar-color: var(--color-scheme-accent) transparent;
 }
 
 .textarea:hover,
 .textarea:focus {
     border: 2px solid var(--color-scheme-accent);
     outline: none;
+}
+
+.input:not(:placeholder-shown),
+.textarea:not(:placeholder-shown) {
+    color: var(--color-neutral-darkest);
 }
 
 /* ==================== DROPDOWN ==================== */
@@ -84,7 +92,7 @@
     border-radius: 12px;
     padding: 8px 12px;
     width: 294px;
-    max-height: 48px;
+    height: 48px;
     background: var(--color-neutral-lightest);
     display: flex;
     align-items: center;
@@ -124,7 +132,7 @@
     align-items: center;
     gap: 6px;
     flex-wrap: wrap;
-    max-height: 60px;
+    height: 60px;
     overflow-y: auto;
     padding-right: 4px;
 }
@@ -140,7 +148,7 @@
     padding: 4px 10px;
     height: 29px;
     font-weight: 400;
-    font-size: 14px;
+    font-size: var(--font-size-sm);
     line-height: 1.5;
     color: var(--color-scheme-text);
 }
@@ -164,7 +172,7 @@
     background: var(--opacity-neutral-darkest-5);
     border-radius: 8px;
     padding: 8px 12px;
-    max-width: 295px;
+    width: 295px;
     height: 37px;
 }
 
@@ -246,7 +254,7 @@
     width: 294px;
     height: 42px;
     font-weight: 500;
-    font-size: 14px;
+    font-size: var(--font-size-sm);
     line-height: 1.6;
     color: var(--color-scheme-text);
 }
@@ -282,7 +290,7 @@
     }
 
     .input {
-        max-width: 640px;
+        width: 640px;
     }
 
     .dropdownTrigger {
@@ -290,7 +298,7 @@
     }
 
     .textarea {
-        max-width: 640px;
+        width: 640px;
     }
 
     .submitButton {
@@ -302,6 +310,6 @@
     }
 
     .checked {
-        max-width: 640px;
+        width: 640px;
     }
 }
