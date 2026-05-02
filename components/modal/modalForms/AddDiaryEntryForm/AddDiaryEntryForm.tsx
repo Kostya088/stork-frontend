@@ -16,6 +16,7 @@ import { getEmotionId } from '@/utils/diary';
 interface AddDiaryEntryFormProps {
   entry: DiaryEntry | null;
   emotions: Emotion[];
+  isSubmitting?: boolean;
   onSubmit: (data: CreateDiaryData | UpdateDiaryData) => Promise<void>;
 }
 
@@ -74,6 +75,7 @@ function DiaryFormWatcher() {
 export default function AddDiaryEntryForm({
   entry,
   emotions,
+  isSubmitting: isParentSubmitting = false,
   onSubmit,
 }: AddDiaryEntryFormProps) {
   const dropdownRef = useRef<HTMLDivElement | null>(null);
@@ -124,7 +126,10 @@ export default function AddDiaryEntryForm({
         }
       }}
     >
-      {({ values, isSubmitting }) => (
+      {({ values, isSubmitting }) => {
+        const isFormSubmitting = isParentSubmitting || isSubmitting;
+
+        return (
         <>
           <h2 className={styles.title}>
             {entry ? 'Редагувати запис' : 'Новий запис'}
@@ -234,13 +239,14 @@ export default function AddDiaryEntryForm({
             <button
               className={styles.submitButton}
               type="submit"
-              disabled={isSubmitting}
+              disabled={isFormSubmitting}
             >
-              {isSubmitting ? 'Зберігаємо...' : 'Зберегти'}
+              {isFormSubmitting ? 'Зберігаємо...' : 'Зберегти'}
             </button>
           </Form>
         </>
-      )}
+        );
+      }}
     </Formik>
   );
 }
