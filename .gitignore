@@ -13,6 +13,9 @@
 # testing
 /coverage
 
+# cspell
+.cspell.json
+
 # next.js
 /.next/
 /out/

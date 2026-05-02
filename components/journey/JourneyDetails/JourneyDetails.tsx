@@ -7,6 +7,7 @@ import clsx from "clsx";
 import { getWeeksBaby, getWeeksMom } from "@/lib/api/clientApi";
 import css from "./JourneyDetails.module.css";
 import Loading from "@/app/loading";
+import TasksReminderCard from "@/components/dashboard/TasksReminderCard/TasksReminderCard";
 
 interface Props {
   weekNumber: number;
@@ -38,22 +39,22 @@ export default function JourneyDetails({ weekNumber }: Props) {
       <div className={css.tabs}>
         <button
           type="button"
-          onClick={() => setTab("baby")}
-          className={clsx(css.tab, { [css.tabActive]: tab === "baby" })}
+          onClick={() => setTab('baby')}
+          className={clsx(css.tab, { [css.tabActive]: tab === 'baby' })}
         >
           Розвиток малюка
         </button>
         <button
           type="button"
-          onClick={() => setTab("mom")}
-          className={clsx(css.tab, { [css.tabActive]: tab === "mom" })}
+          onClick={() => setTab('mom')}
+          className={clsx(css.tab, { [css.tabActive]: tab === 'mom' })}
         >
           Тіло мами
         </button>
       </div>
 
       {/* Розвиток малюка */}
-      {tab === "baby" && (
+      {tab === 'baby' && (
         <div className={css.content}>
           {babyQuery.isLoading && (
             <div className={css.loaderWrapper}>
@@ -95,7 +96,7 @@ export default function JourneyDetails({ weekNumber }: Props) {
                       <svg className={css.factTitle} aria-hidden="true">
                         <use href="/icons/sprite.svg#emotion-star"></use>
                       </svg>
-                      <p>Цікавий факт тижня</p>
+                      <p className={css.factTitleText}>Цікавий факт тижня</p>
                     </div>
                     <p className={css.factText}>
                       {babyQuery.data.interestingFact}
@@ -109,7 +110,7 @@ export default function JourneyDetails({ weekNumber }: Props) {
       )}
 
       {/* Тіло мами */}
-      {tab === "mom" && (
+      {tab === 'mom' && (
         <div className={css.content}>
           {momQuery.isLoading && (
             <div className={css.loaderWrapper}>
@@ -120,50 +121,58 @@ export default function JourneyDetails({ weekNumber }: Props) {
             <p className={css.status}>Не вдалося завантажити дані.</p>
           )}
           {momQuery.data && (
-            <>
-              {/* Перша картка — рожева, з відчуттями */}
-              <div className={clsx(css.momCard, css.momCardFeelings)}>
-                <h3 className={css.cardTitle}>Як ви можете почуватись</h3>
-                {momQuery.data.feelings?.states?.length > 0 && (
-                  <ul className={css.tags}>
-                    {momQuery.data.feelings.states.map((s) => (
-                      <li key={s} className={css.tag}>
-                        {s}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-                {momQuery.data.feelings?.sensationDescr && (
-                  <p className={css.paragraph}>
-                    {momQuery.data.feelings.sensationDescr}
-                  </p>
+            <div className={css.momLayout}>
+              <div className={css.momCardsColumn}>
+                {/* Перша картка — рожева, з відчуттями */}
+                <div className={clsx(css.momCard, css.momCardFeelings)}>
+                  <h3 className={css.cardTitle}>Як ви можете почуватись</h3>
+                  {momQuery.data.feelings?.states?.length > 0 && (
+                    <ul className={css.tags}>
+                      {momQuery.data.feelings.states.map((s) => (
+                        <li key={s} className={css.tag}>
+                          {s}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                  {momQuery.data.feelings?.sensationDescr && (
+                    <p className={css.paragraph}>
+                      {momQuery.data.feelings.sensationDescr}
+                    </p>
+                  )}
+                </div>
+
+                {/* Друга картка — світла, з порадами */}
+                {momQuery.data.comfortTips?.length > 0 && (
+                  <div className={clsx(css.momCard, css.momCardTips)}>
+                    <h3 className={css.cardTitle}>
+                      Поради для вашого комфорту
+                    </h3>
+                    <ul className={css.tipsList}>
+                      {momQuery.data.comfortTips.map((t, i) => (
+                        <li key={t.category} className={css.tipItem}>
+                          <div className={css.tipIconWrapper}>
+                            <svg className={css.tipIcon} aria-hidden="true">
+                              <use
+                                href={`/icons/sprite.svg#${TIP_ICONS[i] ?? 'rest'}`}
+                              />
+                            </svg>
+                          </div>
+                          <div className={css.tipContent}>
+                            <p className={css.tipCategory}>{t.category}</p>
+                            <p className={css.tipText}>{t.tip}</p>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 )}
               </div>
 
-              {/* Друга картка — світла, з порадами */}
-              {momQuery.data.comfortTips?.length > 0 && (
-                <div className={clsx(css.momCard, css.momCardTips)}>
-                  <h3 className={css.cardTitle}>Поради для вашого комфорту</h3>
-                  <ul className={css.tipsList}>
-                    {momQuery.data.comfortTips.map((t, i) => (
-                      <li key={t.category} className={css.tipItem}>
-                        <div className={css.tipIconWrapper}>
-                          <svg className={css.tipIcon} aria-hidden="true">
-                            <use
-                              href={`/icons/sprite.svg#${TIP_ICONS[i] ?? "rest"}`}
-                            />
-                          </svg>
-                        </div>
-                        <div className={css.tipContent}>
-                          <p className={css.tipCategory}>{t.category}</p>
-                          <p className={css.tipText}>{t.tip}</p>
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-            </>
+              <div className={css.momTasksColumn}>
+                <TasksReminderCard />
+              </div>
+            </div>
           )}
         </div>
       )}
