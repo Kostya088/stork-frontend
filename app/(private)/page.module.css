@@ -13,7 +13,6 @@
 .rightColumn {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   gap: 24px;
 }
 
@@ -24,15 +23,22 @@
 }
 
 @media (min-width: 1440px) {
-
   .grid {
-    grid-template-columns: minmax(0, 2fr) minmax(320px, 1fr);
+    grid-template-columns: 674px 390px;
     gap: 32px;
+    align-items: start;
+  }
+
+  .leftColumn,
+  .statusGrid {
+    width: 674px;
+  }
+
+  .rightColumn {
+    width: 390px;
   }
 
   .statusGrid {
     gap: 24px;
   }
 }
-
- 

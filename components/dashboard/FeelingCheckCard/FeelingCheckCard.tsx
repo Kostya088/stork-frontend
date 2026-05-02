@@ -50,7 +50,7 @@ export default function FeelingCheckCard() {
         <h2 className={css.title}>Як ви себе почуваєте?</h2>
 
         <p className={css.text}>
-          <strong>Рекомендація на сьогодні:</strong>
+          <strong className={css.strong}>Рекомендація на сьогодні:</strong>
         </p>
         <p className={css.text}>Занотуйте незвичні відчуття у тілі.</p>
 
@@ -63,7 +63,6 @@ export default function FeelingCheckCard() {
         <AddDiaryEntryForm
           entry={null}
           emotions={emotions}
-          isSubmitting={createDiaryMutation.isPending}
           onSubmit={handleSubmit}
         />
       </Modal>
