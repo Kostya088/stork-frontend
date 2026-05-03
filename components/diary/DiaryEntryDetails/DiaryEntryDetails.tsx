@@ -40,7 +40,7 @@ export default function DiaryEntryDetails({
 
       <div className={styles.meta}>
         <div className={styles.titleRow}>
-          <h1 className={styles.title}>{entry.title}</h1>
+          <h2 className={styles.title}>{entry.title}</h2>
 
           <button
             className={styles.iconButton}
