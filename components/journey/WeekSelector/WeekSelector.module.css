@@ -71,6 +71,10 @@
     border: 1px solid transparent;
 }
 
+.past:hover {
+    border: 4px solid var(--color-pastel-pink-light);
+}
+
 .current {
     background: var(--color-pastel-pink);
     border: 4px solid var(--color-scheme-border);
