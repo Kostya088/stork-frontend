@@ -228,7 +228,7 @@
 }
 
 .dropdownMenu::-webkit-scrollbar-track {
-    background: #eee;
+    background: var(--color-white);
     border-radius: 4px;
     margin: 8px 0;
 }
