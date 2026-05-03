@@ -73,7 +73,7 @@ const TasksReminderCard = () => {
 
           <button type="button" className={css.addBtn} onClick={handleCreate}>
             <svg className={css.addIcon} width="24" height="24">
-              <use href="/icons/open-task-btn.svg" />
+              <use href="/icons/sprite.svg#icon-open-task-btn" />
             </svg>
           </button>
         </div>
@@ -97,7 +97,7 @@ const TasksReminderCard = () => {
 
         <button type="button" className={css.addBtn} onClick={handleCreate}>
   <svg className={css.addIcon} width="24" height="24">
-    <use href="/icons/open-task-btn.svg" />
+    <use href="/icons/sprite.svg#icon-open-task-btn" />
   </svg>
 </button>
       </div>
