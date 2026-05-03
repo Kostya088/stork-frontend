@@ -10,9 +10,9 @@ import { useRouter } from 'next/navigation';
 import CustomSelector from '../CustomSelector/CustomSelector';
 import UserAvatarSelector from '../UserAvatarSelector/UserAvatarSelector';
 import { getMe, updateMe, updateUserAvatar } from '@/lib/api/clientApi';
-import type { ApiError } from '@/lib/api/api';
 import type { Gender } from '@/types/user';
 import { useAuthStore } from '@/lib/store/authStore';
+import { ApiError } from '@/app/api/api';
 
 const OnbordingSchema = Yup.object().shape({
   gender: Yup.string()
@@ -155,10 +155,8 @@ const OnbordingForm = () => {
             <OnboardingFormWatcher />
             <Form className={css.form}>
               <div className={css.fildset}>
-                <label className={css.label} htmlFor={`gender${prefId}`}>
-                  Стать дитини
-                </label>
-                <div id={`gender${prefId}`}>
+                <label className={css.label}>Стать дитини</label>
+                <div>
                   <CustomSelector
                     name="gender"
                     options={genderOptions}
