@@ -68,7 +68,7 @@
   .wrapper {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    height: 727px;
     overflow: hidden;
   }
 
@@ -91,9 +91,19 @@
     width: 6px;
   }
 
+  .list::-webkit-scrollbar-track {
+    background: var(--color-white);
+    border-radius: 4px;
+    margin: 8px 0;
+  }
+
   .list::-webkit-scrollbar-thumb {
-    border-radius: 999px;
-    background: var(--color-scheme-foreground-alt);
+    background: var(--color-scheme-accent);
+    border-radius: 4px;
+  }
+
+  .list::-webkit-scrollbar-thumb:hover {
+    background: #e58c95;
   }
 
   .status,

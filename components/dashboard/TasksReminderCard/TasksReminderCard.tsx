@@ -76,7 +76,7 @@ const TasksReminderCard = () => {
 
         <div className={css.cardContent}>
           <p className={css.textStrong}>Наразі немає жодних завдань</p>
-          <p className={css.text}>Створіть перше нове завдання!</p>
+          <p className={css.text}>Створіть мершій нове завдання!</p>
 
           <button className={css.button} onClick={handleCreate}>
             Створити завдання
