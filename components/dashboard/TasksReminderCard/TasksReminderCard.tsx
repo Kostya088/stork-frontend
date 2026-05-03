@@ -30,7 +30,7 @@ const TasksReminderCard = () => {
     if (isAuthenticated) {
       setIsModalOpen(true);
     } else {
-      router.push('/register');
+      router.push('/login');
     }
   };
 
@@ -71,8 +71,10 @@ const TasksReminderCard = () => {
         <div className={css.cardHeader}>
           <h2 className={css.tasksHeading}>Важливі завдання</h2>
 
-          <button className={css.addBtn} onClick={handleCreate}>
-            +
+          <button type="button" className={css.addBtn} onClick={handleCreate}>
+            <svg className={css.addIcon} width="24" height="24">
+              <use href="/icons/open-task-btn.svg" />
+            </svg>
           </button>
         </div>
 
@@ -93,9 +95,11 @@ const TasksReminderCard = () => {
       <div className={css.cardHeader}>
         <h2 className={css.tasksHeading}>Важливі завдання</h2>
 
-        <button className={css.addBtn} onClick={handleCreate}>
-          +
-        </button>
+        <button type="button" className={css.addBtn} onClick={handleCreate}>
+  <svg className={css.addIcon} width="24" height="24">
+    <use href="/icons/open-task-btn.svg" />
+  </svg>
+</button>
       </div>
 
       {sortedTasks.length ? (
