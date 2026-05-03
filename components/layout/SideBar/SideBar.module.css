@@ -3,13 +3,11 @@
   flex-direction: column;
   height: 100%;
   width: 312px;
-  padding: 0 16px;
   box-sizing: border-box;
 }
 
 .sidebar .authSection {
   margin-top: auto;
-  padding: 16px 0;
   border-top: 1px solid var(--color-scheme-border);
 }
 
@@ -35,33 +33,41 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding: 0px;
+  padding: 0px 16px;
 }
 
 .navLink {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 10px 16px;
-  border-radius: 12px;
+  padding: 8px;
+  border-radius: 8px;
   text-decoration: none;
   font-weight: 400;
   font-size: 14px;
   line-height: 150%;
-  color: #000;
+color: var(--color-scheme-text);
   transition: background-color 0.2s;
   max-height: 40px;
 }
 
 .navIcon {
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   flex-shrink: 0;
-  color: #241a1d;
+  color: var(--color-scheme-text);
 }
 
 .navLink:hover {
-  background: #f1eef0;
+  background: var(--color-neutral-lightest);
+}
+
+.active {
+  background: var(--color-scheme-foreground);
+}
+
+.active:hover {
+  background: var(--color-scheme-foreground);
 }
 
 .authSection {
@@ -82,7 +88,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 21px;
+  padding: 24px 16px;
 }
 
 .logoLink {
@@ -98,9 +104,13 @@
 .closeButton {
   all: unset;
   cursor: pointer;
-  padding: 8px;
-  border-radius: 8px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50px;
   transition: background-color 0.2s;
+  fill: var(--color-scheme-text);
+stroke-width: 1px;
+stroke: var(--color-scheme-text);
 }
 
 .closeButton:hover {
@@ -111,7 +121,7 @@
   width: 18px;
   height: 18px;
   display: block;
-  color: #241a1d;
+  color: var(--color-scheme-text);
 }
 
 @keyframes slideIn {

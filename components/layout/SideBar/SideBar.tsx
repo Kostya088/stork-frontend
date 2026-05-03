@@ -19,11 +19,17 @@ const navLinks = [
 
 export function SideBarContent({ onLinkClick }: { onLinkClick?: () => void }) {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const pathname = usePathname();
 
   const getHref = (href: string) => {
     if (isAuthenticated) return href;
     if (href === '/') return '/login';
     return '/login';
+  };
+
+    const isActive = (href: string) => {
+    if (href === '/') return pathname === '/';
+    return pathname.startsWith(href);
   };
 
   return (
@@ -33,7 +39,9 @@ export function SideBarContent({ onLinkClick }: { onLinkClick?: () => void }) {
           <Link
             key={link.href}
             href={getHref(link.href)}
-            className={css.navLink}
+            className={`${css.navLink} ${
+              isActive(link.href) ? css.active : ''
+            }`}
             onClick={onLinkClick}
           >
             <svg className={css.navIcon}>

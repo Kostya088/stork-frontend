@@ -2,13 +2,24 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 12px 6px;
-  border-radius: 12px;
+  padding-top: 16px;
   text-decoration: none;
   transition: background-color 0.2s;
   flex: 1;
   min-height: 80px;
   min-width: 0;
+}
+
+.container:hover .name,
+.container:hover .email,
+.container:focus .name,
+.container:focus .email {
+  text-decoration: underline;
+}
+
+.container:active .name,
+.container:active .email {
+  color: var(--color-scheme-accent);
 }
 
 .wrapper {
@@ -17,10 +28,7 @@
   gap: 4px;
   width: 100%;
   min-width: 0;
-}
-
-.container:hover {
-  background: #f1eef0;
+  padding: 0px 16px 24px;
 }
 
 .avatar {
@@ -54,17 +62,20 @@
 }
 
 .name {
-  font-weight: 600;
-  color: #241a1d;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--color-scheme-text);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .email {
+  font-weight: 400;
   font-size: 12px;
-  line-height: 160%;
-  color: #000;
+  line-height: 1.6;
+  color: var(--color-scheme-text);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -75,7 +86,7 @@
   cursor: pointer;
   padding: 16px;
   margin-right: 8px;
-  border-radius: 8px;
+  border-radius: 50px;
   transition: background-color 0.2s;
 }
 
