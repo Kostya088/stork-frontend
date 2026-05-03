@@ -98,6 +98,8 @@
 @media (min-width: 1440px) {
   .card {
     max-width: 100%;
+    max-height: 422px;
+    overflow-y: auto;
   }
 
   .title {
