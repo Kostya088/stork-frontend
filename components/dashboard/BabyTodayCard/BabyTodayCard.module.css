@@ -9,6 +9,25 @@
   color: var(--color-scheme-text);
 }
 
+.card::-webkit-scrollbar {
+  width: 6px;
+}
+
+.card::-webkit-scrollbar-track {
+  background: var(--color-white);
+  border-radius: 4px;
+  margin: 8px 0;
+}
+
+.card::-webkit-scrollbar-thumb {
+  background: var(--color-scheme-accent);
+  border-radius: 4px;
+}
+
+.card::-webkit-scrollbar-thumb:hover {
+  background: #e58c95;
+}
+
 .title {
   margin-bottom: 16px;
   font-family: var(--second-family);
