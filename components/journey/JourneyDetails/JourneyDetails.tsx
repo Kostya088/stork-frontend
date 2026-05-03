@@ -1,37 +1,36 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import Image from "next/image";
-import { useQuery } from "@tanstack/react-query";
-import clsx from "clsx";
-import { getWeeksBaby, getWeeksMom } from "@/lib/api/clientApi";
-import css from "./JourneyDetails.module.css";
-import Loading from "@/app/loading";
-import TasksReminderCard from "@/components/dashboard/TasksReminderCard/TasksReminderCard";
+import { useState } from 'react';
+import Image from 'next/image';
+import { useQuery } from '@tanstack/react-query';
+import clsx from 'clsx';
+import { getWeeksBaby, getWeeksMom } from '@/lib/api/clientApi';
+import css from './JourneyDetails.module.css';
+import Loading from '@/app/loading';
+import TasksReminderCard from '@/components/dashboard/TasksReminderCard/TasksReminderCard';
 
 interface Props {
   weekNumber: number;
 }
 
-type Tab = "baby" | "mom";
+type Tab = 'baby' | 'mom';
 
 export default function JourneyDetails({ weekNumber }: Props) {
-  const [tab, setTab] = useState<Tab>("baby");
+  const [tab, setTab] = useState<Tab>('baby');
 
   const babyQuery = useQuery({
-    queryKey: ["weeks", "baby", weekNumber],
+    queryKey: ['weeks', 'baby', weekNumber],
     queryFn: () => getWeeksBaby(weekNumber),
-    enabled: tab === "baby",
+    enabled: tab === 'baby',
   });
 
   const momQuery = useQuery({
-    queryKey: ["weeks", "mom", weekNumber],
+    queryKey: ['weeks', 'mom', weekNumber],
     queryFn: () => getWeeksMom(weekNumber),
-    enabled: tab === "mom",
+    enabled: tab === 'mom',
   });
 
-  const TIP_ICONS = ["food", "activity", "rest"] as const;
-
+  const TIP_ICONS = ['food', 'activity', 'rest'] as const;
 
   return (
     <section className={css.section}>
@@ -73,6 +72,7 @@ export default function JourneyDetails({ weekNumber }: Props) {
                     src={babyQuery.data.image}
                     alt="Ілюстрація малюка"
                     fill
+                    sizes="(min-width: 1440px) 461px, 100vw"
                     className={css.image}
                     priority
                   />
