@@ -155,10 +155,8 @@ const OnbordingForm = () => {
             <OnboardingFormWatcher />
             <Form className={css.form}>
               <div className={css.fildset}>
-                <label className={css.label} htmlFor={`gender${prefId}`}>
-                  Стать дитини
-                </label>
-                <div id={`gender${prefId}`}>
+                <label className={css.label}>Стать дитини</label>
+                <div>
                   <CustomSelector
                     name="gender"
                     options={genderOptions}
