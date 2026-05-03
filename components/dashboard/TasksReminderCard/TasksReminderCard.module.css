@@ -10,25 +10,6 @@
   flex-direction: column;
 }
 
-.list::-webkit-scrollbar {
-  width: 6px;
-}
-
-.list::-webkit-scrollbar-track {
-  background: var(--color-white);
-  border-radius: 4px;
-  margin: 8px 0;
-}
-
-.list::-webkit-scrollbar-thumb {
-  background: var(--color-scheme-accent);
-  border-radius: 4px;
-}
-
-.list::-webkit-scrollbar-thumb:hover {
-  background: #e58c95;
-}
-
 .cardHeader {
   display: flex;
   justify-content: space-between;
@@ -103,8 +84,6 @@
   gap: 16px;
   margin: 0;
   padding: 0;
-  overflow-y: auto;
-  height: 400px;
   list-style: none;
 }
 
@@ -252,5 +231,29 @@
     font-weight: 500;
     font-size: 16px;
     line-height: 1.6;
+  }
+
+  .list{
+    overflow-y: auto;
+    height: 400px;
+  }
+
+  .list::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .list::-webkit-scrollbar-track {
+    background: var(--color-white);
+    border-radius: 4px;
+    margin: 8px 0;
+  }
+
+  .list::-webkit-scrollbar-thumb {
+    background: var(--color-scheme-accent);
+    border-radius: 4px;
+  }
+
+  .list::-webkit-scrollbar-thumb:hover {
+    background: #e58c95;
   }
 }
