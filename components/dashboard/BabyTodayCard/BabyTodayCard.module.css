@@ -1,7 +1,7 @@
 .card {
   width: 100%;
   max-width: 335px;
-  padding: 20px;
+  padding: 24px;
   border-radius: 32px;
   background-color: var(--color-scheme-foreground);
   box-sizing: border-box;

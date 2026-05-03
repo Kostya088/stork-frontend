@@ -2,68 +2,70 @@
   padding: 16px 0;
 }
 
-/* ================= ROW ================= */
-
 .row {
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap; /* не переносим */
+  flex-wrap: nowrap;
   gap: 16px;
   justify-content: center;
 }
 
-/* ================= CARD (MOBILE DEFAULT) ================= */
-
 .card {
-  border: 0;
+  border: 0px solid var(--color-scheme-border);
   border-radius: 32px;
-  background: var(--color-pink-50);
-  padding: 16px;
+  background: var(--color-scheme-foreground);
+  padding: 24px;
 
-  width: 159px;   /* mobile default */
-  height: 127px;
+  width: 159px;
+  height: 105px;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 8px;
+  gap: 4px;
 }
-
-/* ================= TEXT ================= */
 
 .label {
   font-family: var(--font-family);
   font-weight: 400;
-  font-size: var(--font-size-sm);
-  line-height: 1.5;
-  color: var(--color-black);
+  font-size: 14px;
+  line-height: 150%;
+  color: var(--color-scheme-text);
   text-align: left;
 }
 
 .value {
   font-family: var(--second-family);
   font-weight: 700;
-  font-size: var(--font-size-5xl);
-  line-height: 1.2;
+  font-size: 40px;
+  line-height: 120%;
   letter-spacing: 0.01em;
-  color: var(--color-black);
+  color: var(--color-scheme-text);
   text-align: left;
 }
-
-/* ================= TABLET ================= */
 
 @media only screen and (min-width: 768px) {
   .card {
     width: 336px;
     height: 105px;
   }
+
+  .row {
+    gap: 32px;
+  }
 }
 
-/* ================= DESKTOP ================= */
-
 @media only screen and (min-width: 1440px) {
+  .row {
+    width: 642px;
+    gap: 32px;
+    justify-content: flex-start;
+  }
+
   .card {
     width: 305px;
     height: 127px;
+    flex: 0 0 305px;
   }
+
 }

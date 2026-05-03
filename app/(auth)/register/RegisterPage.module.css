@@ -1,4 +1,5 @@
 .page {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,12 +16,11 @@
 }
 
 .left {
-  position: relative;
+  /* position: relative; */
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 20px;
   height: 100%;
 }
 
@@ -31,7 +31,7 @@
 .logoLink {
   position: absolute;
   top: 20px;
-  left: 20px;
+  left: 0px;
   align-items: center;
   margin-bottom: 24px;
   color: inherit;
@@ -43,6 +43,19 @@
 }
 
 @media (min-width: 1440px) {
+  .logoLink {
+    left: 64px;
+  }
+
+  /* .page {
+    position: static;
+    position: static;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    left: auto;
+  } */
+
   .container {
     flex-direction: row;
     max-width: 1440px;
@@ -52,8 +65,9 @@
   }
 
   .left {
+    position: relative;
     width: 50%;
-    padding: 32px 40px;
+    padding: 32px 64px;
   }
 
   .right {

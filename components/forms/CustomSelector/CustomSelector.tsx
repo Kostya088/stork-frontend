@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { useField } from "formik";
-import clsx from "clsx";
-import css from "./CustomSelector.module.css";
+import { useState } from 'react';
+import { useField } from 'formik';
+import clsx from 'clsx';
+import css from './CustomSelector.module.css';
 
 interface Option {
   label: string;
@@ -11,15 +11,17 @@ interface Option {
 }
 
 interface CustomSelectorProps {
+  id?: string;
   name: string;
   options: Option[];
   placeholder?: string;
 }
 
 const CustomSelector = ({
+  id,
   name,
   options,
-  placeholder = "Select option",
+  placeholder = 'Select option',
 }: CustomSelectorProps) => {
   const [isOpenSelector, setIsOpenSelector] = useState(false);
   const [field, meta, helpers] = useField<string>(name);
@@ -30,6 +32,7 @@ const CustomSelector = ({
   return (
     <div className={css.wrapper}>
       <div
+        id={id}
         className={clsx(css.select, isOpenSelector && css.isOpen)}
         onBlur={() => helpers.setTouched(true)}
         onClick={() => setIsOpenSelector((prevState) => !prevState)}
@@ -44,8 +47,8 @@ const CustomSelector = ({
             <use
               href={
                 isOpenSelector
-                  ? "/icons/sprite.svg#icon-chevron-up"
-                  : "/icons/sprite.svg#icon-chevron-down"
+                  ? '/icons/sprite.svg#icon-chevron-up'
+                  : '/icons/sprite.svg#icon-chevron-down'
               }
             />
           </svg>
