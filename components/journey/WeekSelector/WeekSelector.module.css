@@ -84,6 +84,11 @@
     pointer-events: none;
 }
 
+.realCurrent{
+    border: 1px solid transparent;
+    background: var(--color-pastel-pink-lighter);
+}
+
 @media (min-width: 1440px) {
     .weekBtn {
         width: 97px;
