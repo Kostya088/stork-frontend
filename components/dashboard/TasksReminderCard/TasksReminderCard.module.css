@@ -69,8 +69,9 @@
 .cardContent {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  /* gap: 8px; */
 }
+
 
 .textStrong,
 .text,
@@ -84,9 +85,11 @@
   margin: 0;
 }
 
-.textStrong {
+ .textStrong {
+  font-weight: 400;
   font-size: 14px;
   font-weight: 700;
+  margin-bottom: 4px;
 }
 
 .text {
