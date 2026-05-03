@@ -20,9 +20,9 @@ export default function DiaryList({
   return (
     <section className={styles.wrapper} aria-labelledby="diary-list-title">
       <div className={styles.header}>
-        <h1 id="diary-list-title" className={styles.title}>
+        <h2 id="diary-list-title" className={styles.title}>
           Ваші записи
-        </h1>
+        </h2>
 
         <button
           className={styles.createButton}
