@@ -4,7 +4,8 @@
 import { updateMe } from '@/lib/api/clientApi';
 import { User } from '@/types/user';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { ErrorMessage, Field, Form, Formik } from 'formik';
+import { ErrorMessage, Field, Form, Formik, useFormikContext } from 'formik';
+import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import Select from 'react-select';
 import * as yup from 'yup';
@@ -34,17 +35,94 @@ interface FormDataValues {
   dueDate: string;
 }
 
+type ProfileFormDraftValues = Pick<
+  FormDataValues,
+  'name' | 'gender' | 'dueDate'
+>;
+
+const PROFILE_EDIT_DRAFT_KEY_PREFIX = 'profile-edit-form-draft';
+
 const optionsForForm = [
   { value: '', label: 'Ще не знаю' },
   { value: 'boy', label: 'Хлопчик' },
   { value: 'girl', label: 'Дівчинка' },
 ];
 
+function removeProfileDraft(storageKey: string) {
+  try {
+    sessionStorage.removeItem(storageKey);
+  } catch {
+    // Ігноруємо помилки сховища; форма працюватиме і без чернетки.
+  }
+}
+
+function ProfileEditFormDraft({ storageKey }: { storageKey: string }) {
+  const { values, setValues, dirty } = useFormikContext<FormDataValues>();
+  const [isHydrated, setIsHydrated] = useState(false);
+
+  useEffect(() => {
+    try {
+      const savedDraft = sessionStorage.getItem(storageKey);
+
+      if (savedDraft) {
+        const parsedDraft = JSON.parse(
+          savedDraft,
+        ) as Partial<ProfileFormDraftValues>;
+
+        setValues((currentValues) => ({
+          ...currentValues,
+          name: parsedDraft.name ?? currentValues.name,
+          gender: parsedDraft.gender ?? currentValues.gender,
+          dueDate: parsedDraft.dueDate ?? currentValues.dueDate,
+        }));
+      }
+    } catch {
+      removeProfileDraft(storageKey);
+    } finally {
+      setIsHydrated(true);
+    }
+  }, [setValues, storageKey]);
+
+  useEffect(() => {
+    if (!isHydrated) return;
+
+    if (!dirty) {
+      removeProfileDraft(storageKey);
+      return;
+    }
+
+    const draft: ProfileFormDraftValues = {
+      name: values.name,
+      gender: values.gender,
+      dueDate: values.dueDate,
+    };
+
+    try {
+      sessionStorage.setItem(storageKey, JSON.stringify(draft));
+    } catch {
+      // Ігноруємо помилки сховища; форма працюватиме і без чернетки.
+    }
+  }, [
+    dirty,
+    isHydrated,
+    storageKey,
+    values.dueDate,
+    values.gender,
+    values.name,
+  ]);
+
+  return null;
+}
+
 export default function ProfileEditForm({ user }: ProfileEditFormProps) {
   const queryClient = useQueryClient();
+  const draftStorageKey = `${PROFILE_EDIT_DRAFT_KEY_PREFIX}-${
+    user?._id ?? 'anonymous'
+  }`;
   const mutation = useMutation({
     mutationFn: updateMe,
     onSuccess: () => {
+      removeProfileDraft(draftStorageKey);
       toast.success('Дані успішно оновлено');
       queryClient.invalidateQueries({ queryKey: ['user'] });
     },
@@ -75,6 +153,7 @@ export default function ProfileEditForm({ user }: ProfileEditFormProps) {
       >
         {({ values, setFieldValue, resetForm, dirty }) => (
           <Form className={css.formWrapper}>
+            <ProfileEditFormDraft storageKey={draftStorageKey} />
             <div className={css.inputWrapper}>
               <label htmlFor="name-Id" className={css.label}>
                 Імʼя
@@ -159,7 +238,10 @@ export default function ProfileEditForm({ user }: ProfileEditFormProps) {
             <div className={css.buttonWrapper}>
               <button
                 type="button"
-                onClick={() => resetForm()}
+                onClick={() => {
+                  removeProfileDraft(draftStorageKey);
+                  resetForm();
+                }}
                 className={css.buttonCancel}
               >
                 Відмінити зміни
