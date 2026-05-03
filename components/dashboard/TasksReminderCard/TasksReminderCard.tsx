@@ -136,7 +136,14 @@ const TasksReminderCard = () => {
           ))}
         </ul>
       ) : (
-        <p className={css.text}>Немає завдань</p>
+        <div className={css.cardContent}>
+          <p className={css.textStrong}>Наразі немає жодних завдань</p>
+          <p className={css.text}>Створіть мершій нове завдання!</p>
+
+          <button className={css.button} onClick={handleCreate}>
+            Створити завдання
+          </button>
+        </div>
       )}
 
       {isModalOpen && (
