@@ -1,11 +1,14 @@
 'use client';
-import { FormikHelpers } from 'formik';
-import { Field, Form, Formik } from 'formik';
+
 import { useId } from 'react';
+import { Field, Form, Formik, FormikHelpers } from 'formik';
+import * as Yup from 'yup';
+import toast from 'react-hot-toast';
+
 import css from './AddTaskForm.module.css';
+
 import { useTaskStore } from '@/lib/store/taskStore';
 import { createTask } from '@/lib/api/clientApi';
-import toast from 'react-hot-toast';
 
 type Props = {
   onSuccess?: () => void;
@@ -16,47 +19,66 @@ interface AddTaskFormValues {
   date: string;
 }
 
+const validationSchema = Yup.object({
+  task: Yup.string()
+    .min(2, 'Мінімум 2 символи')
+    .required('Введіть назву завдання'),
+
+  date: Yup.string().required('Оберіть дату'),
+});
+
+const getTodayDate = () => {
+  return new Date().toISOString().split('T')[0];
+};
+
 export default function AddTaskForm({ onSuccess }: Props) {
   const fieldId = useId();
   const addTask = useTaskStore((state) => state.addTask);
 
-  const todayFormatted = new Date().toLocaleDateString('uk-UA');
-
   const initialValues: AddTaskFormValues = {
     task: '',
-    date: todayFormatted,
+    date: getTodayDate(),
   };
 
   const onSubmit = async (
     values: AddTaskFormValues,
-    { setSubmitting, resetForm }: FormikHelpers<AddTaskFormValues>,
+    { setSubmitting, resetForm }: FormikHelpers<AddTaskFormValues>
   ) => {
     try {
       const createdTask = await createTask({
         name: values.task,
         date: values.date,
       });
+
       addTask(createdTask);
-      onSuccess?.();
+
       resetForm();
+      onSuccess?.(); 
     } catch {
-      toast.error('Щось пішло не так');
+      toast.error('Щось пішло не так. Спробуйте ще раз');
     } finally {
       setSubmitting(false);
     }
   };
 
   return (
-    <Formik initialValues={initialValues} onSubmit={onSubmit}>
-      <Form>
-        <h3 className={css.title}>
-          Нове <br /> завдання
-        </h3>
-        <div className={css.formFieldWrapper}>
+    <Formik
+      initialValues={initialValues}
+      validationSchema={validationSchema}
+      onSubmit={onSubmit}
+    >
+      {({ errors, touched, isSubmitting }) => (
+        <Form className={css.form}>
+          <h3 className={css.title}>
+            <br /> Нове завдання
+          </h3>
+
+          {/* TASK FIELD */}
           <div className={css.formField}>
             <label className={css.label} htmlFor={`${fieldId}-task`}>
               Назва завдання
             </label>
+
             <Field
               id={`${fieldId}-task`}
               name="task"
@@ -64,33 +86,43 @@ export default function AddTaskForm({ onSuccess }: Props) {
               type="text"
               placeholder="Прийняти вітаміни"
             />
+
+            {touched.task && errors.task && (
+              <div className={css.error}>{errors.task}</div>
+            )}
           </div>
 
+          {/* DATE FIELD */}
           <div className={css.formField}>
             <label className={css.label} htmlFor={`${fieldId}-date`}>
-              Дата
+             Дата
             </label>
+
             <Field
               id={`${fieldId}-date`}
               name="date"
               className={css.input}
               type="date"
             />
-          </div>
-        </div>
 
-        <button
-          className={css.button}
-          type="submit"
-          // disabled={createTaskMutation.isPending}
-        >
-          Зберегти
-        </button>
-      </Form>
+            {touched.date && errors.date && (
+              <div className={css.error}>{errors.date}</div>
+            )}
+          </div>
+
+          {/* SUBMIT */}
+          <button
+            className={css.button}
+            type="submit"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? 'Збереження...' : 'Зберегти'}
+          </button>
+        </Form>
+      )}
     </Formik>
   );
 }
-
 // const queryClient = useQueryClient();
 
 // const [name, setName] = useState("");

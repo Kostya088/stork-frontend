@@ -1,8 +1,8 @@
-import { NextRequest, NextResponse } from "next/server";
-import { cookies } from "next/headers";
-import { isAxiosError } from "axios";
-import { nextServer } from "@/lib/api/api";
-import { logErrorResponse } from "@/app/api/_utils/utils";
+import { NextRequest, NextResponse } from 'next/server';
+import { cookies } from 'next/headers';
+import { isAxiosError } from 'axios';
+import { logErrorResponse } from '@/app/api/_utils/utils';
+import { api } from '@/app/api/api';
 
 export async function GET(
   _request: NextRequest,
@@ -12,7 +12,7 @@ export async function GET(
     const { week } = await params;
     const cookieStore = await cookies();
 
-    const res = await nextServer.get(`/weeks/baby/${week}`, {
+    const res = await api.get(`/weeks/baby/${week}`, {
       headers: {
         Cookie: cookieStore.toString(),
       },
@@ -29,7 +29,7 @@ export async function GET(
     }
     logErrorResponse({ message: (error as Error).message });
     return NextResponse.json(
-      { error: "Internal Server Error" },
+      { error: 'Internal Server Error' },
       { status: 500 },
     );
   }

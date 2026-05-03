@@ -16,7 +16,7 @@ export default function Loading() {
       }}
     >
       <PuffLoader
-        color="#2563eb"
+        color="#FFDAE0"
         size={90}
         speedMultiplier={1.2}
       />

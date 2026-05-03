@@ -1,9 +1,9 @@
-"use client";
-import ProfileAvatar from "@/components/profile/ProfileAvatar/ProfileAvatar";
-import ProfileEditForm from "@/components/profile/ProfileEditForm/ProfileEditForm";
-import { getMe } from "@/lib/api/clientApi";
-import { useAuthStore } from "@/lib/store/authStore";
-import { useQuery } from "@tanstack/react-query";
+'use client';
+import ProfileAvatar from '@/components/profile/ProfileAvatar/ProfileAvatar';
+import ProfileEditForm from '@/components/profile/ProfileEditForm/ProfileEditForm';
+import { getMe } from '@/lib/api/clientApi';
+import { useAuthStore } from '@/lib/store/authStore';
+import { useQuery } from '@tanstack/react-query';
 
 export default function ProfilePage() {
   const setUser = useAuthStore((state) => state.setUser);
@@ -13,7 +13,7 @@ export default function ProfilePage() {
     isLoading,
     isError,
   } = useQuery({
-    queryKey: ["user"],
+    queryKey: ['user'],
     queryFn: async () => {
       const user = await getMe();
       setUser(user);

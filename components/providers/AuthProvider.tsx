@@ -25,7 +25,7 @@ const AuthProvider = ({ children }: Props) => {
       }
     };
     fetchUser();
-  }, [setUser, clearIsAuthenticated]);
+  }, [clearIsAuthenticated, setUser]);
 
   return <>{children}</>;
 };

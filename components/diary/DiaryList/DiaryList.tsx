@@ -1,6 +1,6 @@
-import styles from "./DiaryList.module.css";
 import DiaryEntryCard from "@/components/diary/DiaryEntryCard/DiaryEntryCard";
 import type { DiaryEntry } from "@/types/diaryEntry";
+import styles from "./DiaryList.module.css";
 
 interface DiaryListProps {
   entries: DiaryEntry[];
@@ -23,9 +23,14 @@ export default function DiaryList({
         <h1 id="diary-list-title" className={styles.title}>
           Ваші записи
         </h1>
-        <button className={styles.createButton} type="button" onClick={onCreateEntry}>
+
+        <button
+          className={styles.createButton}
+          type="button"
+          onClick={onCreateEntry}
+        >
           <span>Новий запис</span>
-          <svg className={styles.addIcon}>
+          <svg className={styles.addIcon} aria-hidden="true">
             <use href="/icons/sprite.svg#icon-add" />
           </svg>
         </button>

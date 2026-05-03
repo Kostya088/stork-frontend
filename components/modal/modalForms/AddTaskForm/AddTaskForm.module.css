@@ -1,61 +1,172 @@
 .form {
-  min-height: 484px;
-  padding: 64px 20px;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 32px;
+
+  box-sizing: border-box;
+  min-height: 0;
 }
 
+/* TITLE */
 .title {
-  font-family: Comfortaa;
+  font-family: var(--second-family);
   font-size: var(--font-size-4xl);
-  text-align: center;
-  font-style: normal;
   font-weight: 700;
   line-height: 1.2;
-  letter-spacing: 0.36px;
-  margin-bottom: 36px;
+
+  text-align: center;
+  margin: 0;
+
+  color: var(--color-scheme-text);
+
+  white-space: normal;
+  word-break: break-word;
 }
 
-.labelForm {
-  font-family: Lato;
-  font-size: var(--font-size-sm);
-  font-style: normal;
-  font-weight: 400;
-  line-height: 1.5;
+/* FIELDS WRAPPER */
+.formFields {
+  display: flex;
+  flex-direction: column;
+
+  gap: 20px;
 }
 
-.formFieldWrapper,
+/* FIELD */
 .formField {
   display: flex;
   flex-direction: column;
-}
-
-.formFieldWrapper {
-  gap: 24px;
-  margin-bottom: 24px;
-}
-
-.formField {
   gap: 8px;
 }
 
-.input {
-  padding: 8px 12px;
-  background-color: var(--color-gray-50);
-  border-radius: 12px;
-  border: none;
+/* LABEL */
+.label {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: var(--font-size-md);
+  line-height: 1.5;
+
+  color: var(--color-scheme-text);
 }
 
-.button {
+/* INPUT */
+.input {
   width: 100%;
-  padding: 10px 24px;
-  background-color: var(--color-btn-primary-bg);
-  border-radius: 100px;
-  border: none;
-  box-shadow: 0 4px 0 #f5b5be;
+  height: 40px;
 
-  font-family: Lato;
+  padding: 0 12px;
+
+  background-color: var(--color-input-bg);
+  border: 1px solid transparent;
+  border-radius: 12px;
+
+  font: inherit;
   font-size: var(--font-size-sm);
-  font-style: normal;
-  font-weight: 500;
+  color: var(--color-scheme-text);
+
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--color-input-border-active);
+  background-color: var(--color-white);
+}
+
+/* ERROR */
+.error {
+  color: var(--error-text-color);
+  font-size: var(--font-size-xs);
+  line-height: 1.3;
+}
+
+/* =========================
+   BUTTON (MOBILE FIRST)
+========================= */
+.button {
+  width: 295px;
+  height: 42px;
+
+  padding: 10px 24px;
+
+  background-color: var(--color-btn-primary-bg);
+  border: none;
+  border-bottom: 4px solid var(--color-pink-200);
+  border-radius: 100px;
+
+  align-self: center;
+
+  font-family: var(--font-family);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
   line-height: 1.6;
+
+  color: var(--color-scheme-text);
+
   cursor: pointer;
+
+  transition: transform 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, opacity 0.15s ease;
+}
+
+/* HOVER */
+.button:hover {
+  background-color: var(--color-pink-50);
+  border-bottom-color: var(--opacity-neutral-darkest-15);
+
+  transform: translateY(-1px);
+}
+
+/* ACTIVE */
+.button:active {
+  background-color: var(--color-pink-200);
+
+  transform: translateY(0);
+}
+
+/* DISABLED */
+.button:disabled {
+  background-color: var(--color-btn-primary-bg-disabled);
+  border-bottom-color: var(--color-btn-primary-shadow-disabled);
+
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* =========================
+   TABLET
+========================= */
+@media screen and (min-width: 768px) {
+  .form {
+    gap: 32px;
+  }
+
+  .formFields {
+    gap: 20px;
+  }
+
+  .input {
+    height: 44px;
+  }
+
+  .button {
+    width: 268px;
+    height: 46px;
+  }
+}
+
+/* =========================
+   DESKTOP
+========================= */
+@media screen and (min-width: 1440px) {
+  .form {
+    gap: 32px;
+  }
+
+  .button {
+    width: 268px;
+    height: 46px;
+  }
 }

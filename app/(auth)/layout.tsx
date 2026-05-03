@@ -2,6 +2,7 @@
 
 import { useEffect, useState, startTransition } from "react";
 import { useRouter } from "next/navigation";
+import Loading from "@/app/loading";
 
 type Props = {
   children: React.ReactNode;
@@ -19,5 +20,5 @@ export default function AuthLayout({ children }: Props) {
     });
   }, [router]);
 
-  return <>{loading ? <div>Loading...</div> : children}</>;
+  return <>{loading ? <Loading /> : children}</>;
 }

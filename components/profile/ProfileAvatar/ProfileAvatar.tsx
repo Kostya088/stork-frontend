@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
 // Компонент для рендеру div-а "Хедер профіля"
 
-import { updateUserAvatar } from "@/lib/api/clientApi";
-import { User } from "@/types/user";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import Image from "next/image";
-import { useRef } from "react";
-import toast from "react-hot-toast";
-import css from "./ProfileAvatar.module.css";
+import { updateUserAvatar } from '@/lib/api/clientApi';
+import { User } from '@/types/user';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import Image from 'next/image';
+import { useRef } from 'react';
+import toast from 'react-hot-toast';
+import css from './ProfileAvatar.module.css';
 
 interface ProfileAvatarProps {
   user: User | null;
@@ -19,8 +19,8 @@ export default function ProfileAvatar({ user }: ProfileAvatarProps) {
   const mutation = useMutation({
     mutationFn: updateUserAvatar,
     onSuccess: () => {
-      toast.success("Ваш аватар оновлено");
-      queryClient.invalidateQueries({ queryKey: ["user"] });
+      toast.success('Ваш аватар оновлено');
+      queryClient.invalidateQueries({ queryKey: ['user'] });
     },
   });
 
@@ -37,14 +37,14 @@ export default function ProfileAvatar({ user }: ProfileAvatarProps) {
     if (!file) return;
 
     // якщо фото не визначеного формату -> вивести тост-повідомлення про це і завершити функцію
-    if (!["image/jpeg", "image/jpg", "image/webp"].includes(file.type)) {
-      toast.error("Загрузіть будь-ласка файли форматів .jpeg, .jpg або .webp");
+    if (!['image/jpeg', 'image/jpg', 'image/webp'].includes(file.type)) {
+      toast.error('Загрузіть будь-ласка файли форматів .jpeg, .jpg або .webp');
       return;
     }
 
     // Відправка фото під ключем 'avatar'
     const formData = new FormData();
-    formData.append("avatar", file);
+    formData.append('avatar', file);
     mutation.mutate(formData);
   };
 
@@ -75,7 +75,7 @@ export default function ProfileAvatar({ user }: ProfileAvatarProps) {
             onClick={openFileWindows}
             disabled={mutation.isPending}
           >
-            {mutation.isPending ? "Йде завантаження " : "Завантажити нове фото"}
+            {mutation.isPending ? 'Йде завантаження ' : 'Завантажити нове фото'}
           </button>
         </div>
       </div>

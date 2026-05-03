@@ -4,31 +4,59 @@
   background-color: var(--color-scheme-foreground);
 }
 
+/* ================= TITLE (MOBILE FIRST) ================= */
 .title {
   margin-bottom: 4px;
-  font-size: 20px;
+
+  font-family: "Comfortaa", sans-serif;
   font-weight: 700;
+
+  font-size: 20px;
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+
+  color: var(--color-scheme-text);
 }
 
+/* ================= CONTENT ================= */
 .content {
   display: flex;
   gap: 12px;
   align-items: flex-start;
 }
 
-
+/* ================= TEXT (MOBILE FIRST) ================= */
 .text {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+
   font-size: 14px;
-  line-height: 160%;
+  line-height: 1.6;
+
   color: var(--color-scheme-text);
 }
+
+/* ================= TABLET ================= */
+@media (min-width: 768px) {
+  .card {
+    padding: 24px;
+  }
+
+  .text {
+    font-size: 16px;
+  }
+}
+
+/* ================= DESKTOP ================= */
 @media (min-width: 1440px) {
   .title {
-  font-size: 24px;
-  font-weight: 700;
-  line-height: 140%;
-}
-.text {
-  font-size: 16px;
-}
+    font-size: 24px;
+    line-height: 1.4;
+    letter-spacing: 0.01em;
+  }
+
+  .text {
+    font-size: 16px;
+    line-height: 1.6;
+  }
 }

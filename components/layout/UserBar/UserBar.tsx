@@ -40,7 +40,7 @@ export default function UserBar() {
 
   return (
     <div className={css.wrapper}>
-      <Link href="/profile" className={css.container}>
+      <Link href="/profile" className={css.container} onClick={closeSidebar}>
         <div className={css.avatar}>
           {user.avatar ? (
             <Image
