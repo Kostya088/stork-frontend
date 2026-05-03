@@ -7,13 +7,12 @@ const Page = () => {
   return (
     <div className={css.page}>
       <div className={css.container}>
-        <Link href="/" className={css.logoLink}>
-          <svg className={css.logoIcon} width="95" height="29">
-            <use href="/icons/sprite.svg#icon-leleka-logo" />
-          </svg>
-        </Link>
-
         <div className={css.left}>
+          <Link href="/" className={css.logoLink}>
+            <svg className={css.logoIcon} width="95" height="29">
+              <use href="/icons/sprite.svg#icon-leleka-logo" />
+            </svg>
+          </Link>
           <OnbordingForm />
         </div>
         <div className={css.right}>
