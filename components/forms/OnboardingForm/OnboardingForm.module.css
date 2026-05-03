@@ -7,7 +7,7 @@
 }
 
 .title {
-  font-family: var(--font-comfortaa);
+  font-family: var(--second-family);
   font-weight: 700;
   font-size: 36px;
   line-height: 120%;
@@ -41,7 +41,7 @@
 }
 
 .input {
-  font-family: var(--font-lato);
+  font-family: var(--font-family);
   font-size: 14px;
   width: 100%;
   max-width: 100%;
@@ -78,7 +78,7 @@
 }
 
 .subbtn {
-  font-family: var(--font-lato);
+  font-family: var(--font-family);
   font-weight: 500;
   font-size: 14px;
   background-color: #ffdae0;

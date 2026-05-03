@@ -33,7 +33,11 @@ const CustomSelector = ({
     <div className={css.wrapper}>
       <div
         id={id}
-        className={clsx(css.select, isOpenSelector && css.isOpen)}
+        className={clsx(
+          css.select,
+          isOpenSelector && css.isOpen,
+          !selectedOption && css.placeholderSelect,
+        )}
         onBlur={() => helpers.setTouched(true)}
         onClick={() => setIsOpenSelector((prevState) => !prevState)}
         role="button"
