@@ -8,7 +8,7 @@
 
 .title {
     font-weight: 700;
-    font-size: var( --font-size-4xl);
+    font-size: var(--font-size-4xl);
     line-height: 1.2;
     letter-spacing: 0.01em;
     text-align: center;
@@ -66,7 +66,7 @@
     font-size: var(--font-size-sm);
     line-height: 1.5;
     color: var(--opacity-neutral-darkest-60);
-        scrollbar-width: thin;
+    scrollbar-width: thin;
     scrollbar-color: var(--color-scheme-accent) transparent;
 }
 
@@ -95,8 +95,9 @@
     height: 48px;
     background: var(--color-neutral-lightest);
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
 }
 
 .dropdownTrigger:hover {
@@ -115,6 +116,7 @@
 .dropdownMenu {
     position: absolute;
     overflow-y: auto;
+    overflow-x: hidden;
     border: 1px solid var(--color-scheme-border);
     border-radius: 0 0 12px 12px;
     padding: 8px 0px;
@@ -132,7 +134,7 @@
     align-items: center;
     gap: 6px;
     flex-wrap: wrap;
-    height: 60px;
+    height: 100%;
     overflow-y: auto;
     padding-right: 4px;
 }
@@ -155,6 +157,8 @@
 
 .arrow {
     fill: var(--opacity-neutral-darkest-60);
+    width: 24px;
+    height: 24px;
 }
 
 /* ==================== OPTIONS ==================== */
