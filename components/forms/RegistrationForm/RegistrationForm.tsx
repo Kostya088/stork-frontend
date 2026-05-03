@@ -9,8 +9,8 @@ import clsx from 'clsx';
 import { useRouter } from 'next/navigation';
 import { register } from '@/lib/api/clientApi';
 import { useAuthStore } from '@/lib/store/authStore';
-import { ApiError } from '@/lib/api/api';
 import toast from 'react-hot-toast';
+import { ApiError } from '@/app/api/api';
 
 export interface FormDraft {
   name: string;
