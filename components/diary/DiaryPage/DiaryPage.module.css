@@ -5,7 +5,6 @@
 .inner {
   display: flex;
   flex-direction: column;
-  gap: 32px;
   width: 100%;
   max-width: 1180px;
   margin: 0 auto;
@@ -40,7 +39,7 @@
 
 @media screen and (min-width: 1440px) {
   .content {
-    grid-template-columns: 360px minmax(0, 1fr);
+    grid-template-columns: 389px minmax(0, 1fr);
     align-items: start;
   }
 

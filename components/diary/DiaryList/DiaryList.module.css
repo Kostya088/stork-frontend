@@ -68,6 +68,7 @@
   .wrapper {
     display: flex;
     flex-direction: column;
+    width: 389px;
     height: 727px;
     overflow: hidden;
   }
