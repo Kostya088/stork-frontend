@@ -16,7 +16,7 @@
 
 .modal {
   position: relative;
-  width: 100%;
+  width: 335px;
   background: var(--color-scheme-background);
   border-radius: 40px;
   padding: 48px 20px;
@@ -53,7 +53,7 @@
   }
 
   .modal {
-    max-width: 768px;
+    width: 704px;
     padding: 64px 32px;
   }
 
@@ -73,7 +73,7 @@
   }
 
   .modal {
-    max-width: 768px;
+    width: 768px;
     padding: 64px;
   }
 
