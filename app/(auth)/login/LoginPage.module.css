@@ -20,7 +20,7 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 20px;
+  /* padding: 20px; */
   height: 100%;
 }
 
@@ -31,7 +31,7 @@
 .logoLink {
   position: absolute;
   top: 20px;
-  left: 20px;
+  left: 0px;
   align-items: center;
   margin-bottom: 24px;
   color: inherit;
@@ -41,6 +41,21 @@
 .logoIcon {
   display: block;
 }
+
+
+@media (min-width: 768px) {
+
+  .container {
+    max-width: 704px;
+  }
+  .logoLink {
+    top: 21px;
+    left: 0px;
+  }
+}
+
+
+
 
 @media (min-width: 1440px) {
   .container {
@@ -53,7 +68,7 @@
 
   .left {
     width: 50%;
-    padding: 32px 40px;
+    /* padding: 32px 40px; */
   }
 
   .right {
@@ -67,4 +82,9 @@
     object-fit: cover;
     height: auto;
   }
+
+    .logoLink {
+      top: 21px;
+      left: 64px;
+    }
 }
