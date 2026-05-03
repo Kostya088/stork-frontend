@@ -10,22 +10,22 @@
   flex-direction: column;
 }
 
-.card::-webkit-scrollbar {
+.list::-webkit-scrollbar {
   width: 6px;
 }
 
-.card::-webkit-scrollbar-track {
+.list::-webkit-scrollbar-track {
   background: var(--color-white);
   border-radius: 4px;
   margin: 8px 0;
 }
 
-.card::-webkit-scrollbar-thumb {
+.list::-webkit-scrollbar-thumb {
   background: var(--color-scheme-accent);
   border-radius: 4px;
 }
 
-.card::-webkit-scrollbar-thumb:hover {
+.list::-webkit-scrollbar-thumb:hover {
   background: #e58c95;
 }
 
@@ -100,6 +100,8 @@
   gap: 16px;
   margin: 0;
   padding: 0;
+  overflow-y: auto;
+  height: 400px;
   list-style: none;
 }
 
@@ -218,7 +220,6 @@
   .card {
     max-width: 390px;
     max-height: 499px;
-    overflow-y: auto;
   }
 
   .textStrong {
