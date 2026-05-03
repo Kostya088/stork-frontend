@@ -162,6 +162,7 @@ export default function ProfileEditForm({ user }: ProfileEditFormProps) {
                 type="text"
                 name="name"
                 id="name-Id"
+                autoComplete="name"
                 className={css.input}
               />
               <ErrorMessage
@@ -180,6 +181,7 @@ export default function ProfileEditForm({ user }: ProfileEditFormProps) {
                 disabled
                 name="email"
                 id="email-Id"
+                autoComplete="email"
                 className={css.input}
               />
             </div>
@@ -194,7 +196,7 @@ export default function ProfileEditForm({ user }: ProfileEditFormProps) {
                 className={css.genderSelect}
                 isSearchable={false}
                 classNamePrefix="gender"
-                id="gender-Id"
+                inputId="gender-Id"
                 value={optionsForForm.find(
                   (option) => option.value === values.gender,
                 )}
@@ -227,6 +229,7 @@ export default function ProfileEditForm({ user }: ProfileEditFormProps) {
                 popperPlacement="bottom-end"
                 name="dueDate"
                 id="dueDate-Id"
+                autoComplete="off"
               />
               <ErrorMessage
                 name="dueDate"
