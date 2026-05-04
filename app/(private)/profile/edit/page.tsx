@@ -8,8 +8,8 @@ const Page = () => {
     <div className={css.page}>
       <div className={css.container}>
         <div className={css.left}>
-          <Link href="/" className={css.logoLink}>
-            <svg className={css.logoIcon} width="95" height="29">
+          <Link href="/" className={css.logoLink} aria-label="На головну сторінку">
+            <svg className={css.logoIcon} width="95" height="29" aria-hidden="true">
               <use href="/icons/sprite.svg#icon-leleka-logo" />
             </svg>
           </Link>
