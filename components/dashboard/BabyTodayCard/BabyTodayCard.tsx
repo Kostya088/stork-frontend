@@ -1,12 +1,18 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import { useQuery } from "@tanstack/react-query";
-import { useAuthStore } from "@/lib/store/authStore";
-import { getPublicWeek, getWeeksMe } from "@/lib/api/clientApi";
-import css from "./BabyTodayCard.module.css";
+import Image from 'next/image';
+import { useQuery } from '@tanstack/react-query';
+import { useAuthStore } from '@/lib/store/authStore';
+import { getPublicWeek, getWeeksMe } from '@/lib/api/clientApi';
+import css from './BabyTodayCard.module.css';
 
-export default function BabyTodayCard() {
+import type { WeekDashboardInfo } from '@/types/weekInfo';
+
+interface Props {
+  initialWeekData?: WeekDashboardInfo;
+}
+
+export default function BabyTodayCard({ initialWeekData }: Props) {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
   const {
@@ -14,7 +20,7 @@ export default function BabyTodayCard() {
     isLoading: isCurrentWeekLoading,
     isError: isCurrentWeekError,
   } = useQuery({
-    queryKey: ["weeks", "me"],
+    queryKey: ['weeks', 'me'],
     queryFn: getWeeksMe,
     enabled: isAuthenticated,
   });
@@ -24,9 +30,9 @@ export default function BabyTodayCard() {
     isLoading: isPublicWeekLoading,
     isError: isPublicWeekError,
   } = useQuery({
-    queryKey: ["weeks", "public", 1],
+    queryKey: ['weeks', 'public', 1],
     queryFn: () => getPublicWeek(1),
-    enabled: !isAuthenticated,
+    initialData: initialWeekData,
   });
 
   const weekData = isAuthenticated ? currentWeek : publicWeek;
@@ -75,17 +81,17 @@ export default function BabyTodayCard() {
 
         <div className={css.info}>
           <p>
-            <span className={css.label}>Розмір:</span> Приблизно{" "}
+            <span className={css.label}>Розмір:</span> Приблизно{' '}
             {babyInfo.babySize} см
           </p>
 
           <p>
-            <span className={css.label}>Вага:</span> Близько{" "}
+            <span className={css.label}>Вага:</span> Близько{' '}
             {babyInfo.babyWeight} грамів.
           </p>
 
           <p>
-            <span className={css.label}>Активність:</span>{" "}
+            <span className={css.label}>Активність:</span>{' '}
             {babyInfo.babyActivity}
           </p>
         </div>

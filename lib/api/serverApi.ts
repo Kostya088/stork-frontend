@@ -4,7 +4,7 @@ import { nextServer } from './api';
 // import type { User } from '@/types/user';
 // import type { BabyState } from '@/types/babyState';
 // import type { MomState } from '@/types/momState';
-// import type { WeekDashboardInfo } from '@/types/weekInfo';
+import type { WeekDashboardInfo } from '@/types/weekInfo';
 // import type { DiaryEntry } from '@/types/diaryEntry';
 
 async function getCookies() {
@@ -38,13 +38,22 @@ async function getCookies() {
 //   return res.data;
 // }
 
-// export async function getWeeksMe(): Promise<WeekDashboardInfo> {
-//   const headers = await getCookies();
-//   const { data } = await nextServer.get<WeekDashboardInfo>('/weeks/me', {
-//     headers,
-//   });
-//   return data;
-// }
+export async function getWeeksMe(): Promise<WeekDashboardInfo> {
+  const headers = await getCookies();
+  const { data } = await nextServer.get<WeekDashboardInfo>('/weeks/me', {
+    headers,
+  });
+  return data;
+}
+
+export async function getPublicWeek(week = 1): Promise<WeekDashboardInfo> {
+  const headers = await getCookies();
+  const { data } = await nextServer.get<WeekDashboardInfo>(
+    `/weeks?week=${week}`,
+    { headers },
+  );
+  return data;
+}
 
 // export async function getWeeksBaby(week: number): Promise<BabyState> {
 //   const headers = await getCookies();
