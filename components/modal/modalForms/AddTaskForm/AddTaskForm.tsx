@@ -7,8 +7,9 @@ import toast from 'react-hot-toast';
 
 import css from './AddTaskForm.module.css';
 
-import { useTaskStore } from '@/lib/store/taskStore';
 import { createTask } from '@/lib/api/clientApi';
+import { useQueryClient } from '@tanstack/react-query';
+import type { Task } from '@/types/task';
 
 type Props = {
   onSuccess?: () => void;
@@ -33,7 +34,7 @@ const getTodayDate = () => {
 
 export default function AddTaskForm({ onSuccess }: Props) {
   const fieldId = useId();
-  const addTask = useTaskStore((state) => state.addTask);
+  const queryClient = useQueryClient();
 
   const initialValues: AddTaskFormValues = {
     task: '',
@@ -42,7 +43,7 @@ export default function AddTaskForm({ onSuccess }: Props) {
 
   const onSubmit = async (
     values: AddTaskFormValues,
-    { setSubmitting, resetForm }: FormikHelpers<AddTaskFormValues>
+    { setSubmitting, resetForm }: FormikHelpers<AddTaskFormValues>,
   ) => {
     try {
       const createdTask = await createTask({
@@ -50,10 +51,13 @@ export default function AddTaskForm({ onSuccess }: Props) {
         date: values.date,
       });
 
-      addTask(createdTask);
+      queryClient.setQueryData<Task[]>(['tasks'], (old) => [
+        ...(old ?? []),
+        createdTask,
+      ]);
 
       resetForm();
-      onSuccess?.(); 
+      onSuccess?.();
     } catch {
       toast.error('Щось пішло не так. Спробуйте ще раз');
     } finally {
@@ -95,7 +99,7 @@ export default function AddTaskForm({ onSuccess }: Props) {
           {/* DATE FIELD */}
           <div className={css.formField}>
             <label className={css.label} htmlFor={`${fieldId}-date`}>
-             Дата
+              Дата
             </label>
 
             <Field
@@ -111,11 +115,7 @@ export default function AddTaskForm({ onSuccess }: Props) {
           </div>
 
           {/* SUBMIT */}
-          <button
-            className={css.button}
-            type="submit"
-            disabled={isSubmitting}
-          >
+          <button className={css.button} type="submit" disabled={isSubmitting}>
             {isSubmitting ? 'Збереження...' : 'Зберегти'}
           </button>
         </Form>
@@ -123,69 +123,3 @@ export default function AddTaskForm({ onSuccess }: Props) {
     </Formik>
   );
 }
-// const queryClient = useQueryClient();
-
-// const [name, setName] = useState("");
-// const [date, setDate] = useState("");
-
-// const createTaskMutation = useMutation({
-//   mutationFn: createTask,
-
-//   onSuccess: () => {
-//     queryClient.invalidateQueries({
-//       queryKey: ["tasks"],
-//     });
-
-//     onSuccess?.();
-
-//     setName("");
-//     setDate("");
-//   },
-// });
-
-// const handleSubmit = (e: React.FormEvent) => {
-//   e.preventDefault();
-
-//   if (!name.trim() || !date) return;
-
-//   createTaskMutation.mutate({
-//     name,
-//     date,
-//   });
-// };
-
-// <form className={css.form} onSubmit={handleSubmit}>
-//   <h3 className={css.title}>
-//     Нове <br /> завдання
-//   </h3>
-
-//   <div className={css.formFieldWrapper}>
-//     <div className={css.formField}>
-//       <label className={css.label}>Назва завдання</label>
-//       <input
-//         className={css.input}
-//         type="text"
-//         placeholder="Прийняти вітаміни"
-//         value={name}
-//         onChange={(e) => setName(e.target.value)}
-//       />
-//     </div>
-//     <div className={css.formField}>
-//       <label className={css.label}>Дата</label>
-//       <input
-//         className={css.input}
-//         type="date"
-//         value={date}
-//         onChange={(e) => setDate(e.target.value)}
-//       />
-//     </div>
-//   </div>
-
-//   <button
-//     className={css.button}
-//     type="submit"
-//     disabled={createTaskMutation.isPending}
-//   >
-//     Зберегти
-//   </button>
-// </form>
