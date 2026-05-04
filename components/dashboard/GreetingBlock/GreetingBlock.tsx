@@ -1,26 +1,33 @@
-"use client";
+'use client';
 
-import { useAuthStore } from "@/lib/store/authStore";
-import css from "./GreetingBlock.module.css";
+import { useSyncExternalStore } from 'react';
+import { useAuthStore } from '@/lib/store/authStore';
+import css from './GreetingBlock.module.css';
 
 function getGreeting() {
   const hour = new Date().getHours();
 
-  if (hour >= 6 && hour < 12) return "Доброго ранку";
-  if (hour >= 12 && hour < 18) return "Доброго дня";
-  if (hour >= 18 && hour < 24) return "Доброго вечора";
-  return "Доброї ночі";
+  if (hour >= 6 && hour < 12) return 'Доброго ранку';
+  if (hour >= 12 && hour < 18) return 'Доброго дня';
+  if (hour >= 18 && hour < 24) return 'Доброго вечора';
+  return 'Доброї ночі';
 }
+
+const subscribe = () => () => {};
+const getServerGreeting = () => 'Вітаю';
 
 export default function GreetingBlock() {
   const user = useAuthStore((state) => state.user);
+  const greeting = useSyncExternalStore(
+    subscribe,
+    getGreeting,
+    getServerGreeting,
+  );
 
   return (
     <section className={css.block}>
       <h1 className={css.title}>
-        {user
-          ? `${getGreeting()}, ${user.name}!`
-          : `${getGreeting()}!`}
+        {user ? `${greeting}, ${user.name}!` : `${greeting}!`}
       </h1>
     </section>
   );
