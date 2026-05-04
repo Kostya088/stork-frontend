@@ -44,7 +44,7 @@ function LoginFormWatcher() {
 
 export default function LoginForm() {
   const router = useRouter();
-  const authStore = useAuthStore();
+  const setUser = useAuthStore((state) => state.setUser);
   const [initialValues] = useState(() => {
     try {
       const saved = sessionStorage.getItem(STORAGE_KEY);
@@ -68,7 +68,7 @@ export default function LoginForm() {
     try {
       const user = await login(values);
 
-      authStore.setUser(user);
+      setUser(user);
 
       toast.success('Успішний вхід');
 

@@ -31,6 +31,7 @@ export default function UserBar() {
       closeSidebar();
       clearIsAuthenticated();
       queryClient.removeQueries({ queryKey: ['tasks'] });
+      queryClient.removeQueries({ queryKey: ['user'] });
       startTransition(() => {
         router.push('/login');
       });
