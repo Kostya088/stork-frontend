@@ -11,7 +11,7 @@ export default function MomTipCard() {
   const isAuthenticated = useAuthStore((s) => s.isAuthenticated);
 
   const { data, isLoading } = useQuery<WeekDashboardInfo>({
-    queryKey: ['weekTip', isAuthenticated],
+    queryKey: ['weeks', isAuthenticated ? 'me' : 'public', 1],
     queryFn: () =>
       isAuthenticated ? getWeeksMe() : getPublicWeek(1),
   });
