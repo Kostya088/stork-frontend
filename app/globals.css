@@ -265,6 +265,15 @@ select {
   font: inherit;
 }
 
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--color-pink-200);
+  outline-offset: 3px;
+}
+
 /* Курсор pointer для всіх кнопок */
 button {
   cursor: pointer;
