@@ -10,8 +10,8 @@ export default function Login() {
         {' '}
         {/* ← новий wrapper */}
         <div className={styles.left}>
-          <Link href="/" className={styles.logoLink}>
-            <svg className={styles.logoIcon} width="95" height="29">
+          <Link href="/" className={styles.logoLink} aria-label="На головну сторінку">
+            <svg className={styles.logoIcon} width="95" height="29" aria-hidden="true">
               <use href="/icons/sprite.svg#icon-leleka-logo" />
             </svg>
           </Link>

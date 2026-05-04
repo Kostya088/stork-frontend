@@ -67,8 +67,13 @@ const TasksReminderCard = () => {
         <div className={css.cardHeader}>
           <h2 className={css.tasksHeading}>Важливі завдання</h2>
 
-          <button type="button" className={css.addBtn} onClick={handleCreate}>
-            <svg className={css.addIcon} width="24" height="24">
+          <button
+            type="button"
+            className={css.addBtn}
+            onClick={handleCreate}
+            aria-label="Створити нове завдання"
+          >
+            <svg className={css.addIcon} width="24" height="24" aria-hidden="true">
               <use href="/icons/sprite.svg#icon-open-task-btn" />
             </svg>
           </button>
@@ -91,8 +96,13 @@ const TasksReminderCard = () => {
       <div className={css.cardHeader}>
         <h2 className={css.tasksHeading}>Важливі завдання</h2>
 
-        <button type="button" className={css.addBtn} onClick={handleCreate}>
-          <svg className={css.addIcon} width="24" height="24">
+        <button
+          type="button"
+          className={css.addBtn}
+          onClick={handleCreate}
+          aria-label="Створити нове завдання"
+        >
+          <svg className={css.addIcon} width="24" height="24" aria-hidden="true">
             <use href="/icons/sprite.svg#icon-open-task-btn" />
           </svg>
         </button>
@@ -117,6 +127,7 @@ const TasksReminderCard = () => {
                   className={css.checkbox}
                   checked={task.isDone}
                   onChange={() => handleToggle(task._id, task.isDone)}
+                  aria-label={`${task.isDone ? 'Позначити невиконаним' : 'Позначити виконаним'}: ${task.name}`}
                 />
 
                 <p className={`${css.taskName} ${task.isDone ? css.done : ''}`}>

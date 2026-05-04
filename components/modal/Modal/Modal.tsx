@@ -44,8 +44,13 @@ export default function Modal({ isOpen, onClose, children }: ModalProps) {
 
   return (
     <div className={css.backdrop} onClick={handleBackdropClick}>
-      <div className={css.modal}>
-        <button type="button" className={css.closeButton} onClick={onClose}>
+      <div className={css.modal} role="dialog" aria-modal="true" aria-label="Модальне вікно">
+        <button
+          type="button"
+          className={css.closeButton}
+          onClick={onClose}
+          aria-label="Закрити модальне вікно"
+        >
           <Image
             src="/icons/closeBtn.svg"
             alt="Close modal"
