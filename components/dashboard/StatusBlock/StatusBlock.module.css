@@ -25,6 +25,11 @@
   gap: 4px;
 }
 
+.card:focus-visible {
+  outline: 2px solid var(--color-pink-200);
+  outline-offset: 3px;
+}
+
 .label {
   font-family: var(--font-family);
   font-weight: 400;
