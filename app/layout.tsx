@@ -60,7 +60,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="uk"
       className={`${lato.variable} ${comfortaa.variable}`}
       data-scroll-behavior="smooth"
     >
