@@ -1,15 +1,13 @@
-.wrapper {
-    overflow: hidden;
-        width: 100%;
-        /* max-width: 1400px; */
-        min-width: 0;
-        position: relative;
-}
+
 
 .emblaViewport {
+position: relative;
     overflow: hidden;
-    margin-top: 24px;
     cursor: grab;
+
+    /* Расширяем блок, чтобы он игнорировал паддинги родителя */
+    width: calc(100% + 48px);
+    margin-left: -24px;
 }
 
 .emblaViewport:active {
@@ -18,10 +16,10 @@
 
 .list {
     display: flex;
-    gap: 16px;
     list-style: none;
-    padding: 0 20px;
     margin: 0;
+    gap: 16px;
+    padding: 0 24px;
 }
 
 .slide {
