@@ -46,20 +46,21 @@
   width: 100%;
   max-width: 100%;
   height: 37px;
-  background-color: rgba(0, 0, 0, 0.05);
-  border: none;
+  background-color: var(--input-bg);
+  border: 1px solid var(--input-border);
   border-radius: 12px;
   padding: 8px 12px;
   box-sizing: border-box;
+  color: var(--input-text);
   outline: none;
 }
 
 .datePlaceholder {
-  color: #8a8a8a;
+  color: var(--input-placeholder);
 }
 
 .dateFilled {
-  color: #000;
+  color: var(--input-text);
 }
 
 .input:active,
@@ -68,11 +69,11 @@
 }
 
 .invalid {
-  border: 1px solid #c60000;
+  border: 1px solid var(--text-error);
 }
 
 .errorMessage {
-  color: #c60000;
+  color: var(--text-error);
   /* position: absolute; */
   bottom: 0;
 }
@@ -81,24 +82,24 @@
   font-family: var(--font-family);
   font-weight: 500;
   font-size: 14px;
-  background-color: #ffdae0;
+  background-color: var(--button-primary-bg);
   height: 46px;
   width: 100%;
   border-radius: 100px;
   outline: none;
   border: none;
   margin-bottom: 24px;
-  box-shadow: 0 5px #ffcbd3;
+  box-shadow: 0 5px var(--button-primary-border);
 }
 
 .subbtn:hover,
 .subbtn:focus {
-  background-color: #fff4f6;
-  box-shadow: 0 5px rgba(0, 0, 0, 0.15);
+  background-color: var(--button-primary-bg-hover);
+  box-shadow: 0 5px var(--button-primary-border-hover);
 }
 
 .subbtn:active {
-  background-color: #ffcbd3;
+  background-color: var(--button-primary-bg-active);
   box-shadow: none;
 }
 
@@ -109,8 +110,8 @@
 
 .registerLink {
   text-decoration: none;
-  color: black;
-  border-bottom: 1px solid silver;
+  color: var(--link-color);
+  border-bottom: 1px solid var(--border-default);
 }
 
 @media screen and (min-width: 768px) {

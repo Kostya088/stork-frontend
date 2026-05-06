@@ -2,7 +2,7 @@
   width: 100%;
   padding: 24px 16px;
   border-radius: 32px;
-  background: var(--color-pastel-pink-lighter);
+  background: var(--color-accent-bg-soft);
 }
 
 .header {
@@ -104,7 +104,7 @@
   }
 
   .list::-webkit-scrollbar-thumb:hover {
-    background: #e58c95;
+    background: var(--scrollbar-thumb-hover);
   }
 
   .status,

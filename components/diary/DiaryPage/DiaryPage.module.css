@@ -1,5 +1,5 @@
 .page {
-  color: var(--color-neutral-darkest);
+  color: var(--text-primary);
 }
 
 .inner {
@@ -32,8 +32,8 @@
   margin: 0;
   padding: 12px 16px;
   border-radius: 14px;
-  background: var(--primary-background-color);
-  color: var(--error-text-color);
+  background: var(--surface-accent-soft);
+  color: var(--text-error);
   font-size: 14px;
 }
 

@@ -36,7 +36,7 @@
   height: 40px;
   border-radius: 50%;
   overflow: hidden;
-  background: #ffd2dd;
+  background: var(--surface-avatar);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -51,7 +51,7 @@
 
 .avatarPlaceholder {
   font-weight: 600;
-  color: #241a1d;
+  color: var(--avatar-placeholder-text);
 }
 
 .info {
@@ -97,12 +97,12 @@
 }
 
 .logoutButton:hover {
-  background: #f1eef0;
+  background: var(--surface-hover);
 }
 
 .logoutIcon {
   width: 20px;
   height: 20px;
   display: block;
-  color: #241a1d;
+  color: var(--text-primary);
 }

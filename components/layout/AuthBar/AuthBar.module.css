@@ -29,31 +29,31 @@
 }
 
 .registerLink {
-  background: var(--color-scheme-foreground-alt);
-  border-bottom: 4px solid var(--color-scheme-accent);
+  background: var(--button-primary-bg);
+  border-bottom: 4px solid var(--button-primary-border);
 }
 
 .registerLink:hover,
 .registerLink:focus {
-  border-bottom: 4px solid var(--color-scheme-border);
-  background: var(--color-scheme-background);
+  border-bottom: 4px solid var(--button-primary-border-hover);
+  background: var(--button-primary-bg-hover);
 }
 
 .registerLink:active {
-  background: var(--color-neutral-light);
+  background: var(--button-primary-bg-active);
 }
 
 .loginLink {
-  background: var(--opacity-neutral-darkest-5);
-  border-bottom: 4px solid var(--opacity-neutral-darkest-15);
+  background: var(--button-secondary-bg);
+  border-bottom: 4px solid var(--button-secondary-border);
 }
 
 .loginLink:hover,
 .loginLink:focus {
-  border-bottom: 4px solid var(--opacity-neutral-darkest-15);
-  background: var(--color-scheme-foreground);
+  border-bottom: 4px solid var(--button-secondary-border);
+  background: var(--button-secondary-bg-hover);
 }
 
 .loginLink:active {
-  background: var(--color-scheme-accent);
+  background: var(--button-secondary-bg-active);
 }

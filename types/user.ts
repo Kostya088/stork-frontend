@@ -1,5 +1,6 @@
-export type Gender = "boy" | "girl" | null;
-export type Theme = "light" | "blue" | "pink";
+import type { Theme } from './index';
+
+export type Gender = 'boy' | 'girl' | null;
 
 export interface User {
   _id: string;

@@ -36,8 +36,8 @@
 /* ==================== INPUTS ==================== */
 
 .input {
-    background: var(--opacity-neutral-darkest-5);
-    border: 2px solid var(--opacity-transparent);
+    background: var(--input-bg);
+    border: 2px solid var(--input-border);
     border-radius: 12px;
     padding: 8px 12px;
     width: 294px;
@@ -45,19 +45,19 @@
     font-weight: 400;
     font-size: var(--font-size-sm);
     line-height: 1.5;
-    color: var(--opacity-neutral-darkest-60);
+    color: var(--input-placeholder);
 }
 
 .input:hover,
 .input:focus {
     outline: none;
-    border: 2px solid var(--color-scheme-accent);
+    border: 2px solid var(--input-border-focus);
 }
 
 .textarea {
     resize: none;
-    background: var(--opacity-neutral-darkest-5);
-    border: 1px solid var(--opacity-transparent);
+    background: var(--input-bg);
+    border: 1px solid var(--input-border);
     border-radius: 12px;
     padding: 12px;
     width: 294px;
@@ -65,20 +65,20 @@
     font-weight: 400;
     font-size: var(--font-size-sm);
     line-height: 1.5;
-    color: var(--opacity-neutral-darkest-60);
+    color: var(--input-placeholder);
     scrollbar-width: thin;
     scrollbar-color: var(--color-scheme-accent) transparent;
 }
 
 .textarea:hover,
 .textarea:focus {
-    border: 2px solid var(--color-scheme-accent);
+    border: 2px solid var(--input-border-focus);
     outline: none;
 }
 
 .input:not(:placeholder-shown),
 .textarea:not(:placeholder-shown) {
-    color: var(--color-neutral-darkest);
+    color: var(--input-text);
 }
 
 /* ==================== DROPDOWN ==================== */
@@ -88,12 +88,12 @@
 }
 
 .dropdownTrigger {
-    border: 1px solid var(--opacity-transparent);
+    border: 1px solid var(--input-border);
     border-radius: 12px;
     padding: 8px 12px;
     width: 294px;
     height: 48px;
-    background: var(--color-neutral-lightest);
+    background: var(--surface-hover);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -101,7 +101,7 @@
 }
 
 .dropdownTrigger:hover {
-    border: 2px solid var(--color-scheme-accent);
+    border: 2px solid var(--input-border-focus);
     outline: none;
 }
 
@@ -110,7 +110,7 @@
     border-right: 1px solid var(--color-scheme-border);
     border-top: 1px solid var(--color-scheme-border);
     border-radius: 12px 12px 0 0;
-    background: var(--opacity-neutral-darkest-5);
+    background: var(--surface-overlay);
 }
 
 .dropdownMenu {
@@ -122,7 +122,7 @@
     padding: 8px 0px;
     width: 295px;
     height: 220px;
-    background: var(--color-neutral-lightest);
+    background: var(--surface-hover);
     gap: 8px;
     scrollbar-gutter: stable;
 }
@@ -140,12 +140,12 @@
 }
 
 .placeholder {
-    color: #8b8587;
+    color: var(--input-placeholder);
 }
 
 .chip {
-    background: var(--opacity-neutral-darkest-5);
-    border: 1px solid var(--opacity-transparent);
+    background: var(--surface-overlay);
+    border: 1px solid var(--input-border);
     border-radius: 100px;
     padding: 4px 10px;
     height: 29px;
@@ -173,7 +173,7 @@
 }
 
 .checked {
-    background: var(--opacity-neutral-darkest-5);
+    background: var(--surface-overlay);
     border-radius: 8px;
     padding: 8px 12px;
     width: 295px;
@@ -190,23 +190,23 @@
     justify-content: center;
     cursor: pointer;
     position: relative;
-    background: var(--opacity-neutral-darkest-5);
-    border: 1px solid var(--opacity-transparent);
+    background: var(--surface-overlay);
+    border: 1px solid var(--input-border);
     border-radius: 4px;
     width: 18px;
     height: 18px;
 }
 
 .checkbox:checked {
-    background: var(--color-neutral-darkest);
-    border: 1px solid var(--color-neutral-darkest);
+    background: var(--text-primary);
+    border: 1px solid var(--text-primary);
 }
 
 .checkbox:checked::after {
     content: '';
     width: 6px;
     height: 10px;
-    border: solid var(--color-white);
+    border: solid var(--surface-base);
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
     position: absolute;
@@ -228,7 +228,7 @@
 }
 
 .dropdownMenu::-webkit-scrollbar-track {
-    background: var(--color-white);
+    background: var(--surface-base);
     border-radius: 4px;
     margin: 8px 0;
 }
@@ -239,7 +239,7 @@
 }
 
 .dropdownMenu::-webkit-scrollbar-thumb:hover {
-    background: #e58c95;
+    background: var(--scrollbar-thumb-hover);
 }
 
 /* ==================== BUTTON ==================== */
@@ -251,8 +251,8 @@
     align-self: center;
     border: none;
     outline: none;
-    background: var(--color-scheme-foreground-alt);
-    border-bottom: 4px solid var(--color-scheme-accent);
+    background: var(--button-primary-bg);
+    border-bottom: 4px solid var(--button-primary-border);
     border-radius: 100px;
     padding: 10px 24px;
     width: 294px;
@@ -265,17 +265,17 @@
 
 .submitButton:hover,
 .submitButton:focus {
-    border-bottom: 4px solid var(--color-scheme-border);
-    background: var(--color-scheme-background);
+    border-bottom: 4px solid var(--button-primary-border-hover);
+    background: var(--button-primary-bg-hover);
 }
 
 .submitButton:active {
-    background: var(--color-neutral-light);
+    background: var(--button-primary-bg-active);
 }
 
 .submitButton:disabled {
-    border-bottom: 4px solid var(--color-scheme-accent);
-    background: var(--color-scheme-foreground-alt);
+    border-bottom: 4px solid var(--button-primary-border);
+    background: var(--button-primary-bg-disabled);
     opacity: 0.3;
 }
 
@@ -283,7 +283,7 @@
 
 .error {
     font-size: 12px;
-    color: red;
+    color: var(--text-error);
 }
 
 /* ==================== RESPONSIVE ==================== */

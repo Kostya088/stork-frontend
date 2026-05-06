@@ -112,7 +112,7 @@
 
   .wrapper::-webkit-scrollbar-thumb {
     border-radius: 999px;
-    background: #ffc7d6;
+    background: var(--color-scheme-accent);
   }
 
   .title {
