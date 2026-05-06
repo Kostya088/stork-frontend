@@ -7,10 +7,12 @@ import Link from 'next/link';
 import * as Yup from 'yup';
 import clsx from 'clsx';
 import { useRouter } from 'next/navigation';
-import { register } from '@/lib/api/clientApi';
+import { register, loginWithGoogle } from '@/lib/api/clientApi';
+import { useGoogleLogin } from '@react-oauth/google';
 import { useAuthStore } from '@/lib/store/authStore';
 import toast from 'react-hot-toast';
 import { ApiError } from '@/app/api/api';
+
 
 export interface FormDraft {
   name: string;
@@ -72,6 +74,27 @@ const RegistrationForm = () => {
     }
     return { name: '', email: '', password: '' };
   });
+
+  const handleGoogleLogin = useGoogleLogin({
+  onSuccess: async (tokenResponse) => {
+    try {
+      const user = await loginWithGoogle({ token: tokenResponse.access_token });
+
+      setUser(user);
+
+      toast.success('Успішний вхід через Google');
+
+      sessionStorage.removeItem(STORAGE_KEY);
+
+      router.push('/profile/edit');
+    } catch {
+      toast.error('Не вдалося увійти через Google');
+    }
+  },
+  onError: () => {
+    toast.error('Google авторизацію скасовано або сталася помилка');
+  },
+});
 
   const handleSubmit = async (values: FormDraft) => {
     try {
@@ -156,8 +179,15 @@ const RegistrationForm = () => {
                 />
               </div>
 
-              <button className={css.subbtn} type="submit">
+              <button className={`${css.subbtn} ${css.submitBtn}`} type="submit">
                 Зареєструватись
+              </button>
+              <button
+                className={css.subbtn}
+                type="button"
+                onClick={() => handleGoogleLogin()}
+                >
+                Зареєструватись через Google
               </button>
             </Form>
           </>

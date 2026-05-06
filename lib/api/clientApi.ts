@@ -134,6 +134,16 @@ export async function login(data: LoginRequest): Promise<User> {
   const { data: user } = await nextServer.post<User>('/auth/login', data);
   return user;
 }
+export interface GoogleLoginRequest {
+  token: string;
+}
+
+export async function loginWithGoogle(
+  data: GoogleLoginRequest,
+): Promise<User> {
+  const { data: user } = await nextServer.post<User>('/auth/google', data);
+  return user;
+}
 
 export interface RegisterRequest {
   name: string;
@@ -142,6 +152,7 @@ export interface RegisterRequest {
   dueDate?: string;
   gender?: 'boy' | 'girl';
 }
+
 
 export async function register(data: RegisterRequest): Promise<User> {
   const { data: user } = await nextServer.post<User>('/auth/register', data);
