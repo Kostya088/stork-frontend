@@ -267,9 +267,10 @@ a {
   text-decoration: underline;
   text-decoration-color: transparent;
   transition:
-    color 0.25s ease,
-    text-decoration-color 0.25s ease,
-    opacity 0.2s ease;
+    color 0.25s ease-in-out,
+    text-decoration-color 0.25s ease-in-out,
+    border-color 0.25s ease-in-out,
+    opacity 0.2s ease-in-out;
 }
 
 ul,
@@ -282,6 +283,15 @@ input,
 textarea,
 select {
   font: inherit;
+}
+
+input,
+textarea,
+select {
+  transition:
+    border-color 0.25s ease-in-out,
+    background-color 0.25s ease-in-out,
+    box-shadow 0.25s ease-in-out;
 }
 
 a:focus-visible,
@@ -297,4 +307,10 @@ select:focus-visible {
 button {
   cursor: pointer;
   color: var(--color-scheme-text);
+  transition:
+    background-color 0.25s ease-in-out,
+    color 0.25s ease-in-out,
+    border-color 0.25s ease-in-out,
+    box-shadow 0.25s ease-in-out,
+    opacity 0.25s ease-in-out;
 }
