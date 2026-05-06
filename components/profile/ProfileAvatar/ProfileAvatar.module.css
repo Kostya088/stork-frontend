@@ -13,6 +13,7 @@
 }
 
 .avatarWrapper {
+  position: relative;
   width: 132px;
   height: 132px;
   border-radius: 50%;
@@ -23,8 +24,6 @@
 }
 
 .avatar {
-  width: 100%;
-  height: 100%;
   object-fit: cover;
 }
 
@@ -66,34 +65,34 @@
   margin-top: 16px;
 
   border: none;
-  border-bottom: 4px solid var(--opacity-neutral-darkest-15);
+  border-bottom: 4px solid var(--button-secondary-border);
   border-radius: 100px;
   padding: 8px 20px;
   width: 100%;
   height: 38px;
-  background: var(--opacity-neutral-darkest-5);
+  background: var(--button-secondary-bg);
 
   font-family: var(--font-family);
   font-weight: 500;
   font-size: 14px;
   line-height: 1.6;
-  color: var(--color-black);
+  color: var(--button-secondary-text);
 }
 
 .buttonUpdate:hover {
-  background: var(--color-pastel-pink-lighter);
+  background: var(--color-accent-bg-soft);
 }
 
 .buttonUpdate:focus {
-  background: var(--color-pastel-pink-lighter);
+  background: var(--color-accent-bg-soft);
 }
 
 .buttonUpdate:active {
-  background: var(--color-pink-200);
+  background: var(--button-secondary-bg-active);
   border: none;
 }
 .buttonUpdate:disabled {
-  background: var(--opacity-neutral-darkest-5);
+  background: var(--button-secondary-bg-disabled);
   opacity: 0.3;
 }
 

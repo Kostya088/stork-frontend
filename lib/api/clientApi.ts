@@ -1,5 +1,6 @@
 import type { Task } from '@/types/task';
 import { nextServer } from './api';
+import type { Theme } from '@/types';
 import type { User } from '@/types/user';
 import type { BabyState } from '@/types/babyState';
 import type { MomState } from '@/types/momState';
@@ -96,8 +97,6 @@ export async function updateUserAvatar(
   );
   return data;
 }
-
-export type Theme = 'light' | 'blue' | 'pink';
 
 export async function updateUserTheme(theme: Theme): Promise<User> {
   const { data } = await nextServer.patch<User>('/users/me/theme', { theme });

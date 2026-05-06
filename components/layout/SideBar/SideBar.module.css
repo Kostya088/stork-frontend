@@ -17,7 +17,7 @@
   height: 100%;
   width: 300px;
   max-width: 85vw;
-  background: #fff;
+  background: var(--surface-base);
   animation: slideIn 0.3s ease;
 }
 
@@ -59,7 +59,7 @@ color: var(--color-scheme-text);
 }
 
 .navLink:hover {
-  background: var(--color-neutral-lightest);
+  background: var(--surface-hover);
 }
 
 .active {
@@ -79,7 +79,7 @@ color: var(--color-scheme-text);
   position: fixed;
   inset: 0;
   z-index: 1000;
-  background: rgba(36, 26, 29, 0.28);
+  background: var(--overlay-scrim);
   display: flex;
   justify-content: flex-start;
 }
@@ -114,7 +114,7 @@ stroke: var(--color-scheme-text);
 }
 
 .closeButton:hover {
-  background: #f1eef0;
+  background: var(--surface-hover);
 }
 
 .closeIcon {
@@ -144,10 +144,10 @@ stroke: var(--color-scheme-text);
 
 @keyframes fadeOut {
   from {
-    background: rgba(36, 26, 29, 0.28);
+    background: var(--overlay-scrim);
   }
   to {
-    background: rgba(36, 26, 29, 0);
+    background: var(--opacity-transparent);
   }
 }
 @media (min-width: 1440px) {

@@ -3,7 +3,7 @@
     margin-top: 32px;
     display: flex;
     width: 100%;
-    background: var(--color-pastel-pink-lighter);
+    background: var(--color-accent-bg-soft);
     border-radius: 100px;
     padding: 4px;
 
@@ -18,7 +18,7 @@
     border: none;
     border-radius: 28px;
     background-color: transparent;
-    color: var(--primary-text-color);
+    color: var(--text-primary);
     font-family: var(--font-family);
     font-size: var(--font-size-sm);
     line-height: 1.4;
@@ -28,7 +28,7 @@
 }
 
 .tabActive {
-    background: var(--color-pastel-pink-light);
+    background: var(--color-accent-bg-light);
 }
 
 /* === Status === */
@@ -46,7 +46,7 @@
     margin-top: 16px;
     margin-bottom: 24px;
     padding: 24px;
-    background: var(--color-pastel-pink-lighter);
+    background: var(--color-accent-bg-soft);
     border-radius: 32px;
 }
 
@@ -59,7 +59,7 @@
 .imageWrapper {
     width: 100%;
     position: relative;
-    background: var(--color-bg-primary);
+    background: var(--surface-base);
     border-radius: 24px;
     overflow: hidden;
     height: 379px;
@@ -90,7 +90,7 @@
     font-size: var(--font-size-sm);
     font-weight: 400;
     line-height: 1.4;
-    color: var(--primary-text-color);
+    color: var(--text-primary);
 }
 
 .paragraph {
@@ -99,7 +99,7 @@
     font-size: var(--font-size-sm);
     font-weight: 400;
     line-height: 1.6;
-    color: var(--primary-text-color);
+    color: var(--text-primary);
     white-space: pre-line;
 }
 
@@ -110,7 +110,7 @@
     margin-top: 16px;
     border-radius: 12px;
     padding: 12px;
-    background-color: var(--color-pastel-pink-light);
+    background-color: var(--color-accent-bg-light);
 }
 
 .factWrapperCont {
@@ -136,7 +136,7 @@
     font-family: var(--font-family);
     width: 24px;
     height: 24px;
-    color: var(--primary-text-color);
+    color: var(--text-primary);
     margin-right: 8px;
 }
 
@@ -146,7 +146,7 @@
     font-size: var(--font-size-sm);
     font-weight: 400;
     line-height: 1.5;
-    color: var(--primary-text-color);
+    color: var(--text-primary);
 }
 
 /* === Mom Cards === */
@@ -158,11 +158,11 @@
 }
 
 .momCardFeelings {
-    background: var(--color-pastel-pink-lighter);
+    background: var(--color-accent-bg-soft);
 }
 
 .momCardTips {
-    background: var(--color-pastel-pink-lighter);
+    background: var(--color-accent-bg-soft);
     margin-top: 24px;
 }
 
@@ -172,7 +172,7 @@
     font-weight: 700;
     font-size: var(--font-size-lg);
     line-height: 1.4;
-    color: var(--primary-text-color);
+    color: var(--text-primary);
 }
 
 /* === Tags === */
@@ -194,7 +194,7 @@
     font-size: var(--font-size-sm);
     font-weight: 500;
     line-height: 1.4;
-    color: var(--primary-text-color);
+    color: var(--text-primary);
 }
 
 /* === Tips === */
@@ -230,7 +230,7 @@
     font-size: var(--font-size-sm);
     font-weight: 700;
     line-height: 1.6;
-    color: var(--primary-text-color);
+    color: var(--text-primary);
 }
 
 .tipText {
@@ -239,7 +239,7 @@
     font-size: var(--font-size-sm);
     font-weight: 400;
     line-height: 1.5;
-    color: var(--primary-text-color);
+    color: var(--text-primary);
 }
 
 .momLayout {

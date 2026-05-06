@@ -57,8 +57,8 @@ export default function ProfileAvatar({ user }: ProfileAvatarProps) {
               className={css.avatar}
               src={user.avatar}
               alt={user.name}
-              height={132}
-              width={132}
+              fill
+              sizes="132px"
               loading="eager"
             />
           ) : (
