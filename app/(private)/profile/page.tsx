@@ -22,8 +22,7 @@ export default function ProfilePage() {
   });
 
   if (isLoading) return <p>Завантаження...</p>;
-  if (isError || !user)
-    return <p>Сталася помилка. Спробуйте перегрузити сторінку</p>;
+  if (isError || !user) return <p>Сталася помилка. Спробуйте ще раз</p>;
 
   return (
     <>
