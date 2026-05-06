@@ -1,6 +1,6 @@
-import type { DiaryEntry } from "@/types/diaryEntry";
-import { formatDiaryDate, getEmotionTitle } from "@/utils/diary";
-import styles from "./DiaryEntryDetails.module.css";
+import type { DiaryEntry } from '@/types/diaryEntry';
+import { formatDiaryDate, getEmotionTitle } from '@/utils/diary';
+import styles from './DiaryEntryDetails.module.css';
 
 interface DiaryEntryDetailsProps {
   entry: DiaryEntry | null;
@@ -28,16 +28,13 @@ export default function DiaryEntryDetails({
   if (!entry) {
     return (
       <div className={styles.wrapper}>
-        <p className={styles.placeholder}>
-          Наразі записи у щоденнику відстні
-        </p>
+        <p className={styles.placeholder}>Наразі записи у щоденнику відсутні</p>
       </div>
     );
   }
 
   return (
     <article className={styles.wrapper}>
-
       <div className={styles.meta}>
         <div className={styles.titleRow}>
           <h2 className={styles.title}>{entry.title}</h2>
