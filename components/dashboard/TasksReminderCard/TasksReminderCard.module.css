@@ -160,7 +160,7 @@
   padding: 10px 24px;
   border: none;
   border-radius: 100px;
-  border-bottom: 4px solid var(--color-pink-200);
+  border-bottom: 4px solid var(--button-primary-border);
   background: var(--color-scheme-foreground-alt);
   font-family: var(--font-family);
   font-weight: 500;
@@ -176,13 +176,13 @@
 }
 
 .button:active {
-  background: #b2b2b2;
+  background: var(--button-primary-bg-active);
   transform: translateY(0);
 }
 
 .button:disabled {
-  background: var(--color-btn-primary-bg-disabled);
-  border-bottom-color: var(--color-btn-primary-shadow-disabled);
+  background: var(--button-primary-bg-disabled);
+  border-bottom-color: var(--button-primary-border-disabled);
   opacity: 0.7;
   cursor: not-allowed;
 }
@@ -254,6 +254,6 @@
   }
 
   .list::-webkit-scrollbar-thumb:hover {
-    background: #e58c95;
+    background: var(--scrollbar-thumb-hover);
   }
 }

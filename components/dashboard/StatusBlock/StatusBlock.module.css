@@ -26,7 +26,7 @@
 }
 
 .card:focus-visible {
-  outline: 2px solid var(--color-pink-200);
+  outline: 2px solid var(--focus-ring-color);
   outline-offset: 3px;
 }
 

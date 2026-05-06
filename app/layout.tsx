@@ -6,6 +6,7 @@ import AuthProvider from '@/components/providers/AuthProvider';
 import Header from '@/components/layout/Header/Header';
 import { MobileSidebarOverlay } from '@/components/layout/SideBar/SideBar';
 import { Toaster } from 'react-hot-toast';
+import { ThemeProvider } from '@/components/providers/ThemeProvider';
 
 const lato = localFont({
   src: [
@@ -61,19 +62,22 @@ export default function RootLayout({
       lang="uk"
       className={`${lato.variable} ${comfortaa.variable}`}
       data-scroll-behavior="smooth"
+      suppressHydrationWarning
     >
       <body>
         <TanStackProvider>
           <AuthProvider>
-            <div className="container">
-              <Header
-                showMobileButton={true}
-                hideOnDesktop={true}
-                hideOnAuth={true}
-              />
-              <main>{children}</main>
-            </div>
-            <MobileSidebarOverlay />
+            <ThemeProvider>
+              <div className="container">
+                <Header
+                  showMobileButton={true}
+                  hideOnDesktop={true}
+                  hideOnAuth={true}
+                />
+                <main>{children}</main>
+              </div>
+              <MobileSidebarOverlay />
+            </ThemeProvider>
           </AuthProvider>
         </TanStackProvider>
         <Toaster position="top-left" />

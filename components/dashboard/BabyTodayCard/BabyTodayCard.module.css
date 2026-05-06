@@ -26,7 +26,7 @@
 }
 
 .card::-webkit-scrollbar-thumb:hover {
-  background: #e58c95;
+  background: var(--scrollbar-thumb-hover);
 }
 
 .title {
