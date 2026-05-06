@@ -14,6 +14,7 @@ interface Props {
 
 export default function BabyTodayCard({ initialWeekData }: Props) {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const isInitializing = useAuthStore((state) => state.isInitializing);
 
   const {
     data: currentWeek,
@@ -39,6 +40,7 @@ export default function BabyTodayCard({ initialWeekData }: Props) {
   const babyInfo = weekData?.babyInfo;
 
   if (
+    isInitializing ||
     (isAuthenticated && isCurrentWeekLoading) ||
     (!isAuthenticated && isPublicWeekLoading)
   ) {

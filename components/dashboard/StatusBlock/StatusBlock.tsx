@@ -10,6 +10,7 @@ const WEEK_INDEX = 1;
 
 export default function StatusBlock() {
   const isAuthenticated = useAuthStore((s) => s.isAuthenticated);
+  const isInitializing = useAuthStore((s) => s.isInitializing);
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ['weeks', isAuthenticated ? 'me' : 'public', WEEK_INDEX],
@@ -21,7 +22,7 @@ export default function StatusBlock() {
     },
   });
 
-  if (isLoading) {
+  if (isInitializing || isLoading) {
     return (
       <div className={css.row}>
         <div className={css.card}>

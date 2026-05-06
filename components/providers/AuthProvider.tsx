@@ -10,6 +10,7 @@ interface Props {
 
 const AuthProvider = ({ children }: Props) => {
   const setUser = useAuthStore((state) => state.setUser);
+  const setInitialized = useAuthStore((state) => state.setInitialized);
   const clearIsAuthenticated = useAuthStore(
     (state) => state.clearIsAuthenticated,
   );
@@ -23,9 +24,10 @@ const AuthProvider = ({ children }: Props) => {
       } else {
         clearIsAuthenticated();
       }
+      setInitialized();
     };
     fetchUser();
-  }, [clearIsAuthenticated, setUser]);
+  }, [clearIsAuthenticated, setUser, setInitialized]);
 
   return <>{children}</>;
 };
