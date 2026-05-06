@@ -150,6 +150,7 @@
   --focus-ring-color: var(--border-accent);
   --scrollbar-thumb-hover: var(--color-accent-dark);
   --avatar-placeholder-text: var(--color-accent-darkest);
+  --shadow-accent: color-mix(in srgb, var(--color-accent-primary) 60%, transparent);
 
   /* ================= TYPOGRAPHY ================= */
 
