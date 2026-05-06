@@ -34,7 +34,7 @@ export function SideBarContent({ onLinkClick }: { onLinkClick?: () => void }) {
 
   return (
     <>
-      <nav className={css.nav}>
+      <nav className={css.nav} aria-label="Головна навігація">
         {navLinks.map((link) => (
           <Link
             key={link.href}
@@ -43,8 +43,9 @@ export function SideBarContent({ onLinkClick }: { onLinkClick?: () => void }) {
               isActive(link.href) ? css.active : ''
             }`}
             onClick={onLinkClick}
+            aria-current={isActive(link.href) ? 'page' : undefined}
           >
-            <svg className={css.navIcon}>
+            <svg className={css.navIcon} aria-hidden="true">
               <use href={`/icons/sprite.svg#${link.icon}`} />
             </svg>
             {link.label}
@@ -135,17 +136,22 @@ export function MobileSidebarOverlay() {
         onClick={(e) => e.stopPropagation()}
       >
         <div className={css.mobileHeader}>
-          <Link href="/" className={css.logoLink} onClick={handleClose}>
-            <svg className={css.logoIcon} width="95" height="29">
+          <Link
+            href="/"
+            className={css.logoLink}
+            onClick={handleClose}
+            aria-label="На головну сторінку"
+          >
+            <svg className={css.logoIcon} width="95" height="29" aria-hidden="true">
               <use href="/icons/sprite.svg#icon-leleka-logo" />
             </svg>
           </Link>
           <button
             className={css.closeButton}
             onClick={handleClose}
-            aria-label="Закрити"
+            aria-label="Закрити меню"
           >
-            <svg className={css.closeIcon}>
+            <svg className={css.closeIcon} aria-hidden="true">
               <use href="/icons/sprite.svg#icon-close" />
             </svg>
           </button>

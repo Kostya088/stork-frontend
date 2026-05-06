@@ -21,17 +21,17 @@
   border-radius: 100px;
   border: none;
   outline: none;
-  background-color: rgba(0, 0, 0, 0.05);
-  box-shadow: 0 5px rgba(0, 0, 0, 0.15);
+  background-color: var(--button-secondary-bg);
+  box-shadow: 0 5px var(--button-secondary-border);
 }
 
 .btn:hover,
 .btn:focus {
-  background-color: #ffffff;
+  background-color: var(--button-secondary-bg-hover);
 }
 
 .btn:active {
-  background-color: #b2b2b2;
+  background-color: var(--button-secondary-bg-active);
   box-shadow: none;
 }
 

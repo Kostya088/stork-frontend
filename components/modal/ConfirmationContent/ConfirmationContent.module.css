@@ -48,8 +48,8 @@
     justify-content: center;
     flex-direction: row;
     border: none;
-    background: var(--opacity-neutral-darkest-5);
-    border-bottom: 4px solid var(--opacity-neutral-darkest-15);
+    background: var(--button-secondary-bg);
+    border-bottom: 4px solid var(--button-secondary-border);
     border-radius: 100px;
     padding: 10px 24px;
     width: 268px;
@@ -65,16 +65,16 @@
 
 .confirmButton:hover,
 .confirmButton:focus {
-    border-bottom: 4px solid var(--opacity-neutral-darkest-15);
-    background: var(--color-scheme-foreground);
+    border-bottom: 4px solid var(--button-secondary-border);
+    background: var(--button-secondary-bg-hover);
 }
 
 .cancelButton:active {
-    background: var(--color-neutral-light);
+    background: var(--button-primary-bg-active);
 }
 
 .confirmButton:active {
-    background: var(--color-scheme-accent);
+    background: var(--button-secondary-bg-active);
 }
 
 @media (min-width: 768px) {

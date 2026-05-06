@@ -1,2 +1,2 @@
 export type Gender = "boy" | "girl" | null;
-export type Theme = "light" | "blue" | "pink";
+export type Theme = "oasis" | "blue" | "pink";

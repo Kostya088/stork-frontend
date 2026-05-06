@@ -1,15 +1,16 @@
-"use client";
+'use client';
 
-import { useState, useTransition } from "react";
-import { useRouter } from "next/navigation";
-import { logout as logoutApi } from "@/lib/api/clientApi";
-import { useAuthStore } from "@/lib/store/authStore";
-import { useSidebarStore } from "@/lib/store/sidebarStore";
-import Image from "next/image";
-import Link from "next/link";
-import css from "./UserBar.module.css";
-import Modal from "@/components/modal/Modal/Modal";
-import ConfirmationContent from "@/components/modal/ConfirmationContent/ConfirmationContent";
+import { useState, useTransition } from 'react';
+import { useRouter } from 'next/navigation';
+import { logout as logoutApi } from '@/lib/api/clientApi';
+import { useAuthStore } from '@/lib/store/authStore';
+import { useSidebarStore } from '@/lib/store/sidebarStore';
+import Image from 'next/image';
+import Link from 'next/link';
+import css from './UserBar.module.css';
+import Modal from '@/components/modal/Modal/Modal';
+import ConfirmationContent from '@/components/modal/ConfirmationContent/ConfirmationContent';
+import { useQueryClient } from '@tanstack/react-query';
 
 export default function UserBar() {
   const [, startTransition] = useTransition();
@@ -19,6 +20,7 @@ export default function UserBar() {
   const clearIsAuthenticated = useAuthStore(
     (state) => state.clearIsAuthenticated,
   );
+  const queryClient = useQueryClient();
   const closeSidebar = useSidebarStore((state) => state.close);
   const closeLogoutModal = () => setIsLogoutModalOpen(false);
 
@@ -28,11 +30,13 @@ export default function UserBar() {
       closeLogoutModal();
       closeSidebar();
       clearIsAuthenticated();
+      queryClient.removeQueries({ queryKey: ['tasks'] });
+      queryClient.removeQueries({ queryKey: ['user'] });
       startTransition(() => {
-        router.push("/login");
+        router.push('/login');
       });
     } catch (error) {
-      console.error("Logout failed:", error);
+      console.error('Logout failed:', error);
     }
   };
 

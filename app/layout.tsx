@@ -6,26 +6,27 @@ import AuthProvider from '@/components/providers/AuthProvider';
 import Header from '@/components/layout/Header/Header';
 import { MobileSidebarOverlay } from '@/components/layout/SideBar/SideBar';
 import { Toaster } from 'react-hot-toast';
+import { ThemeProvider } from '@/components/providers/ThemeProvider';
 
 const lato = localFont({
   src: [
     {
-      path: '../public/fonts/Lato-Regular.ttf',
+      path: '../public/fonts/Lato-Regular.woff2',
       weight: '400',
       style: 'normal',
     },
     {
-      path: '../public/fonts/Lato-Medium.ttf',
+      path: '../public/fonts/Lato-Medium.woff2',
       weight: '500',
       style: 'normal',
     },
     {
-      path: '../public/fonts/Lato-SemiBold.ttf',
+      path: '../public/fonts/Lato-SemiBold.woff2',
       weight: '600',
       style: 'normal',
     },
     {
-      path: '../public/fonts/Lato-Bold.ttf',
+      path: '../public/fonts/Lato-Bold.woff2',
       weight: '700',
       style: 'normal',
     },
@@ -53,32 +54,30 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-  modal,
 }: Readonly<{
   children: React.ReactNode;
-  modal?: React.ReactNode;
 }>) {
   return (
     <html
-      lang="en"
+      lang="uk"
       className={`${lato.variable} ${comfortaa.variable}`}
       data-scroll-behavior="smooth"
+      suppressHydrationWarning
     >
       <body>
         <TanStackProvider>
           <AuthProvider>
-            <div className="container">
-              <Header
-                showMobileButton={true}
-                hideOnDesktop={true}
-                hideOnAuth={true}
-              />
-              <main>
-                {children}
-                {modal}
-              </main>
-            </div>
-            <MobileSidebarOverlay />
+            <ThemeProvider>
+              <div className="container">
+                <Header
+                  showMobileButton={true}
+                  hideOnDesktop={true}
+                  hideOnAuth={true}
+                />
+                <main>{children}</main>
+              </div>
+              <MobileSidebarOverlay />
+            </ThemeProvider>
           </AuthProvider>
         </TanStackProvider>
         <Toaster position="top-left" />

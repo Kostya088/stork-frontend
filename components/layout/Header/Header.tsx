@@ -23,18 +23,23 @@ export default function Header({
     <header
       className={`${css.header} ${hideOnDesktop ? css.hideOnDesktop : ''}`}
     >
-      <Link href="/" className={css.logoLink}>
-        <svg className={css.logoIcon} width="95" height="29">
+      <Link href="/" className={css.logoLink} aria-label="На головну сторінку">
+        <svg className={css.logoIcon} width="95" height="29" aria-hidden="true">
           <use href="/icons/sprite.svg#icon-leleka-logo" />
         </svg>
       </Link>
       {showMobileButton && (
         <button
           className={css.burgerMenuButton}
-          aria-label="Burger Menu"
+          aria-label="Відкрити меню"
           onClick={sideBarToggle}
         >
-          <svg className={css.burgerMenuIcon} width="32" height="32">
+          <svg
+            className={css.burgerMenuIcon}
+            width="32"
+            height="32"
+            aria-hidden="true"
+          >
             <use href="/icons/sprite.svg#icon-burger" />
           </svg>
         </button>
