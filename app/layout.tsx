@@ -7,6 +7,7 @@ import Header from '@/components/layout/Header/Header';
 import { MobileSidebarOverlay } from '@/components/layout/SideBar/SideBar';
 import { Toaster } from 'react-hot-toast';
 import { ThemeProvider } from '@/components/providers/ThemeProvider';
+import GoogleProvider from '@/components/providers/GoogleProvider';
 
 const lato = localFont({
   src: [
@@ -66,12 +67,13 @@ export default function RootLayout({
     >
       <body>
         <TanStackProvider>
-          <AuthProvider>
-            <ThemeProvider>
-              <div className="container">
-                <Header
-                  showMobileButton={true}
-                  hideOnDesktop={true}
+          <GoogleProvider>
+            <AuthProvider>
+              <ThemeProvider>
+                <div className="container">
+                  <Header
+                    showMobileButton={true}
+                    hideOnDesktop={true}
                   hideOnAuth={true}
                 />
                 <main>{children}</main>
@@ -79,6 +81,7 @@ export default function RootLayout({
               <MobileSidebarOverlay />
             </ThemeProvider>
           </AuthProvider>
+          </GoogleProvider>
         </TanStackProvider>
         <Toaster position="top-left" />
       </body>
