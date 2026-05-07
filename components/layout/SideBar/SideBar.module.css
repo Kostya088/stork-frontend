@@ -1,7 +1,7 @@
 .sidebar {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: 100vh;
   width: 312px;
   box-sizing: border-box;
 }
@@ -104,6 +104,9 @@ color: var(--color-scheme-text);
 .closeButton {
   all: unset;
   cursor: pointer;
+    display: flex;
+  align-items: center;
+  justify-content: center;
   width: 32px;
   height: 32px;
   border-radius: 50px;
@@ -120,8 +123,13 @@ stroke: var(--color-scheme-text);
 .closeIcon {
   width: 18px;
   height: 18px;
-  display: block;
   color: var(--color-scheme-text);
+}
+
+.authPlaceholder {
+  width: 100%;
+  min-height: 72px;
+  border-radius: 16px;
 }
 
 @keyframes slideIn {

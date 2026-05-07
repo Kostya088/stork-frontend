@@ -98,6 +98,9 @@
   background-color: var(--button-primary-bg-active);
   box-shadow: none;
 }
+.submitButton {
+  margin-bottom: 0;
+}
 
 .linkText {
   font-weight: 400;

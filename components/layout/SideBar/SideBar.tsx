@@ -19,6 +19,7 @@ const navLinks = [
 
 export function SideBarContent({ onLinkClick }: { onLinkClick?: () => void }) {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const isInitializing = useAuthStore((state) => state.isInitializing);
   const pathname = usePathname();
 
   const getHref = (href: string) => {
@@ -27,7 +28,7 @@ export function SideBarContent({ onLinkClick }: { onLinkClick?: () => void }) {
     return '/login';
   };
 
-    const isActive = (href: string) => {
+  const isActive = (href: string) => {
     if (href === '/') return pathname === '/';
     return pathname.startsWith(href);
   };
@@ -52,8 +53,15 @@ export function SideBarContent({ onLinkClick }: { onLinkClick?: () => void }) {
           </Link>
         ))}
       </nav>
+      
       <div className={css.authSection}>
-        {isAuthenticated ? <UserBar /> : <AuthBar onLinkClick={onLinkClick} />}
+        {isInitializing ? (
+          <div className={css.authPlaceholder} aria-hidden="true" />
+        ) : isAuthenticated ? (
+          <UserBar />
+        ) : (
+          <AuthBar onLinkClick={onLinkClick} />
+        )}
       </div>
     </>
   );
@@ -142,7 +150,12 @@ export function MobileSidebarOverlay() {
             onClick={handleClose}
             aria-label="На головну сторінку"
           >
-            <svg className={css.logoIcon} width="95" height="29" aria-hidden="true">
+            <svg
+              className={css.logoIcon}
+              width="95"
+              height="29"
+              aria-hidden="true"
+            >
               <use href="/icons/sprite.svg#icon-leleka-logo" />
             </svg>
           </Link>

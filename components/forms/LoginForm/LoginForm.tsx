@@ -2,7 +2,8 @@
 
 import { useRouter } from 'next/navigation';
 import { useAuthStore } from '@/lib/store/authStore';
-import { login } from '@/lib/api/clientApi';
+import { login, loginWithGoogle } from '@/lib/api/clientApi';
+import { useGoogleLogin } from '@react-oauth/google';
 import styles from './LoginForm.module.css';
 import {
   Formik,
@@ -60,6 +61,26 @@ export default function LoginForm() {
     }
     return { email: '', password: '' };
   });
+  const handleGoogleLogin = useGoogleLogin({
+  onSuccess: async (tokenResponse) => {
+    try {
+      const { user, isNewUser } = await loginWithGoogle({
+        token: tokenResponse.access_token,
+      });
+
+      setUser(user);
+
+      toast.success('Успішний вхід через Google');
+
+      router.push(isNewUser ? '/profile/edit' : '/');
+    } catch {
+      toast.error('Не вдалося увійти через Google');
+    }
+  },
+  onError: () => {
+    toast.error('Google авторизацію скасовано або сталася помилка');
+  },
+});
 
   const handleSubmit = async (
     values: { email: string; password: string },
@@ -136,10 +157,17 @@ export default function LoginForm() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className={styles.button}
+                className={`${styles.button} ${styles.submitButton}`}
               >
                 {isSubmitting ? 'Вхід...' : 'Увійти'}
               </button>
+              <button
+                type="button"
+                onClick={() => handleGoogleLogin()}
+                className={styles.button}
+              >
+                Увійти через Google
+                </button>
 
               {/* LINK */}
               <p className={styles.linkText}>

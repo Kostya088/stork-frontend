@@ -96,6 +96,9 @@
   background-color: var(--button-primary-bg-active);
   box-shadow: none;
 }
+.submitBtn {
+  margin-bottom: 0;
+}
 
 .paragraph {
   margin: 0 auto;

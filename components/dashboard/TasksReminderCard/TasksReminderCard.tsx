@@ -17,16 +17,19 @@ const TasksReminderCard = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const isAuthenticated = useAuthStore((s) => s.isAuthenticated);
+  const isInitializing = useAuthStore((s) => s.isInitializing);
 
   const { data: tasks = [] } = useQuery<Task[]>({
     queryKey: ['tasks'],
     queryFn: getTasks,
-    enabled: isAuthenticated,
+    enabled: !isInitializing && isAuthenticated,
     staleTime: 1000 * 60 * 2,
     refetchOnWindowFocus: false,
   });
 
   const handleCreate = () => {
+    if (isInitializing) return;
+
     if (isAuthenticated) {
       setIsModalOpen(true);
     } else {
@@ -60,6 +63,20 @@ const TasksReminderCard = () => {
 
     return [...active, ...done];
   }, [tasks]);
+
+  if (isInitializing) {
+    return (
+      <section className={css.card}>
+        <div className={css.cardHeader}>
+          <h2 className={css.tasksHeading}>Важливі завдання</h2>
+        </div>
+
+        <div className={css.cardContent}>
+          <p className={css.text}>Завантаження завдань...</p>
+        </div>
+      </section>
+    );
+  }
 
   if (!isAuthenticated) {
     return (
