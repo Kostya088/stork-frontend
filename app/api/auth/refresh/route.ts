@@ -11,6 +11,10 @@ export async function POST() {
     const accessToken = cookieStore.get('accessToken')?.value;
     const refreshToken = cookieStore.get('refreshToken')?.value;
 
+    if (accessToken) {
+      return NextResponse.json({ success: true });
+    }
+    
     if (refreshToken) {
       const apiRes = await api.post('auth/refresh', null, {
         headers: {
@@ -40,9 +44,6 @@ export async function POST() {
         }
         return NextResponse.json({ success: true }, { status: 200 });
       }
-    }
-    if (accessToken) {
-      return NextResponse.json({ success: true });
     }
 
     return NextResponse.json({ success: false }, { status: 200 });
