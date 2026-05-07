@@ -22,7 +22,7 @@
   .grid {
     grid-template-columns: 642px 390px;
     gap: 32px;
-    align-items: start;
+    align-items: stretch;
   }
 
   .leftColumn {
@@ -31,5 +31,6 @@
 
   .rightColumn {
     width: 390px;
+    justify-content: space-between;
   }
 }
