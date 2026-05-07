@@ -124,6 +124,12 @@ stroke: var(--color-scheme-text);
   color: var(--color-scheme-text);
 }
 
+.authPlaceholder {
+  width: 100%;
+  min-height: 72px;
+  border-radius: 16px;
+}
+
 @keyframes slideIn {
   from {
     transform: translateX(-100%);
