@@ -78,7 +78,9 @@ const RegistrationForm = () => {
   const handleGoogleLogin = useGoogleLogin({
   onSuccess: async (tokenResponse) => {
     try {
-      const user = await loginWithGoogle({ token: tokenResponse.access_token });
+      const { user, isNewUser } = await loginWithGoogle({
+        token: tokenResponse.access_token,
+      });
 
       setUser(user);
 
@@ -86,7 +88,7 @@ const RegistrationForm = () => {
 
       sessionStorage.removeItem(STORAGE_KEY);
 
-      router.push('/profile/edit');
+      router.push(isNewUser ? '/profile/edit' : '/');
     } catch {
       toast.error('Не вдалося увійти через Google');
     }

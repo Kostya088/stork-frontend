@@ -138,11 +138,19 @@ export interface GoogleLoginRequest {
   token: string;
 }
 
+export interface GoogleAuthResponse {
+  user: User;
+  isNewUser: boolean;
+}
+
 export async function loginWithGoogle(
   data: GoogleLoginRequest,
-): Promise<User> {
-  const { data: user } = await nextServer.post<User>('/auth/google', data);
-  return user;
+): Promise<GoogleAuthResponse> {
+  const { data: result } = await nextServer.post<GoogleAuthResponse>(
+    '/auth/google',
+    data,
+  );
+  return result;
 }
 
 export interface RegisterRequest {

@@ -64,13 +64,15 @@ export default function LoginForm() {
   const handleGoogleLogin = useGoogleLogin({
   onSuccess: async (tokenResponse) => {
     try {
-      const user = await loginWithGoogle({ token: tokenResponse.access_token });
+      const { user, isNewUser } = await loginWithGoogle({
+        token: tokenResponse.access_token,
+      });
 
       setUser(user);
 
       toast.success('Успішний вхід через Google');
 
-      router.push('/');
+      router.push(isNewUser ? '/profile/edit' : '/');
     } catch {
       toast.error('Не вдалося увійти через Google');
     }
