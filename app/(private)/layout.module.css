@@ -9,21 +9,46 @@
 .main {
   width: 100%;
   min-width: 0;
+  min-height: 0;
 }
 
 @media (min-width: 1440px) {
   .layout {
     display: grid;
     grid-template-columns: 312px 1fr;
+    height: 100vh;
+    overflow: hidden;
   }
 
   .sidebarDesktop {
     display: block;
     border-right: 1px solid var(--color-scheme-border);
+    height: 100vh;
+    overflow: hidden;
   }
 
   .main {
     padding: 24px;
+    overflow-y: auto;
+  }
+
+  .main::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .main::-webkit-scrollbar-track {
+    background: var(--color-white);
+    border-radius: 4px;
+    margin: 8px 0;
+  }
+
+  .main::-webkit-scrollbar-thumb {
+    background: var(--color-scheme-accent);
+    border-radius: 4px;
+  }
+
+  .main::-webkit-scrollbar-thumb:hover {
+    background: var(--scrollbar-thumb-hover);
   }
 
   .noSidebar {
