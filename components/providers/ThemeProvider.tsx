@@ -7,16 +7,18 @@ import { useEffect } from 'react';
 function ThemeSyncer() {
   const { setTheme } = useTheme();
   const user = useAuthStore((state) => state.user);
+  const userTheme = user?.theme as string | undefined;
   const isInitializing = useAuthStore((state) => state.isInitializing);
 
   useEffect(() => {
     if (isInitializing) return;
-    const storedTheme = user?.theme as string | undefined;
+    if (!user) return;
+
     const normalizedTheme =
-      storedTheme === 'light' ? 'oasis' : (storedTheme ?? 'oasis');
+      userTheme === 'light' ? 'oasis' : (userTheme ?? 'oasis');
 
     setTheme(normalizedTheme);
-  }, [user?.theme, setTheme, isInitializing]);
+  }, [user, userTheme, setTheme, isInitializing]);
 
   return null;
 }

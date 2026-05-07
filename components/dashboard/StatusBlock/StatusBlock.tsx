@@ -20,6 +20,7 @@ export default function StatusBlock() {
       }
       return getPublicWeek(WEEK_INDEX);
     },
+    enabled: !isInitializing,
   });
 
   if (isInitializing || isLoading) {
