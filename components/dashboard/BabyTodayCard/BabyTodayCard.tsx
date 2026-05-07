@@ -23,7 +23,7 @@ export default function BabyTodayCard({ initialWeekData }: Props) {
   } = useQuery({
     queryKey: ['weeks', 'me'],
     queryFn: getWeeksMe,
-    enabled: isAuthenticated,
+    enabled: !isInitializing && isAuthenticated,
   });
 
   const {
@@ -34,6 +34,7 @@ export default function BabyTodayCard({ initialWeekData }: Props) {
     queryKey: ['weeks', 'public', 1],
     queryFn: () => getPublicWeek(1),
     initialData: initialWeekData,
+    enabled: !isInitializing && !isAuthenticated,
   });
 
   const weekData = isAuthenticated ? currentWeek : publicWeek;

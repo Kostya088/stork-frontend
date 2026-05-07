@@ -9,14 +9,15 @@ import css from './MomTipCard.module.css';
 
 export default function MomTipCard() {
   const isAuthenticated = useAuthStore((s) => s.isAuthenticated);
+  const isInitializing = useAuthStore((s) => s.isInitializing);
 
   const { data, isLoading } = useQuery<WeekDashboardInfo>({
     queryKey: ['weeks', isAuthenticated ? 'me' : 'public', 1],
-    queryFn: () =>
-      isAuthenticated ? getWeeksMe() : getPublicWeek(1),
+    queryFn: () => (isAuthenticated ? getWeeksMe() : getPublicWeek(1)),
+    enabled: !isInitializing,
   });
 
-  if (isLoading) {
+  if (isInitializing || isLoading) {
     return (
       <section className={css.card}>
         <p className={css.text}>Завантаження поради...</p>

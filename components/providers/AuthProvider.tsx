@@ -17,17 +17,38 @@ const AuthProvider = ({ children }: Props) => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const session = await checkSession();
-      if (session.success) {
+      try {
+        const session = await checkSession();
+
+        if (!session.success) {
+          clearIsAuthenticated();
+          return;
+        }
+
         const user = await getMe();
-        if (user) setUser(user);
-      } else {
+
+        if (user) {
+          setUser(user);
+        } else {
+          clearIsAuthenticated();
+        }
+      } catch {
         clearIsAuthenticated();
+      } finally {
+        setInitialized();
       }
-      setInitialized();
     };
+
     fetchUser();
   }, [clearIsAuthenticated, setUser, setInitialized]);
+
+  useEffect(() => {
+    window.addEventListener('auth:session-expired', clearIsAuthenticated);
+
+    return () => {
+      window.removeEventListener('auth:session-expired', clearIsAuthenticated);
+    };
+  }, [clearIsAuthenticated]);
 
   return <>{children}</>;
 };
