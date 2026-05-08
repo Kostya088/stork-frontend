@@ -25,6 +25,25 @@
   scrollbar-gutter: stable;
 }
 
+.modal::-webkit-scrollbar {
+  width: 6px;
+}
+
+.modal::-webkit-scrollbar-track {
+  background: var(--color-white);
+  border-radius: 4px;
+  margin: 28px 0;
+}
+
+.modal::-webkit-scrollbar-thumb {
+  background: var(--color-scheme-accent);
+  border-radius: 4px;
+}
+
+.modal::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+
 .closeButton {
   position: absolute;
   top: 20px;
