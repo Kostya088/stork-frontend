@@ -202,7 +202,8 @@
 @media screen and (min-width: 1440px) {
   .card {
     max-width: 390px;
-    max-height: 499px;
+    /* max-height: 499px; */
+    height: 100%;
   }
 
   .textStrong {
