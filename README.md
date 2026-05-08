@@ -148,7 +148,7 @@ This project was created by the **Project-03 Team** as part of the GoIT final te
 - [Mariana Melen](https://github.com/marana08)
 - [Kateryna Havryna](https://github.com/HavrynaKateryna)
 - [Yeva Krysheminska](https://github.com/yevac)
-- [Alla](https://github.com/Allamoment)
+- [Alla](https://github.com/Alla11-tech)
 - [Voloshyn](https://github.com/Voloshyn9900)
 - [Andrew Reznik](https://github.com/Andrew1224Reznik)
 - [Ivan Fotin](https://github.com/xzvtvxs)
@@ -157,5 +157,5 @@ This project was created by the **Project-03 Team** as part of the GoIT final te
 - [Roma](https://github.com/RomanFS76)
 - [Denys Hedenko](https://github.com/DenysHedenko)
 - [Denys Ovcharov](https://github.com/denis-ovcharov)
-
+- [Andrii Terleckyj](https://github.com/AndriiTO)
 ---
