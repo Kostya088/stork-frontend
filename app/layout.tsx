@@ -49,7 +49,7 @@ const comfortaa = localFont({
 });
 
 export const metadata: Metadata = {
-  title: 'Stork',
+  title: 'Leleka',
   description: 'Ваш помічник на шляху до материнства',
 };
 
@@ -74,13 +74,13 @@ export default function RootLayout({
                   <Header
                     showMobileButton={true}
                     hideOnDesktop={true}
-                  hideOnAuth={true}
-                />
-                <main>{children}</main>
-              </div>
-              <MobileSidebarOverlay />
-            </ThemeProvider>
-          </AuthProvider>
+                    hideOnAuth={true}
+                  />
+                  <main>{children}</main>
+                </div>
+                <MobileSidebarOverlay />
+              </ThemeProvider>
+            </AuthProvider>
           </GoogleProvider>
         </TanStackProvider>
         <Toaster position="top-left" />
