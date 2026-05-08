@@ -4,6 +4,8 @@
 position: relative;
     overflow: hidden;
     cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
 
     /* Расширяем блок, чтобы он игнорировал паддинги родителя */
     width: calc(100% + 48px);
