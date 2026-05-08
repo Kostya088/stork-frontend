@@ -245,38 +245,48 @@
 /* ==================== BUTTON ==================== */
 
 .submitButton {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    align-self: center;
-    border: none;
-    outline: none;
-    background: var(--button-primary-bg);
-    border-bottom: 4px solid var(--button-primary-border);
-    border-radius: 100px;
-    padding: 10px 24px;
-    width: 294px;
-    height: 42px;
-    font-weight: 500;
-    font-size: var(--font-size-sm);
-    line-height: 1.6;
-    color: var(--color-scheme-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+
+  width: 294px;
+  height: 42px;
+  padding: 10px 24px;
+
+  border: none;
+  outline: none;
+  border-radius: 100px;
+  border-bottom: 4px solid var(--button-primary-border);
+  background: var(--color-scheme-foreground-alt);
+
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 160%;
+  color: var(--color-scheme-text);
+
+  cursor: pointer;
+  transition: 0.2s;
 }
 
 .submitButton:hover,
 .submitButton:focus {
-    border-bottom: 4px solid var(--button-primary-border-hover);
-    background: var(--button-primary-bg-hover);
+  background: var(--color-scheme-background);
+  border-bottom-color: var(--opacity-neutral-darkest-15);
+  transform: translateY(-1px);
 }
 
 .submitButton:active {
-    background: var(--button-primary-bg-active);
+  background: var(--button-primary-bg-active);
+  transform: translateY(0);
 }
 
 .submitButton:disabled {
-    border-bottom: 4px solid var(--button-primary-border);
-    background: var(--button-primary-bg-disabled);
-    opacity: 0.3;
+  background: var(--button-primary-bg-disabled);
+  border-bottom-color: var(--button-primary-border-disabled);
+  opacity: 0.7;
+  cursor: not-allowed;
 }
 
 /* ==================== ERROR ==================== */
