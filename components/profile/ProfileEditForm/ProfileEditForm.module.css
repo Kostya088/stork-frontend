@@ -212,21 +212,19 @@
   font-size: 14px;
   line-height: 1.6;
   color: var(--button-secondary-text);
+  cursor: pointer;
 }
 
-.buttonCancel:hover {
-  border-bottom: 4px solid var(--button-secondary-border);
-  background: var(--button-secondary-bg-hover);
-}
-
+.buttonCancel:hover,
 .buttonCancel:focus {
-  border-bottom: 4px solid var(--button-secondary-border);
+  border-bottom-color: var(--button-secondary-border);
   background: var(--button-secondary-bg-hover);
+  transform: translateY(-1px);
 }
 
 .buttonCancel:active {
   background: var(--button-secondary-bg-active);
-  border-bottom: none;
+  transform: translateY(0);
 }
 
 .buttonSave {
@@ -244,27 +242,26 @@
   font-size: 14px;
   line-height: 1.6;
   color: var(--button-primary-text);
+  cursor: pointer;
 }
 
-.buttonSave:hover {
-  background: var(--button-primary-bg-hover);
-  border-bottom: 4px solid var(--button-primary-border-hover);
-}
-
+.buttonSave:hover,
 .buttonSave:focus {
   background: var(--button-primary-bg-hover);
-  border-bottom: 4px solid var(--button-primary-border-hover);
+  border-bottom-color: var(--button-primary-border-hover);
+  transform: translateY(-1px);
 }
 
 .buttonSave:active {
-  border-bottom: none;
   background: var(--button-primary-bg-active);
+  transform: translateY(0);
 }
 
 .buttonSave:disabled {
-  border-bottom: 4px solid var(--button-primary-border);
+  border-bottom-color: var(--button-primary-border-disabled);
   background: var(--button-primary-bg-disabled);
   opacity: 0.3;
+  cursor: not-allowed;
 }
 
 /* for Tablet 768px-1440px */
