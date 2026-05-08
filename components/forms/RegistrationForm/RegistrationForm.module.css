@@ -73,29 +73,41 @@
 }
 
 .subbtn {
-  font-family: var(--font-lato);
-  font-weight: 500;
-  font-size: 16px;
-  background-color: var(--button-primary-bg);
-  height: 46px;
   width: 100%;
-  border-radius: 100px;
-  outline: none;
-  border: none;
+  height: 46px;
   margin-bottom: 24px;
-  box-shadow: 0 5px var(--button-primary-border);
+
+  border: none;
+  border-radius: 100px;
+  border-bottom: 4px solid var(--button-primary-border);
+  background: var(--color-scheme-foreground-alt);
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 160%;
+  color: var(--color-scheme-text);
+  cursor: pointer;
 }
 
 .subbtn:hover,
 .subbtn:focus {
-  background-color: var(--button-primary-bg-hover);
-  box-shadow: 0 5px var(--button-primary-border-hover);
+  background: var(--color-scheme-background);
+  border-bottom-color: var(--opacity-neutral-darkest-15);
+  transform: translateY(-1px);
 }
 
 .subbtn:active {
-  background-color: var(--button-primary-bg-active);
-  box-shadow: none;
+  background: var(--button-primary-bg-active);
+  transform: translateY(0);
 }
+
+.subbtn:disabled {
+  background: var(--button-primary-bg-disabled);
+  border-bottom-color: var(--button-primary-border-disabled);
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
 .submitBtn {
   margin-bottom: 0;
 }
@@ -148,5 +160,8 @@
 
   .input {
     height: 40px;
+  }
+  .subbtn {
+    font-size: 16px;
   }
 }

@@ -158,6 +158,7 @@
   height: 42px;
   margin-top: 16px;
   padding: 10px 24px;
+  
   border: none;
   border-radius: 100px;
   border-bottom: 4px solid var(--button-primary-border);

@@ -6,38 +6,42 @@
 }
 
 .link {
+  width: 268px;
+  height: 42px;
+  padding: 10px 24px;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 10px 24px;
+
+  border: none;
   border-radius: 100px;
+  border-bottom: 4px solid var(--button-primary-border);
+  background: var(--color-scheme-foreground-alt);
+  font-family: var(--font-family);
   font-weight: 500;
-  font-size: 16px;
-  line-height: 1.6;
+  font-size: 14px;
+  line-height: 160%;
   color: var(--color-scheme-text);
   text-decoration: none;
-  transition:
-    background-color 0.2s,
-    color 0.2s;
   text-align: center;
-  border: none;
-  width: 268px;
-  height: 42px;
+}
+
+.link:hover,
+.link:focus {
+  background: var(--color-scheme-background);
+  border-bottom-color: var(--opacity-neutral-darkest-15);
+  transform: translateY(-1px);
+}
+
+.link:active {
+  background: var(--button-primary-bg-active);
+  transform: translateY(0);
 }
 
 .registerLink {
-  background: var(--button-primary-bg);
+  background: var(--color-scheme-foreground-alt);
   border-bottom: 4px solid var(--button-primary-border);
-}
-
-.registerLink:hover,
-.registerLink:focus {
-  border-bottom: 4px solid var(--button-primary-border-hover);
-  background: var(--button-primary-bg-hover);
-}
-
-.registerLink:active {
-  background: var(--button-primary-bg-active);
 }
 
 .loginLink {
@@ -47,12 +51,14 @@
 
 .loginLink:hover,
 .loginLink:focus {
-  border-bottom: 4px solid var(--button-secondary-border);
-  background: var(--button-secondary-bg-hover);
+  background: var(--color-scheme-background);
+  border-bottom-color: var(--opacity-neutral-darkest-15);
+  transform: translateY(-1px);
 }
 
 .loginLink:active {
-  background: var(--button-secondary-bg-active);
+  background: var(--button-primary-bg-active);
+  transform: translateY(0);
 }
 
 @media (min-width: 1440px){
@@ -63,5 +69,6 @@
   .link{
     width: 280px;
     height: 46px;
+    font-size: 16px;
   }
 }
