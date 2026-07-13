@@ -18,8 +18,7 @@ The application helps users monitor both their well-being and their baby’s dev
 - Personal diary for thoughts and feelings
 - Task management with completion tracking
 
-The backend is powered by a **REST API** with integrated **Swagger documentation**, ensuring a scalable and well-structured architecture.
-
+The [backend](https://github.com/Kostya088/stork-backend) is powered by a **REST API** with integrated **Swagger documentation**, ensuring a scalable and well-structured architecture.
 ---
 
 ## 🛠 Tech Stack
