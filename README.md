@@ -19,6 +19,7 @@ The application helps users monitor both their well-being and their baby’s dev
 - Task management with completion tracking
 
 The [backend](https://github.com/Kostya088/stork-backend) is powered by a **REST API** with integrated **Swagger documentation**, ensuring a scalable and well-structured architecture.
+
 ---
 
 ## 🛠 Tech Stack
